@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */; };
-		354DB4FE1CB7EA8400B9194B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FD1CB7EA8400B9194B /* ViewController.swift */; };
+		354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */; };
 		354DB5011CB7EA8400B9194B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB4FF1CB7EA8400B9194B /* Main.storyboard */; };
 		354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5021CB7EA8400B9194B /* mEatUp.xcdatamodeld */; };
 		354DB5061CB7EA8400B9194B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5051CB7EA8400B9194B /* Assets.xcassets */; };
 		354DB5091CB7EA8400B9194B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */; };
 		354DB5141CB7EA8400B9194B /* mEatUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5131CB7EA8400B9194B /* mEatUpTests.swift */; };
+		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
+		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
+		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +32,7 @@
 /* Begin PBXFileReference section */
 		354DB4F81CB7EA8400B9194B /* mEatUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mEatUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		354DB4FD1CB7EA8400B9194B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		354DB5001CB7EA8400B9194B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		354DB5031CB7EA8400B9194B /* mEatUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mEatUp.xcdatamodel; sourceTree = "<group>"; };
 		354DB5051CB7EA8400B9194B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +41,9 @@
 		354DB50F1CB7EA8400B9194B /* mEatUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mEatUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB5131CB7EA8400B9194B /* mEatUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mEatUpTests.swift; sourceTree = "<group>"; };
 		354DB5151CB7EA8400B9194B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +51,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */,
+				356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */,
+				356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,8 +88,9 @@
 		354DB4FA1CB7EA8400B9194B /* mEatUp */ = {
 			isa = PBXGroup;
 			children = (
+				356275BF1CBBA621009B8122 /* Frameworks */,
 				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
-				354DB4FD1CB7EA8400B9194B /* ViewController.swift */,
+				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
 				354DB4FF1CB7EA8400B9194B /* Main.storyboard */,
 				354DB5051CB7EA8400B9194B /* Assets.xcassets */,
 				354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */,
@@ -97,6 +107,16 @@
 				354DB5151CB7EA8400B9194B /* Info.plist */,
 			);
 			path = mEatUpTests;
+			sourceTree = "<group>";
+		};
+		356275BF1CBBA621009B8122 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */,
+				356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */,
+				356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
-				354DB4FE1CB7EA8400B9194B /* ViewController.swift in Sources */,
+				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,10 +353,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mEatUp",
+				);
 				INFOPLIST_FILE = mEatUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -344,6 +370,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mEatUp",
+				);
 				INFOPLIST_FILE = mEatUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
@@ -394,6 +425,7 @@
 				354DB51A1CB7EA8400B9194B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		354DB51B1CB7EA8400B9194B /* Build configuration list for PBXNativeTarget "mEatUpTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +434,7 @@
 				354DB51D1CB7EA8400B9194B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
