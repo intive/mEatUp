@@ -10,6 +10,8 @@ import Foundation
 import CloudKit
 
 class UserInRoom: CloudKitObject {
+    static let entityName = "UserInRoom"
+    
     var user: User?
     var room: Room?
     var confirmationStatus: ConfirmationStatus?
@@ -28,6 +30,6 @@ class UserInRoom: CloudKitObject {
     
     func acceptInvite(cloudKitHelper: CloudKitHelper) {
         self.confirmationStatus = .Accepted
-        cloudKitHelper.saveUserInRoomRecord(self)
+        cloudKitHelper.saveUserInRoomRecord(self, completionHandler: nil, errorHandler: nil)
     }
 }

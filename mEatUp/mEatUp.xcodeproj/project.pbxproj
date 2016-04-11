@@ -14,6 +14,10 @@
 		354DB5061CB7EA8400B9194B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5051CB7EA8400B9194B /* Assets.xcassets */; };
 		354DB5091CB7EA8400B9194B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */; };
 		354DB5141CB7EA8400B9194B /* mEatUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5131CB7EA8400B9194B /* mEatUpTests.swift */; };
+		BA7255411CBC39090039AF1C /* RoomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255401CBC39090039AF1C /* RoomProperties.swift */; };
+		BA7255431CBC39130039AF1C /* RestaurantProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255421CBC39130039AF1C /* RestaurantProperties.swift */; };
+		BA7255451CBC391C0039AF1C /* UserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255441CBC391C0039AF1C /* UserProperties.swift */; };
+		BA7255471CBC39270039AF1C /* UserInRoomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255461CBC39270039AF1C /* UserInRoomProperties.swift */; };
 		E136F7141CBBA37D00BB4473 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E136F7131CBBA37D00BB4473 /* CloudKit.framework */; };
 		E136F7171CBBA41500BB4473 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7161CBBA41500BB4473 /* CloudKitHelper.swift */; };
 		E136F7191CBBA4E700BB4473 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7181CBBA4E700BB4473 /* Room.swift */; };
@@ -47,6 +51,10 @@
 		354DB50F1CB7EA8400B9194B /* mEatUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mEatUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB5131CB7EA8400B9194B /* mEatUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mEatUpTests.swift; sourceTree = "<group>"; };
 		354DB5151CB7EA8400B9194B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA7255401CBC39090039AF1C /* RoomProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomProperties.swift; sourceTree = "<group>"; };
+		BA7255421CBC39130039AF1C /* RestaurantProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantProperties.swift; sourceTree = "<group>"; };
+		BA7255441CBC391C0039AF1C /* UserProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProperties.swift; sourceTree = "<group>"; };
+		BA7255461CBC39270039AF1C /* UserInRoomProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInRoomProperties.swift; sourceTree = "<group>"; };
 		E136F7121CBBA35B00BB4473 /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
 		E136F7131CBBA37D00BB4473 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E136F7161CBBA41500BB4473 /* CloudKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
@@ -123,6 +131,27 @@
 			path = mEatUpTests;
 			sourceTree = "<group>";
 		};
+		BA72553E1CBC38CA0039AF1C /* Enumerators */ = {
+			isa = PBXGroup;
+			children = (
+				E136F7231CBBA81700BB4473 /* ConfirmationStatus.swift */,
+				E136F71B1CBBA52500BB4473 /* AccessType.swift */,
+				BA7255401CBC39090039AF1C /* RoomProperties.swift */,
+				BA7255421CBC39130039AF1C /* RestaurantProperties.swift */,
+				BA7255441CBC391C0039AF1C /* UserProperties.swift */,
+				BA7255461CBC39270039AF1C /* UserInRoomProperties.swift */,
+			);
+			name = Enumerators;
+			sourceTree = "<group>";
+		};
+		BA72553F1CBC38D50039AF1C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E136F7251CBBE68A00BB4473 /* CloudKitObject.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		E136F7151CBBA40300BB4473 /* CloudKitClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +167,8 @@
 		E136F71A1CBBA51000BB4473 /* SupportClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E136F71B1CBBA52500BB4473 /* AccessType.swift */,
-				E136F7231CBBA81700BB4473 /* ConfirmationStatus.swift */,
-				E136F7251CBBE68A00BB4473 /* CloudKitObject.swift */,
+				BA72553F1CBC38D50039AF1C /* Protocols */,
+				BA72553E1CBC38CA0039AF1C /* Enumerators */,
 			);
 			name = SupportClasses;
 			sourceTree = "<group>";
@@ -253,12 +281,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
+				BA7255451CBC391C0039AF1C /* UserProperties.swift in Sources */,
 				354DB4FE1CB7EA8400B9194B /* ViewController.swift in Sources */,
 				E136F7241CBBA81700BB4473 /* ConfirmationStatus.swift in Sources */,
 				E136F7171CBBA41500BB4473 /* CloudKitHelper.swift in Sources */,
 				E136F71E1CBBA57B00BB4473 /* Restaurant.swift in Sources */,
+				BA7255471CBC39270039AF1C /* UserInRoomProperties.swift in Sources */,
+				BA7255431CBC39130039AF1C /* RestaurantProperties.swift in Sources */,
 				E136F7221CBBA7F300BB4473 /* UserInRoom.swift in Sources */,
 				E136F7201CBBA5CA00BB4473 /* User.swift in Sources */,
+				BA7255411CBC39090039AF1C /* RoomProperties.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
 				E136F7191CBBA4E700BB4473 /* Room.swift in Sources */,
 				E136F7261CBBE68A00BB4473 /* CloudKitObject.swift in Sources */,
@@ -394,10 +426,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = mEatUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -406,10 +441,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = mEatUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

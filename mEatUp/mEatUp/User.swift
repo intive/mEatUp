@@ -10,6 +10,8 @@ import Foundation
 import CloudKit
 
 class User: CloudKitObject {
+    static let entityName = "User"
+    
     var fbID: String?
     var name: String?
     var surname: String?

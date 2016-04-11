@@ -10,6 +10,7 @@ import Foundation
 import CloudKit
 
 class Room: CloudKitObject {
+    static let entityName = "Room"
     
     var roomID: Int?
     var title: String?
