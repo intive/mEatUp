@@ -14,6 +14,8 @@
 		354DB5061CB7EA8400B9194B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5051CB7EA8400B9194B /* Assets.xcassets */; };
 		354DB5091CB7EA8400B9194B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */; };
 		354DB5141CB7EA8400B9194B /* mEatUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5131CB7EA8400B9194B /* mEatUpTests.swift */; };
+		355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355301F91CBCF3E200F23373 /* RoomListViewController.swift */; };
+		355301FC1CBCF4CA00F23373 /* SettlementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */; };
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
@@ -54,6 +56,8 @@
 		354DB50F1CB7EA8400B9194B /* mEatUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mEatUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB5131CB7EA8400B9194B /* mEatUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mEatUpTests.swift; sourceTree = "<group>"; };
 		354DB5151CB7EA8400B9194B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		355301F91CBCF3E200F23373 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettlementListViewController.swift; sourceTree = "<group>"; };
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -116,12 +120,12 @@
 		354DB4FA1CB7EA8400B9194B /* mEatUp */ = {
 			isa = PBXGroup;
 			children = (
+				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
 				356275BF1CBBA621009B8122 /* Frameworks */,
 				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
 				E1FB87C71CBCE93C00273E4E /* CloudKitClasses */,
 				E1FB87C61CBCE92C00273E4E /* SupportClasses */,
-				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
-				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
+				355301F81CBCF26400F23373 /* ViewControllers */,
 				354DB4FF1CB7EA8400B9194B /* Main.storyboard */,
 				354DB5051CB7EA8400B9194B /* Assets.xcassets */,
 				354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */,
@@ -138,6 +142,16 @@
 				354DB5151CB7EA8400B9194B /* Info.plist */,
 			);
 			path = mEatUpTests;
+			sourceTree = "<group>";
+		};
+		355301F81CBCF26400F23373 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
+				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
+				355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		356275BF1CBBA621009B8122 /* Frameworks */ = {
@@ -319,10 +333,12 @@
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
 				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,
 				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
+				355301FC1CBCF4CA00F23373 /* SettlementListViewController.swift in Sources */,
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
+				355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

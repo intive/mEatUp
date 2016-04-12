@@ -31,11 +31,68 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="eN1-iJ-BiO" id="9uN-OK-obm"/>
+                        <segue destination="3p5-4G-dVz" kind="show" identifier="ShowRoomListSegue" id="PTp-H0-WW3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="501" y="407"/>
+            <point key="canvasLocation" x="-371" y="533"/>
+        </scene>
+        <!--SettlementViewController-->
+        <scene sceneID="p9U-PZ-rVQ">
+            <objects>
+                <viewController id="oLP-SW-bDr" userLabel="SettlementViewController" customClass="SettlementListViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m8g-iH-hyi"/>
+                        <viewControllerLayoutGuide type="bottom" id="TFU-x2-2hf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mbg-vH-95D">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="qzF-Uw-5np"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEd-Gu-gPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="863"/>
+        </scene>
+        <!--RoomListViewController-->
+        <scene sceneID="hyh-I0-2Gv">
+            <objects>
+                <viewController id="uNM-NS-eFh" userLabel="RoomListViewController" customClass="RoomListViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bzM-eD-ISw"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Ln-FL-Yo2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FN1-Ot-SOc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="Yjb-Qt-hfZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xgs-zg-Nzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="203"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="P9n-fa-hV8">
+            <objects>
+                <tabBarController storyboardIdentifier="RoomListTabBar" id="3p5-4G-dVz" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="oVn-yU-PZ5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="uNM-NS-eFh" kind="relationship" relationship="viewControllers" id="Reh-Sb-hdf"/>
+                        <segue destination="oLP-SW-bDr" kind="relationship" relationship="viewControllers" id="A1k-IS-gTn"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VrV-34-hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="403" y="533"/>
         </scene>
     </scenes>
 </document>
