@@ -8,25 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */; };
-		354DB4FE1CB7EA8400B9194B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FD1CB7EA8400B9194B /* ViewController.swift */; };
+		354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */; };
 		354DB5011CB7EA8400B9194B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB4FF1CB7EA8400B9194B /* Main.storyboard */; };
 		354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5021CB7EA8400B9194B /* mEatUp.xcdatamodeld */; };
 		354DB5061CB7EA8400B9194B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5051CB7EA8400B9194B /* Assets.xcassets */; };
 		354DB5091CB7EA8400B9194B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */; };
 		354DB5141CB7EA8400B9194B /* mEatUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5131CB7EA8400B9194B /* mEatUpTests.swift */; };
-		BA7255411CBC39090039AF1C /* RoomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255401CBC39090039AF1C /* RoomProperties.swift */; };
-		BA7255431CBC39130039AF1C /* RestaurantProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255421CBC39130039AF1C /* RestaurantProperties.swift */; };
-		BA7255451CBC391C0039AF1C /* UserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255441CBC391C0039AF1C /* UserProperties.swift */; };
-		BA7255471CBC39270039AF1C /* UserInRoomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7255461CBC39270039AF1C /* UserInRoomProperties.swift */; };
-		E136F7141CBBA37D00BB4473 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E136F7131CBBA37D00BB4473 /* CloudKit.framework */; };
-		E136F7171CBBA41500BB4473 /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7161CBBA41500BB4473 /* CloudKitHelper.swift */; };
-		E136F7191CBBA4E700BB4473 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7181CBBA4E700BB4473 /* Room.swift */; };
-		E136F71C1CBBA52500BB4473 /* AccessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F71B1CBBA52500BB4473 /* AccessType.swift */; };
-		E136F71E1CBBA57B00BB4473 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F71D1CBBA57B00BB4473 /* Restaurant.swift */; };
-		E136F7201CBBA5CA00BB4473 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F71F1CBBA5CA00BB4473 /* User.swift */; };
-		E136F7221CBBA7F300BB4473 /* UserInRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7211CBBA7F300BB4473 /* UserInRoom.swift */; };
-		E136F7241CBBA81700BB4473 /* ConfirmationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7231CBBA81700BB4473 /* ConfirmationStatus.swift */; };
-		E136F7261CBBE68A00BB4473 /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E136F7251CBBE68A00BB4473 /* CloudKitObject.swift */; };
+		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
+		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
+		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
+		E1FB87C51CBCE8F100273E4E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB87C41CBCE8F100273E4E /* CloudKit.framework */; };
+		E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */; };
+		E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CC1CBCE97000273E4E /* AccessType.swift */; };
+		E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CD1CBCE97000273E4E /* ConfirmationStatus.swift */; };
+		E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87D01CBCE97600273E4E /* CloudKitHelper.swift */; };
+		E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87D21CBCE98C00273E4E /* Restaurant.swift */; };
+		E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87D31CBCE98C00273E4E /* Room.swift */; };
+		E1FB87D81CBCE98C00273E4E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87D41CBCE98C00273E4E /* User.swift */; };
+		E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87D51CBCE98C00273E4E /* UserInRoom.swift */; };
+		E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87DA1CBCE99B00273E4E /* RestaurantProperties.swift */; };
+		E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87DB1CBCE99B00273E4E /* RoomProperties.swift */; };
+		E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87DC1CBCE99B00273E4E /* UserInRoomProperties.swift */; };
+		E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87DD1CBCE99B00273E4E /* UserProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +45,7 @@
 /* Begin PBXFileReference section */
 		354DB4F81CB7EA8400B9194B /* mEatUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mEatUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		354DB4FD1CB7EA8400B9194B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		354DB5001CB7EA8400B9194B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		354DB5031CB7EA8400B9194B /* mEatUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mEatUp.xcdatamodel; sourceTree = "<group>"; };
 		354DB5051CB7EA8400B9194B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,20 +54,23 @@
 		354DB50F1CB7EA8400B9194B /* mEatUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mEatUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB5131CB7EA8400B9194B /* mEatUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mEatUpTests.swift; sourceTree = "<group>"; };
 		354DB5151CB7EA8400B9194B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA7255401CBC39090039AF1C /* RoomProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomProperties.swift; sourceTree = "<group>"; };
-		BA7255421CBC39130039AF1C /* RestaurantProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantProperties.swift; sourceTree = "<group>"; };
-		BA7255441CBC391C0039AF1C /* UserProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProperties.swift; sourceTree = "<group>"; };
-		BA7255461CBC39270039AF1C /* UserInRoomProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInRoomProperties.swift; sourceTree = "<group>"; };
-		E136F7121CBBA35B00BB4473 /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
-		E136F7131CBBA37D00BB4473 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		E136F7161CBBA41500BB4473 /* CloudKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
-		E136F7181CBBA4E700BB4473 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		E136F71B1CBBA52500BB4473 /* AccessType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessType.swift; sourceTree = "<group>"; };
-		E136F71D1CBBA57B00BB4473 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		E136F71F1CBBA5CA00BB4473 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		E136F7211CBBA7F300BB4473 /* UserInRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInRoom.swift; sourceTree = "<group>"; };
-		E136F7231CBBA81700BB4473 /* ConfirmationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationStatus.swift; sourceTree = "<group>"; };
-		E136F7251CBBE68A00BB4473 /* CloudKitObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitObject.swift; sourceTree = "<group>"; };
+		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
+		E1FB87C41CBCE8F100273E4E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitObject.swift; sourceTree = "<group>"; };
+		E1FB87CC1CBCE97000273E4E /* AccessType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessType.swift; sourceTree = "<group>"; };
+		E1FB87CD1CBCE97000273E4E /* ConfirmationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationStatus.swift; sourceTree = "<group>"; };
+		E1FB87D01CBCE97600273E4E /* CloudKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
+		E1FB87D21CBCE98C00273E4E /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		E1FB87D31CBCE98C00273E4E /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		E1FB87D41CBCE98C00273E4E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E1FB87D51CBCE98C00273E4E /* UserInRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInRoom.swift; sourceTree = "<group>"; };
+		E1FB87DA1CBCE99B00273E4E /* RestaurantProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantProperties.swift; sourceTree = "<group>"; };
+		E1FB87DB1CBCE99B00273E4E /* RoomProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomProperties.swift; sourceTree = "<group>"; };
+		E1FB87DC1CBCE99B00273E4E /* UserInRoomProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInRoomProperties.swift; sourceTree = "<group>"; };
+		E1FB87DD1CBCE99B00273E4E /* UserProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProperties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +78,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E136F7141CBBA37D00BB4473 /* CloudKit.framework in Frameworks */,
+				356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */,
+				E1FB87C51CBCE8F100273E4E /* CloudKit.framework in Frameworks */,
+				356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */,
+				356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +98,6 @@
 		354DB4EF1CB7EA8400B9194B = {
 			isa = PBXGroup;
 			children = (
-				E136F7131CBBA37D00BB4473 /* CloudKit.framework */,
 				354DB4FA1CB7EA8400B9194B /* mEatUp */,
 				354DB5121CB7EA8400B9194B /* mEatUpTests */,
 				354DB4F91CB7EA8400B9194B /* Products */,
@@ -108,11 +116,12 @@
 		354DB4FA1CB7EA8400B9194B /* mEatUp */ = {
 			isa = PBXGroup;
 			children = (
-				E136F7121CBBA35B00BB4473 /* mEatUp.entitlements */,
-				E136F71A1CBBA51000BB4473 /* SupportClasses */,
-				E136F7151CBBA40300BB4473 /* CloudKitClasses */,
+				356275BF1CBBA621009B8122 /* Frameworks */,
+				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
+				E1FB87C71CBCE93C00273E4E /* CloudKitClasses */,
+				E1FB87C61CBCE92C00273E4E /* SupportClasses */,
 				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
-				354DB4FD1CB7EA8400B9194B /* ViewController.swift */,
+				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
 				354DB4FF1CB7EA8400B9194B /* Main.storyboard */,
 				354DB5051CB7EA8400B9194B /* Assets.xcassets */,
 				354DB5071CB7EA8400B9194B /* LaunchScreen.storyboard */,
@@ -131,46 +140,65 @@
 			path = mEatUpTests;
 			sourceTree = "<group>";
 		};
-		BA72553E1CBC38CA0039AF1C /* Enumerators */ = {
+		356275BF1CBBA621009B8122 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E136F7231CBBA81700BB4473 /* ConfirmationStatus.swift */,
-				E136F71B1CBBA52500BB4473 /* AccessType.swift */,
-				BA7255401CBC39090039AF1C /* RoomProperties.swift */,
-				BA7255421CBC39130039AF1C /* RestaurantProperties.swift */,
-				BA7255441CBC391C0039AF1C /* UserProperties.swift */,
-				BA7255461CBC39270039AF1C /* UserInRoomProperties.swift */,
+				E1FB87C41CBCE8F100273E4E /* CloudKit.framework */,
+				356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */,
+				356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */,
+				356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */,
 			);
-			name = Enumerators;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BA72553F1CBC38D50039AF1C /* Protocols */ = {
+		E1FB87C61CBCE92C00273E4E /* SupportClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E136F7251CBBE68A00BB4473 /* CloudKitObject.swift */,
+				E1FB87C91CBCE95200273E4E /* Enumerators */,
+				E1FB87C81CBCE94C00273E4E /* Protocols */,
 			);
-			name = Protocols;
+			name = SupportClasses;
 			sourceTree = "<group>";
 		};
-		E136F7151CBBA40300BB4473 /* CloudKitClasses */ = {
+		E1FB87C71CBCE93C00273E4E /* CloudKitClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E136F7161CBBA41500BB4473 /* CloudKitHelper.swift */,
-				E136F7181CBBA4E700BB4473 /* Room.swift */,
-				E136F71D1CBBA57B00BB4473 /* Restaurant.swift */,
-				E136F71F1CBBA5CA00BB4473 /* User.swift */,
-				E136F7211CBBA7F300BB4473 /* UserInRoom.swift */,
+				E1FB87D01CBCE97600273E4E /* CloudKitHelper.swift */,
+				E1FB87D21CBCE98C00273E4E /* Restaurant.swift */,
+				E1FB87D31CBCE98C00273E4E /* Room.swift */,
+				E1FB87D41CBCE98C00273E4E /* User.swift */,
+				E1FB87D51CBCE98C00273E4E /* UserInRoom.swift */,
 			);
 			name = CloudKitClasses;
 			sourceTree = "<group>";
 		};
-		E136F71A1CBBA51000BB4473 /* SupportClasses */ = {
+		E1FB87C81CBCE94C00273E4E /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				BA72553F1CBC38D50039AF1C /* Protocols */,
-				BA72553E1CBC38CA0039AF1C /* Enumerators */,
+				E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */,
 			);
-			name = SupportClasses;
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		E1FB87C91CBCE95200273E4E /* Enumerators */ = {
+			isa = PBXGroup;
+			children = (
+				E1FB87CC1CBCE97000273E4E /* AccessType.swift */,
+				E1FB87CD1CBCE97000273E4E /* ConfirmationStatus.swift */,
+				E1FB87DA1CBCE99B00273E4E /* RestaurantProperties.swift */,
+				E1FB87DB1CBCE99B00273E4E /* RoomProperties.swift */,
+				E1FB87DC1CBCE99B00273E4E /* UserInRoomProperties.swift */,
+				E1FB87DD1CBCE99B00273E4E /* UserProperties.swift */,
+			);
+			name = Enumerators;
+			sourceTree = "<group>";
+		};
+		E1FB87E21CBCE9EF00273E4E /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */,
+			);
+			name = Entitlements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,21 +308,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
+				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,
+				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
-				BA7255451CBC391C0039AF1C /* UserProperties.swift in Sources */,
-				354DB4FE1CB7EA8400B9194B /* ViewController.swift in Sources */,
-				E136F7241CBBA81700BB4473 /* ConfirmationStatus.swift in Sources */,
-				E136F7171CBBA41500BB4473 /* CloudKitHelper.swift in Sources */,
-				E136F71E1CBBA57B00BB4473 /* Restaurant.swift in Sources */,
-				BA7255471CBC39270039AF1C /* UserInRoomProperties.swift in Sources */,
-				BA7255431CBC39130039AF1C /* RestaurantProperties.swift in Sources */,
-				E136F7221CBBA7F300BB4473 /* UserInRoom.swift in Sources */,
-				E136F7201CBBA5CA00BB4473 /* User.swift in Sources */,
-				BA7255411CBC39090039AF1C /* RoomProperties.swift in Sources */,
+				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
+				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
+				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
+				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
+				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
+				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,
+				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
+				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
+				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
+				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
-				E136F7191CBBA4E700BB4473 /* Room.swift in Sources */,
-				E136F7261CBBE68A00BB4473 /* CloudKitObject.swift in Sources */,
-				E136F71C1CBBA52500BB4473 /* AccessType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,14 +453,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mEatUp",
+				);
 				INFOPLIST_FILE = mEatUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -440,14 +471,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mEatUp",
+				);
 				INFOPLIST_FILE = mEatUp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
