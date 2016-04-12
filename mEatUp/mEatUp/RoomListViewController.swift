@@ -9,9 +9,5 @@
 import UIKit
 
 class RoomListViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
 }
