@@ -18,7 +18,7 @@ class CloudKitHelper {
         publicDB = container.publicCloudDatabase
     }
     
-    func saveRoomRecord(room: Room, completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
+    func saveRoomRecord(room: Room, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         let roomRecord: CKRecord
         
         if let recordID = room.recordID {
@@ -39,14 +39,13 @@ class CloudKitHelper {
             if error == nil {
                 room.recordID = record?.recordID
                 completionHandler?()
-                NSLog("Saved to cloud kit")
             } else {
-                errorHandler?()
+                errorHandler?(error)
             }
         })
     }
     
-    func saveUserRecord(user: User, completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
+    func saveUserRecord(user: User, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         let userRecord: CKRecord
         
         if let recordID = user.recordID {
@@ -64,14 +63,13 @@ class CloudKitHelper {
             if error == nil {
                 user.recordID = record?.recordID
                 completionHandler?()
-                NSLog("Saved to cloud kit")
             } else {
-                errorHandler?()
+                errorHandler?(error)
             }
         })
     }
     
-    func saveRestaurantRecord(restaurant: Restaurant, completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
+    func saveRestaurantRecord(restaurant: Restaurant, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         let restaurantRecord: CKRecord
         
         if let recordID = restaurant.recordID {
@@ -88,14 +86,13 @@ class CloudKitHelper {
             if error == nil {
                 restaurant.recordID = record?.recordID
                 completionHandler?()
-                NSLog("Saved to cloud kit")
             } else {
-                errorHandler?()
+                errorHandler?(error)
             }
         })
     }
     
-    func saveUserInRoomRecord(userInRoom: UserInRoom, completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
+    func saveUserInRoomRecord(userInRoom: UserInRoom, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         let userInRoomRecord: CKRecord
         
         if let recordID = userInRoom.recordID {
@@ -112,14 +109,13 @@ class CloudKitHelper {
             if error == nil {
                 userInRoom.recordID = record?.recordID
                 completionHandler?()
-                NSLog("Saved to cloud kit")
             } else {
-                errorHandler?()
+                errorHandler?(error)
             }
         })
     }
     
-    func loadRestaurantRecordWithId(restaurantID: Int) -> Restaurant {
+    func loadRestaurantRecordWithId(restaurantID: Int, completionHandler: ((Restaurant) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newRestaurant = Restaurant()
         newRestaurant.restaurantID = restaurantID
         
@@ -136,13 +132,13 @@ class CloudKitHelper {
                 }
             }
             else {
-                print(error)
+                errorHandler?(error)
             }
         }
-        return newRestaurant
+        completionHandler(newRestaurant)
     }
     
-    func loadUserRecordWithId(fbID: String) -> User {
+    func loadUserRecordWithId(fbID: String, completionHandler: ((User) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newUser = User()
         newUser.fbID = fbID
         
@@ -160,13 +156,13 @@ class CloudKitHelper {
                 }
             }
             else {
-                print(error)
+                errorHandler?(error)
             }
         }
-        return newUser
+        completionHandler(newUser)
     }
     
-    func loadRoomRecordWithId(roomID: Int) -> Room {
+    func loadRoomRecordWithId(roomID: Int, completionHandler: ((Room) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newRoom = Room()
         newRoom.roomID = roomID
         
@@ -177,21 +173,33 @@ class CloudKitHelper {
                 if let results = results {
                     for room in results {
                         newRoom.title = room[RoomProperties.title.rawValue] as? String
-                        newRoom.accessType = AccessType(rawValue: room[RoomProperties.accessType.rawValue] as! Int)
-                        newRoom.restaurant = self.loadRestaurantRecordWithId(room[RoomProperties.restaurantID.rawValue] as! Int)
+                        if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
+                            newRoom.accessType = AccessType(rawValue: accessType)
+                        }
+                        if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? Int {
+                            self.loadRestaurantRecordWithId(restaurantID, completionHandler: {
+                                restaurant in
+                                    newRoom.restaurant = restaurant
+                            }, errorHandler: nil)
+                        }
                         newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
                         newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
-                        newRoom.owner = self.loadUserRecordWithId(room[RoomProperties.ownerID.rawValue] as! String)
-                        newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as! Bool
+                        if let ownerID = room[RoomProperties.ownerID.rawValue] as? String {
+                            self.loadUserRecordWithId(ownerID, completionHandler: {
+                                owner in
+                                    newRoom.owner = owner
+                            }, errorHandler: nil)
+                        }
+                        newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
                         newRoom.recordID = room.recordID
                     }
                 }
             }
             else {
-                print(error)
+                errorHandler?(error)
             }
         }
-        return newRoom
+        completionHandler(newRoom)
     }
     
     func loadUsersInRoomRecordWithRoomId(roomID: Int, completionHandler: ([UserInRoom]) -> Void, errorHandler: ((NSError?) -> Void)?) {
@@ -204,9 +212,21 @@ class CloudKitHelper {
                 if let results = results {
                     for userInRoom in results {
                         let newUserInRoom = UserInRoom()
-                        newUserInRoom.user = self.loadUserRecordWithId(userInRoom[UserInRoomProperties.userID.rawValue] as! String)
-                        newUserInRoom.room = self.loadRoomRecordWithId(userInRoom[UserInRoomProperties.roomID.rawValue] as! Int)
-                        newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as! Int)
+                        if let userID = userInRoom[UserInRoomProperties.userID.rawValue] as? String {
+                            self.loadUserRecordWithId(userID, completionHandler: {
+                                user in
+                                    newUserInRoom.user = user
+                            }, errorHandler: nil)
+                        }
+                        if let roomID = userInRoom[UserInRoomProperties.roomID.rawValue] as? Int {
+                            self.loadRoomRecordWithId(roomID, completionHandler: {
+                                room in
+                                    newUserInRoom.room = room
+                            }, errorHandler: nil)
+                        }
+                        if let confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                            newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationStatus)
+                        }
                         newUserInRoom.recordID = userInRoom.recordID
                         
                         usersInRoom.append(newUserInRoom)
@@ -231,9 +251,21 @@ class CloudKitHelper {
                 if let results = results {
                     for userInRoom in results {
                         let newUserInRoom = UserInRoom()
-                        newUserInRoom.user = self.loadUserRecordWithId(userInRoom[UserInRoomProperties.userID.rawValue] as! String)
-                        newUserInRoom.room = self.loadRoomRecordWithId(userInRoom[UserInRoomProperties.roomID.rawValue] as! Int)
-                        newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as! Int)
+                        if let userID = userInRoom[UserInRoomProperties.userID.rawValue] as? String {
+                            self.loadUserRecordWithId(userID, completionHandler: {
+                                user in
+                                    newUserInRoom.user = user
+                            }, errorHandler: nil)
+                        }
+                        if let roomID = userInRoom[UserInRoomProperties.roomID.rawValue] as? Int {
+                            self.loadRoomRecordWithId(roomID, completionHandler: {
+                                room in
+                                    newUserInRoom.room = room
+                            }, errorHandler: nil)
+                        }
+                        if let confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                            newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationStatus)
+                        }
                         newUserInRoom.recordID = userInRoom.recordID
                         
                         roomsForUser.append(newUserInRoom)
@@ -262,12 +294,24 @@ class CloudKitHelper {
                         
                         newRoom.roomID = room[RoomProperties.roomID.rawValue] as? Int
                         newRoom.title = room[RoomProperties.title.rawValue] as? String
-                        newRoom.accessType = AccessType(rawValue: room[RoomProperties.accessType.rawValue] as! Int)
-                        newRoom.restaurant = self.loadRestaurantRecordWithId(room[RoomProperties.restaurantID.rawValue] as! Int)
+                        if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
+                            newRoom.accessType = AccessType(rawValue: accessType)
+                        }
+                        if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? Int {
+                            self.loadRestaurantRecordWithId(restaurantID, completionHandler: {
+                                restaurant in
+                                    newRoom.restaurant = restaurant
+                            }, errorHandler: nil)
+                        }
                         newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
                         newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
-                        newRoom.owner = self.loadUserRecordWithId(room[RoomProperties.ownerID.rawValue] as! String)
-                        newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as! Bool
+                        if let ownerID = room[RoomProperties.ownerID.rawValue] as? String {
+                            self.loadUserRecordWithId(ownerID, completionHandler: {
+                                owner in
+                                    newRoom.owner = owner
+                            }, errorHandler: nil)
+                        }
+                        newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
                         newRoom.recordID = room.recordID
                         
                         rooms.append(newRoom)
@@ -292,9 +336,13 @@ class CloudKitHelper {
             if error == nil {
                 if let results = results {
                     for userInRoom in results {
-                        let newRoom = self.loadRoomRecordWithId(userInRoom[UserInRoomProperties.roomID.rawValue] as! Int)
-                        
-                        rooms.append(newRoom)
+                        if let roomID = userInRoom[UserInRoomProperties.roomID.rawValue] as? Int {
+                            self.loadRoomRecordWithId(roomID, completionHandler: {
+                                room in
+                                    let newRoom = room
+                                    rooms.append(newRoom)
+                            }, errorHandler: nil)
+                        }
                     }
                 }
             }
@@ -359,14 +407,14 @@ class CloudKitHelper {
         completionHandler(restaurants)
     }
     
-    func deleteRecord(cloudKitRecord: CloudKitObject, completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
+    func deleteRecord(cloudKitRecord: CloudKitObject, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         if let recordID = cloudKitRecord.recordID {
             publicDB.deleteRecordWithID(recordID, completionHandler: { recordID, error in
-                if error != nil {
-                    errorHandler?()
+                if error == nil {
+                    completionHandler?()
                 }
                 else {
-                    completionHandler?()
+                    errorHandler?(error)
                 }
             })
         }

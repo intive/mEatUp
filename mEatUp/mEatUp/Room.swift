@@ -19,7 +19,7 @@ class Room: CloudKitObject {
     var maxCount: Int?
     var date: NSDate?
     var owner: User?
-    var didEnd: Bool = false
+    var didEnd: Bool? = false
     
     var recordID: CKRecordID?
 

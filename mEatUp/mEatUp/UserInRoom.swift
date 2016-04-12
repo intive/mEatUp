@@ -28,8 +28,8 @@ class UserInRoom: CloudKitObject {
         self.init()
     }
     
-    func acceptInvite(cloudKitHelper: CloudKitHelper) {
+    func acceptInvite(cloudKitHelper: CloudKitHelper, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         self.confirmationStatus = .Accepted
-        cloudKitHelper.saveUserInRoomRecord(self, completionHandler: nil, errorHandler: nil)
+        cloudKitHelper.saveUserInRoomRecord(self, completionHandler: completionHandler, errorHandler: errorHandler)
     }
 }
