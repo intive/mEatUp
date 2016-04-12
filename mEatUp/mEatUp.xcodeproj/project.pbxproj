@@ -19,6 +19,7 @@
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
+		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
 		E1FB87C51CBCE8F100273E4E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB87C41CBCE8F100273E4E /* CloudKit.framework */; };
 		E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */; };
 		E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CC1CBCE97000273E4E /* AccessType.swift */; };
@@ -61,6 +62,7 @@
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
 		E1FB87C41CBCE8F100273E4E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitObject.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
 				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
 				355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */,
+				C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -321,7 +324,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		E10027091CBD0F230071D45C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -354,6 +357,7 @@
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
+				C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
 				355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */,
 			);
