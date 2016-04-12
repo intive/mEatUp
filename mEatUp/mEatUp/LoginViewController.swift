@@ -23,7 +23,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        if (FBSDKAccessToken.currentAccessToken() != nil)
+        if FBSDKAccessToken.currentAccessToken() != nil
         {
             performSegueWithIdentifier("ShowRoomListSegue", sender: nil)
         }

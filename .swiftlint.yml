@@ -9,6 +9,8 @@ disabled_rules: # rule identifiers to exclude from running
   - comma
   - trailing_semicolon
   - control_statement
+  - file_length
+  - function_parameter_count
 included: # paths to include during linting. `--path` is ignored if present. takes precendence over `excluded`.
   -  
 excluded: # paths to ignore during linting. overridden by `included`.

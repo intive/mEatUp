@@ -10,8 +10,8 @@ import Foundation
 import CloudKit
 
 class CloudKitHelper {
-    let container : CKContainer
-    let publicDB : CKDatabase
+    let container: CKContainer
+    let publicDB: CKDatabase
     
     init() {
         container = CKContainer.defaultContainer()
