@@ -32,7 +32,6 @@ class Room: CloudKitObject {
         self.owner = owner
     }
     
-    convenience init() {
-        self.init()
+    init() {
     }
 }

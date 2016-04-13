@@ -26,7 +26,6 @@ class User: CloudKitObject {
         self.photo = photo
     }
     
-    convenience init() {
-        self.init()
+    init() {
     }
 }
