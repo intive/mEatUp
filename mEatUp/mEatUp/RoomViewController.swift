@@ -17,6 +17,9 @@ class RoomViewController: UIViewController {
         //added only for testing, needs to be deleted after adding CloudKit
         let room = createTemporaryRoom()
         infoView.startWithRoom(room)
+        infoView.performSegueBlock = { [unowned self] in
+            self.performSegueWithIdentifier("showRoomDetailsSegue", sender: nil)
+        }
     }
     
     //added only for testing, needs to be deleted after adding CloudKit
