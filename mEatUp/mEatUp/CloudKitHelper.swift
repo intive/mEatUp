@@ -202,8 +202,8 @@ class CloudKitHelper {
         completionHandler(newRoom)
     }
     
-    func loadUsersInRoomRecordWithRoomId(roomID: Int, completionHandler: ([UserInRoom]) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var usersInRoom = [UserInRoom]()
+    func loadUsersInRoomRecordWithRoomId(roomID: Int, completionHandler: ([User]) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        var usersInRoom = [User]()
         
         let predicate = NSPredicate(format: "%@ == %@", RoomProperties.roomID.rawValue ,roomID)
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
@@ -211,25 +211,14 @@ class CloudKitHelper {
             if error == nil {
                 if let results = results {
                     for userInRoom in results {
-                        let newUserInRoom = UserInRoom()
+                        var newUser = User()
                         if let userID = userInRoom[UserInRoomProperties.userID.rawValue] as? String {
                             self.loadUserRecordWithId(userID, completionHandler: {
                                 user in
-                                    newUserInRoom.user = user
+                                    newUser = user
                             }, errorHandler: nil)
                         }
-                        if let roomID = userInRoom[UserInRoomProperties.roomID.rawValue] as? Int {
-                            self.loadRoomRecordWithId(roomID, completionHandler: {
-                                room in
-                                    newUserInRoom.room = room
-                            }, errorHandler: nil)
-                        }
-                        if let confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
-                            newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationStatus)
-                        }
-                        newUserInRoom.recordID = userInRoom.recordID
-                        
-                        usersInRoom.append(newUserInRoom)
+                        usersInRoom.append(newUser)
                     }
                 }
             }
@@ -241,8 +230,8 @@ class CloudKitHelper {
         completionHandler(usersInRoom)
     }
     
-    func loadUsersInRoomRecordWithUserId(userID: Int, completionHandler: ([UserInRoom]) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var roomsForUser = [UserInRoom]()
+    func loadUsersInRoomRecordWithUserId(userID: String, completionHandler: ([Room]) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        var roomsForUser = [Room]()
         
         let predicate = NSPredicate(format: "%@ == %@", UserInRoomProperties.userID.rawValue ,userID)
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
@@ -250,25 +239,15 @@ class CloudKitHelper {
             if error == nil {
                 if let results = results {
                     for userInRoom in results {
-                        let newUserInRoom = UserInRoom()
-                        if let userID = userInRoom[UserInRoomProperties.userID.rawValue] as? String {
-                            self.loadUserRecordWithId(userID, completionHandler: {
-                                user in
-                                    newUserInRoom.user = user
-                            }, errorHandler: nil)
-                        }
+                        var newRoom = Room()
                         if let roomID = userInRoom[UserInRoomProperties.roomID.rawValue] as? Int {
                             self.loadRoomRecordWithId(roomID, completionHandler: {
                                 room in
-                                    newUserInRoom.room = room
+                                    newRoom = room
                             }, errorHandler: nil)
                         }
-                        if let confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
-                            newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationStatus)
-                        }
-                        newUserInRoom.recordID = userInRoom.recordID
                         
-                        roomsForUser.append(newUserInRoom)
+                        roomsForUser.append(newRoom)
                     }
                 }
             }
@@ -325,6 +304,53 @@ class CloudKitHelper {
         }
         completionHandler(rooms)
     }
+    
+    func loadUserRoomRecord(fbID: String, completionHandler: (Room) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        var resultRoom = Room()
+        
+        let predicate = NSPredicate(format: "%@ == %@", RoomProperties.ownerID.rawValue, fbID)
+        
+        let query = CKQuery(recordType: Room.entityName, predicate: predicate)
+        publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            if error == nil {
+                if let results = results {
+                    for room in results {
+                        let newRoom = Room()
+                        
+                        newRoom.roomID = room[RoomProperties.roomID.rawValue] as? Int
+                        newRoom.title = room[RoomProperties.title.rawValue] as? String
+                        if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
+                            newRoom.accessType = AccessType(rawValue: accessType)
+                        }
+                        if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? Int {
+                            self.loadRestaurantRecordWithId(restaurantID, completionHandler: {
+                                restaurant in
+                                newRoom.restaurant = restaurant
+                                }, errorHandler: nil)
+                        }
+                        newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
+                        newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
+                        if let ownerID = room[RoomProperties.ownerID.rawValue] as? String {
+                            self.loadUserRecordWithId(ownerID, completionHandler: {
+                                owner in
+                                newRoom.owner = owner
+                                }, errorHandler: nil)
+                        }
+                        newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
+                        newRoom.recordID = room.recordID
+                        
+                        resultRoom = newRoom
+                    }
+                }
+            }
+            else {
+                errorHandler?(error)
+                return
+            }
+        }
+        completionHandler(resultRoom)
+    }
+
     
     func loadInvitedRoomRecords(fbID: String, completionHandler: ([Room]) -> Void, errorHandler: ((NSError?) -> Void)?) {
         var rooms = [Room]()

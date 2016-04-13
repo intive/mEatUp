@@ -74,7 +74,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="531"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomCell" rowHeight="42" id="BQ4-B8-Lvi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomCell" rowHeight="42" id="BQ4-B8-Lvi" customClass="RoomListCell" customModule="mEatUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BQ4-B8-Lvi" id="vie-1u-3lY">
@@ -84,7 +84,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="delegate" destination="uNM-NS-eFh" id="hKo-ba-3nn"/>
+                                    <outlet property="dataSource" destination="uNM-NS-eFh" id="cZa-PZ-8B9"/>
+                                    <outlet property="delegate" destination="uNM-NS-eFh" id="nyT-qe-Y0J"/>
                                 </connections>
                             </tableView>
                         </subviews>
