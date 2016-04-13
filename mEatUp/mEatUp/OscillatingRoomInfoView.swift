@@ -15,7 +15,7 @@ class OscillatingRoomInfoView: UIView {
     var room: Room?
     var isSwapped = true
     lazy var formatter = NSDateFormatter()
-    var performSegueBlock: (() -> ())?
+    var singleTapAction: (() -> ())?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,7 +30,7 @@ class OscillatingRoomInfoView: UIView {
     }
     
     @IBAction func singleTap(sender: UITapGestureRecognizer) {
-        performSegueBlock?()
+        singleTapAction?()
     }
     
     func startWithRoom(room: Room) {
