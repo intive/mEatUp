@@ -13,7 +13,7 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var loginButton: FBSDKLoginButton!
-    var userDefaults = NSUserDefaults()
+    let userSettings = UserSettings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +42,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     let firstName: String? = (result.objectForKey("first_name") as? String)
                     let lastName: String? = (result.objectForKey("last_name") as? String)
                     let pictureURL: String? = (result.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String)
-            
-                    self.userDefaults.setValue(firstName, forKey: "first_name")
-                    self.userDefaults.setValue(lastName, forKey: "last_name")
-                    self.userDefaults.setValue(pictureURL, forKey: "picture_url")
+                    
+                    self.userSettings.saveUserDetails(firstName, lastName: lastName, pictureURL: pictureURL)
                 }
             }
         }
