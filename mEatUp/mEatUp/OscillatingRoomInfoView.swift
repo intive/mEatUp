@@ -68,14 +68,13 @@ class OscillatingRoomInfoView: UIView {
                 topLabel.text = title
                 bottomLabel.text = "\(ownerName) \(ownerSurname)"
             }
-            isSwapped = !isSwapped
         } else {
             if  let date = room?.date, let restaurantName = room?.restaurant?.name {
                 topLabel.text = restaurantName
                 bottomLabel.text = "\(formatter.stringFromDate(date))"
             }
-            isSwapped = !isSwapped
         }
+        isSwapped = !isSwapped
     }
     
 }
