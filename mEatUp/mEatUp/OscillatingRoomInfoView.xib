@@ -28,6 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="CZF-VM-fCk" secondAttribute="bottom" constant="0.5" id="Kem-dq-slo"/>
                 <constraint firstItem="Z6E-SV-0vR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RkP-Pk-iz5"/>
@@ -38,7 +39,15 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="noE-XL-f2E" appends="YES" id="YmU-2x-LKs"/>
+            </connections>
             <point key="canvasLocation" x="353" y="328"/>
         </view>
+        <tapGestureRecognizer id="noE-XL-f2E" userLabel="SingleTap">
+            <connections>
+                <action selector="singleTap:" destination="-1" id="vsx-l9-ecY"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
