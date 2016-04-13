@@ -23,7 +23,6 @@ class Restaurant: CloudKitObject {
         self.address = address
     }
     
-    convenience init() {
-        self.init()
+    init() {
     }
 }

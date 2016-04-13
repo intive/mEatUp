@@ -19,6 +19,8 @@
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
+		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
+		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
 		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
 		E1FB87C51CBCE8F100273E4E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB87C41CBCE8F100273E4E /* CloudKit.framework */; };
 		E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */; };
@@ -62,6 +64,8 @@
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
+		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
 		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
 		E1FB87C41CBCE8F100273E4E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -126,7 +130,7 @@
 				356275BF1CBBA621009B8122 /* Frameworks */,
 				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
 				E1FB87C71CBCE93C00273E4E /* CloudKitClasses */,
-				E1FB87C61CBCE92C00273E4E /* SupportClasses */,
+				E1FB87C61CBCE92C00273E4E /* SupportFiles */,
 				355301F81CBCF26400F23373 /* ViewControllers */,
 				354DB4FF1CB7EA8400B9194B /* Main.storyboard */,
 				354DB5051CB7EA8400B9194B /* Assets.xcassets */,
@@ -168,13 +172,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E1FB87C61CBCE92C00273E4E /* SupportClasses */ = {
+		C7C5493D1CBD495A0054A91E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		C7E38C081CBE3F5D00B79690 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		E1FB87C61CBCE92C00273E4E /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7E38C081CBE3F5D00B79690 /* CustomViews */,
+				C7C5493D1CBD495A0054A91E /* Classes */,
 				E1FB87C91CBCE95200273E4E /* Enumerators */,
 				E1FB87C81CBCE94C00273E4E /* Protocols */,
 			);
-			name = SupportClasses;
+			name = SupportFiles;
 			sourceTree = "<group>";
 		};
 		E1FB87C71CBCE93C00273E4E /* CloudKitClasses */ = {
@@ -307,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				354DB5091CB7EA8400B9194B /* LaunchScreen.storyboard in Resources */,
+				C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */,
 				354DB5061CB7EA8400B9194B /* Assets.xcassets in Resources */,
 				354DB5011CB7EA8400B9194B /* Main.storyboard in Resources */,
 			);
@@ -324,14 +347,14 @@
 /* Begin PBXShellScriptBuildPhase section */
 		E10027091CBD0F230071D45C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
@@ -347,6 +370,7 @@
 				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
+				C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */,
 				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
