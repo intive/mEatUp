@@ -9,5 +9,5 @@
 import Foundation
 
 enum RestaurantProperties: String{
-    case restaurantID, name, address
+    case name, address, recordID
 }

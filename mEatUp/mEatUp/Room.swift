@@ -12,7 +12,6 @@ import CloudKit
 class Room: CloudKitObject {
     static let entityName = "Room"
     
-    var roomID: Int?
     var title: String?
     var accessType: AccessType?
     var restaurant: Restaurant?
@@ -32,7 +31,6 @@ class Room: CloudKitObject {
         self.owner = owner
     }
     
-    convenience init() {
-        self.init()
+    init() {
     }
 }

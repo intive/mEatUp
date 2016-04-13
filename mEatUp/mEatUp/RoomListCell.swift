@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 class RoomListCell: UITableViewCell {
-
+    @IBOutlet weak var titleLabel: UILabel!
 }
