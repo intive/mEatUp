@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E53171CBE4D8400FE42F5 /* UserSettings.swift */; };
 		354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */; };
 		354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */; };
 		354DB5011CB7EA8400B9194B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 354DB4FF1CB7EA8400B9194B /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		353E53171CBE4D8400FE42F5 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		354DB4F81CB7EA8400B9194B /* mEatUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mEatUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -172,10 +174,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C7C5493D1CBD495A0054A91E /* Classes */ = {
+		353E53161CBE4D5B00FE42F5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
+                353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -192,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				C7E38C081CBE3F5D00B79690 /* CustomViews */,
-				C7C5493D1CBD495A0054A91E /* Classes */,
+				353E53161CBE4D5B00FE42F5 /* Classes */,
 				E1FB87C91CBCE95200273E4E /* Enumerators */,
 				E1FB87C81CBCE94C00273E4E /* Protocols */,
 			);
@@ -375,6 +378,7 @@
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
+				353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */,
 				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,
 				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
 				355301FC1CBCF4CA00F23373 /* SettlementListViewController.swift in Sources */,
