@@ -473,30 +473,90 @@ class CloudKitHelper {
         var joinedRooms: [Room] = []
         var publicRooms: [Room] = []
         
-        loadPublicRoomRecords({
-            room in
-                publicRooms.append(room)
-            
+        let queue = NSOperationQueue()
+        
+        let operation1 = NSBlockOperation(block: {
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.loadPublicRoomRecords({
+                    room in
+                        publicRooms.append(room)
+                    
+                }, errorHandler: nil)
+            })
+        })
+        
+        operation1.completionBlock = {
+            print("Operation 1 completed")
+        }
+        
+        queue.addOperation(operation1)
+        
+        let operation2 = NSBlockOperation(block: {
+            NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.loadInvitedRoomRecords(userRecordID, completionHandler: {
                     room in
                         if let room = room {
                             joinedRooms.append(room)
                         }
-                    
-                        self.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
-                            userRoom in
-                                if let userRoom = userRoom {
-                                    joinedRooms.append(userRoom)
-                                }
-                                self.loadUserRoomRecord(userRecordID, completionHandler: {
-                                    room in
-                                        myRoom = room
-                                    
-                                        completionHandler(publicRooms: publicRooms, joinedRooms: joinedRooms, myRoom: myRoom)
-                                }, errorHandler: nil)
-                        }, errorHandler: nil)
                 }, errorHandler: nil)
-        }, errorHandler: nil)
+            })
+        })
+        
+        operation2.completionBlock = {
+            print("Operation 2 completed")
+        }
+        
+        queue.addOperation(operation2)
+        
+        let operation3 = NSBlockOperation(block: {
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
+                    userRoom in
+                        if let userRoom = userRoom {
+                            joinedRooms.append(userRoom)
+                        }
+                }, errorHandler: nil)
+            })
+        })
+        
+        operation3.completionBlock = {
+            print("Operation 3 completed")
+        }
+        
+        queue.addOperation(operation3)
+        
+        let operation4 = NSBlockOperation(block: {
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.loadUserRoomRecord(userRecordID, completionHandler: {
+                    room in
+                        myRoom = room
+                }, errorHandler: nil)
+            })
+        })
+        
+        operation4.completionBlock = {
+            print("Operation 4 completed")
+        }
+        
+        queue.addOperation(operation4)
+        
+
+        let operation5 = NSBlockOperation(block: {
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                completionHandler(publicRooms: publicRooms, joinedRooms: joinedRooms, myRoom: myRoom)
+            })
+        })
+        
+        operation5.completionBlock = {
+            print("Operation 5 completed")
+        }
+        
+        queue.addOperation(operation5)
+
+        operation5.addDependency(operation1)
+        operation5.addDependency(operation2)
+        operation5.addDependency(operation3)
+        operation5.addDependency(operation4)        
     }
     
     func deleteRecord(cloudKitRecord: CloudKitObject, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
