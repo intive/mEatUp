@@ -28,7 +28,7 @@ class CloudKitHelper {
         }
         
         roomRecord.setValue(room.title, forKey: RoomProperties.title.rawValue)
-        roomRecord.setValue(room.accessType?.hashValue, forKey: RoomProperties.accessType.rawValue)
+        roomRecord.setValue(room.accessType?.rawValue, forKey: RoomProperties.accessType.rawValue)
         if let restaurantRecordID = room.restaurant?.recordID {
             roomRecord.setValue(CKReference(recordID: restaurantRecordID, action: .DeleteSelf), forKey: RoomProperties.restaurantID.rawValue)
         }
@@ -39,18 +39,16 @@ class CloudKitHelper {
             roomRecord.setValue(CKReference(recordID: ownerRecordID, action: .DeleteSelf), forKey: RoomProperties.ownerID.rawValue)
         }
         
-            self.publicDB.saveRecord(roomRecord, completionHandler: { (record, error) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        print("room saved")
-                        room.recordID = record?.recordID
-                        completionHandler?()
-                    } else {
-                        errorHandler?(error)
-                    }
-                })
+        self.publicDB.saveRecord(roomRecord, completionHandler: { (record, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    room.recordID = record?.recordID
+                    completionHandler?()
+                } else {
+                    errorHandler?(error)
+                }
             })
-        
+        })
     }
     
     func saveUserRecord(user: User, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
@@ -67,18 +65,16 @@ class CloudKitHelper {
         userRecord.setValue(user.surname, forKey: UserProperties.surname.rawValue)
         userRecord.setValue(user.photo, forKey: UserProperties.photo.rawValue)
         
-            self.publicDB.saveRecord(userRecord, completionHandler: { (record, error) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        print("user saved")
-                        user.recordID = record?.recordID
-                        completionHandler?()
-                    } else {
-                        errorHandler?(error)
-                    }
-                })
+        self.publicDB.saveRecord(userRecord, completionHandler: { (record, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    user.recordID = record?.recordID
+                    completionHandler?()
+                } else {
+                    errorHandler?(error)
+                }
             })
-        
+        })
     }
     
     func saveRestaurantRecord(restaurant: Restaurant, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
@@ -93,18 +89,16 @@ class CloudKitHelper {
         restaurantRecord.setValue(restaurant.name, forKey: RestaurantProperties.name.rawValue)
         restaurantRecord.setValue(restaurant.address, forKey: RestaurantProperties.address.rawValue)
         
-            self.publicDB.saveRecord(restaurantRecord, completionHandler: { (record, error) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        print("restaurant saved")
-                        restaurant.recordID = record?.recordID
-                        completionHandler?()
-                    } else {
-                        errorHandler?(error)
-                    }
-                })
+        self.publicDB.saveRecord(restaurantRecord, completionHandler: { (record, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    restaurant.recordID = record?.recordID
+                    completionHandler?()
+                } else {
+                    errorHandler?(error)
+                }
             })
-        
+        })
     }
     
     func saveUserInRoomRecord(userInRoom: UserInRoom, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
@@ -116,43 +110,46 @@ class CloudKitHelper {
             userInRoomRecord = CKRecord(recordType: UserInRoom.entityName)
         }
         
-        userInRoomRecord.setValue(userInRoom.user?.recordID, forKey: UserInRoomProperties.userRecordID.rawValue)
-        userInRoomRecord.setValue(userInRoom.room?.recordID, forKey: UserInRoomProperties.roomRecordID.rawValue)
-        userInRoomRecord.setValue(userInRoom.confirmationStatus?.hashValue, forKey: UserInRoomProperties.confirmationStatus.rawValue)
+        if let userRecordID = userInRoom.user?.recordID {
+            userInRoomRecord.setValue(CKReference(recordID: userRecordID, action: .DeleteSelf), forKey: UserInRoomProperties.userRecordID.rawValue)
+        }
         
-            self.publicDB.saveRecord(userInRoomRecord, completionHandler: { (record, error) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        userInRoom.recordID = record?.recordID
-                        completionHandler?()
-                    } else {
-                        errorHandler?(error)
-                    }
-                })
+        if let roomRecordID = userInRoom.room?.recordID{
+            userInRoomRecord.setValue(CKReference(recordID: roomRecordID, action: .DeleteSelf), forKey: UserInRoomProperties.roomRecordID.rawValue)
+        }
+        
+        userInRoomRecord.setValue(userInRoom.confirmationStatus?.rawValue, forKey: UserInRoomProperties.confirmationStatus.rawValue)
+        
+        self.publicDB.saveRecord(userInRoomRecord, completionHandler: { (record, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    userInRoom.recordID = record?.recordID
+                    completionHandler?()
+                } else {
+                    errorHandler?(error)
+                }
             })
-        
+        })
     }
     
     func loadRestaurantRecord(restaurantRecordID: CKRecordID, completionHandler: ((Restaurant) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newRestaurant = Restaurant()
 
-            self.publicDB.fetchRecordWithID(restaurantRecordID) { result, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let result = result {
-                            newRestaurant.name = result[RestaurantProperties.name.rawValue] as? String
-                            newRestaurant.address = result[RestaurantProperties.address.rawValue] as? String
-                            newRestaurant.recordID = result.recordID
-                            
-                        }
+        self.publicDB.fetchRecordWithID(restaurantRecordID) { result, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let result = result {
+                        newRestaurant.name = result[RestaurantProperties.name.rawValue] as? String
+                        newRestaurant.address = result[RestaurantProperties.address.rawValue] as? String
+                        newRestaurant.recordID = result.recordID
                     }
-                    else {
-                        errorHandler?(error)
-                    }
-                    completionHandler(newRestaurant)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                }
+                completionHandler(newRestaurant)
+            })
+        }
     }
     
     func loadUserRecordWithFbId(fbID: String, completionHandler: ((User) -> Void), errorHandler: ((NSError?) -> Void)?) {
@@ -160,316 +157,287 @@ class CloudKitHelper {
         newUser.fbID = fbID
         
         let predicate = NSPredicate(format: "fbID == %@", fbID)
-//        let predicate = NSPredicate(format: "fbID == testfbid")
 
         let query = CKQuery(recordType: User.entityName, predicate: predicate)
         
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for user in results {
-                                newUser.name = user[UserProperties.name.rawValue] as? String
-                                newUser.surname = user[UserProperties.surname.rawValue] as? String
-                                newUser.photo = user[UserProperties.photo.rawValue] as? String
-                                newUser.recordID = user.recordID
-                            }
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for user in results {
+                            newUser.name = user[UserProperties.name.rawValue] as? String
+                            newUser.surname = user[UserProperties.surname.rawValue] as? String
+                            newUser.photo = user[UserProperties.photo.rawValue] as? String
+                            newUser.recordID = user.recordID
                         }
                     }
-                    else {
-                        errorHandler?(error)
-                    }
-                    completionHandler(newUser)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                }
+                completionHandler(newUser)
+            })
+        }
     }
     
     func loadUserRecord(userRecordID: CKRecordID, completionHandler: ((User) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newUser = User()
         
-            self.publicDB.fetchRecordWithID(userRecordID) { result, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let result = result {
-                                newUser.name = result[UserProperties.name.rawValue] as? String
-                                newUser.surname = result[UserProperties.surname.rawValue] as? String
-                                newUser.photo = result[UserProperties.photo.rawValue] as? String
-                                newUser.recordID = result.recordID
-                        }
+        self.publicDB.fetchRecordWithID(userRecordID) { result, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let result = result {
+                            newUser.name = result[UserProperties.name.rawValue] as? String
+                            newUser.surname = result[UserProperties.surname.rawValue] as? String
+                            newUser.photo = result[UserProperties.photo.rawValue] as? String
+                            newUser.recordID = result.recordID
                     }
-                    else {
-                        errorHandler?(error)
-                    }
-                    completionHandler(newUser)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                }
+                completionHandler(newUser)
+            })
+        }
     }
     
     func loadRoomRecord(roomRecordID: CKRecordID, completionHandler: ((Room) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newRoom = Room()
         
-            self.publicDB.fetchRecordWithID(roomRecordID) { result, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let result = result {
-                                newRoom.title = result[RoomProperties.title.rawValue] as? String
-                                if let accessType = result[RoomProperties.accessType.rawValue] as? Int {
-                                    newRoom.accessType = AccessType(rawValue: accessType)
-                                }
-                                if let restaurantID = result[RoomProperties.restaurantID.rawValue] as? CKRecordID {
-                                    self.loadRestaurantRecord(restaurantID, completionHandler: {
-                                        restaurant in
-                                        newRoom.restaurant = restaurant
+        self.publicDB.fetchRecordWithID(roomRecordID) { result, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let result = result {
+                            newRoom.title = result[RoomProperties.title.rawValue] as? String
+                            if let accessType = result[RoomProperties.accessType.rawValue] as? Int {
+                                newRoom.accessType = AccessType(rawValue: accessType)
+                            }
+                            if let restaurantID = result[RoomProperties.restaurantID.rawValue] as? CKReference {
+                                self.loadRestaurantRecord(restaurantID.recordID, completionHandler: {
+                                    restaurant in
+                                    newRoom.restaurant = restaurant
+                                    if let ownerID = result[RoomProperties.ownerID.rawValue] as? CKReference {
+                                        self.loadUserRecord(ownerID.recordID, completionHandler: {
+                                            owner in
+                                            newRoom.owner = owner
+                                            completionHandler(newRoom)
                                         }, errorHandler: nil)
-                                }
-                                newRoom.maxCount = result[RoomProperties.maxCount.rawValue] as? Int
-                                newRoom.date = result[RoomProperties.date.rawValue] as? NSDate
-                                if let ownerID = result[RoomProperties.ownerID.rawValue] as? CKRecordID {
-                                    self.loadUserRecord(ownerID, completionHandler: {
-                                        owner in
-                                        newRoom.owner = owner
-                                        }, errorHandler: nil)
-                                }
-                                newRoom.didEnd = result[RoomProperties.didEnd.rawValue] as? Bool
-                                newRoom.recordID = result.recordID
+                                    }
+                                }, errorHandler: nil)
+                            }
+                            newRoom.maxCount = result[RoomProperties.maxCount.rawValue] as? Int
+                            newRoom.date = result[RoomProperties.date.rawValue] as? NSDate
+
+                            newRoom.didEnd = result[RoomProperties.didEnd.rawValue] as? Bool
+                            newRoom.recordID = result.recordID
+                    }
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        }
+    }
+    
+    func loadUsersInRoomRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: (User) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "roomRecordID == %@", roomRecordID.recordName)
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for userInRoom in results {
+                            if let userID = userInRoom[UserInRoomProperties.userRecordID.rawValue] as? CKReference {
+                                self.loadUserRecord(userID.recordID, completionHandler: {
+                                    user in
+                                        completionHandler(user)
+                                }, errorHandler: nil)
+                            }
+                        }
+                    }
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+            })
+        }
+    }
+    
+    func loadUsersInRoomRecordWithUserId(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "userRecordID == %@", CKReference(recordID: userRecordID, action: .None))
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for userInRoom in results {
+                            if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
+                                self.loadRoomRecord(roomID.recordID, completionHandler: {
+                                    room in
+                                        completionHandler(room)
+                                }, errorHandler: nil)
+                            }
+                        }
+                    }
+                    else {
+                        completionHandler(nil)
+                    }
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+            })
+        }
+    }
+    
+    func loadPublicRoomRecords(completionHandler: (Room) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "accessType == 2")
+        let query = CKQuery(recordType: Room.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for room in results {
+                            let newRoom = Room()
                             
-                        }
-                    }
-                    else {
-                        errorHandler?(error)
-                    }
-                    completionHandler(newRoom)
-                })
-            }
-        
-    }
-    
-    func loadUsersInRoomRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: ([User]) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var usersInRoom = [User]()
-        
-        let predicate = NSPredicate(format: "%@ == %@", UserInRoomProperties.roomRecordID.rawValue ,roomRecordID)
-        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
-        
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for userInRoom in results {
-                                var newUser = User()
-                                if let userID = userInRoom[UserInRoomProperties.userRecordID.rawValue] as? CKRecordID {
-                                    self.loadUserRecord(userID, completionHandler: {
-                                        user in
-                                        newUser = user
-                                        }, errorHandler: nil)
-                                }
-                                usersInRoom.append(newUser)
+                            newRoom.title = room[RoomProperties.title.rawValue] as? String
+                            if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
+                                newRoom.accessType = AccessType(rawValue: accessType)
                             }
-                        }
-                    }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(usersInRoom)
-                })
-            }
-        
-    }
-    
-    func loadUsersInRoomRecordWithUserId(userRecordID: CKRecordID, completionHandler: ([Room]) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var roomsForUser = [Room]()
-        
-        let predicate = NSPredicate(format: "%@ == %@", UserInRoomProperties.userRecordID.rawValue ,userRecordID)
-        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
-        
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for userInRoom in results {
-                                var newRoom = Room()
-                                if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKRecordID {
-                                    self.loadRoomRecord(roomID, completionHandler: {
-                                        room in
-                                        newRoom = room
+                            if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? CKReference {
+                                self.loadRestaurantRecord(restaurantID.recordID, completionHandler: {
+                                    restaurant in
+                                    newRoom.restaurant = restaurant
+                                    if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKReference {
+                                        self.loadUserRecord(ownerID.recordID, completionHandler: {
+                                            owner in
+                                                newRoom.owner = owner
+                                                completionHandler(newRoom)
                                         }, errorHandler: nil)
-                                }
-                                
-                                roomsForUser.append(newRoom)
+                                    }
+                                }, errorHandler: nil)
                             }
+                            newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
+                            newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
+                            newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
+                            newRoom.recordID = room.recordID
                         }
                     }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(roomsForUser)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+            })
+        }
     }
     
-    func loadPublicRoomRecords(completionHandler: ([Room]) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var rooms = [Room]()
-        
-        let predicate = NSPredicate(format: "accessType == 1")
-        
+    func loadUserRoomRecord(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "ownerID == %@", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: Room.entityName, predicate: predicate)
         
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for room in results {
-                                let newRoom = Room()
-                                
-                                newRoom.title = room[RoomProperties.title.rawValue] as? String
-                                if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
-                                    newRoom.accessType = AccessType(rawValue: accessType)
-                                }
-                                if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? CKRecordID {
-                                    self.loadRestaurantRecord(restaurantID, completionHandler: {
-                                        restaurant in
-                                        newRoom.restaurant = restaurant
-                                        }, errorHandler: nil)
-                                }
-                                newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
-                                newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
-                                if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKRecordID {
-                                    self.loadUserRecord(ownerID, completionHandler: {
-                                        owner in
-                                        newRoom.owner = owner
-                                        }, errorHandler: nil)
-                                }
-                                newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
-                                newRoom.recordID = room.recordID
-                                
-                                rooms.append(newRoom)
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for room in results {
+                            let newRoom = Room()
+                            
+                            newRoom.title = room[RoomProperties.title.rawValue] as? String
+                            if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
+                                newRoom.accessType = AccessType(rawValue: accessType)
                             }
-                        }
-                    }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(rooms)
-                })
-            }
-        
-    }
-    
-    func loadUserRoomRecord(fbID: String, completionHandler: (Room) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var resultRoom = Room()
-        
-        let predicate = NSPredicate(format: "%@ == %@", RoomProperties.ownerID.rawValue, fbID)
-        
-        let query = CKQuery(recordType: Room.entityName, predicate: predicate)
-        
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for room in results {
-                                let newRoom = Room()
-                                
-                                newRoom.title = room[RoomProperties.title.rawValue] as? String
-                                if let accessType = room[RoomProperties.accessType.rawValue] as? Int {
-                                    newRoom.accessType = AccessType(rawValue: accessType)
-                                }
-                                if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? CKRecordID {
-                                    self.loadRestaurantRecord(restaurantID, completionHandler: {
-                                        restaurant in
-                                        newRoom.restaurant = restaurant
+                            if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? CKReference {
+                                self.loadRestaurantRecord(restaurantID.recordID, completionHandler: {
+                                    restaurant in
+                                    newRoom.restaurant = restaurant
+                                    newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
+                                    if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKReference {
+                                        self.loadUserRecord(ownerID.recordID, completionHandler: {
+                                            owner in
+                                                newRoom.owner = owner
+                                                completionHandler(newRoom)
                                         }, errorHandler: nil)
-                                }
-                                newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
-                                newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
-                                if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKRecordID {
-                                    self.loadUserRecord(ownerID, completionHandler: {
-                                        owner in
-                                        newRoom.owner = owner
-                                        }, errorHandler: nil)
-                                }
-                                newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
-                                newRoom.recordID = room.recordID
-                                
-                                resultRoom = newRoom
+                                    }
+                                }, errorHandler: nil)
                             }
+                            newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
+                            newRoom.didEnd = room[RoomProperties.didEnd.rawValue] as? Bool
+                            newRoom.recordID = room.recordID
                         }
+                    } else {
+                        completionHandler(nil)
                     }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(resultRoom)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+            })
+        }
     }
 
     
-    func loadInvitedRoomRecords(userRecordID: CKRecordID, completionHandler: ([Room]) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var rooms = [Room]()
-
-        let predicate = NSPredicate(format: "%@ == %@ AND %@ == %@", UserInRoomProperties.userRecordID.rawValue ,userRecordID, UserInRoomProperties.confirmationStatus.rawValue, ConfirmationStatus.Invited.hashValue)
-        
+    func loadInvitedRoomRecords(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "userRecordID == %@ AND confirmationStatus == 1", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for userInRoom in results {
-                                if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKRecordID {
-                                    self.loadRoomRecord(roomID, completionHandler: {
-                                        room in
-                                        let newRoom = room
-                                        rooms.append(newRoom)
-                                        }, errorHandler: nil)
-                                }
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for userInRoom in results {
+                            if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
+                                self.loadRoomRecord(roomID.recordID, completionHandler: {
+                                    room in
+                                        completionHandler(room)
+                                }, errorHandler: nil)
                             }
                         }
+                    } else {
+                        completionHandler(nil)
                     }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(rooms)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+            })
+        }
     }
     
     func loadUserRecords(completionHandler: ([User]) -> Void, errorHandler: ((NSError?) -> Void)?) {
         var users = [User]()
         
         let query = CKQuery(recordType: User.entityName, predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for user in results {
-                                let newUser = User()
-                                newUser.fbID = user[UserProperties.fbID.rawValue] as? String
-                                newUser.name = user[UserProperties.name.rawValue] as? String
-                                newUser.surname = user[UserProperties.surname.rawValue] as? String
-                                newUser.photo = user[UserProperties.photo.rawValue] as? String
-                                newUser.recordID = user.recordID
-                                
-                                users.append(newUser)
-                            }
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for user in results {
+                            let newUser = User()
+                            newUser.fbID = user[UserProperties.fbID.rawValue] as? String
+                            newUser.name = user[UserProperties.name.rawValue] as? String
+                            newUser.surname = user[UserProperties.surname.rawValue] as? String
+                            newUser.photo = user[UserProperties.photo.rawValue] as? String
+                            newUser.recordID = user.recordID
+                            
+                            users.append(newUser)
                         }
                     }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(users)
-                })
-            }
-        
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+                completionHandler(users)
+            })
+        }
     }
     
     func loadRestaurantRecords(completionHandler: ([Restaurant]) -> Void, errorHandler: ((NSError?) -> Void)?) {
@@ -477,44 +445,72 @@ class CloudKitHelper {
         
         let query = CKQuery(recordType: Restaurant.entityName, predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
         
-            self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if error == nil {
-                        if let results = results {
-                            for user in results {
-                                let newRestaurant = Restaurant()
-                                newRestaurant.name = user[RestaurantProperties.name.rawValue] as? String
-                                newRestaurant.address = user[RestaurantProperties.address.rawValue] as? String
-                                newRestaurant.recordID = user.recordID
-                                
-                                restaurants.append(newRestaurant)
-                            }
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for user in results {
+                            let newRestaurant = Restaurant()
+                            newRestaurant.name = user[RestaurantProperties.name.rawValue] as? String
+                            newRestaurant.address = user[RestaurantProperties.address.rawValue] as? String
+                            newRestaurant.recordID = user.recordID
+                            
+                            restaurants.append(newRestaurant)
                         }
                     }
-                    else {
-                        errorHandler?(error)
-                        return
-                    }
-                    completionHandler(restaurants)
-                })
-            }
+                }
+                else {
+                    errorHandler?(error)
+                    return
+                }
+                completionHandler(restaurants)
+            })
+        }
+    }
+    
+    func loadRoomsForRoomList(userRecordID: CKRecordID, completionHandler: (publicRooms: [Room], joinedRooms: [Room], myRoom: Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        var myRoom: Room?
+        var joinedRooms: [Room] = []
+        var publicRooms: [Room] = []
         
+        loadPublicRoomRecords({
+            room in
+                publicRooms.append(room)
+            
+                self.loadInvitedRoomRecords(userRecordID, completionHandler: {
+                    room in
+                        if let room = room {
+                            joinedRooms.append(room)
+                        }
+                    
+                        self.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
+                            userRoom in
+                                if let userRoom = userRoom {
+                                    joinedRooms.append(userRoom)
+                                }
+                                self.loadUserRoomRecord(userRecordID, completionHandler: {
+                                    room in
+                                        myRoom = room
+                                    
+                                        completionHandler(publicRooms: publicRooms, joinedRooms: joinedRooms, myRoom: myRoom)
+                                }, errorHandler: nil)
+                        }, errorHandler: nil)
+                }, errorHandler: nil)
+        }, errorHandler: nil)
     }
     
     func deleteRecord(cloudKitRecord: CloudKitObject, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         if let recordID = cloudKitRecord.recordID {
-            
-                self.publicDB.deleteRecordWithID(recordID, completionHandler: { recordID, error in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if error == nil {
-                            completionHandler?()
-                        }
-                        else {
-                            errorHandler?(error)
-                        }
-                    })
+            self.publicDB.deleteRecordWithID(recordID, completionHandler: { recordID, error in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if error == nil {
+                        completionHandler?()
+                    }
+                    else {
+                        errorHandler?(error)
+                    }
                 })
-            
+            })
         }
     }
 }
