@@ -312,14 +312,14 @@ class CloudKitHelper {
                             if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? CKReference {
                                 self.loadRestaurantRecord(restaurantID.recordID, completionHandler: {
                                     restaurant in
-                                    newRoom.restaurant = restaurant
-                                    if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKReference {
-                                        self.loadUserRecord(ownerID.recordID, completionHandler: {
-                                            owner in
-                                                newRoom.owner = owner
-                                                completionHandler(newRoom)
-                                        }, errorHandler: nil)
-                                    }
+                                        newRoom.restaurant = restaurant
+                                        if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKReference {
+                                            self.loadUserRecord(ownerID.recordID, completionHandler: {
+                                                owner in
+                                                    newRoom.owner = owner
+                                                    completionHandler(newRoom)
+                                            }, errorHandler: nil)
+                                        }
                                 }, errorHandler: nil)
                             }
                             newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
@@ -355,15 +355,15 @@ class CloudKitHelper {
                             if let restaurantID = room[RoomProperties.restaurantID.rawValue] as? CKReference {
                                 self.loadRestaurantRecord(restaurantID.recordID, completionHandler: {
                                     restaurant in
-                                    newRoom.restaurant = restaurant
-                                    newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
-                                    if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKReference {
-                                        self.loadUserRecord(ownerID.recordID, completionHandler: {
-                                            owner in
-                                                newRoom.owner = owner
-                                                completionHandler(newRoom)
-                                        }, errorHandler: nil)
-                                    }
+                                        newRoom.restaurant = restaurant
+                                        newRoom.date = room[RoomProperties.date.rawValue] as? NSDate
+                                        if let ownerID = room[RoomProperties.ownerID.rawValue] as? CKReference {
+                                            self.loadUserRecord(ownerID.recordID, completionHandler: {
+                                                owner in
+                                                    newRoom.owner = owner
+                                                    completionHandler(newRoom)
+                                            }, errorHandler: nil)
+                                        }
                                 }, errorHandler: nil)
                             }
                             newRoom.maxCount = room[RoomProperties.maxCount.rawValue] as? Int
@@ -413,8 +413,8 @@ class CloudKitHelper {
     
     func loadUserRecords(completionHandler: ([User]) -> Void, errorHandler: ((NSError?) -> Void)?) {
         var users = [User]()
-        
         let query = CKQuery(recordType: User.entityName, predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
+        
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
             dispatch_async(dispatch_get_main_queue(), {
                 if error == nil {
@@ -442,7 +442,6 @@ class CloudKitHelper {
     
     func loadRestaurantRecords(completionHandler: ([Restaurant]) -> Void, errorHandler: ((NSError?) -> Void)?) {
         var restaurants = [Restaurant]()
-        
         let query = CKQuery(recordType: Restaurant.entityName, predicate: NSPredicate(format: "TRUEPREDICATE", argumentArray: nil))
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
@@ -466,97 +465,6 @@ class CloudKitHelper {
                 completionHandler(restaurants)
             })
         }
-    }
-    
-    func loadRoomsForRoomList(userRecordID: CKRecordID, completionHandler: (publicRooms: [Room], joinedRooms: [Room], myRoom: Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        var myRoom: Room?
-        var joinedRooms: [Room] = []
-        var publicRooms: [Room] = []
-        
-        let queue = NSOperationQueue()
-        
-        let operation1 = NSBlockOperation(block: {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.loadPublicRoomRecords({
-                    room in
-                        publicRooms.append(room)
-                    
-                }, errorHandler: nil)
-            })
-        })
-        
-        operation1.completionBlock = {
-            print("Operation 1 completed")
-        }
-        
-        queue.addOperation(operation1)
-        
-        let operation2 = NSBlockOperation(block: {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.loadInvitedRoomRecords(userRecordID, completionHandler: {
-                    room in
-                        if let room = room {
-                            joinedRooms.append(room)
-                        }
-                }, errorHandler: nil)
-            })
-        })
-        
-        operation2.completionBlock = {
-            print("Operation 2 completed")
-        }
-        
-        queue.addOperation(operation2)
-        
-        let operation3 = NSBlockOperation(block: {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
-                    userRoom in
-                        if let userRoom = userRoom {
-                            joinedRooms.append(userRoom)
-                        }
-                }, errorHandler: nil)
-            })
-        })
-        
-        operation3.completionBlock = {
-            print("Operation 3 completed")
-        }
-        
-        queue.addOperation(operation3)
-        
-        let operation4 = NSBlockOperation(block: {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.loadUserRoomRecord(userRecordID, completionHandler: {
-                    room in
-                        myRoom = room
-                }, errorHandler: nil)
-            })
-        })
-        
-        operation4.completionBlock = {
-            print("Operation 4 completed")
-        }
-        
-        queue.addOperation(operation4)
-        
-
-        let operation5 = NSBlockOperation(block: {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                completionHandler(publicRooms: publicRooms, joinedRooms: joinedRooms, myRoom: myRoom)
-            })
-        })
-        
-        operation5.completionBlock = {
-            print("Operation 5 completed")
-        }
-        
-        queue.addOperation(operation5)
-
-        operation5.addDependency(operation1)
-        operation5.addDependency(operation2)
-        operation5.addDependency(operation3)
-        operation5.addDependency(operation4)        
     }
     
     func deleteRecord(cloudKitRecord: CloudKitObject, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {

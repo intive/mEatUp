@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -81,16 +82,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="41.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-DI-oXy">
-                                                    <rect key="frame" x="8" y="10" width="543" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-DI-oXy">
+                                                    <rect key="frame" x="489" y="10" width="103" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxk-mf-LZc">
+                                                    <rect key="frame" x="8" y="10" width="91" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1U-s5-aw2">
+                                                    <rect key="frame" x="231" y="10" width="139" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="nxk-mf-LZc" secondAttribute="bottom" constant="2.5" id="2Ja-o3-VUi"/>
+                                                <constraint firstItem="Raq-DI-oXy" firstAttribute="top" secondItem="vie-1u-3lY" secondAttribute="topMargin" constant="2" id="2lT-ad-Qzm"/>
+                                                <constraint firstItem="Raq-DI-oXy" firstAttribute="trailing" secondItem="vie-1u-3lY" secondAttribute="trailingMargin" id="doB-w9-UE0"/>
+                                                <constraint firstItem="t1U-s5-aw2" firstAttribute="centerX" secondItem="vie-1u-3lY" secondAttribute="centerX" id="fgW-kF-ctD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Raq-DI-oXy" secondAttribute="bottom" constant="2.5" id="gUx-R1-111"/>
+                                                <constraint firstItem="nxk-mf-LZc" firstAttribute="top" secondItem="vie-1u-3lY" secondAttribute="topMargin" constant="2" id="kEV-dZ-DiT"/>
+                                                <constraint firstItem="nxk-mf-LZc" firstAttribute="leading" secondItem="vie-1u-3lY" secondAttribute="leadingMargin" id="ufr-Lx-URG"/>
+                                                <constraint firstItem="t1U-s5-aw2" firstAttribute="centerY" secondItem="vie-1u-3lY" secondAttribute="centerY" id="vim-ER-GHR"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="titleLabel" destination="Raq-DI-oXy" id="JMd-Es-tP9"/>
+                                            <outlet property="placeLabel" destination="t1U-s5-aw2" id="gad-gw-GoP"/>
+                                            <outlet property="timeLabel" destination="Raq-DI-oXy" id="zo6-pI-pBf"/>
+                                            <outlet property="titleLabel" destination="nxk-mf-LZc" id="Vdp-Ch-Axz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

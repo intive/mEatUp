@@ -11,4 +11,6 @@ import UIKit
 
 class RoomListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
 }
