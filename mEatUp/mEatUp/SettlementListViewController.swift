@@ -22,7 +22,7 @@ class SettlementListViewController: UIViewController {
         
         let frc = NSFetchedResultsController(
             fetchRequest: websitesFetchRequest,
-            managedObjectContext: coreDataController.context,
+            managedObjectContext: coreDataController.managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         
