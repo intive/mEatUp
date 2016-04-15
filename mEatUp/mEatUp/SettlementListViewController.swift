@@ -52,7 +52,7 @@ class SettlementListViewController: UIViewController {
 extension SettlementListViewController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierWebsiteCell, forIndexPath: indexPath) //as? FinishedRoomCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierWebsiteCell, forIndexPath: indexPath)
         let finishedRoom = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom
         if let cell = cell as? FinishedRoomCell, room = finishedRoom {
             cell.configureWithRoom(room)
