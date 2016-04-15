@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */; };
+		3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2691CBFB55F0094394D /* FinishedRoom.swift */; };
+		3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */; };
+		3508E26F1CBFB55F0094394D /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E26B1CBFB55F0094394D /* Participant.swift */; };
+		3508E2711CBFB5BA0094394D /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2701CBFB5BA0094394D /* CoreDataController.swift */; };
+		3508E2741CBFCB370094394D /* FinishedRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2731CBFCB370094394D /* FinishedRoomCell.swift */; };
 		353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E53171CBE4D8400FE42F5 /* UserSettings.swift */; };
 		353E531A1CBE67E600FE42F5 /* SettlementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353E53191CBE67E600FE42F5 /* SettlementViewController.swift */; };
 		354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */; };
@@ -51,6 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishedRoom+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3508E2691CBFB55F0094394D /* FinishedRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoom.swift; sourceTree = "<group>"; };
+		3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3508E26B1CBFB55F0094394D /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
+		3508E2701CBFB5BA0094394D /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		3508E2731CBFCB370094394D /* FinishedRoomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoomCell.swift; sourceTree = "<group>"; };
 		353E53171CBE4D8400FE42F5 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		353E53191CBE67E600FE42F5 /* SettlementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettlementViewController.swift; sourceTree = "<group>"; };
 		354DB4F81CB7EA8400B9194B /* mEatUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mEatUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +123,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3508E2461CBFB1BF0094394D /* CoreDataClasses */ = {
+			isa = PBXGroup;
+			children = (
+				3508E2701CBFB5BA0094394D /* CoreDataController.swift */,
+				3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */,
+				3508E2691CBFB55F0094394D /* FinishedRoom.swift */,
+				3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */,
+				3508E26B1CBFB55F0094394D /* Participant.swift */,
+			);
+			name = CoreDataClasses;
+			sourceTree = "<group>";
+		};
+		3508E2721CBFCAF00094394D /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				3508E2731CBFCB370094394D /* FinishedRoomCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
 		353E53161CBE4D5B00FE42F5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +173,7 @@
 		354DB4FA1CB7EA8400B9194B /* mEatUp */ = {
 			isa = PBXGroup;
 			children = (
+				3508E2461CBFB1BF0094394D /* CoreDataClasses */,
 				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
 				356275BF1CBBA621009B8122 /* Frameworks */,
 				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
@@ -200,6 +233,7 @@
 		E1FB87C61CBCE92C00273E4E /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				3508E2721CBFCAF00094394D /* TableViewCells */,
 				C7E38C081CBE3F5D00B79690 /* CustomViews */,
 				353E53161CBE4D5B00FE42F5 /* Classes */,
 				E1FB87C91CBCE95200273E4E /* Enumerators */,
@@ -374,10 +408,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
 				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,
 				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
+				3508E2741CBFCB370094394D /* FinishedRoomCell.swift in Sources */,
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
+				3508E2711CBFB5BA0094394D /* CoreDataController.swift in Sources */,
+				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
 				C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */,
 				C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */,
@@ -389,10 +427,12 @@
 				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,
 				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
 				355301FC1CBCF4CA00F23373 /* SettlementListViewController.swift in Sources */,
+				3508E26F1CBFB55F0094394D /* Participant.swift in Sources */,
 				353E531A1CBE67E600FE42F5 /* SettlementViewController.swift in Sources */,
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
+				3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */,
 				C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
 				355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */,
