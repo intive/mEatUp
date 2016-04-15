@@ -13,16 +13,16 @@ class SettlementListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let ReuseIdentifierWebsiteCell = "FinishedRoomCell"
+    let coreDataController = CoreDataController()
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let websitesFetchRequest = NSFetchRequest(entityName: FinishedRoom.entityName())
         let primarySortDescriptor = NSSortDescriptor( key: "date", ascending: false)
         websitesFetchRequest.sortDescriptors = [primarySortDescriptor]
-        let coreDataController = CoreDataController()
         
         let frc = NSFetchedResultsController(
             fetchRequest: websitesFetchRequest,
-            managedObjectContext: coreDataController.managedObjectContext,
+            managedObjectContext: self.coreDataController.managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         
@@ -34,7 +34,6 @@ class SettlementListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // only for testing core data //
-        let coreDataController = CoreDataController()
         coreDataController.addTestFinishedRooms()
         // ************************** //
         fetch()
@@ -53,14 +52,13 @@ class SettlementListViewController: UIViewController {
 extension SettlementListViewController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierWebsiteCell, forIndexPath: indexPath) as? FinishedRoomCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierWebsiteCell, forIndexPath: indexPath) //as? FinishedRoomCell
         let finishedRoom = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom
-        if let cell = cell, room = finishedRoom {
+        if let cell = cell as? FinishedRoomCell, room = finishedRoom {
             cell.configureWithRoom(room)
-            return cell
         }
         
-        return UITableViewCell()
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
