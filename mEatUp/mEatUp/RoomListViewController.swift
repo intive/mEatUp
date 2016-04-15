@@ -32,8 +32,10 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         // testfbid is fbid placeholder and will be replaced by stored value
         cloudKitHelper?.loadUserRecordWithFbId("testfbid", completionHandler: {
             userRecord in
-                self.userRecordID = userRecord.recordID
-                self.loadRoomsForRoomList(userRecord.recordID!)
+                if let userRecordID = userRecord.recordID {
+                    self.userRecordID = userRecordID
+                    self.loadRoomsForRoomList(userRecordID)
+                }
         }, errorHandler: nil)
     }
     
