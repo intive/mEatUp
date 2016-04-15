@@ -47,6 +47,25 @@ class SettlementListViewController: UIViewController {
             print("Fetch error occurred")
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationVC = segue.destinationViewController as? SettlementViewController {
+            var participantsToPass = [Participant]()
+            
+            if let indexPath = tableView.indexPathForSelectedRow, finishedRoom = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom {
+                if let participants = finishedRoom.participants {
+                    for participant in participants {
+                        if let participant = participant as? Participant {
+                            participantsToPass.append(participant)
+                        }
+                    }
+                }
+            }
+
+            destinationVC.participants = participantsToPass
+        }
+    }
+    
 }
 
 extension SettlementListViewController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {

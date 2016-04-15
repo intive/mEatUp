@@ -275,21 +275,24 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ParticipantDebtCell" id="vb7-is-srj">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ParticipantDebtCell" rowHeight="50" id="vb7-is-srj" customClass="ParticipantDebtCell" customModule="mEatUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vb7-is-srj" id="rRP-Xk-ldE">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan Kowalski" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOK-uN-4Ye">
-                                                    <rect key="frame" x="20" y="12" width="98" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0,00zł" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzN-sN-i2V">
+                                                    <rect key="frame" x="525" y="15" width="47" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 0,00zł" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzN-sN-i2V">
-                                                    <rect key="frame" x="455" y="12" width="117" height="21"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D66-bF-lGg" colorLabel="IBBuiltInLabel-Red">
+                                                    <rect key="frame" x="20" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Jan Kowalski" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOK-uN-4Ye">
+                                                    <rect key="frame" x="70" y="14" width="98" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -297,11 +300,18 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qzN-sN-i2V" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="2t8-ZT-dgl"/>
-                                                <constraint firstItem="gOK-uN-4Ye" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="CeW-hH-ThO"/>
-                                                <constraint firstItem="gOK-uN-4Ye" firstAttribute="leading" secondItem="rRP-Xk-ldE" secondAttribute="leading" constant="20" id="nM7-65-b19"/>
+                                                <constraint firstItem="D66-bF-lGg" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="93y-vj-KPj"/>
+                                                <constraint firstItem="gOK-uN-4Ye" firstAttribute="leading" secondItem="D66-bF-lGg" secondAttribute="trailing" constant="50" id="dkz-8H-uyD"/>
+                                                <constraint firstItem="D66-bF-lGg" firstAttribute="leading" secondItem="rRP-Xk-ldE" secondAttribute="leading" constant="20" id="o6w-Ei-nkp"/>
+                                                <constraint firstItem="gOK-uN-4Ye" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="sHd-gZ-vTv"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="qzN-sN-i2V" secondAttribute="trailing" constant="20" id="yJQ-oK-kxG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="balanceLabel" destination="qzN-sN-i2V" id="a4L-xd-bsE"/>
+                                            <outlet property="participantLabel" destination="gOK-uN-4Ye" id="QEB-ow-3NK"/>
+                                            <outlet property="pictureImageView" destination="D66-bF-lGg" id="u5k-3N-LXq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -318,6 +328,9 @@
                             <constraint firstItem="tM0-aO-OR2" firstAttribute="top" secondItem="Nkj-fo-cxm" secondAttribute="top" id="eLx-eD-z2L"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="tM0-aO-OR2" id="jkQ-Qa-3ry"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yWo-XU-i1o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

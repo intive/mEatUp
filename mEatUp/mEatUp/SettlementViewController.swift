@@ -7,19 +7,27 @@
 //
 
 import UIKit
+import CoreData
 
 class SettlementViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    var participants: [Participant]!
+    let ReuseIdentifierWebsiteCell = "ParticipantDebtCell"
 }
 
 extension SettlementViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantDebtCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierWebsiteCell, forIndexPath: indexPath)
+        let participant = participants[indexPath.row]
+        if let cell = cell as? ParticipantDebtCell {
+            cell.configureWithParticipant(participant)
+        }
+ 
         return cell
     }
     
-    //function added only to conform UITableViewDataSource protocol
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return participants.count
     }
 }

@@ -27,6 +27,8 @@
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
+		356EEB601CC0FD27001E23A9 /* ParticipantDebtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */; };
+		356EEB621CC11903001E23A9 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EEB611CC11903001E23A9 /* ImageDownloader.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
 		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
@@ -81,6 +83,8 @@
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantDebtCell.swift; sourceTree = "<group>"; };
+		356EEB611CC11903001E23A9 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
 		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				3508E2731CBFCB370094394D /* FinishedRoomCell.swift */,
+				356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			children = (
 				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
 				353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
+				356EEB611CC11903001E23A9 /* ImageDownloader.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
 				3508E2741CBFCB370094394D /* FinishedRoomCell.swift in Sources */,
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
+				356EEB601CC0FD27001E23A9 /* ParticipantDebtCell.swift in Sources */,
 				3508E2711CBFB5BA0094394D /* CoreDataController.swift in Sources */,
 				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
@@ -423,6 +430,7 @@
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
+				356EEB621CC11903001E23A9 /* ImageDownloader.swift in Sources */,
 				353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */,
 				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,
 				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
