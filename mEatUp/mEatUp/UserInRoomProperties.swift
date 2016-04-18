@@ -9,5 +9,5 @@
 import Foundation
 
 enum UserInRoomProperties: String {
-    case userID, roomID, confirmationStatus
+    case userRecordID, roomRecordID, confirmationStatus
 }

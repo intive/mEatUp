@@ -129,7 +129,7 @@ class RoomDetailsViewController: UIViewController {
     
     //added only for testing, needs to be deleted after adding CloudKit
     func createTemporaryRoom() -> Room {
-        let restaurant = Restaurant(restaurantID: 1, name: "Bro Burgers", address: "Partyzantów 1, Szczecin")
+        let restaurant = Restaurant(name: "Bro Burgers", address: "Partyzantów 1, Szczecin")
         let user = User(fbID: "id", name: "Krzysztof", surname: "Przybysz", photo: "zzz")
         let room = Room(title: "My room", accessType: .Private, restaurant: restaurant, maxCount: 10, date: NSDate(), owner: user)
         return room

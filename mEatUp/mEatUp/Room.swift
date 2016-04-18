@@ -12,7 +12,6 @@ import CloudKit
 class Room: CloudKitObject {
     static let entityName = "Room"
     
-    var roomID: Int?
     var title: String?
     var accessType: AccessType?
     var restaurant: Restaurant?

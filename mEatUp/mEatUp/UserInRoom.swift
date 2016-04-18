@@ -24,8 +24,7 @@ class UserInRoom: CloudKitObject {
         self.confirmationStatus = confirmationStatus
     }
     
-    convenience init() {
-        self.init()
+    init() {
     }
     
     func acceptInvite(cloudKitHelper: CloudKitHelper, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {

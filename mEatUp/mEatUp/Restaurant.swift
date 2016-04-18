@@ -12,13 +12,12 @@ import CloudKit
 class Restaurant: CloudKitObject {
     static let entityName = "Restaurant"
     
-    var restaurantID: Int?
     var name: String?
     var address: String?
     
     var recordID: CKRecordID?
     
-    init(restaurantID: Int, name: String, address: String) {
+    init(name: String, address: String) {
         self.name = name
         self.address = address
     }
