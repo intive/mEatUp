@@ -9,12 +9,11 @@
 import UIKit
 import CloudKit
 
-class RoomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RoomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var roomTableView: UITableView!
     
     var roomListLoader = RoomListDataLoader()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
