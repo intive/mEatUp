@@ -16,6 +16,8 @@ class RoomListDataLoader {
     var joinedRooms: [Room] = []
     var publicRooms: [Room] = []
     
+    var completionHandler: (() -> Void)?
+    
     let sections = [SectionNames.MyRoom.rawValue, SectionNames.Joined.rawValue, SectionNames.Public.rawValue]
     
     var userRecordID: CKRecordID?
@@ -24,22 +26,22 @@ class RoomListDataLoader {
         cloudKitHelper = CloudKitHelper()
     }
     
-    func loadUserRecordFromCloudKit(completionHandler: (() -> Void)) {
+    func loadUserRecordFromCloudKit() {
         // testfbid is fbid placeholder and will be replaced by stored value
         cloudKitHelper?.loadUserRecordWithFbId("testfbid", completionHandler: {
             userRecord in
             if let userRecordID = userRecord.recordID {
                 self.userRecordID = userRecordID
-                self.loadRoomsForRoomList(userRecordID, completionHandler: completionHandler)
+                self.loadRoomsForRoomList(userRecordID)
             }
             }, errorHandler: nil)
     }
     
-    func loadRoomsForRoomList(userRecordID: CKRecordID, completionHandler: (() -> Void)) {
+    func loadRoomsForRoomList(userRecordID: CKRecordID) {
         cloudKitHelper?.loadPublicRoomRecords({
             room in
                 self.publicRooms.append(room)
-                self.filterRooms(completionHandler)
+                self.filterRooms()
             
         }, errorHandler: nil)
         
@@ -48,7 +50,7 @@ class RoomListDataLoader {
             room in
             if let room = room {
                 self.joinedRooms.append(room)
-                self.filterRooms(completionHandler)
+                self.filterRooms()
             }
         }, errorHandler: nil)
         
@@ -57,7 +59,7 @@ class RoomListDataLoader {
             userRoom in
             if let userRoom = userRoom {
                 self.joinedRooms.append(userRoom)
-                self.filterRooms(completionHandler)
+                self.filterRooms()
             }
         }, errorHandler: nil)
         
@@ -65,11 +67,11 @@ class RoomListDataLoader {
         cloudKitHelper?.loadUserRoomRecord(userRecordID, completionHandler: {
             room in
                 self.myRoom = room
-                self.filterRooms(completionHandler)
+                self.filterRooms()
         }, errorHandler: nil)
     }
     
-    func filterRooms(completionHandler: (() -> Void)) {
+    func filterRooms() {
         if joinedRooms.count != 0 {
             for room in joinedRooms {
                 self.publicRooms = publicRooms.filter({($0.recordID?.recordName != room.recordID?.recordName) || ($0.recordID?.recordName != myRoom?.recordID?.recordName)})
@@ -77,6 +79,6 @@ class RoomListDataLoader {
         }
         self.joinedRooms = joinedRooms.filter({ $0.recordID?.recordName != myRoom?.recordID?.recordName })
         
-        completionHandler()
+        completionHandler?()
     }
 }

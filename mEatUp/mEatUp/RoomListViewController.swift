@@ -18,9 +18,9 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        roomListLoader.loadUserRecordFromCloudKit({
-            self.roomTableView.reloadData()
-        })
+        
+        roomListLoader.completionHandler = { self.roomTableView.reloadData() }
+        roomListLoader.loadUserRecordFromCloudKit()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
