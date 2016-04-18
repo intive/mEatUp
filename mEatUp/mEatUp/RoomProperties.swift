@@ -9,5 +9,5 @@
 import Foundation
 
 enum RoomProperties: String {
-    case roomID, title, accessType, restaurantID, maxCount, date, ownerID, didEnd
+    case title, accessType, restaurantID, maxCount, date, ownerID, didEnd, recordID
 }
