@@ -27,13 +27,14 @@
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
-		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
-		E10027101CBD26CA0071D45C /* SectionNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270F1CBD26CA0071D45C /* SectionNames.swift */; };
-		E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10027131CBE48EF0071D45C /* CloudKit.framework */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
 		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
 		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
+		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
+		E10027101CBD26CA0071D45C /* SectionNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270F1CBD26CA0071D45C /* SectionNames.swift */; };
+		E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10027131CBE48EF0071D45C /* CloudKit.framework */; };
+		E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */; };
 		E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */; };
 		E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CC1CBCE97000273E4E /* AccessType.swift */; };
 		E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CD1CBCE97000273E4E /* ConfirmationStatus.swift */; };
@@ -83,13 +84,14 @@
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
-		E100270F1CBD26CA0071D45C /* SectionNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionNames.swift; sourceTree = "<group>"; };
-		E10027131CBE48EF0071D45C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
 		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
 		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
+		E100270F1CBD26CA0071D45C /* SectionNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionNames.swift; sourceTree = "<group>"; };
+		E10027131CBE48EF0071D45C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListDataLoader.swift; sourceTree = "<group>"; };
 		E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
 		E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitObject.swift; sourceTree = "<group>"; };
 		E1FB87CC1CBCE97000273E4E /* AccessType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessType.swift; sourceTree = "<group>"; };
@@ -227,14 +229,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E100270C1CBD1C250071D45C /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				E100270D1CBD1C410071D45C /* RoomListCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
 		C7E38C081CBE3F5D00B79690 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,9 +237,26 @@
 			name = CustomViews;
 			sourceTree = "<group>";
 		};
+		E100270C1CBD1C250071D45C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E100270D1CBD1C410071D45C /* RoomListCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		E1D814C31CC4F4B600F5A538 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		E1FB87C61CBCE92C00273E4E /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				E1D814C31CC4F4B600F5A538 /* Data */,
 				3508E2721CBFCAF00094394D /* TableViewCells */,
 				C7E38C081CBE3F5D00B79690 /* CustomViews */,
 				353E53161CBE4D5B00FE42F5 /* Classes */,
@@ -436,6 +447,7 @@
 				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
+				E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */,
 				E10027101CBD26CA0071D45C /* SectionNames.swift in Sources */,
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
 				353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */,

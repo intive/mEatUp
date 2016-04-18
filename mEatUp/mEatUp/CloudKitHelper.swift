@@ -146,6 +146,7 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
+                    return
                 }
                 completionHandler(newRestaurant)
             })
@@ -174,6 +175,7 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
+                    return
                 }
                 completionHandler(newUser)
             })
@@ -195,6 +197,7 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
+                    return
                 }
                 completionHandler(newUser)
             })
@@ -259,7 +262,6 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
-                    return
                 }
             })
         }
@@ -288,7 +290,6 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
-                    return
                 }
             })
         }
@@ -331,7 +332,6 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
-                    return
                 }
             })
         }
@@ -376,7 +376,6 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
-                    return
                 }
             })
         }
@@ -405,7 +404,6 @@ class CloudKitHelper {
                 }
                 else {
                     errorHandler?(error)
-                    return
                 }
             })
         }
