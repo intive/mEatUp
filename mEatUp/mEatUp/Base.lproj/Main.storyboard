@@ -269,7 +269,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="CaB-9o-jdM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="63K-jN-C03">
-                                <rect key="frame" x="490" y="7" width="90" height="30"/>
+                                <rect key="frame" x="530" y="7" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Join"/>
