@@ -27,8 +27,10 @@
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
+		C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
+		C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */; };
 		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
 		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
 		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
@@ -84,8 +86,10 @@
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerWithDoneButton.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
+		C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyBottomBorderTextField.swift; sourceTree = "<group>"; };
 		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
 		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 			children = (
 				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
 				353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
+				C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */,
+				C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
 				C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */,
+				C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */,
 				C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */,
 				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
@@ -458,6 +465,7 @@
 				353E531A1CBE67E600FE42F5 /* SettlementViewController.swift in Sources */,
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
+				C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */,
 				E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
 				3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */,
