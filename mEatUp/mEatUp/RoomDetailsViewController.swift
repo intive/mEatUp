@@ -158,14 +158,3 @@ extension RoomDetailsViewController: UITextFieldDelegate {
         activeField = nil
     }
 }
-
-extension NSDateFormatter {
-    func stringFromDate(date: NSDate, withFormat format: String) -> String {
-        let oldDateFormat = self.dateFormat
-        self.dateFormat = format
-        let toReturn = self.stringFromDate(date)
-        self.dateFormat = oldDateFormat
-        return toReturn
-    }
-}
-
