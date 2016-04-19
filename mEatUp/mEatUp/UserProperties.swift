@@ -9,5 +9,5 @@
 import Foundation
 
 enum UserProperties: String {
-    case fbID, name, surname, photo
+    case fbID, name, surname, photo, recordID
 }

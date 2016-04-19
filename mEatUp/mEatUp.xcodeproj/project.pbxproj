@@ -29,11 +29,17 @@
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
 		356EEB601CC0FD27001E23A9 /* ParticipantDebtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */; };
 		356EEB621CC11903001E23A9 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EEB611CC11903001E23A9 /* ImageDownloader.swift */; };
+		C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
+		C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */; };
 		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
 		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
-		E1FB87C51CBCE8F100273E4E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FB87C41CBCE8F100273E4E /* CloudKit.framework */; };
+		C7F88DB71CC53115007A6038 /* NSDateFormatter+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */; };
+		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
+		E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10027131CBE48EF0071D45C /* CloudKit.framework */; };
+		E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */; };
+		E1F1177A1CC62B7F00B36F84 /* RoomDataScopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F117791CC62B7F00B36F84 /* RoomDataScopes.swift */; };
 		E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */; };
 		E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CC1CBCE97000273E4E /* AccessType.swift */; };
 		E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CD1CBCE97000273E4E /* ConfirmationStatus.swift */; };
@@ -85,12 +91,18 @@
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantDebtCell.swift; sourceTree = "<group>"; };
 		356EEB611CC11903001E23A9 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerWithDoneButton.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
+		C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyBottomBorderTextField.swift; sourceTree = "<group>"; };
 		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
 		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+MEATUP.swift"; sourceTree = "<group>"; };
+		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
+		E10027131CBE48EF0071D45C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListDataLoader.swift; sourceTree = "<group>"; };
+		E1F117791CC62B7F00B36F84 /* RoomDataScopes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDataScopes.swift; sourceTree = "<group>"; };
 		E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
-		E1FB87C41CBCE8F100273E4E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitObject.swift; sourceTree = "<group>"; };
 		E1FB87CC1CBCE97000273E4E /* AccessType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessType.swift; sourceTree = "<group>"; };
 		E1FB87CD1CBCE97000273E4E /* ConfirmationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationStatus.swift; sourceTree = "<group>"; };
@@ -111,7 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */,
-				E1FB87C51CBCE8F100273E4E /* CloudKit.framework in Frameworks */,
+				E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */,
 				356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */,
 				356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */,
 			);
@@ -154,6 +166,9 @@
 				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
 				353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
 				356EEB611CC11903001E23A9 /* ImageDownloader.swift */,
+				C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */,
+				C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */,
+				C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -161,6 +176,7 @@
 		354DB4EF1CB7EA8400B9194B = {
 			isa = PBXGroup;
 			children = (
+				E10027131CBE48EF0071D45C /* CloudKit.framework */,
 				354DB4FA1CB7EA8400B9194B /* mEatUp */,
 				354DB5121CB7EA8400B9194B /* mEatUpTests */,
 				354DB4F91CB7EA8400B9194B /* Products */,
@@ -179,8 +195,9 @@
 		354DB4FA1CB7EA8400B9194B /* mEatUp */ = {
 			isa = PBXGroup;
 			children = (
-				3508E2461CBFB1BF0094394D /* CoreDataClasses */,
 				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
+				3508E2461CBFB1BF0094394D /* CoreDataClasses */,
+				E100270C1CBD1C250071D45C /* Cells */,
 				356275BF1CBBA621009B8122 /* Frameworks */,
 				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
 				E1FB87C71CBCE93C00273E4E /* CloudKitClasses */,
@@ -220,7 +237,6 @@
 		356275BF1CBBA621009B8122 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E1FB87C41CBCE8F100273E4E /* CloudKit.framework */,
 				356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */,
 				356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */,
 				356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */,
@@ -236,9 +252,26 @@
 			name = CustomViews;
 			sourceTree = "<group>";
 		};
+		E100270C1CBD1C250071D45C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E100270D1CBD1C410071D45C /* RoomListCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		E1D814C31CC4F4B600F5A538 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		E1FB87C61CBCE92C00273E4E /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				E1D814C31CC4F4B600F5A538 /* Data */,
 				3508E2721CBFCAF00094394D /* TableViewCells */,
 				C7E38C081CBE3F5D00B79690 /* CustomViews */,
 				353E53161CBE4D5B00FE42F5 /* Classes */,
@@ -277,6 +310,7 @@
 				E1FB87DB1CBCE99B00273E4E /* RoomProperties.swift */,
 				E1FB87DC1CBCE99B00273E4E /* UserInRoomProperties.swift */,
 				E1FB87DD1CBCE99B00273E4E /* UserProperties.swift */,
+				E1F117791CC62B7F00B36F84 /* RoomDataScopes.swift */,
 			);
 			name = Enumerators;
 			sourceTree = "<group>";
@@ -417,6 +451,7 @@
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
 				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,
+				C7F88DB71CC53115007A6038 /* NSDateFormatter+MEATUP.swift in Sources */,
 				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
 				3508E2741CBFCB370094394D /* FinishedRoomCell.swift in Sources */,
 				354DB5041CB7EA8400B9194B /* mEatUp.xcdatamodeld in Sources */,
@@ -425,10 +460,13 @@
 				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
 				C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */,
+				C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */,
 				C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */,
 				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
+				E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */,
+				E1F1177A1CC62B7F00B36F84 /* RoomDataScopes.swift in Sources */,
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
 				356EEB621CC11903001E23A9 /* ImageDownloader.swift in Sources */,
 				353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */,
@@ -439,6 +477,8 @@
 				353E531A1CBE67E600FE42F5 /* SettlementViewController.swift in Sources */,
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
+				C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */,
+				E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
 				3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */,
 				C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */,
@@ -576,6 +616,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mEatUp",
@@ -594,6 +635,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mEatUp",
