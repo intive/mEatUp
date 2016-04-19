@@ -31,11 +31,8 @@ class SettlementListViewController: UIViewController {
         return frc
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // only for testing core data //
-        coreDataController.addTestFinishedRooms()
-        // ************************** //
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         fetch()
     }
     
@@ -47,6 +44,22 @@ class SettlementListViewController: UIViewController {
             print("Fetch error occurred")
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationVC = segue.destinationViewController as? SettlementViewController {
+            var participantsToPass = [Participant]()
+            
+            if let indexPath = tableView.indexPathForSelectedRow, finishedRoom = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom {
+                if let elements = finishedRoom.participants, participants =  elements.allObjects as? [Participant] {
+                    participantsToPass = participants
+                }
+            }
+
+            destinationVC.participants = participantsToPass
+            destinationVC.coreDataController = coreDataController
+        }
+    }
+    
 }
 
 extension SettlementListViewController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
