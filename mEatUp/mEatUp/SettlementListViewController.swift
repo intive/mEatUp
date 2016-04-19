@@ -81,4 +81,26 @@ extension SettlementListViewController: UITableViewDataSource, UITableViewDelega
         
         return 0
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let objectToDelete = fetchedResultsController.objectAtIndexPath(indexPath) as? NSManagedObject
+            if let objectToDelete = objectToDelete {
+                fetchedResultsController.managedObjectContext.deleteObject(objectToDelete)
+                coreDataController.saveContext()
+            }
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case NSFetchedResultsChangeType.Delete:
+            if let indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            break
+        default:
+            break
+        }
+    }
 }
