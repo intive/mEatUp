@@ -15,7 +15,7 @@ extension UIImageView {
             }.resume()
     }
     
-    func setFacebookImageFromUrl(url: NSURL) {
+    func setImageFromUrl(url: NSURL) {
         getDataFromUrl(url) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 guard let data = data where error == nil else { return }

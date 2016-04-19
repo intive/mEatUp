@@ -15,22 +15,24 @@ class ParticipantDebtCell: UITableViewCell {
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var balanceIndicatorButton: UIButton!
     var balanceIndicator: BalanceIndicator = .Neutral
-    var participant: Participant!
+    var participant: Participant?
     
     func configureWithParticipant(passedParticipant: Participant) {
         participant = passedParticipant
-        participantLabel.text = "\(participant.firstName) \(participant.lastName)"
-        balanceTextField.text = "\(abs(participant.debt.doubleValue))"
+        if let participant = participant{
+            participantLabel.text = "\(participant.firstName) \(participant.lastName)"
+            balanceTextField.text = "\(abs(participant.debt.doubleValue))"
         
-        setCellSettingsWithBalance(participant.debt.doubleValue)
+            setCellSettingsWithBalance(participant.debt.doubleValue)
         
-        if let pictureURLString = participant.pictureURL, url = NSURL(string: pictureURLString) {
-            pictureImageView.setFacebookImageFromUrl(url)
+            if let pictureURLString = participant.pictureURL, url = NSURL(string: pictureURLString) {
+                pictureImageView.setImageFromUrl(url)
+            }
         }
     }
     
     @IBAction func balanceChanged(sender: UITextField) {
-        if let cellText = balanceTextField.text, let newBalance = Double(cellText) {
+        if let cellText = balanceTextField.text, let newBalance = Double(cellText), participant = participant {
             if newBalance != participant.debt.doubleValue {
                 if balanceIndicator == .Negative {
                     participant.debt = -newBalance
@@ -43,7 +45,7 @@ class ParticipantDebtCell: UITableViewCell {
     }
     
     @IBAction func balanceIndicatorChanged(sender: UIButton) {
-        if let title = balanceIndicatorButton.titleLabel?.text {
+        if let title = balanceIndicatorButton.titleLabel?.text, participant = participant {
             if participant.debt != 0.0 {
                 if title == "+" {
                     balanceIndicatorButton.setTitle("-", forState: .Normal)
