@@ -62,7 +62,6 @@ class RoomDetailsViewController: UIViewController {
         let info = aNotification.userInfo
         
         if let keyboardSize = (info?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            print(keyboardSize)
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
