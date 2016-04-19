@@ -47,6 +47,17 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         return 1
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("ShowRoomViewController", sender: roomListLoader.currentRoomList[indexPath.row])
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? RoomViewController {
+            destination.room = sender as? Room
+            destination.userRecordID = roomListLoader.userRecordID
+        }
+    }
+    
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         guard let scope = RoomDataScopes(rawValue: selectedScope) else {
             return

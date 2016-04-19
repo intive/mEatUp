@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -210,7 +211,6 @@
                                             <outlet property="placeLabel" destination="B4P-Cj-M6o" id="Fux-WA-Sdl"/>
                                             <outlet property="timeLabel" destination="XiX-mk-pTn" id="ANg-zo-9m9"/>
                                             <outlet property="titleLabel" destination="mES-pv-M1r" id="JKa-fX-XGC"/>
-                                            <segue destination="lG1-sF-iMY" kind="show" id="kU4-vC-MLr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -234,6 +234,7 @@
                     <connections>
                         <outlet property="roomTableView" destination="Fc9-1m-3Tc" id="mH8-n7-vUd"/>
                         <outlet property="searchBar" destination="jR3-Tb-bav" id="6YY-S1-F6M"/>
+                        <segue destination="lG1-sF-iMY" kind="show" identifier="ShowRoomViewController" id="dCl-vC-Thi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xgs-zg-Nzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -256,15 +257,52 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ParticipantCell" id="gaF-tn-ec1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ParticipantCell" id="gaF-tn-ec1" customClass="RoomParticipantTableViewCell" customModule="mEatUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gaF-tn-ec1" id="wsu-8K-exs">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K95-v1-zvc">
+                                                    <rect key="frame" x="277" y="11" width="45" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SAl-M9-i1S">
+                                                    <rect key="frame" x="3" y="4.5" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="QcL-pB-gv1"/>
+                                                        <constraint firstAttribute="width" constant="35" id="TUh-LS-oLi"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="K95-v1-zvc" firstAttribute="centerY" secondItem="wsu-8K-exs" secondAttribute="centerY" id="6Cf-ge-FW2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="SAl-M9-i1S" secondAttribute="bottom" constant="5" id="Wxx-pb-vGL"/>
+                                                <constraint firstAttribute="topMargin" secondItem="SAl-M9-i1S" secondAttribute="top" constant="5" id="XMf-DA-Quz"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="SAl-M9-i1S" secondAttribute="leading" constant="5" id="Z4q-oc-Jid"/>
+                                                <constraint firstItem="SAl-M9-i1S" firstAttribute="centerY" secondItem="wsu-8K-exs" secondAttribute="centerY" id="dnx-vD-A9Z"/>
+                                                <constraint firstItem="K95-v1-zvc" firstAttribute="centerX" secondItem="wsu-8K-exs" secondAttribute="centerX" id="q4A-Le-3wN"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Wxx-pb-vGL"/>
+                                                    <exclude reference="XMf-DA-Quz"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgView" destination="SAl-M9-i1S" id="hfr-gI-A97"/>
+                                            <outlet property="nameLabel" destination="K95-v1-zvc" id="5b9-71-mpN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="lG1-sF-iMY" id="P6X-KT-epx"/>
+                                    <outlet property="delegate" destination="lG1-sF-iMY" id="1O8-N4-Hk7"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -293,6 +331,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="infoView" destination="NAa-Hx-5fA" id="eKL-qR-Rks"/>
+                        <outlet property="participantsTableView" destination="nft-zk-oRX" id="3iT-y5-A9R"/>
                         <segue destination="7Gv-nF-1j4" kind="show" identifier="showRoomDetailsSegue" id="RmG-Tc-ZsY"/>
                     </connections>
                 </viewController>
@@ -538,10 +577,10 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vb7-is-srj" id="rRP-Xk-ldE">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D66-bF-lGg" colorLabel="IBBuiltInLabel-Red">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D66-bF-lGg" colorLabel="IBBuiltInLabel-Red">
                                                     <rect key="frame" x="20" y="0.0" width="50" height="50"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Jan Kowalski" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOK-uN-4Ye">

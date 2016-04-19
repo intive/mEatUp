@@ -243,7 +243,7 @@ class CloudKitHelper {
     }
     
     func loadUsersInRoomRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: (User) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "roomRecordID == %@", roomRecordID.recordName)
+        let predicate = NSPredicate(format: "roomRecordID == %@", CKReference(recordID: roomRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in

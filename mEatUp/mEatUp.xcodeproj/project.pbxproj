@@ -31,6 +31,7 @@
 		357498CE1CC647710052C790 /* UIImageView+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */; };
 		357498D01CC64B610052C790 /* BalanceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CF1CC64B610052C790 /* BalanceIndicator.swift */; };
 		C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */; };
+		C772E1161CC637C400194C5C /* RoomParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
 		C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */; };
@@ -94,6 +95,7 @@
 		357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+MEATUP.swift"; sourceTree = "<group>"; };
 		357498CF1CC64B610052C790 /* BalanceIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceIndicator.swift; sourceTree = "<group>"; };
 		C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerWithDoneButton.swift; sourceTree = "<group>"; };
+		C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
 		C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyBottomBorderTextField.swift; sourceTree = "<group>"; };
@@ -156,8 +158,10 @@
 		3508E2721CBFCAF00094394D /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				E100270D1CBD1C410071D45C /* RoomListCell.swift */,
 				3508E2731CBFCB370094394D /* FinishedRoomCell.swift */,
 				356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */,
+				C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -199,7 +203,6 @@
 			children = (
 				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
 				3508E2461CBFB1BF0094394D /* CoreDataClasses */,
-				E100270C1CBD1C250071D45C /* Cells */,
 				356275BF1CBBA621009B8122 /* Frameworks */,
 				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
 				E1FB87C71CBCE93C00273E4E /* CloudKitClasses */,
@@ -252,14 +255,6 @@
 				C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */,
 			);
 			name = CustomViews;
-			sourceTree = "<group>";
-		};
-		E100270C1CBD1C250071D45C /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				E100270D1CBD1C410071D45C /* RoomListCell.swift */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		E1D814C31CC4F4B600F5A538 /* Data */ = {
@@ -454,6 +449,7 @@
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
 				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,
+				C772E1161CC637C400194C5C /* RoomParticipantTableViewCell.swift in Sources */,
 				C7F88DB71CC53115007A6038 /* NSDateFormatter+MEATUP.swift in Sources */,
 				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
 				3508E2741CBFCB370094394D /* FinishedRoomCell.swift in Sources */,
