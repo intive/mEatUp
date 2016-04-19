@@ -32,7 +32,6 @@
 		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
 		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
 		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
-		E10027101CBD26CA0071D45C /* SectionNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270F1CBD26CA0071D45C /* SectionNames.swift */; };
 		E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10027131CBE48EF0071D45C /* CloudKit.framework */; };
 		E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */; };
 		E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FB87CA1CBCE96300273E4E /* CloudKitObject.swift */; };
@@ -89,7 +88,6 @@
 		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
 		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
-		E100270F1CBD26CA0071D45C /* SectionNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionNames.swift; sourceTree = "<group>"; };
 		E10027131CBE48EF0071D45C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListDataLoader.swift; sourceTree = "<group>"; };
 		E1FB87C31CBCE8BB00273E4E /* mEatUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mEatUp.entitlements; sourceTree = "<group>"; };
@@ -180,8 +178,8 @@
 		354DB4FA1CB7EA8400B9194B /* mEatUp */ = {
 			isa = PBXGroup;
 			children = (
-				3508E2461CBFB1BF0094394D /* CoreDataClasses */,
 				354DB4FB1CB7EA8400B9194B /* AppDelegate.swift */,
+				3508E2461CBFB1BF0094394D /* CoreDataClasses */,
 				E100270C1CBD1C250071D45C /* Cells */,
 				356275BF1CBBA621009B8122 /* Frameworks */,
 				E1FB87E21CBCE9EF00273E4E /* Entitlements */,
@@ -295,7 +293,6 @@
 				E1FB87DB1CBCE99B00273E4E /* RoomProperties.swift */,
 				E1FB87DC1CBCE99B00273E4E /* UserInRoomProperties.swift */,
 				E1FB87DD1CBCE99B00273E4E /* UserProperties.swift */,
-				E100270F1CBD26CA0071D45C /* SectionNames.swift */,
 			);
 			name = Enumerators;
 			sourceTree = "<group>";
@@ -448,7 +445,6 @@
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
 				E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */,
-				E10027101CBD26CA0071D45C /* SectionNames.swift in Sources */,
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
 				353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */,
 				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,

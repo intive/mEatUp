@@ -13,44 +13,29 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var roomTableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var roomListLoader = RoomListDataLoader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        roomListLoader.completionHandler = { self.roomTableView.reloadData() }
+        roomListLoader.completionHandler = {
+            self.roomTableView.reloadData()
+            self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
+        }
         roomListLoader.loadUserRecordFromCloudKit()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return roomListLoader.myRoom != nil ? 1 : 0
-        case 1:
-            return roomListLoader.joinedRooms.count
-        default:
-            return roomListLoader.publicRooms.count
-        }
+        return roomListLoader.currentRoomList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RoomListCell", forIndexPath: indexPath)
         
-        var dataSource: [Room] = []
-        
-        switch indexPath.section {
-        case 0:
-            if let myRoom = roomListLoader.myRoom {
-                dataSource.append(myRoom)
-            }
-        case 1:
-            dataSource = roomListLoader.joinedRooms
-        default:
-            dataSource = roomListLoader.publicRooms
-        }
-        
         if let cell = cell as? RoomListCell {
-            if let title = dataSource[indexPath.row].title, place = dataSource[indexPath.row].restaurant?.name, date = dataSource[indexPath.row].date {
+            if let title = roomListLoader.currentRoomList[indexPath.row].title, place = roomListLoader.currentRoomList[indexPath.row].restaurant?.name, date = roomListLoader.currentRoomList[indexPath.row].date {
                 cell.setupCell(title, place: place, date: date)
             }
         }
@@ -59,10 +44,35 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return roomListLoader.sections.count
+        return 1
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return roomListLoader.sections[section]
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        roomListLoader.completionHandler = {
+            self.roomTableView.reloadData()
+        }
+        roomListLoader.loadCurrentRoomList(selectedScope, filter: nil)
+        
+        roomTableView.reloadData()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            roomListLoader.loadCurrentRoomList(searchBar.selectedScopeButtonIndex, filter: nil)
+        } else {
+            roomListLoader.loadCurrentRoomList(searchBar.selectedScopeButtonIndex, filter: {room in
+                return room.title!.lowercaseString.containsString(searchText.lowercaseString)})
+        }
+        
+        self.roomTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        
+        roomListLoader.loadCurrentRoomList(searchBar.selectedScopeButtonIndex, filter: nil)
+        
+        self.roomTableView.reloadData()
     }
 }
