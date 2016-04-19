@@ -76,12 +76,12 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="chn-D4-rcz" id="9a3-ca-Iqa">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 0,00zł" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNg-FR-slx" userLabel="Balance">
-                                                    <rect key="frame" x="463" y="12" width="117" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="449" y="12" width="131" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -296,20 +296,36 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="KvU-a1-u0s"/>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="e5k-Wo-qNW" userLabel="width = 80"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <action selector="balanceChanged:" destination="vb7-is-srj" eventType="editingDidEnd" id="4YC-Zf-LZy"/>
+                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHZ-Ja-jDP">
+                                                    <rect key="frame" x="490" y="4" width="30" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                                    <state key="normal" title="+">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="balanceIndicatorChanged:" destination="vb7-is-srj" eventType="touchUpInside" id="nIb-fD-Bxe"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="D66-bF-lGg" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="93y-vj-KPj"/>
                                                 <constraint firstAttribute="trailing" secondItem="u69-Cg-XnQ" secondAttribute="trailing" constant="20" id="X2S-5Y-fz8"/>
                                                 <constraint firstItem="gOK-uN-4Ye" firstAttribute="leading" secondItem="D66-bF-lGg" secondAttribute="trailing" constant="50" id="dkz-8H-uyD"/>
                                                 <constraint firstItem="D66-bF-lGg" firstAttribute="leading" secondItem="rRP-Xk-ldE" secondAttribute="leading" constant="20" id="o6w-Ei-nkp"/>
+                                                <constraint firstItem="EHZ-Ja-jDP" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="oIV-Tr-R7e"/>
                                                 <constraint firstItem="u69-Cg-XnQ" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="qQ6-VV-qvz"/>
                                                 <constraint firstItem="gOK-uN-4Ye" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="sHd-gZ-vTv"/>
+                                                <constraint firstItem="u69-Cg-XnQ" firstAttribute="leading" secondItem="EHZ-Ja-jDP" secondAttribute="trailing" id="sNI-vg-qnE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="balanceIndicatorButton" destination="EHZ-Ja-jDP" id="Yr1-5t-yRr"/>
                                             <outlet property="balanceTextField" destination="u69-Cg-XnQ" id="5hK-U8-2aN"/>
                                             <outlet property="participantLabel" destination="gOK-uN-4Ye" id="QEB-ow-3NK"/>
                                             <outlet property="pictureImageView" destination="D66-bF-lGg" id="u5k-3N-LXq"/>

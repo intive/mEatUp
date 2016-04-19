@@ -25,6 +25,13 @@ class FinishedRoomCell: UITableViewCell {
         
         titleLabel.text = finishedRoom.title
         balanceLabel.text = "\(balance)"
+        if balance < 0 {
+            balanceLabel.textColor = UIColor.redColor()
+        } else if balance > 0 {
+            balanceLabel.textColor = UIColor.greenColor()
+        } else {
+            balanceLabel.textColor = UIColor.blackColor()
+        }
     }
     
 }
