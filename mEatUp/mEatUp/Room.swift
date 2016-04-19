@@ -32,5 +32,7 @@ class Room: CloudKitObject {
     }
     
     init() {
+        owner = User()
+        restaurant = Restaurant()
     }
 }

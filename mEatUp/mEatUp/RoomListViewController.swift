@@ -43,10 +43,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         guard let scope = RoomDataScopes(rawValue: selectedScope) else {
             return
@@ -91,5 +87,13 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         roomListLoader.loadCurrentRoomList(scope, filter: nil)
         
         self.roomTableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "createRoom" {
+            let dest = segue.destinationViewController as? RoomDetailsViewController
+            dest?.viewPurpose = RoomDetailsPurpose.Create
+            dest?.userRecordID = roomListLoader.userRecordID
+        }
     }
 }

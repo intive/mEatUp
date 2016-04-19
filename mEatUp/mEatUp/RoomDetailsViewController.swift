@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import CloudKit
 
 class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var ownerTextField: UITextField!
     @IBOutlet weak var placeTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
@@ -19,11 +19,17 @@ class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var limitSlider: UISlider!
     @IBOutlet weak var limitLabel: UILabel!
     @IBOutlet weak var privateSwitch: UISwitch!
+    @IBOutlet weak var rightBarButton: UIBarButtonItem!
     
     var activeField: UITextField?
     var room: Room?
     let datePicker = DatePickerWithDoneButton()
     let formatter = NSDateFormatter()
+    
+    let cloudKitHelper = CloudKitHelper()
+    
+    var viewPurpose: RoomDetailsPurpose?
+    var userRecordID: CKRecordID?
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         limitLabel.text = "\(Int(sender.value))"
@@ -86,11 +92,10 @@ class RoomDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //added only for testing, needs to be deleted after adding CloudKit
-        room = createTemporaryRoom()
-        if let room = room {
-            configureWithRoom(room)
+        if let purpose = viewPurpose {
+            setupViewForPurpose(purpose)
         }
+        
         //hardcoded bool just for testing, needs to be determined based on if the visiting user is the room's owner
         enableUserInteraction(true)
         
@@ -104,6 +109,17 @@ class RoomDetailsViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    func setupViewForPurpose(purpose: RoomDetailsPurpose) {
+        switch purpose {
+        case .Create:
+            rightBarButton.title = RoomDetailsPurpose.Create.rawValue
+        case .Edit:
+            rightBarButton.title = RoomDetailsPurpose.Edit.rawValue
+        case .View:
+            rightBarButton.title = RoomDetailsPurpose.View.rawValue
+        }
+    }
+    
     func enableUserInteraction(bool: Bool) {
         ownerTextField.userInteractionEnabled = false
         placeTextField.userInteractionEnabled = bool
@@ -111,7 +127,6 @@ class RoomDetailsViewController: UIViewController {
         hourTextField.userInteractionEnabled = bool
         limitSlider.userInteractionEnabled = bool
         privateSwitch.userInteractionEnabled = bool
-        saveButton.hidden = !bool
     }
     
     func configureWithRoom(room: Room) {
@@ -127,14 +142,34 @@ class RoomDetailsViewController: UIViewController {
         }
     }
     
-    //added only for testing, needs to be deleted after adding CloudKit
-    func createTemporaryRoom() -> Room {
-        let restaurant = Restaurant(name: "Bro Burgers", address: "Partyzantów 1, Szczecin")
-        let user = User(fbID: "id", name: "Krzysztof", surname: "Przybysz", photo: "zzz")
-        let room = Room(title: "My room", accessType: .Private, restaurant: restaurant, maxCount: 10, date: NSDate(), owner: user)
-        return room
+    func createRoom() {
+        if room == nil {
+            room?.owner?.recordID = userRecordID
+            room?.restaurant?.recordID = CKRecordID(recordName: "temp") // this line will be replaced by actual restaurant record id
+            room?.maxCount = Int(limitSlider.value)
+            room?.accessType = AccessType(rawValue: privateSwitch.on ? 1 : 2)
+        }
+        
+//        hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
+//        dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
+//        
+//        let dateString = dateTextField.text? + hourTextField.text?
     }
     
+    @IBAction func barButtonPressed(sender: UIBarButtonItem) {
+        guard let purpose = viewPurpose else {
+            return
+        }
+        
+        switch purpose {
+        case .Create:
+            createRoom()
+        case .Edit:
+            break
+        case .View:
+            break
+        }
+    }
 }
 
 extension RoomDetailsViewController: UITextFieldDelegate {
