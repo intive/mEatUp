@@ -31,8 +31,8 @@ class SettlementListViewController: UIViewController {
         return frc
     }()
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         fetch()
     }
     
@@ -50,12 +50,8 @@ class SettlementListViewController: UIViewController {
             var participantsToPass = [Participant]()
             
             if let indexPath = tableView.indexPathForSelectedRow, finishedRoom = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom {
-                if let participants = finishedRoom.participants {
-                    for participant in participants {
-                        if let participant = participant as? Participant {
-                            participantsToPass.append(participant)
-                        }
-                    }
+                if let elements = finishedRoom.participants, participants =  elements.allObjects as? [Participant] {
+                    participantsToPass = participants
                 }
             }
 
