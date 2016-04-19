@@ -48,30 +48,47 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        guard let scope = RoomDataScopes(rawValue: selectedScope) else {
+            return
+        }
+        
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
         }
-        roomListLoader.loadCurrentRoomList(selectedScope, filter: nil)
+        roomListLoader.loadCurrentRoomList(scope, filter: nil)
         
         roomTableView.reloadData()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let scope = RoomDataScopes(rawValue: searchBar.selectedScopeButtonIndex) else {
+            return
+        }
+        
         if searchText.isEmpty {
-            roomListLoader.loadCurrentRoomList(searchBar.selectedScopeButtonIndex, filter: nil)
+            roomListLoader.loadCurrentRoomList(scope, filter: nil)
         } else {
-            roomListLoader.loadCurrentRoomList(searchBar.selectedScopeButtonIndex, filter: {room in
-                return room.title!.lowercaseString.containsString(searchText.lowercaseString)})
+            roomListLoader.loadCurrentRoomList(scope, filter: {room in
+                if let title = room.title {
+                    return title.lowercaseString.containsString(searchText.lowercaseString)
+                } else {
+                    return false
+                }
+            })
         }
         
         self.roomTableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        guard let scope = RoomDataScopes(rawValue: searchBar.selectedScopeButtonIndex) else {
+            return
+        }
+        
         searchBar.text = ""
         searchBar.endEditing(true)
         
-        roomListLoader.loadCurrentRoomList(searchBar.selectedScopeButtonIndex, filter: nil)
+        roomListLoader.loadCurrentRoomList(scope, filter: nil)
         
         self.roomTableView.reloadData()
     }

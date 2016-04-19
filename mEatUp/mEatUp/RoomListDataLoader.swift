@@ -73,28 +73,28 @@ class RoomListDataLoader {
         }, errorHandler: nil)
     }
     
-    func loadCurrentRoomList(option: Int, filter: ((Room) -> Bool)?) {
+    func loadCurrentRoomList(dataScope: RoomDataScopes, filter: ((Room) -> Bool)?) {
         
-        switch option {
-        case 1:
+        switch dataScope {
+        case .Joined:
             if let filter = filter {
                 currentRoomList = joinedRooms.filter({filter($0)})
             } else {
                 currentRoomList = joinedRooms
             }
-        case 2:
+        case .Invited:
             if let filter = filter {
                 currentRoomList = invitedRooms.filter({filter($0)})
             } else {
                 currentRoomList = invitedRooms
             }
-        case 3:
+        case .MyRoom:
             if let filter = filter {
                 currentRoomList = myRoom.filter({filter($0)})
             } else {
                 currentRoomList = myRoom
             }
-        default:
+        case .Public:
             if let filter = filter {
                 currentRoomList = publicRooms.filter({filter($0)})
             } else {
