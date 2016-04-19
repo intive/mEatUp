@@ -12,8 +12,22 @@ import CoreData
 class SettlementViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    //passed in PrepareForSegue method
     var participants: [Participant]!
+    //passed in PrepareForSegue method
+    var coreDataController : CoreDataController!
     let ReuseIdentifierWebsiteCell = "ParticipantDebtCell"
+    
+    @IBAction func saveButtonTapped(sender: UIBarButtonItem) {
+        for i in 0 ..< participants.count {
+            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))  as? ParticipantDebtCell {
+                if let cellText = cell.balanceTextField.text, let balance = Double(cellText) {
+                    participants[i].setValue(balance, forKey: "debt")
+                }
+            }
+        }
+        coreDataController.saveContext()
+    }
 }
 
 extension SettlementViewController: UITableViewDataSource, UITableViewDelegate {

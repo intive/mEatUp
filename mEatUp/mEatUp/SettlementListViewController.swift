@@ -31,11 +31,8 @@ class SettlementListViewController: UIViewController {
         return frc
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // only for testing core data //
-        coreDataController.addTestFinishedRooms()
-        // ************************** //
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
         fetch()
     }
     
@@ -63,6 +60,7 @@ class SettlementListViewController: UIViewController {
             }
 
             destinationVC.participants = participantsToPass
+            destinationVC.coreDataController = coreDataController
         }
     }
     

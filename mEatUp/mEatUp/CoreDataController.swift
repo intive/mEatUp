@@ -11,6 +11,8 @@ import CoreData
 
 class CoreDataController: NSObject {
     
+    static let sharedInstance = CoreDataController()
+    
     // MARK: - Core Data stack
     
     lazy var applicationDocumentsDirectory: NSURL = {

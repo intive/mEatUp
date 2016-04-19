@@ -11,14 +11,14 @@ import UIKit
 class ParticipantDebtCell: UITableViewCell {
     
     @IBOutlet weak var participantLabel: UILabel!
-    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var balanceTextField: UITextField!
     @IBOutlet weak var pictureImageView: UIImageView!
     
     let imageDownloader = ImageDownloader()
     
     func configureWithParticipant(particpant: Participant) {
         participantLabel.text = "\(particpant.firstName) \(particpant.lastName)"
-        balanceLabel.text = "\(particpant.debt.stringValue) zł "
+        balanceTextField.text = "\(particpant.debt.stringValue)"
         if let pictureURLString = particpant.pictureURL, url = NSURL(string: pictureURLString) {
             imageDownloader.setFacebookImageFromUrl(url, imageView: pictureImageView)
         }

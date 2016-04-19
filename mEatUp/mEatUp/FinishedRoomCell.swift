@@ -24,7 +24,7 @@ class FinishedRoomCell: UITableViewCell {
         }
         
         titleLabel.text = finishedRoom.title
-        balanceLabel.text = "\(balance) zł"
+        balanceLabel.text = "\(balance)"
     }
     
 }
