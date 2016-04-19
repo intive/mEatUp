@@ -339,10 +339,10 @@
             </objects>
             <point key="canvasLocation" x="2629" y="203"/>
         </scene>
-        <!--Title-->
+        <!--Room Details View Controller Scene-->
         <scene sceneID="rWu-5e-0K8">
             <objects>
-                <viewController id="7Gv-nF-1j4" customClass="RoomDetailsViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Gv-nF-1j4" userLabel="Room Details View Controller Scene" customClass="RoomDetailsViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XGg-IA-iMe"/>
                         <viewControllerLayoutGuide type="bottom" id="qsO-H5-xnW"/>
@@ -376,6 +376,7 @@
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="23"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
+                                                    <action selector="placeTextFieldEditing:" destination="7Gv-nF-1j4" eventType="editingDidBegin" id="cBy-EK-2y0"/>
                                                     <outlet property="delegate" destination="7Gv-nF-1j4" id="C4A-Vg-jUW"/>
                                                 </connections>
                                             </textField>
