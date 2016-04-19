@@ -31,9 +31,9 @@ class RoomViewController: UIViewController {
     
     func getUsers() {
         if let room = room, recordID = room.recordID {
-            cloudKitHelper.loadUsersInRoomRecordWithRoomId(recordID, completionHandler: { user in
-                self.users.append(user)
-                self.participantsTableView.reloadData()
+            cloudKitHelper.loadUsersInRoomRecordWithRoomId(recordID, completionHandler: { [weak self] user in
+                self?.users.append(user)
+                self?.participantsTableView.reloadData()
                 }, errorHandler: nil)
         }
     }
@@ -49,9 +49,10 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        
-        if let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantCell", forIndexPath: indexPath) as? RoomParticipantTableViewCell {
+    
+        let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantCell", forIndexPath: indexPath)
+            
+        if let cell = cell as? RoomParticipantTableViewCell {
             cell.configureWithRoom(users[indexPath.row])
             return cell
         }

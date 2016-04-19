@@ -52,11 +52,9 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowRoomViewController" {
-            if let destination = segue.destinationViewController as? RoomViewController {
-                destination.room = sender as? Room
-                destination.userRecordID = roomListLoader.userRecordID
-            }
+        if let destination = segue.destinationViewController as? RoomViewController {
+            destination.room = sender as? Room
+            destination.userRecordID = roomListLoader.userRecordID
         }
     }
     
