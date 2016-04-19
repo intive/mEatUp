@@ -12,14 +12,15 @@ import CloudKit
 class RoomListDataLoader {
     var cloudKitHelper: CloudKitHelper?
     
-    var myRoom: Room?
+    var myRoom: [Room] = []
     var joinedRooms: [Room] = []
+    var invitedRooms: [Room] = []
     var publicRooms: [Room] = []
     
+    var currentRoomList: [Room] = []
+    
     var completionHandler: (() -> Void)?
-    
-    let sections = [SectionNames.MyRoom.rawValue, SectionNames.Joined.rawValue, SectionNames.Public.rawValue]
-    
+        
     var userRecordID: CKRecordID?
 
     init() {
@@ -34,51 +35,71 @@ class RoomListDataLoader {
                 self.userRecordID = userRecordID
                 self.loadRoomsForRoomList(userRecordID)
             }
-            }, errorHandler: nil)
+        }, errorHandler: nil)
     }
     
     func loadRoomsForRoomList(userRecordID: CKRecordID) {
         cloudKitHelper?.loadPublicRoomRecords({
             room in
                 self.publicRooms.append(room)
-                self.filterRooms()
-            
+                self.completionHandler?()
         }, errorHandler: nil)
         
         
         cloudKitHelper?.loadInvitedRoomRecords(userRecordID, completionHandler: {
             room in
-            if let room = room {
-                self.joinedRooms.append(room)
-                self.filterRooms()
-            }
+                if let room = room {
+                    self.invitedRooms.append(room)
+                    self.completionHandler?()
+                }
         }, errorHandler: nil)
         
         
         cloudKitHelper?.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
             userRoom in
-            if let userRoom = userRoom {
-                self.joinedRooms.append(userRoom)
-                self.filterRooms()
-            }
+                if let userRoom = userRoom {
+                    self.joinedRooms.append(userRoom)
+                    self.completionHandler?()
+                }
         }, errorHandler: nil)
         
         
         cloudKitHelper?.loadUserRoomRecord(userRecordID, completionHandler: {
             room in
-                self.myRoom = room
-                self.filterRooms()
+                if let room = room {
+                    self.myRoom.append(room)
+                    self.completionHandler?()
+                }
         }, errorHandler: nil)
     }
     
-    func filterRooms() {
-        if joinedRooms.count != 0 {
-            for room in joinedRooms {
-                self.publicRooms = publicRooms.filter({($0.recordID?.recordName != room.recordID?.recordName) || ($0.recordID?.recordName != myRoom?.recordID?.recordName)})
+    func loadCurrentRoomList(dataScope: RoomDataScopes, filter: ((Room) -> Bool)?) {
+        
+        switch dataScope {
+        case .Joined:
+            if let filter = filter {
+                currentRoomList = joinedRooms.filter({filter($0)})
+            } else {
+                currentRoomList = joinedRooms
+            }
+        case .Invited:
+            if let filter = filter {
+                currentRoomList = invitedRooms.filter({filter($0)})
+            } else {
+                currentRoomList = invitedRooms
+            }
+        case .MyRoom:
+            if let filter = filter {
+                currentRoomList = myRoom.filter({filter($0)})
+            } else {
+                currentRoomList = myRoom
+            }
+        case .Public:
+            if let filter = filter {
+                currentRoomList = publicRooms.filter({filter($0)})
+            } else {
+                currentRoomList = publicRooms
             }
         }
-        self.joinedRooms = joinedRooms.filter({ $0.recordID?.recordName != myRoom?.recordID?.recordName })
-        
-        completionHandler?()
     }
 }
