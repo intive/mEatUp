@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PickerView_MEATUP: UIPickerView {
+class PickerViewMeatup: UIPickerView {
     var doneTappedBlock: (() -> ())?
     
     func toolBar() -> UIToolbar {

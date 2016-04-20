@@ -15,7 +15,7 @@ class SettlementViewController: UIViewController {
     //passed in PrepareForSegue method
     var participants: [Participant]!
     //passed in PrepareForSegue method
-    var coreDataController : CoreDataController!
+    var coreDataController: CoreDataController!
     let ReuseIdentifierWebsiteCell = "ParticipantDebtCell"
     
     @IBAction func saveButtonTapped(sender: UIBarButtonItem) {

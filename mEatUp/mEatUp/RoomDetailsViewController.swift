@@ -32,7 +32,7 @@ class RoomDetailsViewController: UIViewController {
     }
     
     @IBAction func placeTextFieldEditing(sender: UITextField) {
-        let picker = PickerView_MEATUP()
+        let picker = PickerViewMeatup()
         picker.dataSource = self
         picker.delegate = self
         sender.inputView = picker

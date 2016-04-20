@@ -76,8 +76,10 @@ class CoreDataController: NSObject {
             
             if rooms.count > 0 {
                 for result: AnyObject in rooms{
-                    managedObjectContext.deleteObject(result as! NSManagedObject)
-                    print("NSManagedObject has been Deleted")
+                    if let result = result as? NSManagedObject {
+                        managedObjectContext.deleteObject(result)
+                        print("NSManagedObject has been Deleted")
+                    }
                 }
                 try managedObjectContext.save() }
         } catch {
