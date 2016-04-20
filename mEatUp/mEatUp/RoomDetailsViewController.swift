@@ -32,10 +32,16 @@ class RoomDetailsViewController: UIViewController {
     }
     
     @IBAction func placeTextFieldEditing(sender: UITextField) {
-        let picker = UIPickerView()
+        let picker = PickerView_MEATUP()
         picker.dataSource = self
         picker.delegate = self
         sender.inputView = picker
+        
+        picker.doneTappedBlock = { [weak self] in
+            self?.placeTextField.text = self?.restaurants[picker.selectedRowInComponent(0)].name
+            self?.view.endEditing(true)
+        }
+        sender.inputAccessoryView = picker.toolBar()
     }
     
     @IBAction func dateTextFieldEditing(sender: UITextField) {
@@ -106,12 +112,7 @@ class RoomDetailsViewController: UIViewController {
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
-//        getRestaurants()
-        
-        cloudKitHelper.loadUserRecords({
-            user in
-                print(user)
-            }, errorHandler: nil)
+        getRestaurants()
     }
     
     deinit {
@@ -120,7 +121,6 @@ class RoomDetailsViewController: UIViewController {
     
     func getRestaurants() {
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
-            print(restaurants)
             self?.restaurants.appendContentsOf(restaurants)
             }, errorHandler: nil)
     }
