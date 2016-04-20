@@ -148,12 +148,10 @@ class RoomDetailsViewController: UIViewController {
             room?.restaurant?.recordID = CKRecordID(recordName: "temp") // this line will be replaced by actual restaurant record id
             room?.maxCount = Int(limitSlider.value)
             room?.accessType = AccessType(rawValue: privateSwitch.on ? 1 : 2)
+            if let day = dateTextField.text, hour = hourTextField.text {
+                room?.date = formatter.dateFromString(day, hour: hour)
+            }
         }
-        
-//        hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
-//        dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
-//        
-//        let dateString = dateTextField.text? + hourTextField.text?
     }
     
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
