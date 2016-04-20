@@ -536,7 +536,7 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Title" id="426-WQ-uwM">
+                    <navigationItem key="navigationItem" title="Room information" id="426-WQ-uwM">
                         <barButtonItem key="rightBarButtonItem" title="Right Bar Button" id="UBY-eT-Hba">
                             <connections>
                                 <action selector="barButtonPressed:" destination="7Gv-nF-1j4" id="dKV-8J-M4b"/>
