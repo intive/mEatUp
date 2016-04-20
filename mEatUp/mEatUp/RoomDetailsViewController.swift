@@ -26,20 +26,22 @@ class RoomDetailsViewController: UIViewController {
     let datePicker = DatePickerWithDoneButton()
     let formatter = NSDateFormatter()
     let cloudKitHelper = CloudKitHelper()
+    let picker = PickerViewMeatup()
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         limitLabel.text = "\(Int(sender.value))"
     }
     
     @IBAction func placeTextFieldEditing(sender: UITextField) {
-        let picker = PickerViewMeatup()
         picker.dataSource = self
         picker.delegate = self
         sender.inputView = picker
         
         picker.doneTappedBlock = { [weak self] in
-            self?.placeTextField.text = self?.restaurants[picker.selectedRowInComponent(0)].name
-            self?.view.endEditing(true)
+            if let row = self?.picker.selectedRowInComponent(0) {
+                self?.placeTextField.text = self?.restaurants[row].name
+                self?.view.endEditing(true)
+            }
         }
         sender.inputAccessoryView = picker.toolBar()
     }
@@ -122,6 +124,7 @@ class RoomDetailsViewController: UIViewController {
     func getRestaurants() {
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
             self?.restaurants.appendContentsOf(restaurants)
+            self?.picker.reloadComponent(0)
             }, errorHandler: nil)
     }
     
