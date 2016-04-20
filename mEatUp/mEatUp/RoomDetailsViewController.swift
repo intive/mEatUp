@@ -24,6 +24,7 @@ class RoomDetailsViewController: UIViewController {
     var activeField: UITextField?
     var room: Room?
     var restaurants = [Restaurant]()
+    var chosenRestaurant: Restaurant?
     let datePicker = DatePickerWithDoneButton()
     let formatter = NSDateFormatter()
     let picker = PickerViewMeatup()
@@ -45,6 +46,7 @@ class RoomDetailsViewController: UIViewController {
         picker.doneTappedBlock = { [weak self] in
             if let row = self?.picker.selectedRowInComponent(0) {
                 self?.placeTextField.text = self?.restaurants[row].name
+                self?.chosenRestaurant = self?.restaurants[row]
                 self?.view.endEditing(true)
             }
         }
@@ -111,9 +113,6 @@ class RoomDetailsViewController: UIViewController {
             setupViewForPurpose(purpose)
         }
         
-        //hardcoded bool just for testing, needs to be determined based on if the visiting user is the room's owner
-        enableUserInteraction(true)
-        
         limitLabel.text = "\(room?.maxCount ?? 0)"
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
@@ -129,10 +128,13 @@ class RoomDetailsViewController: UIViewController {
         switch purpose {
         case .Create:
             rightBarButton.title = RoomDetailsPurpose.Create.rawValue
+            enableUserInteraction(true)
         case .Edit:
             rightBarButton.title = RoomDetailsPurpose.Edit.rawValue
+            enableUserInteraction(true)
         case .View:
             rightBarButton.title = RoomDetailsPurpose.View.rawValue
+            enableUserInteraction(false)
         }
     }
     
@@ -166,14 +168,21 @@ class RoomDetailsViewController: UIViewController {
     }
     
     func createRoom() {
-        if room == nil {
-            room?.owner?.recordID = userRecordID
-            room?.restaurant?.recordID = CKRecordID(recordName: "temp") // this line will be replaced by actual restaurant record id
-            room?.maxCount = Int(limitSlider.value)
-            room?.accessType = AccessType(rawValue: privateSwitch.on ? 1 : 2)
-            if let day = dateTextField.text, hour = hourTextField.text {
-                room?.date = formatter.dateFromString(day, hour: hour)
-            }
+        room = Room()
+        room?.owner?.recordID = userRecordID
+        room?.maxCount = Int(limitSlider.value)
+        room?.accessType = AccessType(rawValue: privateSwitch.on ? 1 : 2)
+        if let day = dateTextField.text, hour = hourTextField.text {
+            room?.date = formatter.dateFromString(day, hour: hour)
+        }
+        if let restaurant = chosenRestaurant {
+            room?.restaurant = restaurant
+        }
+        
+        if let room = room {
+            cloudKitHelper.saveRoomRecord(room, completionHandler: {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }, errorHandler: nil)
         }
     }
     
