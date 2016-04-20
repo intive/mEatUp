@@ -16,4 +16,16 @@ extension NSDateFormatter {
         self.dateFormat = oldDateFormat
         return toReturn
     }
+    
+    func dateFromString(day: String, hour: String) -> NSDate? {
+        let dateString = day + "," + hour
+        
+        dateFormat = "dd.MM.yyy,H:mm"
+        
+        if let date = dateFromString(dateString) {
+            return date
+        }
+        
+        return nil
+    }
 }

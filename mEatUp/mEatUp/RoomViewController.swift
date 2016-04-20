@@ -38,6 +38,13 @@ class RoomViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? RoomDetailsViewController {
+            destination.room = room
+            destination.userRecordID = userRecordID
+        }
+    }
+    
 }
 
 extension RoomViewController: UITableViewDataSource, UITableViewDelegate {

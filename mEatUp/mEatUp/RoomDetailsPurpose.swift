@@ -1,5 +1,5 @@
 //
-//  RoomDataScopes.swift
+//  RoomDetailsPurpose.swift
 //  mEatUp
 //
 //  Created by Paweł Knuth on 19.04.2016.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum RoomDataScopes: Int {
-    case Public = 0, Joined, Invited, MyRoom
+enum RoomDetailsPurpose: String {
+    case Create, Edit, View = ""
 }

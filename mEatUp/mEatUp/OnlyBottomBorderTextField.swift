@@ -14,7 +14,7 @@ class OnlyBottomBorderTextField: UITextField {
         super.init(coder: aDecoder)
         
         let bottomBorder = CALayer()
-        bottomBorder.frame = CGRectMake(0.0, self.frame.size.height - 5, self.frame.size.width, 1.0);
+        bottomBorder.frame = CGRect(x: 0.0, y: self.frame.size.height - 5, width: self.frame.size.width, height: 1.0)
         bottomBorder.backgroundColor = UIColor.blackColor().CGColor
         self.layer.addSublayer(bottomBorder)
     }

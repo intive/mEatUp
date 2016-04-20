@@ -7,26 +7,52 @@
 //
 
 import UIKit
+import CloudKit
 
 class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var ownerTextField: UITextField!
     @IBOutlet weak var placeTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var hourTextField: UITextField!
     @IBOutlet weak var limitSlider: UISlider!
     @IBOutlet weak var limitLabel: UILabel!
     @IBOutlet weak var privateSwitch: UISwitch!
+    @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var topLabel: UILabel!
     
     var activeField: UITextField?
     var room: Room?
+    var restaurants = [Restaurant]()
+    var chosenRestaurant: Restaurant?
     let datePicker = DatePickerWithDoneButton()
     let formatter = NSDateFormatter()
+    let picker = PickerViewMeatup()
+    
+    let cloudKitHelper = CloudKitHelper()
+    
+    var viewPurpose: RoomDetailsPurpose?
+    var userRecordID: CKRecordID?
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         limitLabel.text = "\(Int(sender.value))"
+    }
+    
+    @IBAction func placeTextFieldEditing(sender: UITextField) {
+        picker.dataSource = self
+        picker.delegate = self
+        sender.inputView = picker
+        
+        picker.doneTappedBlock = { [weak self] in
+            if let row = self?.picker.selectedRowInComponent(0) {
+                self?.placeTextField.text = self?.restaurants[row].name
+                self?.chosenRestaurant = self?.restaurants[row]
+                self?.view.endEditing(true)
+            }
+        }
+        sender.inputAccessoryView = picker.toolBar()
     }
     
     @IBAction func dateTextFieldEditing(sender: UITextField) {
@@ -85,39 +111,73 @@ class RoomDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //added only for testing, needs to be deleted after adding CloudKit
-        room = createTemporaryRoom()
-        if let room = room {
-            configureWithRoom(room)
-        }
-        //hardcoded bool just for testing, needs to be determined based on if the visiting user is the room's owner
-        enableUserInteraction(true)
+        determineViewPurpose()
         
-        limitLabel.text = "\(room?.maxCount ?? 0)"
+        if let purpose = viewPurpose {
+            setupViewForPurpose(purpose)
+        }
+        
+        limitLabel.text = "\(room?.maxCount ?? Int(limitSlider.minimumValue))"
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
+        getRestaurants()
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    func determineViewPurpose() {
+        if room == nil {
+            viewPurpose = RoomDetailsPurpose.Create
+        } else if room?.owner?.recordID == userRecordID {
+            viewPurpose = RoomDetailsPurpose.Edit
+        } else {
+            viewPurpose = RoomDetailsPurpose.View
+        }
+    }
+    
+    func setupViewForPurpose(purpose: RoomDetailsPurpose) {
+        switch purpose {
+        case .Create:
+            rightBarButton.title = RoomDetailsPurpose.Create.rawValue
+            enableUserInteraction(true)
+        case .Edit:
+            rightBarButton.title = RoomDetailsPurpose.Edit.rawValue
+            enableUserInteraction(true)
+        case .View:
+            topLabel.text = "Owner"
+            topTextField.placeholder = "Owner"
+            if let room = room {
+                configureWithRoom(room)
+            }
+            navigationItem.rightBarButtonItems?.removeAll()
+            enableUserInteraction(false)
+        }
+    }
+    
+    func getRestaurants() {
+        cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
+            self?.restaurants.appendContentsOf(restaurants)
+            self?.picker.reloadComponent(0)
+        }, errorHandler: nil)
+    }
+    
     func enableUserInteraction(bool: Bool) {
-        ownerTextField.userInteractionEnabled = false
+        topTextField.userInteractionEnabled = bool
         placeTextField.userInteractionEnabled = bool
         dateTextField.userInteractionEnabled = bool
         hourTextField.userInteractionEnabled = bool
         limitSlider.userInteractionEnabled = bool
         privateSwitch.userInteractionEnabled = bool
-        saveButton.hidden = !bool
     }
     
     func configureWithRoom(room: Room) {
-        title = "\(room.title ?? "Room") Details"
+        title = "\(room.title ?? "Room")"
         
         if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType?.rawValue {
-            ownerTextField.text = "\(name) \(surname)"
+            topTextField.text = "\(name) \(surname)"
             placeTextField.text = room.restaurant?.name
             hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
             dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
@@ -126,14 +186,40 @@ class RoomDetailsViewController: UIViewController {
         }
     }
     
-    //added only for testing, needs to be deleted after adding CloudKit
-    func createTemporaryRoom() -> Room {
-        let restaurant = Restaurant(name: "Bro Burgers", address: "Partyzantów 1, Szczecin")
-        let user = User(fbID: "id", name: "Krzysztof", surname: "Przybysz", photo: "zzz")
-        let room = Room(title: "My room", accessType: .Private, restaurant: restaurant, maxCount: 10, date: NSDate(), owner: user)
-        return room
+    func createRoom() {
+        room = Room()
+        room?.owner?.recordID = userRecordID
+        room?.maxCount = Int(limitSlider.value)
+        room?.accessType = AccessType(rawValue: privateSwitch.on ? AccessType.Private.rawValue : AccessType.Public.rawValue)
+        room?.title = topTextField.text
+        if let day = dateTextField.text, hour = hourTextField.text {
+            room?.date = formatter.dateFromString(day, hour: hour)
+        }
+        if let restaurant = chosenRestaurant {
+            room?.restaurant = restaurant
+        }
+        
+        if let room = room {
+            cloudKitHelper.saveRoomRecord(room, completionHandler: {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }, errorHandler: nil)
+        }
     }
     
+    @IBAction func barButtonPressed(sender: UIBarButtonItem) {
+        guard let purpose = viewPurpose else {
+            return
+        }
+        
+        switch purpose {
+        case .Create:
+            createRoom()
+        case .Edit:
+            break
+        case .View:
+            break
+        }
+    }
 }
 
 extension RoomDetailsViewController: UITextFieldDelegate {
@@ -143,7 +229,7 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if textField == hourTextField || textField == dateTextField || textField == ownerTextField {
+        if textField == hourTextField || textField == dateTextField || textField == topTextField || textField == placeTextField {
             return false
         }
         return true
@@ -155,5 +241,19 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         activeField = nil
+    }
+}
+
+extension RoomDetailsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return restaurants.count
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return restaurants[row].name
     }
 }

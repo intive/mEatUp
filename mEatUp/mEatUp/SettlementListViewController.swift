@@ -65,7 +65,6 @@ class SettlementListViewController: UIViewController {
             destinationVC.participants = participantsToPass
         }
     }
-    
 }
 
 extension SettlementListViewController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
@@ -109,8 +108,12 @@ extension SettlementListViewController: UITableViewDataSource, UITableViewDelega
             break
         }
     }
+<<<<<<< .merge_file_OCmzSR
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
     }
 }
+=======
+}
+>>>>>>> .merge_file_TYPdpe
