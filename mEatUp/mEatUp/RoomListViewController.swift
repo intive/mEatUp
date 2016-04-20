@@ -35,12 +35,17 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("RoomListCell", forIndexPath: indexPath)
         
         if let cell = cell as? RoomListCell {
-            if let title = roomListLoader.currentRoomList[indexPath.row].title, place = roomListLoader.currentRoomList[indexPath.row].restaurant?.name, date = roomListLoader.currentRoomList[indexPath.row].date {
+            let row = indexPath.row
+            if let title = roomListLoader.currentRoomList[row].title, place = roomListLoader.currentRoomList[row].restaurant?.name, date = roomListLoader.currentRoomList[row].date {
                 cell.setupCell(title, place: place, date: date)
             }
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("ShowRoomViewController", sender: roomListLoader.currentRoomList[indexPath.row])
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -90,10 +95,14 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "createRoom" {
-            let dest = segue.destinationViewController as? RoomDetailsViewController
-            dest?.viewPurpose = RoomDetailsPurpose.Create
-            dest?.userRecordID = roomListLoader.userRecordID
+        if let destination = segue.destinationViewController as? RoomDetailsViewController {
+            destination.viewPurpose = RoomDetailsPurpose.Create
+            destination.userRecordID = roomListLoader.userRecordID
+        }
+        
+        if let destination = segue.destinationViewController as? RoomViewController {
+            destination.room = sender as? Room
+            destination.userRecordID = roomListLoader.userRecordID
         }
     }
 }

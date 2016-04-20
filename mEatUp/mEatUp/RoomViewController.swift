@@ -7,31 +7,40 @@
 //
 
 import UIKit
+import CloudKit
 
 class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
     
+    @IBOutlet weak var participantsTableView: UITableView!
+    var cloudKitHelper = CloudKitHelper()
+    var room: Room?
+    var users = [User]()
+    var userRecordID: CKRecordID?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //added only for testing, needs to be deleted after adding CloudKit
-        let room = createTemporaryRoom()
-        infoView.startWithRoom(room)
+        if let room = room {
+            infoView.startWithRoom(room)
+        }
         infoView.singleTapAction = { [unowned self] in
             self.performSegueWithIdentifier("showRoomDetailsSegue", sender: nil)
         }
+        getUsers()
     }
     
-    //added only for testing, needs to be deleted after adding CloudKit
-    func createTemporaryRoom() -> Room {
-        let restaurant = Restaurant(name: "Bro Burgers", address: "Partyzantów 1, Szczecin")
-        let user = User(fbID: "id", name: "Krzysztof", surname: "Przybysz", photo: "zzz")
-        let room = Room(title: "My room", accessType: .Private, restaurant: restaurant, maxCount: 10, date: NSDate(), owner: user)
-        return room
+    func getUsers() {
+        if let room = room, recordID = room.recordID {
+            cloudKitHelper.loadUsersInRoomRecordWithRoomId(recordID, completionHandler: { [weak self] user in
+                self?.users.append(user)
+                self?.participantsTableView.reloadData()
+                }, errorHandler: nil)
+        }
     }
+    
 }
 
-extension RoomViewController : UITableViewDataSource {
+extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "Participants"
@@ -40,12 +49,21 @@ extension RoomViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
         let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantCell", forIndexPath: indexPath)
+            
+        if let cell = cell as? RoomParticipantTableViewCell {
+            cell.configureWithRoom(users[indexPath.row])
+            return cell
+        }
         return cell
     }
     
-    //function added only to conform UITableViewDataSource protocol
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return users.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
