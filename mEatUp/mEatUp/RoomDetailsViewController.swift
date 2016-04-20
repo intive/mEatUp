@@ -12,7 +12,6 @@ import CloudKit
 class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var ownerTextField: UITextField!
     @IBOutlet weak var placeTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var hourTextField: UITextField!
@@ -20,6 +19,9 @@ class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var limitLabel: UILabel!
     @IBOutlet weak var privateSwitch: UISwitch!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var topLabel: UILabel!
     
     var activeField: UITextField?
     var room: Room?
@@ -133,6 +135,8 @@ class RoomDetailsViewController: UIViewController {
             rightBarButton.title = RoomDetailsPurpose.Edit.rawValue
             enableUserInteraction(true)
         case .View:
+            topLabel.text = "Owner"
+            topTextField.placeholder = "OwnerTF"
             rightBarButton.title = RoomDetailsPurpose.View.rawValue
             enableUserInteraction(false)
         }
@@ -146,7 +150,7 @@ class RoomDetailsViewController: UIViewController {
     }
     
     func enableUserInteraction(bool: Bool) {
-        ownerTextField.userInteractionEnabled = false
+        topTextField.userInteractionEnabled = bool
         placeTextField.userInteractionEnabled = bool
         dateTextField.userInteractionEnabled = bool
         hourTextField.userInteractionEnabled = bool
@@ -158,7 +162,7 @@ class RoomDetailsViewController: UIViewController {
         title = "\(room.title ?? "Room") Details"
         
         if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType?.rawValue {
-            ownerTextField.text = "\(name) \(surname)"
+            topTextField.text = "\(name) \(surname)"
             placeTextField.text = room.restaurant?.name
             hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
             dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
@@ -171,7 +175,8 @@ class RoomDetailsViewController: UIViewController {
         room = Room()
         room?.owner?.recordID = userRecordID
         room?.maxCount = Int(limitSlider.value)
-        room?.accessType = AccessType(rawValue: privateSwitch.on ? 1 : 2)
+        room?.accessType = AccessType(rawValue: privateSwitch.on ? AccessType.Private.rawValue : AccessType.Public.rawValue)
+        room?.title = topTextField.text
         if let day = dateTextField.text, hour = hourTextField.text {
             room?.date = formatter.dateFromString(day, hour: hour)
         }
@@ -209,7 +214,7 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if textField == hourTextField || textField == dateTextField || textField == ownerTextField || textField == placeTextField {
+        if textField == hourTextField || textField == dateTextField || textField == topTextField || textField == placeTextField {
             return false
         }
         return true
