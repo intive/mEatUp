@@ -115,7 +115,7 @@ class RoomDetailsViewController: UIViewController {
             setupViewForPurpose(purpose)
         }
         
-        limitLabel.text = "\(room?.maxCount ?? 0)"
+        limitLabel.text = "\(room?.maxCount ?? Int(limitSlider.minimumValue))"
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
@@ -136,7 +136,10 @@ class RoomDetailsViewController: UIViewController {
             enableUserInteraction(true)
         case .View:
             topLabel.text = "Owner"
-            topTextField.placeholder = "OwnerTF"
+            topTextField.placeholder = "Owner"
+            if let room = room {
+                configureWithRoom(room)
+            }
             navigationItem.rightBarButtonItems?.removeAll()
             enableUserInteraction(false)
         }
@@ -159,7 +162,7 @@ class RoomDetailsViewController: UIViewController {
     }
     
     func configureWithRoom(room: Room) {
-        title = "\(room.title ?? "Room") Details"
+        title = "\(room.title ?? "Room")"
         
         if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType?.rawValue {
             topTextField.text = "\(name) \(surname)"
