@@ -20,9 +20,10 @@ class OscillatingRoomInfoView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        let view = NSBundle.mainBundle().loadNibNamed("OscillatingRoomInfoView", owner: self, options: nil)[0] as! UIView
-        self.addSubview(view)
-        view.frame = self.bounds
+        if let view = NSBundle.mainBundle().loadNibNamed("OscillatingRoomInfoView", owner: self, options: nil)[0] as? UIView {
+            self.addSubview(view)
+            view.frame = self.bounds
+        }
     }
     
     deinit {

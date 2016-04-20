@@ -22,11 +22,28 @@ class RoomDetailsViewController: UIViewController {
     
     var activeField: UITextField?
     var room: Room?
+    var restaurants = [Restaurant]()
     let datePicker = DatePickerWithDoneButton()
     let formatter = NSDateFormatter()
+    let cloudKitHelper = CloudKitHelper()
+    let picker = PickerViewMeatup()
     
     @IBAction func sliderValueChanged(sender: UISlider) {
         limitLabel.text = "\(Int(sender.value))"
+    }
+    
+    @IBAction func placeTextFieldEditing(sender: UITextField) {
+        picker.dataSource = self
+        picker.delegate = self
+        sender.inputView = picker
+        
+        picker.doneTappedBlock = { [weak self] in
+            if let row = self?.picker.selectedRowInComponent(0) {
+                self?.placeTextField.text = self?.restaurants[row].name
+                self?.view.endEditing(true)
+            }
+        }
+        sender.inputAccessoryView = picker.toolBar()
     }
     
     @IBAction func dateTextFieldEditing(sender: UITextField) {
@@ -97,10 +114,18 @@ class RoomDetailsViewController: UIViewController {
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
+        getRestaurants()
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func getRestaurants() {
+        cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
+            self?.restaurants.appendContentsOf(restaurants)
+            self?.picker.reloadComponent(0)
+            }, errorHandler: nil)
     }
     
     func enableUserInteraction(bool: Bool) {
@@ -143,7 +168,7 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if textField == hourTextField || textField == dateTextField || textField == ownerTextField {
+        if textField == hourTextField || textField == dateTextField || textField == ownerTextField || textField == placeTextField {
             return false
         }
         return true
@@ -155,5 +180,19 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         activeField = nil
+    }
+}
+
+extension RoomDetailsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return restaurants.count
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return restaurants[row].name
     }
 }
