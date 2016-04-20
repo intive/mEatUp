@@ -137,7 +137,7 @@ class RoomDetailsViewController: UIViewController {
         case .View:
             topLabel.text = "Owner"
             topTextField.placeholder = "OwnerTF"
-            rightBarButton.title = RoomDetailsPurpose.View.rawValue
+            navigationItem.rightBarButtonItems = []
             enableUserInteraction(false)
         }
     }
