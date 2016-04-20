@@ -144,6 +144,9 @@ class RoomDetailsViewController: UIViewController {
             rightBarButton.title = RoomDetailsPurpose.Create.rawValue
             enableUserInteraction(true)
         case .Edit:
+            if let room = room {
+                configureWithRoom(room)
+            }
             rightBarButton.title = RoomDetailsPurpose.Edit.rawValue
             enableUserInteraction(true)
         case .View:
@@ -176,13 +179,22 @@ class RoomDetailsViewController: UIViewController {
     func configureWithRoom(room: Room) {
         title = "\(room.title ?? "Room")"
         
-        if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType?.rawValue {
-            topTextField.text = "\(name) \(surname)"
+        if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType {
+            if let access = viewPurpose {
+                switch access {
+                case .View:
+                    topTextField.text = "\(name) \(surname)"
+                case .Edit:
+                    topTextField.text = room.title
+                case .Create:
+                    break
+                }
+            }
             placeTextField.text = room.restaurant?.name
             hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
             dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
             limitSlider.value = Float(limit)
-            privateSwitch.on = access == 1 ? true : false
+            privateSwitch.on = access == AccessType.Private ? true : false
         }
     }
     
@@ -229,7 +241,7 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if textField == hourTextField || textField == dateTextField || textField == topTextField || textField == placeTextField {
+        if textField == hourTextField || textField == dateTextField || textField == placeTextField {
             return false
         }
         return true
