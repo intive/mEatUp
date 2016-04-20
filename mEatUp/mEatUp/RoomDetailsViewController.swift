@@ -218,6 +218,13 @@ class RoomDetailsViewController: UIViewController {
         }
     }
     
+    func updateRoom(room: Room) {
+        room.title = topTextField.text
+        cloudKitHelper.saveRoomRecord(room, completionHandler: {
+            self.dismissViewControllerAnimated(true, completion: nil)
+            }, errorHandler: nil)
+    }
+    
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
         guard let purpose = viewPurpose else {
             return
@@ -227,6 +234,9 @@ class RoomDetailsViewController: UIViewController {
         case .Create:
             createRoom()
         case .Edit:
+            if let room = room {
+                updateRoom(room)
+            }
             break
         case .View:
             break
