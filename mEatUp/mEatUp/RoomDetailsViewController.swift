@@ -220,6 +220,16 @@ class RoomDetailsViewController: UIViewController {
     
     func updateRoom(room: Room) {
         room.title = topTextField.text
+        room.restaurant?.name = placeTextField.text
+        if let day = dateTextField.text, hour = hourTextField.text {
+            room.date = formatter.dateFromString(day, hour: hour)
+        }
+        room.maxCount = Int(limitSlider.value)
+        room.accessType = AccessType(rawValue: privateSwitch.on ? AccessType.Private.rawValue : AccessType.Public.rawValue)
+        if let restaurant = chosenRestaurant {
+            room.restaurant = restaurant
+        }
+        
         cloudKitHelper.editRoomRecord(room, completionHandler: {
             self.dismissViewControllerAnimated(true, completion: nil)
             }, errorHandler: nil)
