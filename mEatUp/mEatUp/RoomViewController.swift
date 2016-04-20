@@ -44,6 +44,7 @@ class RoomViewController: UIViewController {
                 destination.viewPurpose = RoomDetailsPurpose.Edit
             } else {
                 destination.viewPurpose = RoomDetailsPurpose.View
+                destination.room = room
             }
             
             destination.userRecordID = userRecordID
