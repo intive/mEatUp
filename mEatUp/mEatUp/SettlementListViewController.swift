@@ -59,7 +59,6 @@ class SettlementListViewController: UIViewController {
             destinationVC.coreDataController = coreDataController
         }
     }
-    
 }
 
 extension SettlementListViewController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
