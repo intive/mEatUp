@@ -220,7 +220,7 @@ class RoomDetailsViewController: UIViewController {
     
     func updateRoom(room: Room) {
         room.title = topTextField.text
-        cloudKitHelper.saveRoomRecord(room, completionHandler: {
+        cloudKitHelper.editRoomRecord(room, completionHandler: {
             self.dismissViewControllerAnimated(true, completion: nil)
             }, errorHandler: nil)
     }

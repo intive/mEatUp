@@ -18,6 +18,35 @@ class CloudKitHelper {
         publicDB = container.publicCloudDatabase
     }
     
+    func editRoomRecord(room: Room, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
+        publicDB.fetchRecordWithID(room.recordID!, completionHandler: {
+            record, error in
+            if let record = record {
+                record.setValue(room.title, forKey: RoomProperties.title.rawValue)
+                record.setValue(room.accessType?.rawValue, forKey: RoomProperties.accessType.rawValue)
+                if let restaurantRecordID = room.restaurant?.recordID {
+                    record.setValue(CKReference(recordID: restaurantRecordID, action: .DeleteSelf), forKey: RoomProperties.restaurantID.rawValue)
+                }
+                record.setValue(room.maxCount, forKey: RoomProperties.maxCount.rawValue)
+                record.setValue(room.date, forKey: RoomProperties.date.rawValue)
+                record.setValue(room.didEnd, forKey: RoomProperties.didEnd.rawValue)
+                if let ownerRecordID = room.owner?.recordID {
+                    record.setValue(CKReference(recordID: ownerRecordID, action: .DeleteSelf), forKey: RoomProperties.ownerID.rawValue)
+                }
+                self.publicDB.saveRecord(record, completionHandler: { (record, error) in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if error == nil {
+                            room.recordID = record?.recordID
+                            completionHandler?()
+                        } else {
+                            errorHandler?(error)
+                        }
+                    })
+                })
+            }
+        })
+    }
+    
     func saveRoomRecord(room: Room, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         let roomRecord: CKRecord
         
