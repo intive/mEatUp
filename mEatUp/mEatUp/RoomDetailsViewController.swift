@@ -111,6 +111,8 @@ class RoomDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        determineViewPurpose()
+        
         if let purpose = viewPurpose {
             setupViewForPurpose(purpose)
         }
@@ -124,6 +126,16 @@ class RoomDetailsViewController: UIViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func determineViewPurpose() {
+        if room == nil {
+            viewPurpose = RoomDetailsPurpose.Create
+        } else if room?.owner?.recordID == userRecordID {
+            viewPurpose = RoomDetailsPurpose.Edit
+        } else {
+            viewPurpose = RoomDetailsPurpose.View
+        }
     }
     
     func setupViewForPurpose(purpose: RoomDetailsPurpose) {

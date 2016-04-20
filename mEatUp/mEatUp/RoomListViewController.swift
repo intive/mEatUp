@@ -96,7 +96,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? RoomDetailsViewController {
-            destination.viewPurpose = RoomDetailsPurpose.Create
             destination.userRecordID = roomListLoader.userRecordID
         }
         
