@@ -30,6 +30,7 @@
 		356EEB601CC0FD27001E23A9 /* ParticipantDebtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */; };
 		357498CE1CC647710052C790 /* UIImageView+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */; };
 		357498D01CC64B610052C790 /* BalanceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CF1CC64B610052C790 /* BalanceIndicator.swift */; };
+		35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */; };
 		C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */; };
 		C772E1161CC637C400194C5C /* RoomParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
@@ -94,6 +95,7 @@
 		356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantDebtCell.swift; sourceTree = "<group>"; };
 		357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+MEATUP.swift"; sourceTree = "<group>"; };
 		357498CF1CC64B610052C790 /* BalanceIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceIndicator.swift; sourceTree = "<group>"; };
+		35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoomListDataLoader.swift; sourceTree = "<group>"; };
 		C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerWithDoneButton.swift; sourceTree = "<group>"; };
 		C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */,
+				35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -428,14 +431,14 @@
 /* Begin PBXShellScriptBuildPhase section */
 		E10027091CBD0F230071D45C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
@@ -446,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */,
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
 				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,

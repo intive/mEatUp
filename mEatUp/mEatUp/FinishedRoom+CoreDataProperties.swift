@@ -18,7 +18,7 @@ extension FinishedRoom {
     @NSManaged var title: String
     @NSManaged var restaurant: String?
     @NSManaged var date: NSDate?
-    @NSManaged var roomID: NSNumber
+    @NSManaged var roomID: String
     @NSManaged var participants: NSSet?
-
+    @NSManaged var isVisible: NSNumber?
 }

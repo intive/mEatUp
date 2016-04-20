@@ -13,16 +13,17 @@ class SettlementListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let ReuseIdentifierWebsiteCell = "FinishedRoomCell"
-    let coreDataController = CoreDataController()
+    let finishedRoomListLoader = FinishedRoomListDataLoader()
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
-        let websitesFetchRequest = NSFetchRequest(entityName: FinishedRoom.entityName())
+        let fetchRequest = NSFetchRequest(entityName: FinishedRoom.entityName())
+        fetchRequest.predicate = NSPredicate(format: "isVisible == %@", true)
         let primarySortDescriptor = NSSortDescriptor( key: "date", ascending: false)
-        websitesFetchRequest.sortDescriptors = [primarySortDescriptor]
+        fetchRequest.sortDescriptors = [primarySortDescriptor]
         
         let frc = NSFetchedResultsController(
-            fetchRequest: websitesFetchRequest,
-            managedObjectContext: self.coreDataController.managedObjectContext,
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataController.sharedInstance.managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         
@@ -31,9 +32,15 @@ class SettlementListViewController: UIViewController {
         return frc
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        finishedRoomListLoader.loadUserRecordFromCloudKit()
+        fetch()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        fetch()
+        tableView.reloadData()
     }
     
     func fetch() {
@@ -56,7 +63,6 @@ class SettlementListViewController: UIViewController {
             }
 
             destinationVC.participants = participantsToPass
-            destinationVC.coreDataController = coreDataController
         }
     }
     
@@ -84,10 +90,10 @@ extension SettlementListViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let objectToDelete = fetchedResultsController.objectAtIndexPath(indexPath) as? NSManagedObject
+            let objectToDelete = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom
             if let objectToDelete = objectToDelete {
-                fetchedResultsController.managedObjectContext.deleteObject(objectToDelete)
-                coreDataController.saveContext()
+                objectToDelete.isVisible = false
+                CoreDataController.sharedInstance.saveContext()
             }
         }
     }
@@ -102,5 +108,9 @@ extension SettlementListViewController: UITableViewDataSource, UITableViewDelega
         default:
             break
         }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
     }
 }
