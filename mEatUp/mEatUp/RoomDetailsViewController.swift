@@ -111,11 +111,13 @@ class RoomDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        determineViewPurpose()
+        
         if let purpose = viewPurpose {
             setupViewForPurpose(purpose)
         }
         
-        limitLabel.text = "\(room?.maxCount ?? 0)"
+        limitLabel.text = "\(room?.maxCount ?? Int(limitSlider.minimumValue))"
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
@@ -126,17 +128,33 @@ class RoomDetailsViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    func determineViewPurpose() {
+        if room == nil {
+            viewPurpose = RoomDetailsPurpose.Create
+        } else if room?.owner?.recordID == userRecordID {
+            viewPurpose = RoomDetailsPurpose.Edit
+        } else {
+            viewPurpose = RoomDetailsPurpose.View
+        }
+    }
+    
     func setupViewForPurpose(purpose: RoomDetailsPurpose) {
         switch purpose {
         case .Create:
             rightBarButton.title = RoomDetailsPurpose.Create.rawValue
             enableUserInteraction(true)
         case .Edit:
+            if let room = room {
+                configureWithRoom(room)
+            }
             rightBarButton.title = RoomDetailsPurpose.Edit.rawValue
             enableUserInteraction(true)
         case .View:
             topLabel.text = "Owner"
-            topTextField.placeholder = "OwnerTF"
+            topTextField.placeholder = "Owner"
+            if let room = room {
+                configureWithRoom(room)
+            }
             navigationItem.rightBarButtonItems?.removeAll()
             enableUserInteraction(false)
         }
@@ -159,15 +177,24 @@ class RoomDetailsViewController: UIViewController {
     }
     
     func configureWithRoom(room: Room) {
-        title = "\(room.title ?? "Room") Details"
+        title = "\(room.title ?? "Room")"
         
-        if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType?.rawValue {
-            topTextField.text = "\(name) \(surname)"
+        if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType {
+            if let purpose = viewPurpose {
+                switch purpose {
+                case .View:
+                    topTextField.text = "\(name) \(surname)"
+                case .Edit:
+                    topTextField.text = room.title
+                case .Create:
+                    break
+                }
+            }
             placeTextField.text = room.restaurant?.name
             hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
             dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
             limitSlider.value = Float(limit)
-            privateSwitch.on = access == 1 ? true : false
+            privateSwitch.on = access == AccessType.Private ? true : false
         }
     }
     
@@ -191,6 +218,23 @@ class RoomDetailsViewController: UIViewController {
         }
     }
     
+    func updateRoom(room: Room) {
+        room.title = topTextField.text
+        room.restaurant?.name = placeTextField.text
+        if let day = dateTextField.text, hour = hourTextField.text {
+            room.date = formatter.dateFromString(day, hour: hour)
+        }
+        room.maxCount = Int(limitSlider.value)
+        room.accessType = AccessType(rawValue: privateSwitch.on ? AccessType.Private.rawValue : AccessType.Public.rawValue)
+        if let restaurant = chosenRestaurant {
+            room.restaurant = restaurant
+        }
+        
+        cloudKitHelper.editRoomRecord(room, completionHandler: {
+            self.dismissViewControllerAnimated(true, completion: nil)
+            }, errorHandler: nil)
+    }
+    
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
         guard let purpose = viewPurpose else {
             return
@@ -200,6 +244,9 @@ class RoomDetailsViewController: UIViewController {
         case .Create:
             createRoom()
         case .Edit:
+            if let room = room {
+                updateRoom(room)
+            }
             break
         case .View:
             break
@@ -214,7 +261,7 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if textField == hourTextField || textField == dateTextField || textField == topTextField || textField == placeTextField {
+        if textField == hourTextField || textField == dateTextField || textField == placeTextField {
             return false
         }
         return true

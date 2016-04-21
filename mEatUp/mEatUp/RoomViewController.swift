@@ -75,12 +75,7 @@ class RoomViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? RoomDetailsViewController {
-            if room?.owner?.recordID == userRecordID {
-                destination.viewPurpose = RoomDetailsPurpose.Edit
-            } else {
-                destination.viewPurpose = RoomDetailsPurpose.View
-            }
-            
+            destination.room = room
             destination.userRecordID = userRecordID
         }
     }
