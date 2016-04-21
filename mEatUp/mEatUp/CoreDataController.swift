@@ -119,12 +119,7 @@ class CoreDataController {
             print(error.localizedDescription)
         }
         
-        if rooms.count > 0 {
-            return true
-        } else {
-            return false
-        }
-
+        return rooms.count > 0 ? true : false
     }
     
     // Added for testing Core Data, SettlementListViewController and SettlementViewController
