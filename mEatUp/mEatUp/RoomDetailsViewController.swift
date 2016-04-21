@@ -180,8 +180,8 @@ class RoomDetailsViewController: UIViewController {
         title = "\(room.title ?? "Room")"
         
         if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType {
-            if let access = viewPurpose {
-                switch access {
+            if let purpose = viewPurpose {
+                switch purpose {
                 case .View:
                     topTextField.text = "\(name) \(surname)"
                 case .Edit:
