@@ -521,6 +521,22 @@ class CloudKitHelper {
         }
     }
     
+    func checkIfUserInRoom(roomRecordID: CKRecordID, userRecordID: CKRecordID, completionHandler: (Bool) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "roomRecordID == %@ AND userRecordID = %@", CKReference(recordID: roomRecordID, action: .None), CKReference(recordID: userRecordID, action: .None))
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    results?.count > 0 ? completionHandler(true) : completionHandler(false)
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        }
+    }
+    
     func deleteRecord(cloudKitRecord: CloudKitObject, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         if let recordID = cloudKitRecord.recordID {
             self.publicDB.deleteRecordWithID(recordID, completionHandler: { recordID, error in

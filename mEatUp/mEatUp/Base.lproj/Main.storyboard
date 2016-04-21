@@ -324,18 +324,12 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <gestureRecognizers/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" id="CaB-9o-jdM">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="63K-jN-C03">
-                                <rect key="frame" x="530" y="7" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Join"/>
-                            </button>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="ZQW-yE-8Bg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="infoView" destination="NAa-Hx-5fA" id="eKL-qR-Rks"/>
                         <outlet property="participantsTableView" destination="nft-zk-oRX" id="3iT-y5-A9R"/>
+                        <outlet property="rightBarButton" destination="ZQW-yE-8Bg" id="qHr-yH-D55"/>
                         <segue destination="7Gv-nF-1j4" kind="show" identifier="showRoomDetailsSegue" id="RmG-Tc-ZsY"/>
                     </connections>
                 </viewController>
@@ -705,6 +699,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RmS-TD-TDb"/>
+        <segue reference="RmG-Tc-ZsY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,11 +12,14 @@ import CloudKit
 class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
     
+    @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
     var cloudKitHelper = CloudKitHelper()
     var room: Room?
     var users = [User]()
     var userRecordID: CKRecordID?
+    
+    var viewPurpose: RoomViewPurpose?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +29,47 @@ class RoomViewController: UIViewController {
         infoView.singleTapAction = { [unowned self] in
             self.performSegueWithIdentifier("showRoomDetailsSegue", sender: nil)
         }
-        getUsers()
+        determineViewPurpose()
     }
     
     func getUsers() {
-        if let room = room, recordID = room.recordID {
-            cloudKitHelper.loadUsersInRoomRecordWithRoomId(recordID, completionHandler: { [weak self] user in
+        if let roomRecordID = room?.recordID {
+            cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] user in
                 self?.users.append(user)
                 self?.participantsTableView.reloadData()
-                }, errorHandler: nil)
+            }, errorHandler: nil)
+        }
+    }
+    
+    func determineViewPurpose() {
+        if let userRecordID = userRecordID, roomRecordID = room?.recordID {
+            cloudKitHelper.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
+                inRoom in
+                    if inRoom {
+                        if self.room?.owner?.recordID == userRecordID {
+                            self.viewPurpose = RoomViewPurpose.Owner
+                        } else {
+                            self.viewPurpose = RoomViewPurpose.Participant
+                        }
+                    } else {
+                        self.viewPurpose = RoomViewPurpose.User
+                    }
+                    if let viewPurpose = self.viewPurpose {
+                        self.setupViewForPurpose(viewPurpose)
+                    }
+                    self.getUsers()
+            }, errorHandler: nil)
+        }
+    }
+    
+    func setupViewForPurpose(purpose: RoomViewPurpose) {
+        switch purpose {
+        case .Owner:
+            rightBarButton.title = RoomViewActions.Delete.rawValue
+        case .Participant:
+            rightBarButton.title = RoomViewActions.Leave.rawValue
+        case .User:
+            rightBarButton.title = RoomViewActions.Join.rawValue
         }
     }
     
