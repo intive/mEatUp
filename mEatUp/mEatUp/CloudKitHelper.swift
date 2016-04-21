@@ -295,6 +295,33 @@ class CloudKitHelper {
         }
     }
     
+    func loadFinishedRoomRecords(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "userRecordID == %@ AND didEnd == true", CKReference(recordID: userRecordID, action: .None))
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let results = results {
+                        for userInRoom in results {
+                            if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
+                                self.loadRoomRecord(roomID.recordID, completionHandler: {
+                                    room in
+                                    completionHandler(room)
+                                    }, errorHandler: nil)
+                            }
+                        }
+                    } else {
+                        completionHandler(nil)
+                    }
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        }
+    }
+    
     func loadPublicRoomRecords(completionHandler: (Room) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "accessType == 2")
         let query = CKQuery(recordType: Room.entityName, predicate: predicate)

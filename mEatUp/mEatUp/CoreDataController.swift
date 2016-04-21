@@ -9,9 +9,10 @@
 import UIKit
 import CoreData
 
-class CoreDataController: NSObject {
-    
+class CoreDataController {
     static let sharedInstance = CoreDataController()
+    
+    private init() {}
     
     // MARK: - Core Data stack
     
@@ -88,26 +89,59 @@ class CoreDataController: NSObject {
         
     }
     
+    func addFinishedRoom(id: String, title: String, owner: String, restaurant: String, date: NSDate) {
+        if roomExists(id) == false {
+            if let roomDescription = NSEntityDescription.entityForName(FinishedRoom.entityName(), inManagedObjectContext: managedObjectContext) {
+                let room = FinishedRoom(entity: roomDescription, insertIntoManagedObjectContext: managedObjectContext)
+                room.roomID = id
+                room.owner = owner
+                room.restaurant = restaurant
+                room.title = title
+                room.date = date
+            
+                do {
+                    try managedObjectContext.save()
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                    print("Saving finished room failed")
+                }
+            }
+        }
+    }
+    
+    func roomExists(roomID: String) -> Bool {
+        let roomRequest = NSFetchRequest(entityName: "FinishedRoom")
+        roomRequest.predicate = NSPredicate(format: "roomID == %@", roomID)
+        var rooms = []
+        do {
+            rooms = try managedObjectContext.executeFetchRequest(roomRequest)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        return rooms.count > 0 ? true : false
+    }
+    
     // Added for testing Core Data, SettlementListViewController and SettlementViewController
     func addTestFinishedRooms() {
         deleteAllFinishedRoom()
         if let roomDescription = NSEntityDescription.entityForName(FinishedRoom.entityName(), inManagedObjectContext: managedObjectContext) {
             let room1 = FinishedRoom(entity: roomDescription, insertIntoManagedObjectContext: managedObjectContext)
-            room1.roomID = 1
+            room1.roomID = "1"
             room1.owner = "Kobe Bryant"
             room1.restaurant = "Krowa na Deptaku"
             room1.title = "Krowa z Lakersami"
             room1.date = NSDate()
             
             let room2 = FinishedRoom(entity: roomDescription, insertIntoManagedObjectContext: managedObjectContext)
-            room2.roomID = 2
+            room2.roomID = "2"
             room2.owner = "Hieronim Lis"
             room2.restaurant = "Na językach"
             room2.title = "Lunch na językach"
             room2.date = NSDate()
             
             let room3 = FinishedRoom(entity: roomDescription, insertIntoManagedObjectContext: managedObjectContext)
-            room3.roomID = 3
+            room3.roomID = "3"
             room3.owner = "Zygmunt Chajzer"
             room3.restaurant = "Pizzeria Pepperoni"
             room3.title = "Czwartkowy lunch iOS"
