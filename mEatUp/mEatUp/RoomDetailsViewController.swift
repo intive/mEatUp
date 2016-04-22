@@ -25,11 +25,9 @@ class RoomDetailsViewController: UIViewController {
     
     var activeField: UITextField?
     var room: Room?
-    var restaurants = [Restaurant]()
     var chosenRestaurant: Restaurant?
     let datePicker = DatePickerWithDoneButton()
     let formatter = NSDateFormatter()
-    let picker = PickerViewMeatup()
     
     let cloudKitHelper = CloudKitHelper()
     
@@ -41,18 +39,8 @@ class RoomDetailsViewController: UIViewController {
     }
     
     @IBAction func placeTextFieldEditing(sender: UITextField) {
-        picker.dataSource = self
-        picker.delegate = self
-        sender.inputView = picker
-        
-        picker.doneTappedBlock = { [weak self] in
-            if let row = self?.picker.selectedRowInComponent(0) {
-                self?.placeTextField.text = self?.restaurants[row].name
-                self?.chosenRestaurant = self?.restaurants[row]
-                self?.view.endEditing(true)
-            }
-        }
-        sender.inputAccessoryView = picker.toolBar()
+        performSegueWithIdentifier("ShowRestaurantListViewController", sender: nil)
+        self.view.endEditing(true)
     }
     
     @IBAction func dateTextFieldEditing(sender: UITextField) {
@@ -76,6 +64,15 @@ class RoomDetailsViewController: UIViewController {
             self?.view.endEditing(true)
         }
         sender.inputView = datePicker
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let navigationCtrl = segue.destinationViewController as? UINavigationController, let destination = navigationCtrl.topViewController as? RestaurantListViewController {
+            destination.saveRestaurant = { [weak self] restaurant in
+                self?.placeTextField.text = restaurant.name
+                self?.chosenRestaurant = restaurant
+            }
+        }
     }
     
     func registerForKeyboardNotifications() {
@@ -121,7 +118,6 @@ class RoomDetailsViewController: UIViewController {
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
-        getRestaurants()
     }
     
     deinit {
@@ -158,13 +154,6 @@ class RoomDetailsViewController: UIViewController {
             navigationItem.rightBarButtonItems?.removeAll()
             enableUserInteraction(false)
         }
-    }
-    
-    func getRestaurants() {
-        cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
-            self?.restaurants.appendContentsOf(restaurants)
-            self?.picker.reloadComponent(0)
-        }, errorHandler: nil)
     }
     
     func enableUserInteraction(bool: Bool) {
@@ -273,19 +262,5 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         activeField = nil
-    }
-}
-
-extension RoomDetailsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return restaurants.count
-    }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return restaurants[row].name
     }
 }
