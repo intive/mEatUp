@@ -19,11 +19,11 @@
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="lastName" attributeType="String" syncable="YES"/>
         <attribute name="pictureURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="room" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FinishedRoom" inverseName="participants" inverseEntity="FinishedRoom" syncable="YES"/>
     </entity>
     <elements>
         <element name="FinishedRoom" positionX="-137" positionY="-162" width="128" height="148"/>
-        <element name="Participant" positionX="151" positionY="-162" width="128" height="133"/>
+        <element name="Participant" positionX="151" positionY="-162" width="128" height="135"/>
     </elements>
 </model>

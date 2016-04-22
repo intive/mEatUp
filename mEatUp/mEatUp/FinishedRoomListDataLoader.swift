@@ -27,14 +27,23 @@ class FinishedRoomListDataLoader {
                 self.userRecordID = userRecordID
                 self.loadFinishedRoomList(userRecordID)
             }
-            }, errorHandler: nil)
+        }, errorHandler: nil)
     }
     
     func loadFinishedRoomList(userRecordID: CKRecordID) {
-        cloudKitHelper?.loadPublicRoomRecords({
+        cloudKitHelper?.loadUserFinishedRoomRecords( userRecordID, completionHandler: {
             room in
-            if let title = room.title, name = room.owner?.name, let surname = room.owner?.surname, let id = room.recordID?.recordName, let restaurant = room.restaurant?.name, let date = room.date {
-                CoreDataController.sharedInstance.addFinishedRoom(id, title: title, owner: name + " " + surname, restaurant: restaurant, date: date)
+            if let room = room {
+                if let title = room.title, name = room.owner?.name, let surname = room.owner?.surname, let id = room.recordID, let restaurant = room.restaurant?.name, let date = room.date {
+                    if let addedRoom = CoreDataController.sharedInstance.addFinishedRoom(id.recordName, title: title, owner: name + " " + surname, restaurant: restaurant, date: date) {
+                        self.cloudKitHelper?.loadUsersInRoomRecordWithRoomId(id, completionHandler: { user in
+                            if let userID = user.recordID, firstname = user.name, lastname = user.surname, pictureURL = user.photo {
+                                CoreDataController.sharedInstance.addUserToRoom(userID.recordName, firstname: firstname, lastname: lastname, pictureURL: pictureURL, room: addedRoom)
+                            }
+                        }, errorHandler: nil)
+                    }
+                }
+                
             }
             self.completionHandler?()
             }, errorHandler: nil)
