@@ -122,10 +122,17 @@ class CoreDataController {
             participant.userID = id
             participant.debt = 0.00
             participant.pictureURL = pictureURL
+            
+            do {
+                try managedObjectContext.save()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+                print("Saving finished room failed")
+            }
         }
 
     }
-    
+
     func roomExists(roomID: String) -> Bool {
         let roomRequest = NSFetchRequest(entityName: "FinishedRoom")
         roomRequest.predicate = NSPredicate(format: "roomID == %@", roomID)
