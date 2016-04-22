@@ -324,8 +324,8 @@ class CloudKitHelper {
         }
     }
     
-    func loadFinishedRoomRecords(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "userRecordID == %@ AND didEnd == true", CKReference(recordID: userRecordID, action: .None))
+    func loadUserFinishedRoomRecords(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "userRecordID == %@", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
@@ -336,8 +336,10 @@ class CloudKitHelper {
                             if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
                                 self.loadRoomRecord(roomID.recordID, completionHandler: {
                                     room in
-                                    completionHandler(room)
-                                    }, errorHandler: nil)
+                                    if room.didEnd == true {
+                                        completionHandler(room)
+                                    }
+                                }, errorHandler: nil)
                             }
                         }
                     } else {
