@@ -16,6 +16,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     
     var roomListLoader = RoomListDataLoader()
+    let finishedRoomListLoader = FinishedRoomListDataLoader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,8 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
         }
         roomListLoader.loadUserRecordFromCloudKit()
+        
+        finishedRoomListLoader.loadUserRecordFromCloudKit()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
