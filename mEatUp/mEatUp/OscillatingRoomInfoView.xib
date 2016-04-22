@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OscillatingRoomInfoView" customModule="mEatUp" customModuleProvider="target">
@@ -17,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6E-SV-0vR">
-                    <rect key="frame" x="55" y="0.0" width="40.5" height="18"/>
+                    <rect key="frame" x="55" y="0.0" width="40.5" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -27,12 +29,30 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Forward-50" translatesAutoresizingMaskIntoConstraints="NO" id="HZp-5J-leQ">
+                    <rect key="frame" x="95" y="0.0" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="UpA-w4-U0z"/>
+                        <constraint firstAttribute="width" constant="25" id="VXY-XJ-427"/>
+                        <constraint firstAttribute="width" secondItem="HZp-5J-leQ" secondAttribute="height" multiplier="1:1" id="wMy-fK-iK0"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="UpA-w4-U0z"/>
+                            <exclude reference="VXY-XJ-427"/>
+                        </mask>
+                    </variation>
+                </imageView>
             </subviews>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="HZp-5J-leQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ClV-gH-THB"/>
                 <constraint firstAttribute="bottom" secondItem="CZF-VM-fCk" secondAttribute="bottom" constant="0.5" id="Kem-dq-slo"/>
                 <constraint firstItem="Z6E-SV-0vR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RkP-Pk-iz5"/>
+                <constraint firstItem="HZp-5J-leQ" firstAttribute="centerY" secondItem="Z6E-SV-0vR" secondAttribute="centerY" id="WNE-El-bcO"/>
                 <constraint firstItem="CZF-VM-fCk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="YNm-xn-ioN"/>
+                <constraint firstItem="HZp-5J-leQ" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.4" id="ZMZ-sC-uW6"/>
+                <constraint firstItem="HZp-5J-leQ" firstAttribute="leading" secondItem="Z6E-SV-0vR" secondAttribute="trailing" id="e1I-VY-Mmy"/>
                 <constraint firstItem="Z6E-SV-0vR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xoo-H6-v5a"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -50,4 +70,7 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="Forward-50" width="50" height="50"/>
+    </resources>
 </document>
