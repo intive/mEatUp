@@ -19,6 +19,9 @@ class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var limitLabel: UILabel!
     @IBOutlet weak var privateSwitch: UISwitch!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    @IBOutlet weak var limitText: UILabel!
+    @IBOutlet weak var privateText: UILabel!
+    
     
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var topLabel: UILabel!
@@ -127,7 +130,7 @@ class RoomDetailsViewController: UIViewController {
     func determineViewPurpose() {
         if room == nil {
             viewPurpose = RoomDetailsPurpose.Create
-        } else if room?.owner?.recordID == userRecordID {
+        } else if room?.owner?.recordID == userRecordID && room?.didEnd == false {
             viewPurpose = RoomDetailsPurpose.Edit
         } else {
             viewPurpose = RoomDetailsPurpose.View
@@ -179,6 +182,15 @@ class RoomDetailsViewController: UIViewController {
                     break
                 }
             }
+            
+            if room.didEnd == true {
+                privateSwitch.hidden = true
+                limitSlider.hidden = true
+                limitText.hidden = true
+                privateText.hidden = true
+                limitLabel.hidden = true
+            }
+            
             placeTextField.text = room.restaurant?.name
             hourTextField.text = formatter.stringFromDate(date, withFormat: "H:mm")
             dateTextField.text = formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")

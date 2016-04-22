@@ -127,7 +127,7 @@ class CoreDataController {
                 try managedObjectContext.save()
             } catch let error as NSError {
                 print(error.localizedDescription)
-                print("Saving finished room failed")
+                print("Saving participant room failed")
             }
         }
 
