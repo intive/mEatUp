@@ -89,7 +89,7 @@ class CoreDataController {
         
     }
     
-    func addFinishedRoom(id: String, title: String, owner: String, restaurant: String, date: NSDate) {
+    func addFinishedRoom(id: String, title: String, owner: String, restaurant: String, date: NSDate) -> FinishedRoom? {
         if roomExists(id) == false {
             if let roomDescription = NSEntityDescription.entityForName(FinishedRoom.entityName(), inManagedObjectContext: managedObjectContext) {
                 let room = FinishedRoom(entity: roomDescription, insertIntoManagedObjectContext: managedObjectContext)
@@ -105,8 +105,25 @@ class CoreDataController {
                     print(error.localizedDescription)
                     print("Saving finished room failed")
                 }
+                
+                return room
             }
         }
+        
+        return nil
+    }
+    
+    func addUserToRoom(id: String, firstname: String, lastname: String, pictureURL: String, room: FinishedRoom) {
+        if let participantDescription = NSEntityDescription.entityForName(Participant.entityName(), inManagedObjectContext: managedObjectContext) {
+            let participant = Participant(entity: participantDescription, insertIntoManagedObjectContext: managedObjectContext)
+            participant.firstName = firstname
+            participant.lastName = lastname
+            participant.room = room
+            participant.userID = id
+            participant.debt = 0.00
+            participant.pictureURL = pictureURL
+        }
+
     }
     
     func roomExists(roomID: String) -> Bool {
@@ -159,15 +176,15 @@ class CoreDataController {
                 participant1.firstName = "Maciej"
                 participant1.lastName = "Plewko"
                 participant1.room = room1
-                participant1.userID = 1
+                participant1.userID = "1"
                 participant1.debt = 10.0
-                participant1.pictureURL = "https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico"
+                participant1.pictureURL = "https://scontent.fwaw3-1.fna.fbcdn.net/hprofile-xla1/v/t1.0-1/p50x50/11130302_10206750662389680_4841865343581589964_n.jpg?oh=08a05ee9496bc330aafbefa97943103d&oe=5772445F"
                 
                 let participant2 = Participant(entity: participantDescription, insertIntoManagedObjectContext: managedObjectContext)
                 participant2.firstName = "Krzysztof"
                 participant2.lastName = "Przybysz"
                 participant2.room = room1
-                participant2.userID = 2
+                participant2.userID = "2"
                 participant2.debt = 0.0
                 participant2.pictureURL = "https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico"
                 
@@ -175,18 +192,15 @@ class CoreDataController {
                 participant3.firstName = "Paweł"
                 participant3.lastName = "Knuth"
                 participant3.room = room1
-                participant3.userID = 3
+                participant3.userID = "3"
                 participant3.debt = 0.0
                 participant3.pictureURL = "https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico"
-                
-                let particpants1 = room1.mutableSetValueForKey("participants")
-                particpants1.addObjectsFromArray([participant1, participant2, participant3])
                 
                 let participant4 = Participant(entity: participantDescription, insertIntoManagedObjectContext: managedObjectContext)
                 participant4.firstName = "Jan"
                 participant4.lastName = "Kowalski"
                 participant4.room = room2
-                participant4.userID = 4
+                participant4.userID = "4"
                 participant4.debt = 5.0
                 participant4.pictureURL = "https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico"
                 
@@ -194,7 +208,7 @@ class CoreDataController {
                 participant5.firstName = "Zenon"
                 participant5.lastName = "Kawa"
                 participant5.room = room2
-                participant5.userID = 5
+                participant5.userID = "5"
                 participant5.debt = 5.0
                 participant5.pictureURL = "https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico"
                 
@@ -202,12 +216,9 @@ class CoreDataController {
                 participant6.firstName = "John"
                 participant6.lastName = "Smith"
                 participant6.room = room2
-                participant6.userID = 6
+                participant6.userID = "6"
                 participant6.debt = -50.0
                 participant6.pictureURL = "https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico"
-                
-                let particpants2 = room2.mutableSetValueForKey("participants")
-                particpants2.addObjectsFromArray([participant4, participant5, participant6])
         
                 do {
                     try managedObjectContext.save()

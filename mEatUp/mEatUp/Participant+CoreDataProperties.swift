@@ -17,7 +17,7 @@ extension Participant {
     @NSManaged var firstName: String
     @NSManaged var lastName: String
     @NSManaged var pictureURL: String?
-    @NSManaged var userID: NSNumber
+    @NSManaged var userID: String
     @NSManaged var debt: NSNumber
     @NSManaged var room: FinishedRoom
 

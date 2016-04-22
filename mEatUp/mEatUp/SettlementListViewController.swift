@@ -34,7 +34,6 @@ class SettlementListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        finishedRoomListLoader.loadUserRecordFromCloudKit()
         fetch()
     }
     
