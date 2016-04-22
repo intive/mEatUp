@@ -56,6 +56,7 @@ class SettlementListViewController: UIViewController {
             var participantsToPass = [Participant]()
             
             if let indexPath = tableView.indexPathForSelectedRow, finishedRoom = fetchedResultsController.objectAtIndexPath(indexPath) as? FinishedRoom {
+                destinationVC.finishedRoom = finishedRoom
                 if let elements = finishedRoom.participants, participants =  elements.allObjects as? [Participant] {
                     participantsToPass = participants
                 }
