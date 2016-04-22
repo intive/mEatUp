@@ -608,7 +608,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Title" id="Wqt-jY-TEz">
+                    <navigationItem key="navigationItem" title="Restaurant List" id="Wqt-jY-TEz">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="daq-aZ-04v">
                             <connections>
                                 <segue destination="5bE-wa-Hdk" kind="show" identifier="ShowRestaurantDetailsViewController" id="eci-vB-y77"/>
@@ -623,7 +623,7 @@
             </objects>
             <point key="canvasLocation" x="4740" y="203"/>
         </scene>
-        <!--Title-->
+        <!--Create-->
         <scene sceneID="dkS-sj-KGE">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="5bE-wa-Hdk" customClass="RestaurantViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
@@ -683,7 +683,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Title" id="Y4g-hQ-V1N">
+                    <navigationItem key="navigationItem" title="Create" id="Y4g-hQ-V1N">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Gi3-cm-h0a">
                             <connections>
                                 <action selector="saveButtonTapped:" destination="5bE-wa-Hdk" id="AMQ-qj-V02"/>

@@ -21,7 +21,6 @@ class RestaurantListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        title = "Restaurant List"
         self.navigationController?.navigationBar.translucent = false
         
         searchController.searchResultsUpdater = self
@@ -31,43 +30,25 @@ class RestaurantListViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        getRestaurants()
+        loadRestaurants()
     }
     
-    func getRestaurants() {
+    func loadRestaurants() {
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
-            self?.restaurants.appendContentsOf(restaurants)
+            self?.restaurants = restaurants
             self?.tableView.reloadData()
         }, errorHandler: nil)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destination = segue.destinationViewController as? RestaurantViewController {
-            destination.refreshList = { [weak self] in
-                self?.getRestaurants()
-            }
-        }
     }
 }
 
 extension RestaurantListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
-            return filteredRestaurants.count
-        }
-        return restaurants.count
+        return searchController.gotContentAndActive() ? filteredRestaurants.count : restaurants.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RestaurantCell", forIndexPath: indexPath)
-        let restaurant: Restaurant
-        
-        if searchController.active && searchController.searchBar.text != "" {
-            restaurant = filteredRestaurants[indexPath.row]
-        } else {
-            restaurant = restaurants[indexPath.row]
-        }
-        
+        let restaurant = searchController.gotContentAndActive() ? filteredRestaurants[indexPath.row] : restaurants[indexPath.row]
         
         if let cell = cell as? RestaurantTableViewCell {
             cell.configureWithRestaurant(restaurant)
@@ -76,12 +57,7 @@ extension RestaurantListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let restaurant: Restaurant
-        if searchController.active && searchController.searchBar.text != "" {
-            restaurant = filteredRestaurants[indexPath.row]
-        } else {
-            restaurant = restaurants[indexPath.row]
-        }
+        let restaurant = searchController.gotContentAndActive() ? filteredRestaurants[indexPath.row] : restaurants[indexPath.row]
         self.searchController.active = false
         dismissViewControllerAnimated(true) { [unowned self] in
             self.saveRestaurant?(restaurant)
@@ -96,7 +72,7 @@ extension RestaurantListViewController: UISearchResultsUpdating {
         }
     }
     
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
+    func filterContentForSearchText(searchText: String) {
         filteredRestaurants = restaurants.filter { restaurant in
             guard let name = restaurant.name else { return false }
             return name.lowercaseString.containsString(searchText.lowercaseString)

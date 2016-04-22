@@ -31,6 +31,7 @@
 		357498CE1CC647710052C790 /* UIImageView+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */; };
 		357498D01CC64B610052C790 /* BalanceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CF1CC64B610052C790 /* BalanceIndicator.swift */; };
 		35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */; };
+		C7184B721CCA2B830074BA99 /* UISearchController+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7184B711CCA2B830074BA99 /* UISearchController+MEATUP.swift */; };
 		C74476BF1CC8DA880062AC81 /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476BE1CC8DA880062AC81 /* RestaurantListViewController.swift */; };
 		C74476C11CC906FE0062AC81 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */; };
 		C74476C31CC914000062AC81 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476C21CC914000062AC81 /* RestaurantViewController.swift */; };
@@ -103,6 +104,7 @@
 		357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+MEATUP.swift"; sourceTree = "<group>"; };
 		357498CF1CC64B610052C790 /* BalanceIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceIndicator.swift; sourceTree = "<group>"; };
 		35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoomListDataLoader.swift; sourceTree = "<group>"; };
+		C7184B711CCA2B830074BA99 /* UISearchController+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchController+MEATUP.swift"; sourceTree = "<group>"; };
 		C74476BE1CC8DA880062AC81 /* RestaurantListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListViewController.swift; sourceTree = "<group>"; };
 		C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		C74476C21CC914000062AC81 /* RestaurantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */,
 				357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */,
 				C744A9F31CC771D6006C309F /* PickerView+MEATUP.swift */,
+				C7184B711CCA2B830074BA99 /* UISearchController+MEATUP.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
 				E17687D01CC6410D00B5F115 /* RoomDetailsPurpose.swift in Sources */,
+				C7184B721CCA2B830074BA99 /* UISearchController+MEATUP.swift in Sources */,
 				C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */,
 				E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
