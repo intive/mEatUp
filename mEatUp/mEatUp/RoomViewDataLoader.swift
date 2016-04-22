@@ -25,7 +25,7 @@ class RoomViewDataLoader {
         self.room = room
     }
     
-    func getUsers() {
+    func loadUsers() {
         self.users.removeAll()
         if let roomRecordID = room?.recordID {
             cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] user in
@@ -51,7 +51,7 @@ class RoomViewDataLoader {
                     self.purposeHandler?(RoomViewPurpose.User)
                 }
 
-                self.getUsers()
+                self.loadUsers()
             }, errorHandler: nil)
         }
     }
@@ -62,7 +62,7 @@ class RoomViewDataLoader {
         }
         cloudKitHelper.deleteRecord(userInRoom, completionHandler: {
             self.purposeHandler?(RoomViewPurpose.User)
-            self.getUsers()
+            self.loadUsers()
             self.userInRoom = nil
            
             }, errorHandler: nil)
@@ -80,7 +80,7 @@ class RoomViewDataLoader {
                     self.purposeHandler?(RoomViewPurpose.Participant)
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))),
                         dispatch_get_main_queue(), {
-                            self.getUsers()
+                            self.loadUsers()
                     })
                 }, errorHandler: nil)
             }
