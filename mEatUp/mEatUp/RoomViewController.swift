@@ -16,52 +16,38 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var participantsTableView: UITableView!
     var cloudKitHelper = CloudKitHelper()
     var room: Room?
-    var users = [User]()
     var userRecordID: CKRecordID?
+    
+    var roomDataLoader: RoomViewDataLoader?
     
     var viewPurpose: RoomViewPurpose?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let userRecordID = userRecordID, room = room {
+            roomDataLoader = RoomViewDataLoader(userRecordID: userRecordID, room: room)
+        }
+        roomDataLoader?.refreshHandler = {
+            self.participantsTableView.reloadData()
+        }
+        
+        roomDataLoader?.purposeHandler = {
+            purpose in
+            self.viewPurpose = purpose
+            self.setupViewForPurpose(purpose)
+            self.rightBarButton.enabled = true
+        }
+        
         if let room = room {
             infoView.startWithRoom(room)
         }
         infoView.singleTapAction = { [unowned self] in
             self.performSegueWithIdentifier("showRoomDetailsSegue", sender: nil)
         }
-        determineViewPurpose()
+        
+        roomDataLoader?.determineViewPurpose()
     }
-    
-    func getUsers() {
-        if let roomRecordID = room?.recordID {
-            cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] user in
-                self?.users.append(user)
-                self?.participantsTableView.reloadData()
-            }, errorHandler: nil)
-        }
-    }
-    
-    func determineViewPurpose() {
-        if let userRecordID = userRecordID, roomRecordID = room?.recordID {
-            cloudKitHelper.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
-                inRoom in
-                    if inRoom {
-                        if self.room?.owner?.recordID == userRecordID {
-                            self.viewPurpose = RoomViewPurpose.Owner
-                        } else {
-                            self.viewPurpose = RoomViewPurpose.Participant
-                        }
-                    } else {
-                        self.viewPurpose = RoomViewPurpose.User
-                    }
-                    if let viewPurpose = self.viewPurpose {
-                        self.setupViewForPurpose(viewPurpose)
-                    }
-                    self.getUsers()
-            }, errorHandler: nil)
-        }
-    }
-    
+
     func setupViewForPurpose(purpose: RoomViewPurpose) {
         switch purpose {
         case .Owner:
@@ -80,6 +66,23 @@ class RoomViewController: UIViewController {
         }
     }
     
+    @IBAction func rightBarButtonPressed(sender: UIBarButtonItem) {
+        guard let purpose = viewPurpose else {
+            return
+        }
+        
+        rightBarButton.enabled = false
+        
+        switch purpose {
+        case .Owner:
+            break
+        case .Participant:
+            roomDataLoader?.leaveRoom()
+        case .User:
+            roomDataLoader?.joinRoom()
+        }
+    }
+    
 }
 
 extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
@@ -94,15 +97,19 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     
         let cell = tableView.dequeueReusableCellWithIdentifier("ParticipantCell", forIndexPath: indexPath)
             
-        if let cell = cell as? RoomParticipantTableViewCell {
-            cell.configureWithRoom(users[indexPath.row])
+        if let cell = cell as? RoomParticipantTableViewCell, let roomDataLoader = self.roomDataLoader {
+            cell.configureWithRoom(roomDataLoader.users[indexPath.row])
             return cell
         }
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        guard let roomDataLoader = self.roomDataLoader else {
+            return 0
+        }
+        
+        return roomDataLoader.users.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
