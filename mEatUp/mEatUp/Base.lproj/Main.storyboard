@@ -324,7 +324,11 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <gestureRecognizers/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" id="ZQW-yE-8Bg"/>
+                        <barButtonItem key="rightBarButtonItem" id="ZQW-yE-8Bg">
+                            <connections>
+                                <action selector="rightBarButtonPressed:" destination="lG1-sF-iMY" id="NLe-pu-dR4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="infoView" destination="NAa-Hx-5fA" id="eKL-qR-Rks"/>
@@ -863,6 +867,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RmG-Tc-ZsY"/>
+        <segue reference="RmS-TD-TDb"/>
     </inferredMetricsTieBreakers>
 </document>

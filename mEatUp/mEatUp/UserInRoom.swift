@@ -24,6 +24,16 @@ class UserInRoom: CloudKitObject {
         self.confirmationStatus = confirmationStatus
     }
     
+    init(userRecordID: CKRecordID, roomRecordID: CKRecordID, confirmationStatus: ConfirmationStatus) {
+        let user = User()
+        user.recordID = userRecordID
+        self.user = user
+        
+        let room = Room()
+        room.recordID = roomRecordID
+        self.room = room
+    }
+    
     init() {
     }
     
