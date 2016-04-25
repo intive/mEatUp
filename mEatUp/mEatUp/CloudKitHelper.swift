@@ -218,6 +218,7 @@ class CloudKitHelper {
             dispatch_async(dispatch_get_main_queue(), {
                 if error == nil {
                     if let result = result {
+                            newUser.fbID = result[UserProperties.fbID.rawValue] as? String
                             newUser.name = result[UserProperties.name.rawValue] as? String
                             newUser.surname = result[UserProperties.surname.rawValue] as? String
                             newUser.photo = result[UserProperties.photo.rawValue] as? String
