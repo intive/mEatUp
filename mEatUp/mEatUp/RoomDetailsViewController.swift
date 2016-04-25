@@ -43,7 +43,6 @@ class RoomDetailsViewController: UIViewController {
     
     @IBAction func placeTextFieldEditing(sender: UITextField) {
         performSegueWithIdentifier("ShowRestaurantListViewController", sender: nil)
-        self.view.endEditing(true)
     }
     
     @IBAction func dateTextFieldEditing(sender: UITextField) {
@@ -74,7 +73,6 @@ class RoomDetailsViewController: UIViewController {
             destination.saveRestaurant = { [weak self] restaurant in
                 self?.placeTextField.text = restaurant.name
                 self?.chosenRestaurant = restaurant
-                self?.view.endEditing(true)
             }
         }
     }
