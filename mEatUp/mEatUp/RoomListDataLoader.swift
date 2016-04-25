@@ -61,7 +61,7 @@ class RoomListDataLoader {
         
         cloudKitHelper?.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
             userRoom in
-                if let userRoom = userRoom where !userRoom.eventOccured{
+                if let userRoom = userRoom {
                     self.joinedRooms.append(userRoom)
                     self.completionHandler?()
                 }
