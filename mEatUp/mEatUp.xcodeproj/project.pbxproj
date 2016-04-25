@@ -254,8 +254,8 @@
 		355301F81CBCF26400F23373 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
 				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
+				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
 				355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */,
 				C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */,
 				C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */,
