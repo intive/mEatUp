@@ -9,5 +9,5 @@
 import Foundation
 
 enum RoomDetailsPurpose: String {
-    case Create, Edit, View = ""
+    case Create, Edit = "Save", View = ""
 }
