@@ -9,5 +9,5 @@
 import Foundation
 
 enum RoomViewActions: String {
-    case Delete, Join, Leave
+    case Disband, Join, Leave, End
 }
