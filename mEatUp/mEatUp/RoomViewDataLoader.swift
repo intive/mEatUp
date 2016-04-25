@@ -67,14 +67,6 @@ class RoomViewDataLoader {
         }, errorHandler: nil)
     }
     
-    func eventEnded() -> Bool? {
-        guard let date = room?.date else {
-            return nil
-        }
-        
-        return date.isLessThanDate(NSDate())
-    }
-    
     func leaveRoom(completionBlock: (() -> Void)?) {
         guard let userInRoom = self.userInRoom else {
             return
