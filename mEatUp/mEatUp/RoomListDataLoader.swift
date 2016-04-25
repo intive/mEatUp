@@ -43,14 +43,16 @@ class RoomListDataLoader {
     func loadRoomsForRoomList(userRecordID: CKRecordID) {
         cloudKitHelper?.loadPublicRoomRecords({
             room in
+            if !room.eventOccured {
                 self.publicRooms.append(room)
                 self.completionHandler?()
+            }
         }, errorHandler: nil)
         
         
         cloudKitHelper?.loadInvitedRoomRecords(userRecordID, completionHandler: {
             room in
-                if let room = room {
+                if let room = room where !room.eventOccured {
                     self.invitedRooms.append(room)
                     self.completionHandler?()
                 }
@@ -59,7 +61,7 @@ class RoomListDataLoader {
         
         cloudKitHelper?.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
             userRoom in
-                if let userRoom = userRoom {
+                if let userRoom = userRoom where !userRoom.eventOccured{
                     self.joinedRooms.append(userRoom)
                     self.completionHandler?()
                 }
