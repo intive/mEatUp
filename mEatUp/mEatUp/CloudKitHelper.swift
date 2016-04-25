@@ -195,6 +195,7 @@ class CloudKitHelper {
                 if error == nil {
                     if let results = results {
                         for user in results {
+                            newUser.fbID = user[UserProperties.fbID.rawValue] as? String
                             newUser.name = user[UserProperties.name.rawValue] as? String
                             newUser.surname = user[UserProperties.surname.rawValue] as? String
                             newUser.photo = user[UserProperties.photo.rawValue] as? String
@@ -218,10 +219,11 @@ class CloudKitHelper {
             dispatch_async(dispatch_get_main_queue(), {
                 if error == nil {
                     if let result = result {
-                            newUser.name = result[UserProperties.name.rawValue] as? String
-                            newUser.surname = result[UserProperties.surname.rawValue] as? String
-                            newUser.photo = result[UserProperties.photo.rawValue] as? String
-                            newUser.recordID = result.recordID
+                        newUser.fbID = result[UserProperties.fbID.rawValue] as? String
+                        newUser.name = result[UserProperties.name.rawValue] as? String
+                        newUser.surname = result[UserProperties.surname.rawValue] as? String
+                        newUser.photo = result[UserProperties.photo.rawValue] as? String
+                        newUser.recordID = result.recordID
                     }
                 }
                 else {
@@ -232,7 +234,6 @@ class CloudKitHelper {
             })
         }
     }
-    
     func loadRoomRecord(roomRecordID: CKRecordID, completionHandler: ((Room) -> Void), errorHandler: ((NSError?) -> Void)?) {
         let newRoom = Room()
         
