@@ -74,6 +74,7 @@ class RoomDetailsViewController: UIViewController {
             destination.saveRestaurant = { [weak self] restaurant in
                 self?.placeTextField.text = restaurant.name
                 self?.chosenRestaurant = restaurant
+                self?.view.endEditing(true)
             }
         }
     }

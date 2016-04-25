@@ -33,11 +33,21 @@ class RestaurantListViewController: UIViewController {
         loadRestaurants()
     }
     
+    deinit {
+        searchController.view.removeFromSuperview()
+    }
+    
     func loadRestaurants() {
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
             self?.restaurants = restaurants
             self?.tableView.reloadData()
         }, errorHandler: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? RestaurantViewController  {
+            destination.saveRestaurant = self.saveRestaurant
+        }
     }
 }
 
