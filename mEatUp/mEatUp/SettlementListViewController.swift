@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import FBSDKLoginKit
 
 class SettlementListViewController: UIViewController {
     
@@ -42,6 +43,10 @@ class SettlementListViewController: UIViewController {
         tableView.reloadData()
     }
     
+    func facebookLogout() {
+        FBSDKLoginManager().logOut()
+    }
+    
     func fetch() {
         do {
             try fetchedResultsController.performFetch()
@@ -63,6 +68,10 @@ class SettlementListViewController: UIViewController {
             }
 
             destinationVC.participants = participantsToPass
+        }
+        
+        if let _ = segue.destinationViewController as? LoginViewController {
+            facebookLogout()
         }
     }
 }

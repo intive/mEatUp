@@ -7,10 +7,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Log In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Log In View Controller" id="BYZ-38-t0r" customClass="LoginViewController" customModule="mEatUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -122,7 +122,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settlements" id="qzF-Uw-5np"/>
-                    <navigationItem key="navigationItem" id="e4a-dz-pXL" userLabel="Settlement List"/>
+                    <navigationItem key="navigationItem" id="e4a-dz-pXL" userLabel="Settlement List">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="nUr-Ud-vl3">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="j9H-3P-NYX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="HSW-24-LP7" id="6LV-GS-zRc"/>
                     </connections>
@@ -229,6 +235,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Room List" id="Xqu-Vm-apF">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="brl-yU-r3v">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="NSv-d8-7fF"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="l5C-TE-PZV">
                             <connections>
                                 <segue destination="7Gv-nF-1j4" kind="show" identifier="createRoom" id="RmS-TD-TDb"/>
@@ -800,7 +811,7 @@
                     <navigationItem key="navigationItem" id="Md4-zL-CL4">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="agK-jq-Sk2" customClass="OscillatingRoomInfoView" customModule="mEatUp" customModuleProvider="target">
-                            <rect key="frame" x="180" y="5.5" width="240" height="33"/>
+                            <rect key="frame" x="180" y="6" width="240" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="LZ2-u5-vKa">
@@ -876,7 +887,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="j9H-3P-NYX"/>
         <segue reference="RmS-TD-TDb"/>
-        <segue reference="aGV-Mz-HDX"/>
     </inferredMetricsTieBreakers>
 </document>

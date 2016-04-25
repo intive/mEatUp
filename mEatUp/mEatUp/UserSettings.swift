@@ -13,14 +13,27 @@ class UserSettings: NSObject {
     let userDefaults = NSUserDefaults()
     
     // NSUserDefaults keys
+    private let facebookIDkey = "fbID"
     private let firstNameKey = "first_name"
     private let lastNameKey = "last_name"
     private let picutreURLKey = "picture_url"
     
-    func saveUserDetails(firstName: String?, lastName: String?, pictureURL: String?) {
+    func saveUserDetails(id: String?, firstName: String?, lastName: String?, pictureURL: String?) {
+        userDefaults.setValue(id, forKey: facebookIDkey)
         userDefaults.setValue(firstName, forKey: firstNameKey)
         userDefaults.setValue(lastName, forKey: lastNameKey)
         userDefaults.setValue(pictureURL, forKey: picutreURLKey)
+    }
+    
+     func clearUserDetails() {
+        userDefaults.setValue(nil, forKey: facebookIDkey)
+        userDefaults.setValue(nil, forKey: firstNameKey)
+        userDefaults.setValue(nil, forKey: lastNameKey)
+        userDefaults.setValue(nil, forKey: picutreURLKey)
+    }
+    
+    func facebookID() -> String? {
+        return userDefaults.stringForKey(facebookIDkey)
     }
     
     func firstName() -> String? {

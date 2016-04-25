@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import FBSDKLoginKit
 
 class RoomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -28,6 +29,10 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         roomListLoader.loadUserRecordFromCloudKit()
         
         finishedRoomListLoader.loadUserRecordFromCloudKit()
+    }
+    
+    func facebookLogout() {
+        FBSDKLoginManager().logOut()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -105,6 +110,11 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         if let destination = segue.destinationViewController as? RoomViewController {
             destination.room = sender as? Room
             destination.userRecordID = roomListLoader.userRecordID
+        }
+        
+        if let _ = segue.destinationViewController as? LoginViewController {
+            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            facebookLogout()
         }
     }
 }
