@@ -35,7 +35,6 @@ class RoomViewController: UIViewController {
             purpose in
             self.viewPurpose = purpose
             self.setupViewForPurpose(purpose)
-            self.rightBarButton.enabled = true
         }
         
         if let room = room {
@@ -49,13 +48,19 @@ class RoomViewController: UIViewController {
     }
 
     func setupViewForPurpose(purpose: RoomViewPurpose) {
+        guard let room = roomDataLoader?.room else {
+            return
+        }
+        
         switch purpose {
         case .Owner:
-            rightBarButton.title = roomDataLoader?.room?.eventOccured == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
+            rightBarButton.title = room.eventOccured == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
         case .Participant:
             rightBarButton.title = RoomViewActions.Leave.rawValue
+            rightBarButton.enabled = !room.eventOccured
         case .User:
             rightBarButton.title = RoomViewActions.Join.rawValue
+            rightBarButton.enabled = !room.eventOccured
         }
     }
     
