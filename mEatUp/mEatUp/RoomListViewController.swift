@@ -31,8 +31,12 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         finishedRoomListLoader.loadUserRecordFromCloudKit()
     }
     
-    func facebookLogout() {
-        FBSDKLoginManager().logOut()
+    @IBAction func facebookLogout(sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        if let loginView: LoginViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+            FBSDKLoginManager().logOut()
+            UIApplication.sharedApplication().keyWindow?.rootViewController = loginView
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,9 +116,5 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             destination.userRecordID = roomListLoader.userRecordID
         }
         
-        if let _ = segue.destinationViewController as? LoginViewController {
-            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-            facebookLogout()
-        }
     }
 }

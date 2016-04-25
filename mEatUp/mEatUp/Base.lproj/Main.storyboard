@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaj-l8-8DJ" customClass="FBSDKLoginButton">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaj-l8-8DJ" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="0.0" y="20" width="600" height="30"/>
                                 <state key="normal" title="FacebookLoginButton"/>
                             </button>
@@ -31,6 +31,7 @@
                             <constraint firstItem="qaj-l8-8DJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kH4-6L-Sjp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ffu-UT-pqp"/>
                     <connections>
                         <outlet property="loginButton" destination="qaj-l8-8DJ" id="Bi9-Ih-TRP"/>
                         <segue destination="3p5-4G-dVz" kind="show" identifier="ShowRoomListSegue" id="PTp-H0-WW3"/>
@@ -125,7 +126,7 @@
                     <navigationItem key="navigationItem" id="e4a-dz-pXL" userLabel="Settlement List">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="nUr-Ud-vl3">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="j9H-3P-NYX"/>
+                                <action selector="facebookLogout:" destination="oLP-SW-bDr" id="a6U-a3-Lm1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -237,7 +238,7 @@
                     <navigationItem key="navigationItem" title="Room List" id="Xqu-Vm-apF">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="brl-yU-r3v">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="NSv-d8-7fF"/>
+                                <action selector="facebookLogout:" destination="uNM-NS-eFh" id="wGb-oF-02N"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="l5C-TE-PZV">
@@ -887,7 +888,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="j9H-3P-NYX"/>
         <segue reference="RmS-TD-TDb"/>
     </inferredMetricsTieBreakers>
 </document>
