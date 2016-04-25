@@ -56,7 +56,7 @@ class RoomViewDataLoader {
         }
     }
     
-    func checkIfEventEnded() -> Bool? {
+    func eventEnded() -> Bool? {
         guard let date = room?.date else {
             return nil
         }
@@ -64,7 +64,7 @@ class RoomViewDataLoader {
         return date.isLessThanDate(NSDate())
     }
     
-    func leaveRoom() {
+    func leaveRoom(completionBlock: (() -> Void)?) {
         guard let userInRoom = self.userInRoom else {
             return
         }
@@ -72,11 +72,12 @@ class RoomViewDataLoader {
             self.purposeHandler?(RoomViewPurpose.User)
             self.loadUsers()
             self.userInRoom = nil
-           
-            }, errorHandler: nil)
+            
+            completionBlock?()
+        }, errorHandler: nil)
     }
     
-    func joinRoom() {
+    func joinRoom(completionBlock: (() -> Void)?) {
         if let userRecordID = userRecordID, let roomRecordID = room?.recordID {
             if userInRoom == nil {
                 self.userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
@@ -89,23 +90,26 @@ class RoomViewDataLoader {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))),
                         dispatch_get_main_queue(), {
                             self.loadUsers()
+                            completionBlock?()
                     })
                 }, errorHandler: nil)
             }
         }
     }
     
-    func endRoom() {
+    func endRoom(completionBlock: (() -> Void)?) {
         guard let room = room else {
             return
         }
         
         room.didEnd = true
         
-        cloudKitHelper.editRoomRecord(room, completionHandler: nil, errorHandler: nil)
+        cloudKitHelper.editRoomRecord(room, completionHandler: {
+            completionBlock?()
+        }, errorHandler: nil)
     }
     
-    func disbandRoom() {
+    func disbandRoom(completionBlock: (() -> Void)?) {
         
     }
 }
