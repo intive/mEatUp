@@ -19,6 +19,8 @@ class RestaurantListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchController.loadViewIfNeeded()
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.navigationController?.navigationBar.translucent = false
@@ -30,6 +32,7 @@ class RestaurantListViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         loadRestaurants()
     }
     
@@ -38,6 +41,12 @@ class RestaurantListViewController: UIViewController {
             self?.restaurants = restaurants
             self?.tableView.reloadData()
         }, errorHandler: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? RestaurantViewController  {
+            destination.saveRestaurant = self.saveRestaurant
+        }
     }
 }
 
