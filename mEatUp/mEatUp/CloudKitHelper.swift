@@ -296,6 +296,22 @@ class CloudKitHelper {
         }
     }
     
+    func usersInRoomRecordWithRoomIdCount(roomRecordID: CKRecordID, completionHandler: (Int) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "roomRecordID == %@", CKReference(recordID: roomRecordID, action: .None))
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil, let results = results {
+                    completionHandler(results.count)
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        }
+    }
+    
     func loadUsersInRoomRecordWithUserId(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "userRecordID == %@", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
