@@ -34,7 +34,15 @@ class RoomDetailsViewController: UIViewController {
     
     let cloudKitHelper = CloudKitHelper()
     
-    var viewPurpose: RoomDetailsPurpose?
+    var viewPurpose: RoomDetailsPurpose {
+        if room == nil {
+            return RoomDetailsPurpose.Create
+        } else if room?.owner?.recordID == userRecordID && room?.didEnd == false {
+            return RoomDetailsPurpose.Edit
+        } else {
+            return RoomDetailsPurpose.View
+        }
+    }
     var userRecordID: CKRecordID?
     
     @IBAction func sliderValueChanged(sender: UISlider) {
@@ -111,11 +119,7 @@ class RoomDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        determineViewPurpose()
-        
-        if let purpose = viewPurpose {
-            setupViewForPurpose(purpose)
-        }
+        setupViewForPurpose(viewPurpose)
         
         limitLabel.text = "\(room?.maxCount ?? Int(limitSlider.minimumValue))"
         datePicker.locale = NSLocale(localeIdentifier: "PL")
@@ -125,16 +129,6 @@ class RoomDetailsViewController: UIViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    func determineViewPurpose() {
-        if room == nil {
-            viewPurpose = RoomDetailsPurpose.Create
-        } else if room?.owner?.recordID == userRecordID && room?.didEnd == false {
-            viewPurpose = RoomDetailsPurpose.Edit
-        } else {
-            viewPurpose = RoomDetailsPurpose.View
-        }
     }
     
     func setupViewForPurpose(purpose: RoomDetailsPurpose) {
@@ -172,15 +166,14 @@ class RoomDetailsViewController: UIViewController {
         title = "\(room.title ?? "Room")"
         
         if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType {
-            if let purpose = viewPurpose {
-                switch purpose {
-                case .View:
-                    topTextField.text = "\(name) \(surname)"
-                case .Edit:
-                    topTextField.text = room.title
-                case .Create:
-                    break
-                }
+
+            switch viewPurpose {
+            case .View:
+                topTextField.text = "\(name) \(surname)"
+            case .Edit:
+                topTextField.text = room.title
+            case .Create:
+                break
             }
             
             if room.didEnd == true {
@@ -242,18 +235,13 @@ class RoomDetailsViewController: UIViewController {
     }
     
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
-        guard let purpose = viewPurpose else {
-            return
-        }
-        
-        switch purpose {
+        switch viewPurpose {
         case .Create:
             createRoom()
         case .Edit:
             if let room = room {
                 updateRoom(room)
             }
-            break
         case .View:
             break
         }
