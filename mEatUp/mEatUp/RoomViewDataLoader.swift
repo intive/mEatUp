@@ -107,19 +107,33 @@ class RoomViewDataLoader {
         }
     }
     
-    func endRoom(completionBlock: (() -> Void)?) {
+    func endRoom(completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
         guard let room = room else {
+            errorHandler?()
             return
         }
         
         room.didEnd = true
         
         cloudKitHelper.editRoomRecord(room, completionHandler: {
-            completionBlock?()
-        }, errorHandler: nil)
+            completionHandler?()
+            }, errorHandler: {
+                error in
+                    errorHandler?()
+        })
     }
     
-    func disbandRoom(completionBlock: (() -> Void)?) {
+    func disbandRoom(completionHandler: (() -> Void)?, errorHandler: (() -> Void)?) {
+        guard let room = room else {
+            errorHandler?()
+            return
+        }
         
+        cloudKitHelper.deleteRecord(room, completionHandler: {
+            completionHandler?()
+            }, errorHandler: {
+                error in
+                    errorHandler?()
+        })
     }
 }

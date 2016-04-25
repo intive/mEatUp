@@ -80,7 +80,7 @@ class RoomViewController: UIViewController {
         
         switch purpose {
         case .Owner:
-            roomDataLoader?.room?.eventOccured == true ? roomDataLoader?.endRoom(nil) : roomDataLoader?.disbandRoom(nil)
+            roomDataLoader?.room?.eventOccured == true ? roomDataLoader?.endRoom(nil, errorHandler: nil) : roomDataLoader?.disbandRoom(nil, errorHandler: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
         case .Participant:
             roomDataLoader?.leaveRoom(nil)
