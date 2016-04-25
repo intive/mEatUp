@@ -19,6 +19,8 @@ class RestaurantListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchController.loadViewIfNeeded()
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.navigationController?.navigationBar.translucent = false
@@ -32,10 +34,6 @@ class RestaurantListViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         loadRestaurants()
-    }
-    
-    deinit {
-        searchController.view.removeFromSuperview()
     }
     
     func loadRestaurants() {
