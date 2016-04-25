@@ -21,6 +21,14 @@ class Room: CloudKitObject {
     var didEnd: Bool? = false
     
     var recordID: CKRecordID?
+    
+    var eventOccured: Bool {
+        guard let date = date else {
+            return true
+        }
+        
+        return date.isLessThanDate(NSDate())
+    }
 
     init(title: String, accessType: AccessType, restaurant: Restaurant, maxCount: Int, date: NSDate, owner: User) {
         self.title = title
