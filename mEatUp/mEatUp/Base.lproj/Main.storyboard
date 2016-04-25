@@ -123,7 +123,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settlements" id="qzF-Uw-5np"/>
-                    <navigationItem key="navigationItem" id="e4a-dz-pXL" userLabel="Settlement List">
+                    <navigationItem key="navigationItem" title="Settlement List" id="e4a-dz-pXL" userLabel="Settlement List">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="nUr-Ud-vl3">
                             <connections>
                                 <action selector="facebookLogout:" destination="oLP-SW-bDr" id="a6U-a3-Lm1"/>
@@ -885,6 +885,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RmS-TD-TDb"/>
+        <segue reference="aGV-Mz-HDX"/>
     </inferredMetricsTieBreakers>
 </document>
