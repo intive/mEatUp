@@ -51,7 +51,7 @@ class RoomViewController: UIViewController {
     func setupViewForPurpose(purpose: RoomViewPurpose) {
         switch purpose {
         case .Owner:
-            rightBarButton.title = RoomViewActions.Delete.rawValue
+            rightBarButton.title = roomDataLoader?.checkIfEventEnded() == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
         case .Participant:
             rightBarButton.title = RoomViewActions.Leave.rawValue
         case .User:
@@ -75,7 +75,8 @@ class RoomViewController: UIViewController {
         
         switch purpose {
         case .Owner:
-            break
+            roomDataLoader?.checkIfEventEnded() == true ? roomDataLoader?.endRoom() : roomDataLoader?.disbandRoom()
+            self.dismissViewControllerAnimated(true, completion: nil)
         case .Participant:
             roomDataLoader?.leaveRoom()
         case .User:

@@ -56,6 +56,14 @@ class RoomViewDataLoader {
         }
     }
     
+    func checkIfEventEnded() -> Bool? {
+        guard let date = room?.date else {
+            return nil
+        }
+        
+        return date.isLessThanDate(NSDate())
+    }
+    
     func leaveRoom() {
         guard let userInRoom = self.userInRoom else {
             return
@@ -85,5 +93,19 @@ class RoomViewDataLoader {
                 }, errorHandler: nil)
             }
         }
+    }
+    
+    func endRoom() {
+        guard let room = room else {
+            return
+        }
+        
+        room.didEnd = true
+        
+        cloudKitHelper.editRoomRecord(room, completionHandler: nil, errorHandler: nil)
+    }
+    
+    func disbandRoom() {
+        
     }
 }
