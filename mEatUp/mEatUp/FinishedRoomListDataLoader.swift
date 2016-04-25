@@ -10,6 +10,7 @@ import CloudKit
 
 class FinishedRoomListDataLoader {
     var cloudKitHelper: CloudKitHelper?
+    let userSettings = UserSettings()
     
     var userRecordID: CKRecordID?
     
@@ -20,14 +21,15 @@ class FinishedRoomListDataLoader {
     }
     
     func loadUserRecordFromCloudKit() {
-        // testfbid is fbid placeholder and will be replaced by stored value
-        cloudKitHelper?.loadUserRecordWithFbId("testfbid", completionHandler: {
-            userRecord in
-            if let userRecordID = userRecord.recordID {
-                self.userRecordID = userRecordID
-                self.loadFinishedRoomList(userRecordID)
-            }
-        }, errorHandler: nil)
+        if let fbID = userSettings.facebookID() {
+            cloudKitHelper?.loadUserRecordWithFbId(fbID, completionHandler: {
+                userRecord in
+                if let userRecordID = userRecord.recordID {
+                    self.userRecordID = userRecordID
+                    self.loadFinishedRoomList(userRecordID)
+                }
+                }, errorHandler: nil)
+        }
     }
     
     func loadFinishedRoomList(userRecordID: CKRecordID) {

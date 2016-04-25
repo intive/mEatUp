@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import FBSDKLoginKit
 
 class SettlementListViewController: UIViewController {
     
@@ -40,6 +41,15 @@ class SettlementListViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
+    }
+    
+    @IBAction func facebookLogout(sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        if let loginView: LoginViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+            FBSDKLoginManager().logOut()
+            UserSettings().clearUserDetails()
+            UIApplication.sharedApplication().keyWindow?.rootViewController = loginView
+        }
     }
     
     func fetch() {

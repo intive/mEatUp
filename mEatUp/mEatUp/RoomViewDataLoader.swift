@@ -56,12 +56,15 @@ class RoomViewDataLoader {
         }
     }
     
-    func eventEnded() -> Bool? {
-        guard let date = room?.date else {
-            return nil
+    func ableToJoin(completionBlock: ((Bool) -> Void)?) {
+        guard let roomRecordID = room?.recordID else {
+            return
         }
         
-        return date.isLessThanDate(NSDate())
+        return cloudKitHelper.usersInRoomRecordWithRoomIdCount(roomRecordID, completionHandler: {
+            userCount in
+                completionBlock?(self.room?.maxCount > userCount ? true: false)
+        }, errorHandler: nil)
     }
     
     func leaveRoom(completionBlock: (() -> Void)?) {
@@ -78,22 +81,29 @@ class RoomViewDataLoader {
     }
     
     func joinRoom(completionBlock: (() -> Void)?) {
-        if let userRecordID = userRecordID, let roomRecordID = room?.recordID {
-            if userInRoom == nil {
-                self.userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
-                guard let userInRoom = self.userInRoom else {
-                    return
+        if let userRecordID = userRecordID, let roomRecordID = room?.recordID where userInRoom == nil  {
+            ableToJoin({
+                isAble in
+                if isAble {
+                    self.userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
+                    guard let userInRoom = self.userInRoom else {
+                        return
+                    }
+                    
+                    self.cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
+                        self.purposeHandler?(RoomViewPurpose.Participant)
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))),
+                            dispatch_get_main_queue(), {
+                                self.loadUsers()
+                                completionBlock?()
+                        })
+                    }, errorHandler: nil)
+                } else {
+                    //ALERT! - Room is full
                 }
-                
-                self.cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
-                    self.purposeHandler?(RoomViewPurpose.Participant)
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))),
-                        dispatch_get_main_queue(), {
-                            self.loadUsers()
-                            completionBlock?()
-                    })
-                }, errorHandler: nil)
-            }
+            })
+        } else {
+            //ALERT! - User already in room
         }
     }
     
