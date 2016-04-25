@@ -308,7 +308,9 @@ class CloudKitHelper {
                             if let roomID = userInRoom[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
                                 self.loadRoomRecord(roomID.recordID, completionHandler: {
                                     room in
-                                        completionHandler(room)
+                                        if room.didEnd == false {
+                                            completionHandler(room)
+                                        }
                                 }, errorHandler: nil)
                             }
                         }
@@ -354,7 +356,7 @@ class CloudKitHelper {
     }
     
     func loadPublicRoomRecords(completionHandler: (Room) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "accessType == 2")
+        let predicate = NSPredicate(format: "accessType == 2 AND didEnd == 0")
         let query = CKQuery(recordType: Room.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
@@ -396,7 +398,7 @@ class CloudKitHelper {
     }
     
     func loadUserRoomRecord(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "ownerID == %@", CKReference(recordID: userRecordID, action: .None))
+        let predicate = NSPredicate(format: "ownerID == %@ AND didEnd == 0", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: Room.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
@@ -441,7 +443,7 @@ class CloudKitHelper {
 
     
     func loadInvitedRoomRecords(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "userRecordID == %@ AND confirmationStatus == 1", CKReference(recordID: userRecordID, action: .None))
+        let predicate = NSPredicate(format: "userRecordID == %@ AND confirmationStatus == 1 AND didEnd == 0", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
