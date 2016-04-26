@@ -41,7 +41,7 @@ class CoreDataController {
             print("\(storeError), \(storeError.userInfo)")
             
             // Update User Defaults
-            UserSettings().incompatibleStoreDetection(true)
+            UserSettings().incompatibleStoreDetection = true
         }
         
         return persistentStoreCoordinator

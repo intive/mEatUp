@@ -101,6 +101,7 @@
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		356B41391CCF9DD8008142FC /* mEatUp 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mEatUp 2.xcdatamodel"; sourceTree = "<group>"; };
 		356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantDebtCell.swift; sourceTree = "<group>"; };
 		357498CD1CC647710052C790 /* UIImageView+Meatup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Meatup.swift"; sourceTree = "<group>"; };
 		357498CF1CC64B610052C790 /* BalanceIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceIndicator.swift; sourceTree = "<group>"; };
@@ -755,6 +756,7 @@
 		354DB5021CB7EA8400B9194B /* mEatUp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				356B41391CCF9DD8008142FC /* mEatUp 2.xcdatamodel */,
 				354DB5031CB7EA8400B9194B /* mEatUp.xcdatamodel */,
 			);
 			currentVersion = 354DB5031CB7EA8400B9194B /* mEatUp.xcdatamodel */;

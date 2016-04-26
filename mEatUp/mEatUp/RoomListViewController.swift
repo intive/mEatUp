@@ -30,7 +30,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.navigationBar.translucent = false
         finishedRoomListLoader.loadUserRecordFromCloudKit()
 
-        if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection() where didDetectIncompatibleStore == true {
+        if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
             let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
             let message = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
             
@@ -131,7 +131,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Configure Alert Controller
         alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (_) -> Void in
-            UserSettings().incompatibleStoreDetection(false)
+            UserSettings().incompatibleStoreDetection = false
         }))
         
         // Present Alert Controller

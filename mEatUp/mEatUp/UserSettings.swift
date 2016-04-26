@@ -19,6 +19,17 @@ class UserSettings: NSObject {
     private let picutreURLKey = "picture_url"
     private let incompatibleStoreDetectionKey = "didDetectIncomatibleStore"
     
+    var incompatibleStoreDetection: Bool? {
+        get {
+            return userDefaults.boolForKey(incompatibleStoreDetectionKey)
+        }
+        set(detected) {
+            if let detected = detected {
+                userDefaults.setBool(detected, forKey: incompatibleStoreDetectionKey)
+            }
+        }
+    }
+    
     func saveUserDetails(id: String?, firstName: String?, lastName: String?, pictureURL: String?) {
         userDefaults.setValue(id, forKey: facebookIDkey)
         userDefaults.setValue(firstName, forKey: firstNameKey)
@@ -47,13 +58,5 @@ class UserSettings: NSObject {
     
     func pictureURL() -> String? {
         return userDefaults.stringForKey(picutreURLKey)
-    }
-    
-    func incompatibleStoreDetection() -> Bool? {
-        return userDefaults.boolForKey(incompatibleStoreDetectionKey)
-    }
-    
-    func incompatibleStoreDetection(detected: Bool) {
-        return userDefaults.setBool(detected, forKey: incompatibleStoreDetectionKey)
     }
 }
