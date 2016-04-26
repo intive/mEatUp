@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UIDatePickerMeatup: UIDatePicker {
+class MeatupDatePicker: UIDatePicker {
     var doneButtonAction: (NSDate -> ())?
     var cancelButtonAction: (() -> ())?
     
