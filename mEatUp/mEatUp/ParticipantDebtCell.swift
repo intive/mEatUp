@@ -73,7 +73,7 @@ class ParticipantDebtCell: UITableViewCell {
             balanceIndicator = .Positive
         } else {
             balanceTextField.backgroundColor = UIColor.whiteColor()
-            balanceIndicatorButton.setTitle("+", forState: .Normal)
+            balanceIndicatorButton.setTitle("+/-", forState: .Normal)
             balanceIndicator = .Neutral
         }
     }
