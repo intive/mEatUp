@@ -36,6 +36,10 @@ class RestaurantListViewController: UIViewController {
         loadRestaurants()
     }
     
+    @IBAction func cancellButtonTapped(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func loadRestaurants() {
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
             self?.restaurants = restaurants

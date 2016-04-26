@@ -27,7 +27,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
         }
         roomListLoader.loadUserRecordFromCloudKit()
-        
+        self.navigationController?.navigationBar.translucent = false
         finishedRoomListLoader.loadUserRecordFromCloudKit()
 
         if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection() where didDetectIncompatibleStore == true {
@@ -37,7 +37,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
         }
     }
-    
+
     @IBAction func facebookLogout(sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         if let loginView: LoginViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
