@@ -31,6 +31,7 @@ class RoomDetailsViewController: UIViewController {
     var chosenRestaurant: Restaurant?
     let datePicker = UIDatePickerMeatup()
     let formatter = NSDateFormatter()
+    let stringLengthLimit = 30
     
     let cloudKitHelper = CloudKitHelper()
     
@@ -262,6 +263,13 @@ extension RoomDetailsViewController: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if textField == hourTextField || textField == dateTextField || textField == placeTextField {
             return false
+        }
+        if textField == topTextField {
+            let textFieldText: NSString = textField.text ?? ""
+            let textAfterUpdate = textFieldText.stringByReplacingCharactersInRange(range, withString: string)
+            if textAfterUpdate.characters.count > stringLengthLimit {
+                return false
+            }
         }
         return true
     }
