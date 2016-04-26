@@ -660,6 +660,12 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Restaurant List" id="Wqt-jY-TEz">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="FfT-iX-RFM"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xKW-rq-trU">
+                            <connections>
+                                <action selector="cancellButtonTapped:" destination="76o-eq-9xn" id="RVa-If-x41"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="daq-aZ-04v">
                             <connections>
                                 <segue destination="5bE-wa-Hdk" kind="show" identifier="ShowRestaurantDetailsViewController" id="eci-vB-y77"/>
@@ -735,6 +741,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Create" id="Y4g-hQ-V1N">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="sSc-Qw-e5l"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Gi3-cm-h0a">
                             <connections>
                                 <action selector="saveButtonTapped:" destination="5bE-wa-Hdk" id="AMQ-qj-V02"/>
