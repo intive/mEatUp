@@ -27,10 +27,10 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
         }
         roomListLoader.loadUserRecordFromCloudKit()
-        
+        self.navigationController?.navigationBar.translucent = false
         finishedRoomListLoader.loadUserRecordFromCloudKit()
     }
-    
+
     @IBAction func facebookLogout(sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         if let loginView: LoginViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {

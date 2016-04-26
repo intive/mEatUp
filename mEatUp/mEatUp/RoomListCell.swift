@@ -12,16 +12,16 @@ import UIKit
 class RoomListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     let dateFormatter = NSDateFormatter()
     
     func setupCell(title: String, place: String, date: NSDate) {
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
+        timeLabel.text = dateFormatter.stringFromDate(date, withFormat: "H:mm")
+        dayLabel.text = dateFormatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
         
         titleLabel.text = title
         placeLabel.text = place
-        timeLabel.text = dateFormatter.stringFromDate(date)
     }
 }
