@@ -39,7 +39,7 @@
 		C772E1161CC637C400194C5C /* RoomParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
-		C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */; };
+		C7CD52C11CBE98C800A8CB8B /* UITextField+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52C01CBE98C800A8CB8B /* UITextField+MEATUP.swift */; };
 		C7E38C071CBE32F200B79690 /* OscillatingRoomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */; };
 		C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */; };
 		C7F88DB71CC53115007A6038 /* NSDateFormatter+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */; };
@@ -113,7 +113,7 @@
 		C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
-		C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyBottomBorderTextField.swift; sourceTree = "<group>"; };
+		C7CD52C01CBE98C800A8CB8B /* UITextField+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+MEATUP.swift"; sourceTree = "<group>"; };
 		C7E38C061CBE32F200B79690 /* OscillatingRoomInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatingRoomInfoView.xib; sourceTree = "<group>"; };
 		C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+MEATUP.swift"; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 			children = (
 				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
 				353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
-				C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */,
+				C7CD52C01CBE98C800A8CB8B /* UITextField+MEATUP.swift */,
 				C74547091CBFB8900055E9A3 /* UIDatePicker+MEATUP.swift */,
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */,
 				357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */,
@@ -501,7 +501,7 @@
 				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
 				C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */,
-				C7CD52C11CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift in Sources */,
+				C7CD52C11CBE98C800A8CB8B /* UITextField+MEATUP.swift in Sources */,
 				C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */,
 				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,

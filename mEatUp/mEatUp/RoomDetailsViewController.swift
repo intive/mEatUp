@@ -264,13 +264,6 @@ extension RoomDetailsViewController: UITextFieldDelegate {
         if textField == hourTextField || textField == dateTextField || textField == placeTextField {
             return false
         }
-        if textField == topTextField {
-            let textFieldText: NSString = textField.text ?? ""
-            let textAfterUpdate = textFieldText.stringByReplacingCharactersInRange(range, withString: string)
-            if textAfterUpdate.characters.count > stringLengthLimit {
-                return false
-            }
-        }
         return true
     }
     

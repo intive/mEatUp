@@ -32,13 +32,4 @@ extension RestaurantViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let textFieldText: NSString = textField.text ?? ""
-        let textAfterUpdate = textFieldText.stringByReplacingCharactersInRange(range, withString: string)
-        if textAfterUpdate.characters.count > stringLengthLimit {
-            return false
-        }
-        return true
-    }
 }
