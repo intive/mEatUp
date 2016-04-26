@@ -131,8 +131,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Configure Alert Controller
         alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (_) -> Void in
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.removeObjectForKey("didDetectIncompatibleStore")
+            UserSettings().incompatibleStoreDetection(false)
         }))
         
         // Present Alert Controller
