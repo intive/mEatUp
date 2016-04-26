@@ -29,7 +29,7 @@ class RoomDetailsViewController: UIViewController {
     var activeField: UITextField?
     var room: Room?
     var chosenRestaurant: Restaurant?
-    let datePicker = UIDatePickerMeatup()
+    let datePicker = MeatupDatePicker()
     let formatter = NSDateFormatter()
     let stringLengthLimit = 30
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UITextFieldMeatup: UITextField, UITextFieldDelegate {
+class MeatupTextField: UITextField, UITextFieldDelegate {
     var maximumCharacters: Int = 20
     var delegate2: UITextFieldDelegate?
     
@@ -17,7 +17,7 @@ class UITextFieldMeatup: UITextField, UITextFieldDelegate {
             return delegate2
         }
         set {
-            if newValue as? UITextFieldMeatup != self {
+            if newValue as? MeatupTextField != self {
                 self.delegate2 = newValue
             } else {
                 super.delegate = newValue
