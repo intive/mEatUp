@@ -29,7 +29,7 @@ class RoomDetailsViewController: UIViewController {
     var activeField: UITextField?
     var room: Room?
     var chosenRestaurant: Restaurant?
-    let datePicker = DatePickerWithDoneButton()
+    let datePicker = UIDatePickerMeatup()
     let formatter = NSDateFormatter()
     
     let cloudKitHelper = CloudKitHelper()
@@ -58,8 +58,11 @@ class RoomDetailsViewController: UIViewController {
         datePicker.datePickerMode = .Date
         
         sender.inputAccessoryView = datePicker.toolBar()
-        datePicker.doneTappedBlock = { [weak self] date in
+        datePicker.doneButtonAction = { [weak self] date in
             self?.dateTextField.text = self?.formatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
+            self?.view.endEditing(true)
+        }
+        datePicker.cancelButtonAction = { [weak self] in
             self?.view.endEditing(true)
         }
         sender.inputView = datePicker
@@ -69,8 +72,11 @@ class RoomDetailsViewController: UIViewController {
         datePicker.datePickerMode = .Time
         
         sender.inputAccessoryView = datePicker.toolBar()
-        datePicker.doneTappedBlock = { [weak self] date in
+        datePicker.doneButtonAction = { [weak self] date in
             self?.hourTextField.text = self?.formatter.stringFromDate(date, withFormat: "H:mm")
+            self?.view.endEditing(true)
+        }
+        datePicker.cancelButtonAction = { [weak self] in
             self?.view.endEditing(true)
         }
         sender.inputView = datePicker

@@ -35,8 +35,7 @@
 		C74476BF1CC8DA880062AC81 /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476BE1CC8DA880062AC81 /* RestaurantListViewController.swift */; };
 		C74476C11CC906FE0062AC81 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */; };
 		C74476C31CC914000062AC81 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476C21CC914000062AC81 /* RestaurantViewController.swift */; };
-		C744A9F41CC771D6006C309F /* PickerView+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C744A9F31CC771D6006C309F /* PickerView+MEATUP.swift */; };
-		C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */; };
+		C745470A1CBFB8900055E9A3 /* UIDatePicker+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74547091CBFB8900055E9A3 /* UIDatePicker+MEATUP.swift */; };
 		C772E1161CC637C400194C5C /* RoomParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */; };
 		C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */; };
 		C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */; };
@@ -110,8 +109,7 @@
 		C74476BE1CC8DA880062AC81 /* RestaurantListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListViewController.swift; sourceTree = "<group>"; };
 		C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		C74476C21CC914000062AC81 /* RestaurantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
-		C744A9F31CC771D6006C309F /* PickerView+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PickerView+MEATUP.swift"; sourceTree = "<group>"; };
-		C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerWithDoneButton.swift; sourceTree = "<group>"; };
+		C74547091CBFB8900055E9A3 /* UIDatePicker+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+MEATUP.swift"; sourceTree = "<group>"; };
 		C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscillatingRoomInfoView.swift; sourceTree = "<group>"; };
 		C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
@@ -195,10 +193,9 @@
 				C7C5493E1CBD4CE30054A91E /* OscillatingRoomInfoView.swift */,
 				353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
 				C7CD52C01CBE98C800A8CB8B /* OnlyBottomBorderTextField.swift */,
-				C74547091CBFB8900055E9A3 /* DatePickerWithDoneButton.swift */,
+				C74547091CBFB8900055E9A3 /* UIDatePicker+MEATUP.swift */,
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */,
 				357498CD1CC647710052C790 /* UIImageView+MEATUP.swift */,
-				C744A9F31CC771D6006C309F /* PickerView+MEATUP.swift */,
 				C7184B711CCA2B830074BA99 /* UISearchController+MEATUP.swift */,
 			);
 			name = Classes;
@@ -521,14 +518,13 @@
 				354DB4FE1CB7EA8400B9194B /* LoginViewController.swift in Sources */,
 				355301FC1CBCF4CA00F23373 /* SettlementListViewController.swift in Sources */,
 				E134A87D1CC8C96C0014F251 /* RoomViewActions.swift in Sources */,
-				C744A9F41CC771D6006C309F /* PickerView+MEATUP.swift in Sources */,
 				3508E26F1CBFB55F0094394D /* Participant.swift in Sources */,
 				353E531A1CBE67E600FE42F5 /* SettlementViewController.swift in Sources */,
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
 				E17687D01CC6410D00B5F115 /* RoomDetailsPurpose.swift in Sources */,
 				C7184B721CCA2B830074BA99 /* UISearchController+MEATUP.swift in Sources */,
-				C745470A1CBFB8900055E9A3 /* DatePickerWithDoneButton.swift in Sources */,
+				C745470A1CBFB8900055E9A3 /* UIDatePicker+MEATUP.swift in Sources */,
 				E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */,
 				E1FB87D81CBCE98C00273E4E /* User.swift in Sources */,
 				3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */,
