@@ -660,6 +660,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Restaurant List" id="Wqt-jY-TEz">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="JpO-Bc-ufp"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xKW-rq-trU">
                             <connections>
                                 <action selector="cancellButtonTapped:" destination="76o-eq-9xn" id="RVa-If-x41"/>
