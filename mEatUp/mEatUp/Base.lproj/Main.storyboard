@@ -660,6 +660,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Restaurant List" id="Wqt-jY-TEz">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xKW-rq-trU">
+                            <connections>
+                                <action selector="cancellButtonTapped:" destination="76o-eq-9xn" id="RVa-If-x41"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="daq-aZ-04v">
                             <connections>
                                 <segue destination="5bE-wa-Hdk" kind="show" identifier="ShowRestaurantDetailsViewController" id="eci-vB-y77"/>
