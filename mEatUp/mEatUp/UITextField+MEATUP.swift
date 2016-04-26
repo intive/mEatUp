@@ -42,10 +42,7 @@ class UITextFieldMeatup: UITextField, UITextFieldDelegate {
         if textAfterUpdate.characters.count > maximumCharacters {
             returnValue = false
         }
-        if let shouldChangeCharactersInRange = delegate2?.textField {
-            return shouldChangeCharactersInRange(textField, shouldChangeCharactersInRange: range, replacementString: string) && returnValue
-        }
-        return returnValue
+        return (delegate2?.textField?(textField, shouldChangeCharactersInRange: range, replacementString: string) ?? true) && returnValue
     }
 
 }
