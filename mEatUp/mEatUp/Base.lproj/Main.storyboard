@@ -364,13 +364,18 @@
                                     <outlet property="delegate" destination="lG1-sF-iMY" id="1O8-N4-Hk7"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ECR-jp-dML">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ECR-jp-dML" firstAttribute="centerX" secondItem="0y4-Aa-DPT" secondAttribute="centerX" id="BiN-v8-btb"/>
                             <constraint firstItem="nft-zk-oRX" firstAttribute="height" secondItem="0y4-Aa-DPT" secondAttribute="height" multiplier="0.5" id="cyq-tB-NDg"/>
                             <constraint firstItem="nft-zk-oRX" firstAttribute="centerX" secondItem="0y4-Aa-DPT" secondAttribute="centerX" id="dXM-CK-REA"/>
                             <constraint firstItem="nft-zk-oRX" firstAttribute="width" secondItem="0y4-Aa-DPT" secondAttribute="width" id="eXA-kS-scs"/>
                             <constraint firstItem="nft-zk-oRX" firstAttribute="top" secondItem="wKO-dC-0en" secondAttribute="bottom" constant="-64" id="oaL-Yg-0Nk"/>
+                            <constraint firstItem="ECR-jp-dML" firstAttribute="centerY" secondItem="0y4-Aa-DPT" secondAttribute="centerY" id="xiE-DW-lhO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OR3-aT-tp1">
@@ -389,6 +394,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="infoView" destination="NAa-Hx-5fA" id="eKL-qR-Rks"/>
+                        <outlet property="loadingIndicator" destination="ECR-jp-dML" id="gil-My-WDF"/>
                         <outlet property="participantsTableView" destination="nft-zk-oRX" id="3iT-y5-A9R"/>
                         <outlet property="rightBarButton" destination="ZQW-yE-8Bg" id="qHr-yH-D55"/>
                         <segue destination="7Gv-nF-1j4" kind="show" identifier="showRoomDetailsSegue" id="RmG-Tc-ZsY"/>

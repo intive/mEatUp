@@ -32,7 +32,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
-        //finishedRoomListLoader.loadUserRecordFromCloudKit()
+        finishedRoomListLoader.loadUserRecordFromCloudKit()
 
         if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
             let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
