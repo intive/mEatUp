@@ -13,7 +13,7 @@ import FBSDKLoginKit
 class RoomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var roomTableView: UITableView!
-    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     var roomListLoader = RoomListDataLoader()
@@ -22,13 +22,17 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideSearchBarScopes()
+        finishedRoomListLoader.loadUserRecordFromCloudKit()
+        
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
             self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
+            self.loadingIndicator.stopAnimating()
+            self.showSearchBarScopes()
         }
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
-        finishedRoomListLoader.loadUserRecordFromCloudKit()
 
         if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
             let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
@@ -75,6 +79,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
         }
         roomListLoader.loadCurrentRoomList(scope, filter: nil)
         
@@ -136,5 +141,15 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Present Alert Controller
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private func hideSearchBarScopes() {
+        searchBar.showsScopeBar = false;
+        searchBar.sizeToFit()
+    }
+    
+    private func showSearchBarScopes() {
+        self.searchBar.showsScopeBar = true
+        self.searchBar.sizeToFit()
     }
 }

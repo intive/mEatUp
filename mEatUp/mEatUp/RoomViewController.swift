@@ -11,7 +11,7 @@ import CloudKit
 
 class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
-    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
     var cloudKitHelper = CloudKitHelper()
@@ -29,6 +29,7 @@ class RoomViewController: UIViewController {
         }
         roomDataLoader?.refreshHandler = {
             self.participantsTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
         }
         
         roomDataLoader?.purposeHandler = {
