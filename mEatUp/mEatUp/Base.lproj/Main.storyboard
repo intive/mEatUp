@@ -124,6 +124,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settlements" id="qzF-Uw-5np"/>
                     <navigationItem key="navigationItem" title="Settlement List" id="e4a-dz-pXL" userLabel="Settlement List">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="nng-r7-cra"/>
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="nUr-Ud-vl3">
                             <connections>
                                 <action selector="facebookLogout:" destination="oLP-SW-bDr" id="a6U-a3-Lm1"/>
@@ -664,6 +665,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HL7-Pn-GWe">
+                                <rect key="frame" x="290" y="258" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -671,6 +675,8 @@
                             <constraint firstItem="rhy-kV-dcf" firstAttribute="centerY" secondItem="kjJ-gs-dKV" secondAttribute="centerY" id="125-9t-TAS"/>
                             <constraint firstItem="rhy-kV-dcf" firstAttribute="centerX" secondItem="kjJ-gs-dKV" secondAttribute="centerX" id="Pvb-up-ePr"/>
                             <constraint firstItem="rhy-kV-dcf" firstAttribute="width" secondItem="kjJ-gs-dKV" secondAttribute="width" id="hKm-C5-Otr"/>
+                            <constraint firstItem="HL7-Pn-GWe" firstAttribute="centerY" secondItem="kjJ-gs-dKV" secondAttribute="centerY" id="oQw-LB-a6O"/>
+                            <constraint firstItem="HL7-Pn-GWe" firstAttribute="centerX" secondItem="kjJ-gs-dKV" secondAttribute="centerX" id="x3z-dJ-2Pk"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -688,6 +694,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="loadingIndicator" destination="HL7-Pn-GWe" id="ZXo-oJ-EQx"/>
                         <outlet property="tableView" destination="rhy-kV-dcf" id="2Mi-XD-rRL"/>
                     </connections>
                 </viewController>
@@ -866,6 +873,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Md4-zL-CL4">
                         <nil key="title"/>
+                        <barButtonItem key="backBarButtonItem" title="Back" id="dTG-v8-pgV"/>
                         <view key="titleView" contentMode="scaleToFill" id="agK-jq-Sk2" customClass="OscillatingRoomInfoView" customModule="mEatUp" customModuleProvider="target">
                             <rect key="frame" x="275" y="5.5" width="50" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -943,6 +951,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RmS-TD-TDb"/>
+        <segue reference="aGV-Mz-HDX"/>
     </inferredMetricsTieBreakers>
 </document>

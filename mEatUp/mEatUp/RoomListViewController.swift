@@ -23,6 +23,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         hideSearchBarScopes()
+        finishedRoomListLoader.loadUserRecordFromCloudKit()
         
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
@@ -32,7 +33,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
-        finishedRoomListLoader.loadUserRecordFromCloudKit()
 
         if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
             let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
