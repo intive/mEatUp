@@ -804,7 +804,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                                                     <connections>
-                                                        <action selector="balanceChanged:" destination="vb7-is-srj" eventType="editingDidEnd" id="4YC-Zf-LZy"/>
+                                                        <action selector="balanceChanged:" destination="vb7-is-srj" eventType="editingChanged" id="fgC-9H-OJl"/>
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHZ-Ja-jDP">
