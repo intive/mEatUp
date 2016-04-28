@@ -69,6 +69,9 @@ class RoomViewController: UIViewController {
             destination.room = room
             destination.userRecordID = userRecordID
         }
+        if let navigationCtrl = segue.destinationViewController as? UINavigationController, let destination = navigationCtrl.topViewController as? InvitationViewController {
+            destination.room = room
+        }
     }
     
     @IBAction func rightBarButtonPressed(sender: UIBarButtonItem) {
@@ -96,6 +99,19 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
             return "Participants"
         }
         return nil
+    }
+
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        let inviteButton = UIButton(frame: CGRect(x: view.frame.width - view.frame.height, y: 0, width: view.frame.height, height: view.frame.height))
+        inviteButton.setImage(UIImage(named: "AddUser.png"), forState: .Normal)
+        inviteButton.addTarget(self, action: #selector(inviteButtonTapped), forControlEvents: .TouchUpInside)
+        
+        view.addSubview(inviteButton)
+    }
+    
+    func inviteButtonTapped(sender: UIButton) {
+        performSegueWithIdentifier("ShowInvitationRoomController", sender: nil)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

@@ -31,6 +31,8 @@
 		357498CE1CC647710052C790 /* UIImageView+Meatup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CD1CC647710052C790 /* UIImageView+Meatup.swift */; };
 		357498D01CC64B610052C790 /* BalanceIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357498CF1CC64B610052C790 /* BalanceIndicator.swift */; };
 		35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */; };
+		C7175D7B1CD0AC5700F56934 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */; };
+		C7175D7D1CD0B16A00F56934 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */; };
 		C7184B721CCA2B830074BA99 /* UISearchController+Meatup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */; };
 		C74476BF1CC8DA880062AC81 /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476BE1CC8DA880062AC81 /* RestaurantListViewController.swift */; };
 		C74476C11CC906FE0062AC81 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */; };
@@ -105,6 +107,8 @@
 		357498CD1CC647710052C790 /* UIImageView+Meatup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Meatup.swift"; sourceTree = "<group>"; };
 		357498CF1CC64B610052C790 /* BalanceIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceIndicator.swift; sourceTree = "<group>"; };
 		35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoomListDataLoader.swift; sourceTree = "<group>"; };
+		C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
+		C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchController+Meatup.swift"; sourceTree = "<group>"; };
 		C74476BE1CC8DA880062AC81 /* RestaurantListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantListViewController.swift; sourceTree = "<group>"; };
 		C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				356EEB5F1CC0FD27001E23A9 /* ParticipantDebtCell.swift */,
 				C772E1151CC637C400194C5C /* RoomParticipantTableViewCell.swift */,
 				C74476C01CC906FE0062AC81 /* RestaurantTableViewCell.swift */,
+				C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
 				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
 				355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */,
+				C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */,
 				C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */,
 				C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */,
 				353E53191CBE67E600FE42F5 /* SettlementViewController.swift */,
@@ -498,6 +504,7 @@
 				E1D4FE131CCE169400C88541 /* NSDate+CompareDates.swift in Sources */,
 				356EEB601CC0FD27001E23A9 /* ParticipantDebtCell.swift in Sources */,
 				3508E2711CBFB5BA0094394D /* CoreDataController.swift in Sources */,
+				C7175D7D1CD0B16A00F56934 /* UserTableViewCell.swift in Sources */,
 				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
 				C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */,
@@ -512,6 +519,7 @@
 				E1F1177A1CC62B7F00B36F84 /* RoomDataScopes.swift in Sources */,
 				357498D01CC64B610052C790 /* BalanceIndicator.swift in Sources */,
 				E1FB87D71CBCE98C00273E4E /* Room.swift in Sources */,
+				C7175D7B1CD0AC5700F56934 /* InvitationViewController.swift in Sources */,
 				C74476C11CC906FE0062AC81 /* RestaurantTableViewCell.swift in Sources */,
 				353E53181CBE4D8400FE42F5 /* UserSettings.swift in Sources */,
 				E1FB87DE1CBCE99B00273E4E /* RestaurantProperties.swift in Sources */,
