@@ -13,6 +13,7 @@ class RestaurantViewController: UIViewController {
     @IBOutlet weak var addressTextField: UITextField!
     var cloudKitHelper = CloudKitHelper()
     var saveRestaurant: ((Restaurant) -> Void)?
+    let stringLengthLimit = 30
     
     @IBAction func saveButtonTapped(sender: UIBarButtonItem) {
         if let name = nameTextField.text, let address = addressTextField.text {

@@ -13,7 +13,7 @@ import FBSDKLoginKit
 class RoomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var roomTableView: UITableView!
-    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     var roomListLoader = RoomListDataLoader()
@@ -22,13 +22,25 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideSearchBarScopes()
+        finishedRoomListLoader.loadUserRecordFromCloudKit()
+        
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
+
+            self.loadingIndicator.stopAnimating()
+            self.showSearchBarScopes()
         }
         
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
-        finishedRoomListLoader.loadUserRecordFromCloudKit()
+
+        if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
+            let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
+            let message = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
+            
+            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+        }
     }
 
     @IBAction func facebookLogout(sender: UIBarButtonItem) {
@@ -68,6 +80,12 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.roomListLoader.dataScope = scope
         self.roomListLoader.filter = nil
+
+        roomListLoader.completionHandler = {
+            self.roomTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
+        }
+        roomListLoader.loadCurrentRoomList(scope, filter: nil)
         
         roomTableView.reloadData()
     }
@@ -116,6 +134,28 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             destination.room = sender as? Room
             destination.userRecordID = roomListLoader.userRecordID
         }
+    }
+    
+    private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
+        // Initialize Alert Controller
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
+        // Configure Alert Controller
+        alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (_) -> Void in
+            UserSettings().incompatibleStoreDetection = false
+        }))
+        
+        // Present Alert Controller
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private func hideSearchBarScopes() {
+        searchBar.showsScopeBar = false;
+        searchBar.sizeToFit()
+    }
+    
+    private func showSearchBarScopes() {
+        self.searchBar.showsScopeBar = true
+        self.searchBar.sizeToFit()
     }
 }
