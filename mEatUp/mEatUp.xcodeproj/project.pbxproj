@@ -46,7 +46,9 @@
 		C7F88DB71CC53115007A6038 /* NSDateFormatter+MEATUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */; };
 		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
 		E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10027131CBE48EF0071D45C /* CloudKit.framework */; };
+		E11E40481CD22BDD004137B1 /* Array+FindRoomIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E40471CD22BDD004137B1 /* Array+FindRoomIndex.swift */; };
 		E121F3631CCA374700860871 /* RoomViewDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E121F3621CCA374700860871 /* RoomViewDataLoader.swift */; };
+		E12352271CCF677C009F84F8 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12352261CCF677C009F84F8 /* Subscriptions.swift */; };
 		E12D3A1F1CC8C0FF0072EC41 /* RoomViewPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */; };
 		E134A87D1CC8C96C0014F251 /* RoomViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134A87C1CC8C96C0014F251 /* RoomViewActions.swift */; };
 		E17687D01CC6410D00B5F115 /* RoomDetailsPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17687CF1CC6410D00B5F115 /* RoomDetailsPurpose.swift */; };
@@ -121,7 +123,9 @@
 		C7F88DB61CC53115007A6038 /* NSDateFormatter+MEATUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+MEATUP.swift"; sourceTree = "<group>"; };
 		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
 		E10027131CBE48EF0071D45C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E11E40471CD22BDD004137B1 /* Array+FindRoomIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindRoomIndex.swift"; sourceTree = "<group>"; };
 		E121F3621CCA374700860871 /* RoomViewDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewDataLoader.swift; sourceTree = "<group>"; };
+		E12352261CCF677C009F84F8 /* Subscriptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
 		E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewPurpose.swift; sourceTree = "<group>"; };
 		E134A87C1CC8C96C0014F251 /* RoomViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewActions.swift; sourceTree = "<group>"; };
 		E17687CF1CC6410D00B5F115 /* RoomDetailsPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsPurpose.swift; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
+				E11E40471CD22BDD004137B1 /* Array+FindRoomIndex.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 				E1FB87D31CBCE98C00273E4E /* Room.swift */,
 				E1FB87D41CBCE98C00273E4E /* User.swift */,
 				E1FB87D51CBCE98C00273E4E /* UserInRoom.swift */,
+				E12352261CCF677C009F84F8 /* Subscriptions.swift */,
 			);
 			name = CloudKitClasses;
 			sourceTree = "<group>";
@@ -415,6 +421,12 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = XTRY58ZV6V;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -490,9 +502,11 @@
 				35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */,
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
+				E11E40481CD22BDD004137B1 /* Array+FindRoomIndex.swift in Sources */,
 				E12D3A1F1CC8C0FF0072EC41 /* RoomViewPurpose.swift in Sources */,
 				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,
 				C74476BF1CC8DA880062AC81 /* RestaurantListViewController.swift in Sources */,
+				E12352271CCF677C009F84F8 /* Subscriptions.swift in Sources */,
 				C772E1161CC637C400194C5C /* RoomParticipantTableViewCell.swift in Sources */,
 				C7F88DB71CC53115007A6038 /* NSDateFormatter+MEATUP.swift in Sources */,
 				E1FB87DF1CBCE99B00273E4E /* RoomProperties.swift in Sources */,
@@ -669,6 +683,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mEatUp",
@@ -677,6 +692,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -688,6 +704,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mEatUp/mEatUp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/mEatUp",
@@ -696,6 +713,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.blstream.mEatUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

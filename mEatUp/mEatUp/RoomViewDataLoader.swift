@@ -11,6 +11,7 @@ import CloudKit
 
 class RoomViewDataLoader {
     var refreshHandler: (() -> Void)?
+    var dismissHandler: (() -> Void)?
     var purposeHandler: ((RoomViewPurpose) -> Void)?
     var users = [User]()
     var room: Room?
@@ -23,6 +24,16 @@ class RoomViewDataLoader {
     init(userRecordID: CKRecordID, room: Room) {
         self.userRecordID = userRecordID
         self.room = room
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
+    }
+    
+    @objc func roomDeletedNotification(aNotification: NSNotification) {
+        if let roomRecordID = aNotification.object as? CKRecordID {
+            if roomRecordID == room?.recordID {
+                dismissHandler?()
+            }
+        }
     }
     
     func loadUsers() {

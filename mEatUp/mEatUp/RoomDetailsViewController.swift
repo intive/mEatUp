@@ -192,6 +192,7 @@ class RoomDetailsViewController: UIViewController {
     }
     
     func createRoom() {
+        rightBarButton.enabled = false
         room = Room()
         room?.owner?.recordID = userRecordID
         room?.maxCount = Int(limitSlider.value)

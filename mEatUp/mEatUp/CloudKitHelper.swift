@@ -552,6 +552,7 @@ class CloudKitHelper {
                     if let results = results where results.count > 0 {
                         for userInRoom in results {
                             let newUserInRoom = UserInRoom()
+                            newUserInRoom.confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? ConfirmationStatus
                             newUserInRoom.recordID = userInRoom.recordID
                             completionHandler(newUserInRoom)
                         }

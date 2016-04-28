@@ -10,14 +10,45 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import FBSDKLoginKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let cloudKitHelper = CloudKitHelper()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+        
+        application.applicationIconBadgeNumber = 0
+//        let s = Subscriptions()
+//        s.deleteSubscription()
+//        s.createCreateSubscription()
+//        s.createDeleteSubscription()
+//        s.createEditSubscription()
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        if let pushInfo = userInfo as? [String: NSObject] {
+            let queryNotification = CKQueryNotification(fromRemoteNotificationDictionary: pushInfo)
+            
+            switch queryNotification.queryNotificationReason {
+            case .RecordCreated:
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomAdded", object: queryNotification.recordID))
+            case .RecordDeleted:
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomDeleted", object: queryNotification.recordID))
+            case .RecordUpdated:
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomUpdated", object: queryNotification.recordID))
+            }
+        }
+        return
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
