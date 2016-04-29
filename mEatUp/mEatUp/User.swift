@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-class User: CloudKitObject {
+class User: CloudKitObject, Equatable {
     static let entityName = "User"
     
     var fbID: String?

@@ -19,4 +19,15 @@ extension Array {
         }
         return nil
     }
+    
+    func findUserIndex(user: User) -> Int? {
+        for (index, element) in self.enumerate() {
+            if let element = element as? User {
+                if element == user {
+                    return index
+                }
+            }
+        }
+        return nil
+    }
 }

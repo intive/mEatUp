@@ -123,4 +123,28 @@ class Subscriptions {
             }
         })
     }
+    
+    func createDeleteUserInRoomSubscription() {
+        let predicate = NSPredicate(format: "TRUEPREDICATE")
+        
+        let subscription = CKSubscription(recordType: UserInRoom.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordDeletion)
+        
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.shouldSendContentAvailable = true
+        notificationInfo.desiredKeys = ["userRecordID", "roomRecordID", "confirmationStatus"]
+        notificationInfo.shouldBadge = false
+        
+        subscription.notificationInfo = notificationInfo
+        
+        cloudKitHelper.publicDB.saveSubscription(subscription, completionHandler: {
+            returnRecord, error in
+            if let error = error {
+                print("Subscription faild \(error)")
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("Subscription succeed")
+                })
+            }
+        })
+    }
 }

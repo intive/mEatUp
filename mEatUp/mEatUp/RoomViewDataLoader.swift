@@ -27,6 +27,7 @@ class RoomViewDataLoader {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomRemovedNotification), name: "userInRoomRemoved", object: nil)
     }
     
     @objc func roomDeletedNotification(aNotification: NSNotification) {
@@ -47,6 +48,24 @@ class RoomViewDataLoader {
                     }
             }, errorHandler: nil)
         }
+    }
+
+    @objc func userInRoomRemovedNotification(aNotification: NSNotification) {
+        if let queryNotification = aNotification.object as? CKQueryNotification {
+            if room?.recordID?.recordName == queryNotification.recordFields?["roomRecordID"] as? String {
+                if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
+                    self.users = self.users.filter({return filterRemovedUser($0, userRecordName: userRecordName)})
+                    refreshHandler?()
+                }
+            }
+        }
+    }
+    
+    func filterRemovedUser(user: User, userRecordName: String) -> Bool {
+        if let recordName = user.recordID?.recordName {
+            return !(recordName == userRecordName)
+        }
+        return false
     }
     
     func loadUsers() {

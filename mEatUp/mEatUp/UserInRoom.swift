@@ -44,3 +44,7 @@ class UserInRoom: CloudKitObject {
         cloudKitHelper.saveUserInRoomRecord(self, completionHandler: completionHandler, errorHandler: errorHandler)
     }
 }
+
+func == (lhs: User, rhs: User) -> Bool {
+    return lhs.recordID == rhs.recordID
+}
