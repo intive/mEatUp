@@ -121,4 +121,21 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            if let roomRecordID = room?.recordID {
+                roomDataLoader?.deleteUser(indexPath.row, roomRecordID: roomRecordID)
+            }
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        guard let purpose = viewPurpose else {
+            return false
+        }
+        
+        return purpose == .Owner ? true : false
+    }
+    
 }
