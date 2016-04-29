@@ -80,6 +80,15 @@ class RoomViewDataLoader {
         }, errorHandler: nil)
     }
     
+    func deleteUser(userRow: Int, roomRecordID: CKRecordID) {
+        if let userRecordID = users[userRow].recordID {
+            cloudKitHelper.deleteUserInRoomRecord(userRecordID, roomRecordID: roomRecordID, completionHandler: {
+                self.purposeHandler?(RoomViewPurpose.Owner)
+                self.loadUsers()
+                } , errorHandler: nil)
+        }
+    }
+    
     func joinRoom(completionBlock: (() -> Void)?) {
         if let userRecordID = userRecordID, let roomRecordID = room?.recordID where userInRoom == nil  {
             ableToJoin({
