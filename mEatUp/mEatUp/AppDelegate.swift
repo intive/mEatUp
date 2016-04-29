@@ -27,10 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.applicationIconBadgeNumber = 0
 //        let s = Subscriptions()
-//        s.deleteSubscription()
-//        s.createCreateSubscription()
-//        s.createDeleteSubscription()
-//        s.createEditSubscription()
+//        s.deleteSubscriptions()
+//        s.createCreateRoomSubscription()
+//        s.createDeleteRoomSubscription()
+//        s.createEditRoomSubscription()
+//        s.createCreateUserInRoomSubscription()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -41,7 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             switch queryNotification.queryNotificationReason {
             case .RecordCreated:
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomAdded", object: queryNotification.recordID))
+                if let _ = queryNotification.recordFields?["confirmationStatus"] {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "userInRoomAdded", object: queryNotification.recordID))
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomAdded", object: queryNotification.recordID))
+                }
             case .RecordDeleted:
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomDeleted", object: queryNotification.recordID))
             case .RecordUpdated:

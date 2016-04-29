@@ -26,6 +26,7 @@ class RoomViewDataLoader {
         self.room = room
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
     }
     
     @objc func roomDeletedNotification(aNotification: NSNotification) {
@@ -33,6 +34,18 @@ class RoomViewDataLoader {
             if roomRecordID == room?.recordID {
                 dismissHandler?()
             }
+        }
+    }
+    
+    @objc func userInRoomAddedNotification(aNotification: NSNotification) {
+        if let userInRoomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
+                userInRoom in
+                    if self.room == userInRoom.room, let user = userInRoom.user {
+                        self.users.append(user)
+                        self.refreshHandler?()
+                    }
+            }, errorHandler: nil)
         }
     }
     

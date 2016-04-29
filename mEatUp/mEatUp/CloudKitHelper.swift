@@ -297,6 +297,41 @@ class CloudKitHelper {
         }
     }
     
+    func loadUsersInRoomRecord(userInRoomRecordID: CKRecordID, completionHandler: (UserInRoom) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let newUserInRoom = UserInRoom()
+        
+        self.publicDB.fetchRecordWithID(userInRoomRecordID, completionHandler: {
+            result,error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let result = result {
+                        if let confirmationValue = result[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                            newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationValue)
+                        }
+                        
+                        if let roomID =  result[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
+                            self.loadRoomRecord(roomID.recordID, completionHandler: {
+                                room in
+                                newUserInRoom.room = room
+                                
+                                if let userID = result[UserInRoomProperties.userRecordID.rawValue] as? CKReference {
+                                    self.loadUserRecord(userID.recordID, completionHandler: {
+                                        user in
+                                            newUserInRoom.user = user
+                                            completionHandler(newUserInRoom)
+                                        }, errorHandler: nil)
+                                }
+                                }, errorHandler: nil)
+                        }
+                    }
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        })
+    }
+    
     func usersInRoomRecordWithRoomIdCount(roomRecordID: CKRecordID, completionHandler: (Int) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "roomRecordID == %@", CKReference(recordID: roomRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
