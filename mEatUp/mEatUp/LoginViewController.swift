@@ -67,15 +67,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             newUser.photo = pictureURL
                             cloud.saveUserRecord(newUser, completionHandler: nil, errorHandler: nil)
                         }
-                        }, errorHandler: { error in
+                    }, errorHandler: { error in
                             let newUser = User()
                             newUser.fbID = fbID
                             newUser.name = firstName
                             newUser.surname = lastName
                             newUser.photo = pictureURL
                             cloud.saveUserRecord(newUser, completionHandler: nil, errorHandler: nil)
-                        }
-                    )
+                    })
                 }
             }
         }

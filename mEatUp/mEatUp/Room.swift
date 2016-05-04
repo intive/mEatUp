@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-class Room: CloudKitObject {
+class Room: CloudKitObject, Equatable {
     static let entityName = "Room"
     
     var title: String?
@@ -43,4 +43,10 @@ class Room: CloudKitObject {
         owner = User()
         restaurant = Restaurant()
     }
+    
+
+}
+
+func == (lhs: Room, rhs: Room) -> Bool {
+    return lhs.recordID == rhs.recordID
 }

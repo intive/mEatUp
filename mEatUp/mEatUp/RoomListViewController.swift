@@ -27,10 +27,11 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
-            self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
+
             self.loadingIndicator.stopAnimating()
             self.showSearchBarScopes()
         }
+        
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
 
@@ -77,6 +78,9 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
         
+        self.roomListLoader.dataScope = scope
+        self.roomListLoader.filter = nil
+
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
             self.loadingIndicator.stopAnimating()
@@ -91,16 +95,18 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
         
+        self.roomListLoader.dataScope = scope
+
         if searchText.isEmpty {
-            roomListLoader.loadCurrentRoomList(scope, filter: nil)
+            self.roomListLoader.filter = nil
         } else {
-            roomListLoader.loadCurrentRoomList(scope, filter: {room in
+            self.roomListLoader.filter = { room in
                 if let title = room.title {
                     return title.lowercaseString.containsString(searchText.lowercaseString)
                 } else {
                     return false
                 }
-            })
+            }
         }
         
         self.roomTableView.reloadData()
