@@ -19,11 +19,12 @@ class RoomViewController: UIViewController {
     var userRecordID: CKRecordID?
     
     var roomDataLoader: RoomViewDataLoader?
-    
+
     var viewPurpose: RoomViewPurpose?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if let userRecordID = userRecordID, room = room {
             roomDataLoader = RoomViewDataLoader(userRecordID: userRecordID, room: room)
         }
@@ -145,7 +146,7 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete, let roomRecordID = room?.recordID {
-                roomDataLoader?.deleteUser(indexPath.row, roomRecordID: roomRecordID)
+            roomDataLoader?.deleteUser(indexPath.row, roomRecordID: roomRecordID)
         }
     }
     
