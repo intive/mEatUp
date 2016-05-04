@@ -13,24 +13,32 @@ import FBSDKLoginKit
 class RoomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var roomTableView: UITableView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
     var roomListLoader = RoomListDataLoader()
     let finishedRoomListLoader = FinishedRoomListDataLoader()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(RoomListViewController.handleManualRefresh(_:)), forControlEvents: .ValueChanged)
+        return refreshControl
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         hideSearchBarScopes()
+        roomTableView.addSubview(self.refreshControl)
+        refreshControl.beginRefreshing()
+        
         finishedRoomListLoader.loadUserRecordFromCloudKit()
         
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
             self.roomListLoader.currentRoomList = self.roomListLoader.publicRooms
-            self.loadingIndicator.stopAnimating()
             self.showSearchBarScopes()
+            self.refreshControl.endRefreshing()
         }
+        
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
 
@@ -77,10 +85,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             return
         }
         
-        roomListLoader.completionHandler = {
-            self.roomTableView.reloadData()
-            self.loadingIndicator.stopAnimating()
-        }
         roomListLoader.loadCurrentRoomList(scope, filter: nil)
         
         roomTableView.reloadData()
@@ -151,5 +155,14 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     private func showSearchBarScopes() {
         self.searchBar.showsScopeBar = true
         self.searchBar.sizeToFit()
+    }
+    
+    func handleManualRefresh(refreshControl: UIRefreshControl) {
+        roomListLoader.completionHandler = {
+            self.roomTableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+        
+        roomListLoader.loadUserRecordFromCloudKit()
     }
 }

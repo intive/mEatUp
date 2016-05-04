@@ -10,7 +10,6 @@ import UIKit
 
 class RestaurantListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     let cloudKitHelper = CloudKitHelper()
     let searchController = UISearchController(searchResultsController: nil)
@@ -18,9 +17,17 @@ class RestaurantListViewController: UIViewController {
     var filteredRestaurants = [Restaurant]()
     var saveRestaurant: ((Restaurant) -> Void)?
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(RestaurantListViewController.handleManualRefresh(_:)), forControlEvents: .ValueChanged)
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchController.loadViewIfNeeded()
+        tableView.addSubview(self.refreshControl)
+        refreshControl.beginRefreshing()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,10 +49,11 @@ class RestaurantListViewController: UIViewController {
     }
     
     func loadRestaurants() {
+        refreshControl.beginRefreshing()
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
             self?.restaurants = restaurants
             self?.tableView.reloadData()
-            self?.loadingIndicator.stopAnimating()
+            self?.refreshControl.endRefreshing()
         }, errorHandler: nil)
     }
     
@@ -54,6 +62,11 @@ class RestaurantListViewController: UIViewController {
             destination.saveRestaurant = self.saveRestaurant
         }
     }
+    
+    func handleManualRefresh(refreshControl: UIRefreshControl) {
+        loadRestaurants()
+    }
+    
 }
 
 extension RestaurantListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -78,6 +91,7 @@ extension RestaurantListViewController: UITableViewDelegate, UITableViewDataSour
             self.saveRestaurant?(restaurant)
         }
     }
+    
 }
 
 extension RestaurantListViewController: UISearchResultsUpdating {

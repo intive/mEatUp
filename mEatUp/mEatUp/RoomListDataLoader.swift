@@ -41,6 +41,11 @@ class RoomListDataLoader {
     }
     
     func loadRoomsForRoomList(userRecordID: CKRecordID) {
+        myRoom.removeAll()
+        joinedRooms.removeAll()
+        invitedRooms.removeAll()
+        publicRooms.removeAll()
+        
         cloudKitHelper?.loadPublicRoomRecords({
             room in
             if !room.eventOccured {
