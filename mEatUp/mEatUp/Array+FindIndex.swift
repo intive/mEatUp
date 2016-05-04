@@ -1,5 +1,5 @@
 //
-//  NSArray+FindAndReplace.swift
+//  NSArray+FindIndex.swift
 //  mEatUp
 //
 //  Created by Paweł Knuth on 28.04.2016.

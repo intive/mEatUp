@@ -45,7 +45,7 @@
 		C7F88DB71CC53115007A6038 /* NSDateFormatter+Meatup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */; };
 		E100270E1CBD1C410071D45C /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E100270D1CBD1C410071D45C /* RoomListCell.swift */; };
 		E10027141CBE48EF0071D45C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10027131CBE48EF0071D45C /* CloudKit.framework */; };
-		E11E40481CD22BDD004137B1 /* Array+FindRoomIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E40471CD22BDD004137B1 /* Array+FindRoomIndex.swift */; };
+		E11E40481CD22BDD004137B1 /* Array+FindIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */; };
 		E121F3631CCA374700860871 /* RoomViewDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E121F3621CCA374700860871 /* RoomViewDataLoader.swift */; };
 		E12352271CCF677C009F84F8 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12352261CCF677C009F84F8 /* Subscriptions.swift */; };
 		E12D3A1F1CC8C0FF0072EC41 /* RoomViewPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */; };
@@ -122,7 +122,7 @@
 		C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+Meatup.swift"; sourceTree = "<group>"; };
 		E100270D1CBD1C410071D45C /* RoomListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
 		E10027131CBE48EF0071D45C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		E11E40471CD22BDD004137B1 /* Array+FindRoomIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindRoomIndex.swift"; sourceTree = "<group>"; };
+		E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindIndex.swift"; sourceTree = "<group>"; };
 		E121F3621CCA374700860871 /* RoomViewDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewDataLoader.swift; sourceTree = "<group>"; };
 		E12352261CCF677C009F84F8 /* Subscriptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
 		E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewPurpose.swift; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
-				E11E40471CD22BDD004137B1 /* Array+FindRoomIndex.swift */,
+				E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -502,7 +502,7 @@
 				35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */,
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
-				E11E40481CD22BDD004137B1 /* Array+FindRoomIndex.swift in Sources */,
+				E11E40481CD22BDD004137B1 /* Array+FindIndex.swift in Sources */,
 				E12D3A1F1CC8C0FF0072EC41 /* RoomViewPurpose.swift in Sources */,
 				E1FB87D91CBCE98C00273E4E /* UserInRoom.swift in Sources */,
 				C74476BF1CC8DA880062AC81 /* RestaurantListViewController.swift in Sources */,
