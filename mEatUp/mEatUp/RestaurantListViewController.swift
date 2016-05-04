@@ -10,6 +10,7 @@ import UIKit
 
 class RestaurantListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     let cloudKitHelper = CloudKitHelper()
     let searchController = UISearchController(searchResultsController: nil)
@@ -44,6 +45,7 @@ class RestaurantListViewController: UIViewController {
         cloudKitHelper.loadRestaurantRecords({ [weak self] restaurants in
             self?.restaurants = restaurants
             self?.tableView.reloadData()
+            self?.loadingIndicator.stopAnimating()
         }, errorHandler: nil)
     }
     

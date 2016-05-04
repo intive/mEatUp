@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if FBSDKAccessToken.currentAccessToken() != nil
         {
             loginButton.hidden = true
+            createUser()
             performSegueWithIdentifier("ShowRoomListSegue", sender: nil)
         }
     }
@@ -36,36 +37,47 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         if error != nil {
         } else {
-            FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields":"id, first_name, last_name, picture.type(small)"]).startWithCompletionHandler { (connection, result, error) -> Void in
-                if error != nil {
-                } else {
-                    if let fbID = (result.objectForKey("id") as? String) {
-                        let firstName: String? = (result.objectForKey("first_name") as? String)
-                        let lastName: String? = (result.objectForKey("last_name") as? String)
-                        let pictureURL: String? = (result.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String)
-                    
-                        self.userSettings.saveUserDetails(fbID, firstName: firstName, lastName: lastName, pictureURL: pictureURL)
-                    
-                        let cloud = CloudKitHelper()
-                        cloud.loadUserRecordWithFbId(fbID, completionHandler: { user in
-                            if user.recordID == nil {
-                                let newUser = User()
-                                newUser.fbID = fbID
-                                newUser.name = firstName
-                                newUser.surname = lastName
-                                newUser.photo = pictureURL
-                                cloud.saveUserRecord(newUser, completionHandler: nil, errorHandler: nil)
-                            }
-                        }, errorHandler: nil)
-                    }
-                }
-            }
+            createUser()
         }
     }
     
     //function added only to conform FBSDKLoginButtonDelegate protocol
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
 
+    }
+    
+    func createUser() {
+        FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields":"id, first_name, last_name, picture.type(small)"]).startWithCompletionHandler { (connection, result, error) -> Void in
+            if error != nil {
+            } else {
+                if let fbID = (result.objectForKey("id") as? String) {
+                    let firstName: String? = (result.objectForKey("first_name") as? String)
+                    let lastName: String? = (result.objectForKey("last_name") as? String)
+                    let pictureURL: String? = (result.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String)
+                    
+                    self.userSettings.saveUserDetails(fbID, firstName: firstName, lastName: lastName, pictureURL: pictureURL)
+                    
+                    let cloud = CloudKitHelper()
+                    cloud.loadUserRecordWithFbId(fbID, completionHandler: { user in
+                        if user.recordID == nil {
+                            let newUser = User()
+                            newUser.fbID = fbID
+                            newUser.name = firstName
+                            newUser.surname = lastName
+                            newUser.photo = pictureURL
+                            cloud.saveUserRecord(newUser, completionHandler: nil, errorHandler: nil)
+                        }
+                    }, errorHandler: { error in
+                            let newUser = User()
+                            newUser.fbID = fbID
+                            newUser.name = firstName
+                            newUser.surname = lastName
+                            newUser.photo = pictureURL
+                            cloud.saveUserRecord(newUser, completionHandler: nil, errorHandler: nil)
+                    })
+                }
+            }
+        }
     }
     
 }

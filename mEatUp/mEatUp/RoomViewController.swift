@@ -11,7 +11,7 @@ import CloudKit
 
 class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
-    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
     var cloudKitHelper = CloudKitHelper()
@@ -29,12 +29,18 @@ class RoomViewController: UIViewController {
         }
         roomDataLoader?.refreshHandler = {
             self.participantsTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
         }
         
         roomDataLoader?.purposeHandler = {
             purpose in
             self.viewPurpose = purpose
             self.setupViewForPurpose(purpose)
+        }
+        
+        roomDataLoader?.dismissHandler = {
+            //alert about room removal you are currently in
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         if let room = room {
@@ -136,4 +142,15 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete, let roomRecordID = room?.recordID {
+                roomDataLoader?.deleteUser(indexPath.row, roomRecordID: roomRecordID)
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return viewPurpose == .Owner ? true : false
+    }
+    
 }

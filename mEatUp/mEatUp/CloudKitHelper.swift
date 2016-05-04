@@ -272,7 +272,7 @@ class CloudKitHelper {
         }
     }
     
-    func loadUsersInRoomRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: (User) -> Void, errorHandler: ((NSError?) -> Void)?) {
+    func loadUsersInRoomRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: (UserWithStatus) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "roomRecordID == %@", CKReference(recordID: roomRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
@@ -281,10 +281,15 @@ class CloudKitHelper {
                 if error == nil {
                     if let results = results {
                         for userInRoom in results {
+                            let userWithStatus = UserWithStatus()
+                            if let confirmationValue = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                                userWithStatus.status = ConfirmationStatus(rawValue: confirmationValue)
+                            }
                             if let userID = userInRoom[UserInRoomProperties.userRecordID.rawValue] as? CKReference {
                                 self.loadUserRecord(userID.recordID, completionHandler: {
                                     user in
-                                        completionHandler(user)
+                                        userWithStatus.user = user
+                                        completionHandler(userWithStatus)
                                 }, errorHandler: nil)
                             }
                         }
@@ -295,6 +300,41 @@ class CloudKitHelper {
                 }
             })
         }
+    }
+    
+    func loadUsersInRoomRecord(userInRoomRecordID: CKRecordID, completionHandler: (UserInRoom) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        let newUserInRoom = UserInRoom()
+        
+        self.publicDB.fetchRecordWithID(userInRoomRecordID, completionHandler: {
+            result,error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let result = result {
+                        if let confirmationValue = result[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                            newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationValue)
+                        }
+                        
+                        if let roomID =  result[UserInRoomProperties.roomRecordID.rawValue] as? CKReference {
+                            self.loadRoomRecord(roomID.recordID, completionHandler: {
+                                room in
+                                newUserInRoom.room = room
+                                
+                                if let userID = result[UserInRoomProperties.userRecordID.rawValue] as? CKReference {
+                                    self.loadUserRecord(userID.recordID, completionHandler: {
+                                        user in
+                                            newUserInRoom.user = user
+                                            completionHandler(newUserInRoom)
+                                        }, errorHandler: nil)
+                                }
+                                }, errorHandler: nil)
+                        }
+                    }
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        })
     }
     
     func usersInRoomRecordWithRoomIdCount(roomRecordID: CKRecordID, completionHandler: (Int) -> Void, errorHandler: ((NSError?) -> Void)?) {
@@ -311,6 +351,25 @@ class CloudKitHelper {
                 }
             })
         }
+    }
+    
+    func deleteUserInRoomRecord(userRecordID: CKRecordID, roomRecordID: CKRecordID, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "userRecordID == %@ AND roomRecordID = %@", CKReference(recordID: userRecordID, action: .None), CKReference(recordID: roomRecordID, action: .None))
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil, let result = results {
+                    let userInRoom = UserInRoom()
+                    userInRoom.recordID = result[0].recordID
+                    self.deleteRecord(userInRoom, completionHandler: nil, errorHandler: nil)
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        }
+
     }
     
     func loadUsersInRoomRecordWithUserId(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
@@ -552,6 +611,7 @@ class CloudKitHelper {
                     if let results = results where results.count > 0 {
                         for userInRoom in results {
                             let newUserInRoom = UserInRoom()
+                            newUserInRoom.confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? ConfirmationStatus
                             newUserInRoom.recordID = userInRoom.recordID
                             completionHandler(newUserInRoom)
                         }
