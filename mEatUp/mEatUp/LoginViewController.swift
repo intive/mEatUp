@@ -74,8 +74,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                             newUser.surname = lastName
                             newUser.photo = pictureURL
                             cloud.saveUserRecord(newUser, completionHandler: nil, errorHandler: nil)
-                        }
-                    )
+                    })
                 }
             }
         }

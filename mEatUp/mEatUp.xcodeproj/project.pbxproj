@@ -51,6 +51,7 @@
 		E12D3A1F1CC8C0FF0072EC41 /* RoomViewPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */; };
 		E134A87D1CC8C96C0014F251 /* RoomViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134A87C1CC8C96C0014F251 /* RoomViewActions.swift */; };
 		E17687D01CC6410D00B5F115 /* RoomDetailsPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17687CF1CC6410D00B5F115 /* RoomDetailsPurpose.swift */; };
+		E18D191C1CD9FCA400763DB0 /* UserWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D191B1CD9FCA400763DB0 /* UserWithStatus.swift */; };
 		E1D4FE131CCE169400C88541 /* NSDate+CompareDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */; };
 		E1D814C51CC4F4CF00F5A538 /* RoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */; };
 		E1F1177A1CC62B7F00B36F84 /* RoomDataScopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F117791CC62B7F00B36F84 /* RoomDataScopes.swift */; };
@@ -127,6 +128,7 @@
 		E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewPurpose.swift; sourceTree = "<group>"; };
 		E134A87C1CC8C96C0014F251 /* RoomViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewActions.swift; sourceTree = "<group>"; };
 		E17687CF1CC6410D00B5F115 /* RoomDetailsPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailsPurpose.swift; sourceTree = "<group>"; };
+		E18D191B1CD9FCA400763DB0 /* UserWithStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWithStatus.swift; sourceTree = "<group>"; };
 		E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+CompareDates.swift"; sourceTree = "<group>"; };
 		E1D814C41CC4F4CF00F5A538 /* RoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListDataLoader.swift; sourceTree = "<group>"; };
 		E1F117791CC62B7F00B36F84 /* RoomDataScopes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDataScopes.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
 				357498CD1CC647710052C790 /* UIImageView+Meatup.swift */,
 				C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */,
+				E18D191B1CD9FCA400763DB0 /* UserWithStatus.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				C7C5493F1CBD4CE30054A91E /* OscillatingRoomInfoView.swift in Sources */,
 				E1FB87E01CBCE99B00273E4E /* UserInRoomProperties.swift in Sources */,
 				E1FB87D11CBCE97600273E4E /* CloudKitHelper.swift in Sources */,
+				E18D191C1CD9FCA400763DB0 /* UserWithStatus.swift in Sources */,
 				E1FB87D61CBCE98C00273E4E /* Restaurant.swift in Sources */,
 				E121F3631CCA374700860871 /* RoomViewDataLoader.swift in Sources */,
 				C74476C31CC914000062AC81 /* RestaurantViewController.swift in Sources */,

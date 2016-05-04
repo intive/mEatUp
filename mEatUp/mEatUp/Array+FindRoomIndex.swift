@@ -20,10 +20,10 @@ extension Array {
         return nil
     }
     
-    func findUserIndex(user: User) -> Int? {
+    func findUserIndex(userInRoom: UserWithStatus) -> Int? {
         for (index, element) in self.enumerate() {
             if let element = element as? User {
-                if element == user {
+                if element == userInRoom.user {
                     return index
                 }
             }

@@ -37,6 +37,18 @@ class RoomListDataLoader {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomAddedNotification), name: "roomAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomUpdatedNotification), name: "roomUpdated", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
+    }
+    
+    @objc func userInRoomAddedNotification(aNotification: NSNotification) {
+        if let userInRoomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper?.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
+                userInRoom in
+                if self.userRecordID == userInRoom.user?.recordID {
+                    //Alert for invite
+                }
+            }, errorHandler: nil)
+        }
     }
     
     @objc func roomUpdatedNotification(aNotification: NSNotification) {
@@ -48,6 +60,15 @@ class RoomListDataLoader {
                     self.replaceRoomInArray(&self.invitedRooms, room: room)
                     self.completionHandler?()
             }, errorHandler: nil)
+            
+            if let userRecordID = userRecordID {
+                cloudKitHelper?.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
+                    inRoom in
+                    if inRoom != nil {
+                        //Alert that room user was in was modified
+                    }
+                }, errorHandler: nil)
+            }
         }
     }
     

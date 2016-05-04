@@ -30,9 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        s.deleteSubscriptions()
 //        s.createCreateRoomSubscription()
 //        s.createDeleteRoomSubscription()
-//        s.createEditRoomSubscription()
+//        s.createUpdateRoomSubscription()
 //        s.createCreateUserInRoomSubscription()
 //        s.createDeleteUserInRoomSubscription()
+//        s.createUpdateUserInRoomSubscription()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -55,7 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomDeleted", object: queryNotification.recordID))
                 }
             case .RecordUpdated:
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomUpdated", object: queryNotification.recordID))
+                if let _ = queryNotification.recordFields?["confirmationStatus"] {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "userInRoomUpdated", object: queryNotification))
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomUpdated", object: queryNotification.recordID))
+                }
             }
         }
         return

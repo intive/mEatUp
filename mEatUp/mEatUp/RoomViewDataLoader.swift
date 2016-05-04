@@ -13,7 +13,7 @@ class RoomViewDataLoader {
     var refreshHandler: (() -> Void)?
     var dismissHandler: (() -> Void)?
     var purposeHandler: ((RoomViewPurpose) -> Void)?
-    var users = [User]()
+    var users = [UserWithStatus]()
     var room: Room?
     
     let cloudKitHelper = CloudKitHelper()
@@ -28,6 +28,26 @@ class RoomViewDataLoader {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomRemovedNotification), name: "userInRoomRemoved", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomUpdatedNotification), name: "userInRoomUpdated", object: nil)
+    }
+    
+    @objc func userInRoomUpdatedNotification(aNotification: NSNotification) {
+        if let userInRoomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
+                userInRoom in
+                if self.room == userInRoom.room, let user = userInRoom.user, let status = userInRoom.confirmationStatus {
+                    self.confirmUserInRoom(&self.users, user: UserWithStatus(user: user, status: status))
+                    self.refreshHandler?()
+                }
+            }, errorHandler: nil)
+        }
+    }
+    
+    func confirmUserInRoom(inout array: [UserWithStatus], user: UserWithStatus) {
+        if let index = array.findUserIndex(user) {
+            array.removeAtIndex(index)
+            array.append(user)
+        }
     }
     
     @objc func roomDeletedNotification(aNotification: NSNotification) {
@@ -42,8 +62,8 @@ class RoomViewDataLoader {
         if let userInRoomRecordID = aNotification.object as? CKRecordID {
             cloudKitHelper.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
                 userInRoom in
-                    if self.room == userInRoom.room, let user = userInRoom.user {
-                        self.users.append(user)
+                    if self.room == userInRoom.room, let user = userInRoom.user, let status = userInRoom.confirmationStatus {
+                        self.users.append(UserWithStatus(user: user, status: status))
                         self.refreshHandler?()
                     }
             }, errorHandler: nil)
@@ -54,8 +74,18 @@ class RoomViewDataLoader {
         if let queryNotification = aNotification.object as? CKQueryNotification {
             if room?.recordID?.recordName == queryNotification.recordFields?["roomRecordID"] as? String {
                 if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
-                    self.users = self.users.filter({return filterRemovedUser($0, userRecordName: userRecordName)})
-                    refreshHandler?()
+                    if userRecordName == userRecordID?.recordName {
+                        //Alert - kicked from room
+                        dismissHandler?()
+                    } else {
+                        self.users = self.users.filter({
+                            guard let user = $0.user else {
+                                return true
+                            }
+                            return filterRemovedUser(user, userRecordName: userRecordName)
+                        })
+                        refreshHandler?()
+                    }
                 }
             }
         }
@@ -71,8 +101,8 @@ class RoomViewDataLoader {
     func loadUsers() {
         self.users.removeAll()
         if let roomRecordID = room?.recordID {
-            cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] user in
-                self?.users.append(user)
+            cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] userWithStatus in
+                self?.users.append(userWithStatus)
                 self?.refreshHandler?()
             }, errorHandler: nil)
         }
