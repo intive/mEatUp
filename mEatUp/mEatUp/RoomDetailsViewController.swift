@@ -21,8 +21,6 @@ class RoomDetailsViewController: UIViewController {
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var limitText: UILabel!
     @IBOutlet weak var privateText: UILabel!
-    
-    
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var topLabel: UILabel!
     

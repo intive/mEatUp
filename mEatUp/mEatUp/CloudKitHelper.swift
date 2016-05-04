@@ -353,6 +353,25 @@ class CloudKitHelper {
         }
     }
     
+    func deleteUserInRoomRecord(userRecordID: CKRecordID, roomRecordID: CKRecordID, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
+        let predicate = NSPredicate(format: "userRecordID == %@ AND roomRecordID = %@", CKReference(recordID: userRecordID, action: .None), CKReference(recordID: roomRecordID, action: .None))
+        let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
+        
+        self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil, let result = results {
+                    let userInRoom = UserInRoom()
+                    userInRoom.recordID = result[0].recordID
+                    self.deleteRecord(userInRoom, completionHandler: nil, errorHandler: nil)
+                }
+                else {
+                    errorHandler?(error)
+                }
+            })
+        }
+
+    }
+    
     func loadUsersInRoomRecordWithUserId(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "userRecordID == %@", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
