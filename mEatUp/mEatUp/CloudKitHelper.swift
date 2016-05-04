@@ -281,7 +281,7 @@ class CloudKitHelper {
                 if error == nil {
                     if let results = results {
                         for userInRoom in results {
-                            var userWithStatus = UserWithStatus()
+                            let userWithStatus = UserWithStatus()
                             if let confirmationValue = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
                                 userWithStatus.status = ConfirmationStatus(rawValue: confirmationValue)
                             }

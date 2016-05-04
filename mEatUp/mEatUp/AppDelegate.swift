@@ -26,14 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         application.applicationIconBadgeNumber = 0
-//        let s = Subscriptions()
-//        s.deleteSubscriptions()
-//        s.createCreateRoomSubscription()
-//        s.createDeleteRoomSubscription()
-//        s.createUpdateRoomSubscription()
-//        s.createCreateUserInRoomSubscription()
-//        s.createDeleteUserInRoomSubscription()
-//        s.createUpdateUserInRoomSubscription()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

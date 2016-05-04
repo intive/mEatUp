@@ -73,7 +73,7 @@ class RoomListDataLoader {
     }
     
     func replaceRoomInArray(inout array: [Room], room: Room) {
-        if let index = array.findRoomIndex(room) {
+        if let index = array.findIndex(room) {
             array.removeAtIndex(index)
             array.append(room)
         }

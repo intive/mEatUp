@@ -36,17 +36,17 @@ class RoomViewDataLoader {
             cloudKitHelper.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
                 userInRoom in
                 if self.room == userInRoom.room, let user = userInRoom.user, let status = userInRoom.confirmationStatus {
-                    self.confirmUserInRoom(&self.users, user: UserWithStatus(user: user, status: status))
+                    self.confirmUserInRoom(&self.users, userWithStatus: UserWithStatus(user: user, status: status))
                     self.refreshHandler?()
                 }
             }, errorHandler: nil)
         }
     }
     
-    func confirmUserInRoom(inout array: [UserWithStatus], user: UserWithStatus) {
-        if let index = array.findUserIndex(user) {
+    func confirmUserInRoom(inout array: [UserWithStatus], userWithStatus: UserWithStatus) {
+        if let index = array.findIndex(userWithStatus) {
             array.removeAtIndex(index)
-            array.append(user)
+            array.append(userWithStatus)
         }
     }
     

@@ -54,5 +54,4 @@ class FinishedRoomListDataLoader {
             self.completionHandler?()
             }, errorHandler: nil)
     }
-
 }

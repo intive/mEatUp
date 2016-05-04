@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 class UserInRoom: CloudKitObject {
-    static let entityName = "UserInRoom"
+    static var entityName = "UserInRoom"
     
     var user: User?
     var room: Room?
@@ -43,8 +43,4 @@ class UserInRoom: CloudKitObject {
         self.confirmationStatus = .Accepted
         cloudKitHelper.saveUserInRoomRecord(self, completionHandler: completionHandler, errorHandler: errorHandler)
     }
-}
-
-func == (lhs: User, rhs: User) -> Bool {
-    return lhs.recordID == rhs.recordID
 }

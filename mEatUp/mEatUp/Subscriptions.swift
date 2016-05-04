@@ -14,28 +14,24 @@ class Subscriptions {
     
     func deleteSubscriptions() {
         cloudKitHelper.publicDB.fetchAllSubscriptionsWithCompletionHandler({subscriptions, error in
-            if error == nil {
-                if let subscriptions = subscriptions {
-                    for subscription in subscriptions {
-                        self.cloudKitHelper.publicDB.deleteSubscriptionWithID(subscription.subscriptionID, completionHandler: { (str, error) -> Void in
-                            if error != nil {
-                                print(error!.localizedDescription)
-                            }
-                        })
-                    }
+            if let subscriptions = subscriptions where error == nil {
+                for subscription in subscriptions {
+                    self.cloudKitHelper.publicDB.deleteSubscriptionWithID(subscription.subscriptionID, completionHandler: { (str, error) -> Void in
+                        if error != nil {
+                            print(error!.localizedDescription)
+                        }
+                    })
                 }
             }
         })
     }
     
-    func createUpdateRoomSubscription() {
-        let predicate = NSPredicate(format: "TRUEPREDICATE")
-        
-        let subscription = CKSubscription(recordType: Room.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordUpdate)
+    func createSubscription(predicate: NSPredicate, recordType: String, option: CKSubscriptionOptions, desiredKeys: [String]?) {
+        let subscription = CKSubscription(recordType: recordType, predicate: predicate, options: option)
         
         let notificationInfo = CKNotificationInfo()
-        
-        notificationInfo.alertBody = "Room you were in has changed"
+        notificationInfo.shouldSendContentAvailable = true
+        notificationInfo.desiredKeys = desiredKeys
         notificationInfo.shouldBadge = false
         
         subscription.notificationInfo = notificationInfo
@@ -50,125 +46,51 @@ class Subscriptions {
                 })
             }
         })
+    }
+    
+    func createSubscriptions() {
+        createUpdateRoomSubscription()
+        createDeleteRoomSubscription()
+        createCreateRoomSubscription()
+        createCreateUserInRoomSubscription()
+        createDeleteUserInRoomSubscription()
+        createUpdateUserInRoomSubscription()
+    }
+    
+    func createUpdateRoomSubscription() {
+        let predicate = NSPredicate(format: "TRUEPREDICATE")
+        
+        createSubscription(predicate, recordType: Room.entityName, option: .FiresOnRecordUpdate, desiredKeys: nil)
     }
     
     
     func createDeleteRoomSubscription() {
         let predicate = NSPredicate(format: "TRUEPREDICATE")
         
-        let subscription = CKSubscription(recordType: Room.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordDeletion)
-        
-        let notificationInfo = CKNotificationInfo()
-        
-        notificationInfo.alertBody = "Room you were in has been deleted"
-        notificationInfo.shouldBadge = false
-        
-        subscription.notificationInfo = notificationInfo
-        
-        cloudKitHelper.publicDB.saveSubscription(subscription, completionHandler: {
-            returnRecord, error in
-            if let error = error {
-                print("Subscription faild \(error)")
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("Subscription succeed")
-                })
-            }
-        })
+        createSubscription(predicate, recordType: Room.entityName, option: .FiresOnRecordDeletion, desiredKeys: nil)
     }
     
     func createCreateRoomSubscription() {
         let predicate = NSPredicate(format: "accessType == 2")
         
-        let subscription = CKSubscription(recordType: Room.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordCreation)
-        
-        let notificationInfo = CKNotificationInfo()
-        
-        notificationInfo.shouldBadge = false
-        
-        subscription.notificationInfo = notificationInfo
-        
-        cloudKitHelper.publicDB.saveSubscription(subscription, completionHandler: {
-            returnRecord, error in
-            if let error = error {
-                print("Subscription faild \(error)")
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("Subscription succeed")
-                })
-            }
-        })
+        createSubscription(predicate, recordType: Room.entityName, option: .FiresOnRecordCreation, desiredKeys: nil)
     }
     
     func createCreateUserInRoomSubscription() {
         let predicate = NSPredicate(format: "TRUEPREDICATE")
         
-        let subscription = CKSubscription(recordType: UserInRoom.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordCreation)
-        
-        let notificationInfo = CKNotificationInfo()
-        notificationInfo.shouldSendContentAvailable = true
-        notificationInfo.desiredKeys = ["userRecordID", "roomRecordID", "confirmationStatus"]
-        notificationInfo.shouldBadge = false
-        
-        subscription.notificationInfo = notificationInfo
-        
-        cloudKitHelper.publicDB.saveSubscription(subscription, completionHandler: {
-            returnRecord, error in
-            if let error = error {
-                print("Subscription faild \(error)")
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("Subscription succeed")
-                })
-            }
-        })
+        createSubscription(predicate, recordType: UserInRoom.entityName, option: .FiresOnRecordCreation, desiredKeys: ["userRecordID", "roomRecordID", "confirmationStatus"])
     }
     
     func createDeleteUserInRoomSubscription() {
         let predicate = NSPredicate(format: "TRUEPREDICATE")
         
-        let subscription = CKSubscription(recordType: UserInRoom.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordDeletion)
-        
-        let notificationInfo = CKNotificationInfo()
-        notificationInfo.shouldSendContentAvailable = true
-        notificationInfo.desiredKeys = ["userRecordID", "roomRecordID", "confirmationStatus"]
-        notificationInfo.shouldBadge = false
-        
-        subscription.notificationInfo = notificationInfo
-        
-        cloudKitHelper.publicDB.saveSubscription(subscription, completionHandler: {
-            returnRecord, error in
-            if let error = error {
-                print("Subscription faild \(error)")
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("Subscription succeed")
-                })
-            }
-        })
+        createSubscription(predicate, recordType: UserInRoom.entityName, option: .FiresOnRecordDeletion, desiredKeys: ["userRecordID", "roomRecordID", "confirmationStatus"])
     }
     
     func createUpdateUserInRoomSubscription() {
         let predicate = NSPredicate(format: "confirmationStatus == 2")
         
-        let subscription = CKSubscription(recordType: UserInRoom.entityName, predicate: predicate, options: CKSubscriptionOptions.FiresOnRecordUpdate)
-        
-        let notificationInfo = CKNotificationInfo()
-        notificationInfo.shouldSendContentAvailable = true
-        notificationInfo.desiredKeys = ["userRecordID", "roomRecordID", "confirmationStatus"]
-        notificationInfo.shouldBadge = false
-        
-        subscription.notificationInfo = notificationInfo
-        
-        cloudKitHelper.publicDB.saveSubscription(subscription, completionHandler: {
-            returnRecord, error in
-            if let error = error {
-                print("Subscription faild \(error)")
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("Subscription succeed")
-                })
-            }
-        })
+        createSubscription(predicate, recordType: UserInRoom.entityName, option: .FiresOnRecordUpdate, desiredKeys: ["userRecordID", "roomRecordID", "confirmationStatus"])
     }
 }

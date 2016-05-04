@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserWithStatus {
+class UserWithStatus: Equatable {
     var user: User?
     var status: ConfirmationStatus?
     
@@ -19,4 +19,8 @@ class UserWithStatus {
     
     init() {
     }
+}
+
+func == (lhs: UserWithStatus, rhs: UserWithStatus) -> Bool {
+    return lhs.user == rhs.user
 }

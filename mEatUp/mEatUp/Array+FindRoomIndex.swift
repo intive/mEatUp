@@ -8,24 +8,11 @@
 
 import Foundation
 
-extension Array {
-    func findRoomIndex(room: Room) -> Int? {
+extension Array where Element: Equatable {
+    func findIndex(object: Element) -> Int? {
         for (index, element) in self.enumerate() {
-            if let element = element as? Room {
-                if element == room {
-                    return index
-                }
-            }
-        }
-        return nil
-    }
-    
-    func findUserIndex(userInRoom: UserWithStatus) -> Int? {
-        for (index, element) in self.enumerate() {
-            if let element = element as? User {
-                if element == userInRoom.user {
-                    return index
-                }
+            if element == object {
+                return index
             }
         }
         return nil

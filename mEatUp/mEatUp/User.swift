@@ -11,7 +11,7 @@ import CloudKit
 
 class User: CloudKitObject, Equatable {
     static let entityName = "User"
-    
+
     var fbID: String?
     var name: String?
     var surname: String?
@@ -28,4 +28,8 @@ class User: CloudKitObject, Equatable {
     
     init() {
     }
+}
+
+func == (lhs: User, rhs: User) -> Bool {
+    return lhs.recordID == rhs.recordID
 }
