@@ -19,7 +19,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(RoomListViewController.handleManualRefresh(_:)), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(handleManualRefresh(_:)), forControlEvents: .ValueChanged)
         return refreshControl
     }()
     
