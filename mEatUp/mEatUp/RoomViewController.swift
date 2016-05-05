@@ -122,7 +122,7 @@ class RoomViewController: UIViewController {
 
 extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return nil
+        return "Participants"
     }
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
