@@ -200,10 +200,8 @@
 				353E53171CBE4D8400FE42F5 /* UserSettings.swift */,
 				C7CD52C01CBE98C800A8CB8B /* MeatupTextField.swift */,
 				C74547091CBFB8900055E9A3 /* MeatupDatePicker.swift */,
-				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
-				357498CD1CC647710052C790 /* UIImageView+Meatup.swift */,
-				C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */,
 				E18D191B1CD9FCA400763DB0 /* UserWithStatus.swift */,
+
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -291,6 +289,9 @@
 		E1D4FE111CCE167D00C88541 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */,
+				357498CD1CC647710052C790 /* UIImageView+Meatup.swift */,
+				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
 				E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */,
 			);

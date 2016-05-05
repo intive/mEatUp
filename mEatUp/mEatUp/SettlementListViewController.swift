@@ -33,8 +33,15 @@ class SettlementListViewController: UIViewController {
         return frc
     }()
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleManualRefresh(_:)), forControlEvents: .ValueChanged)
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.addSubview(self.refreshControl)
         fetch()
     }
     
@@ -53,12 +60,15 @@ class SettlementListViewController: UIViewController {
     }
     
     func fetch() {
+        refreshControl.beginRefreshing()
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
         } catch {
             print("Fetch error occurred")
+            refreshControl.endRefreshing()
         }
+        refreshControl.endRefreshing()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -74,6 +84,10 @@ class SettlementListViewController: UIViewController {
 
             destinationVC.participants = participantsToPass
         }
+    }
+    
+    func handleManualRefresh(refreshControl: UIRefreshControl) {
+        fetch()
     }
 }
 
@@ -121,5 +135,6 @@ extension SettlementListViewController: UITableViewDataSource, UITableViewDelega
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }

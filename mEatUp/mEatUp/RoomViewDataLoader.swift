@@ -146,8 +146,8 @@ class RoomViewDataLoader {
         }
         cloudKitHelper.deleteRecord(userInRoom, completionHandler: {
             self.purposeHandler?(RoomViewPurpose.User)
-            self.loadUsers()
             self.userInRoom = nil
+            self.loadUsers()
             
             completionBlock?()
         }, errorHandler: nil)
