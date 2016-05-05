@@ -8,7 +8,6 @@
 
 import UIKit
 import CloudKit
-import CoreGraphics
 
 class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
@@ -93,10 +92,10 @@ class RoomViewController: UIViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         case .Participant:
             pullAndStartRefreshingTableView()
-            roomDataLoader?.leaveRoom({print("koniec participant")})
+            roomDataLoader?.leaveRoom(nil)
         case .User:
             pullAndStartRefreshingTableView()
-            roomDataLoader?.joinRoom({print("koniec user")})
+            roomDataLoader?.joinRoom(nil)
         }
     }
 
@@ -116,6 +115,7 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
             
         if let cell = cell as? RoomParticipantTableViewCell, let roomDataLoader = self.roomDataLoader {
             cell.configureWithRoom(roomDataLoader.users[indexPath.row])
+
             return cell
         }
         return cell
@@ -148,8 +148,9 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func pullAndStartRefreshingTableView() {
-        UIView.animateWithDuration(0.25, delay: 0, options: .BeginFromCurrentState, animations: { self.participantsTableView.contentOffset = CGPointMake(0, -108)}, completion: {finished in
-        self.refreshControl.beginRefreshing()})
+        let yOffset = participantsTableView.contentOffset.y - refreshControl.frame.size.height
+        participantsTableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: true)
+        refreshControl.beginRefreshing()
     }
     
 }
