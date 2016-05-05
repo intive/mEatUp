@@ -123,8 +123,6 @@ class RoomViewDataLoader {
                 } else {
                     self.purposeHandler?(RoomViewPurpose.User)
                 }
-
-                self.loadUsers()
             }, errorHandler: nil)
         }
     }

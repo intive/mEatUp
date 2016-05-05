@@ -15,10 +15,17 @@ class InvitationViewController: UIViewController {
     
     let cloudKitHelper = CloudKitHelper()
     var users = [User]()
-    var filteredUsers = [User]()
+    var currentUserList: [User] {
+        get {
+            return loadCurrentUserList(filter)
+        }
+    }
+    
+    var filter: ((User) -> Bool)? = nil
     var checked = [CKRecordID]()
     var room: Room?
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +52,24 @@ class InvitationViewController: UIViewController {
         guard let roomRecordID = room?.recordID else { return }
         for userRecordID in checked {
             let userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: .Invited)
-            cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: nil, errorHandler: nil)
+            cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }, errorHandler: nil)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func loadCurrentUserList(filter: ((User) -> Bool)?) -> [User] {
+        guard let filter = filter else {
+            return users
+        }
+
+        return users.filter({filter($0)})
     }
 }
 
-extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
+extension InvitationViewController: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count ?? 0
+        return currentUserList.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -61,9 +77,9 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath)
         if let cell = cell as? UserTableViewCell {
             
-            guard let userRecordID = users[indexPath.row].recordID else { return cell }
+            guard let userRecordID = currentUserList[indexPath.row].recordID else { return cell }
             let accessoryType: UITableViewCellAccessoryType = checked.contains(userRecordID) ? .Checkmark : .None
-            cell.configureWithUser(users[indexPath.row], accessoryType: accessoryType)
+            cell.configureWithUser(currentUserList[indexPath.row], accessoryType: accessoryType)
             
             return cell
         }
@@ -76,7 +92,7 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
 
-        guard let userRecordID = users[indexPath.row].recordID else { return }
+        guard let userRecordID = currentUserList[indexPath.row].recordID else { return }
         
         if checked.contains(userRecordID) {
             if let index = checked.indexOf(userRecordID) {
@@ -89,4 +105,27 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filter = nil
+        } else {
+            filter = { user in
+                guard let name = user.name, let surname = user.surname else {
+                    return false
+                }
+                let userName = "\(name) \(surname)"
+                return userName.lowercaseString.containsString(searchText.lowercaseString)
+            }
+        }
+    
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = ""
+        filter = nil
+        searchBar.endEditing(true)
+        
+        tableView.reloadData()
+    }
 }

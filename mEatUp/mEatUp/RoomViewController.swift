@@ -25,9 +25,20 @@ class RoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupViewController()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        roomDataLoader?.loadUsers()
+        participantsTableView.reloadData()
+    }
+    
+    func setupViewController() {
         if let userRecordID = userRecordID, room = room {
             roomDataLoader = RoomViewDataLoader(userRecordID: userRecordID, room: room)
         }
+        
         roomDataLoader?.refreshHandler = {
             self.participantsTableView.reloadData()
             self.loadingIndicator.stopAnimating()
