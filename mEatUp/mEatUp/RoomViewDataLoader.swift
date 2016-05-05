@@ -154,7 +154,7 @@ class RoomViewDataLoader {
     }
     
     func deleteUser(userRow: Int, roomRecordID: CKRecordID) {
-        if let userRecordID = users[userRow].recordID {
+        if let userRecordID = users[userRow].user?.recordID {
             cloudKitHelper.deleteUserInRoomRecord(userRecordID, roomRecordID: roomRecordID, completionHandler: {
                 self.purposeHandler?(RoomViewPurpose.Owner)
                 self.loadUsers()
