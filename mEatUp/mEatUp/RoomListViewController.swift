@@ -42,10 +42,8 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.navigationBar.translucent = false
 
         if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
-            let applicationName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleDisplayName")
-            let message = "A serious application error occurred while \(applicationName) tried to read your data. Please contact support for help."
-            
-            self.showAlertWithTitle("Warning", message: message, cancelButtonTitle: "OK")
+            let message = "A serious application error occurred while mEatUp tried to read your data. Please contact support for help."
+            self.presentViewController( AlertCreator.singleActionAlert("Warning", message: message, actionTitle: "OK", actionHandler: nil), animated: true, completion: nil)
         }
     }
 
@@ -140,19 +138,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             destination.room = sender as? Room
             destination.userRecordID = roomListLoader.userRecordID
         }
-    }
-    
-    private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
-        // Initialize Alert Controller
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        
-        // Configure Alert Controller
-        alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (_) -> Void in
-            UserSettings().incompatibleStoreDetection = false
-        }))
-        
-        // Present Alert Controller
-        presentViewController(alertController, animated: true, completion: nil)
     }
     
     private func hideSearchBarScopes() {
