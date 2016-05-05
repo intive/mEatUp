@@ -35,7 +35,6 @@ class RoomViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         roomDataLoader?.loadUsers()
-        participantsTableView.reloadData()
     }
     
     func setupViewController() {
