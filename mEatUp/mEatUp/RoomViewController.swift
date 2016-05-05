@@ -17,6 +17,7 @@ class RoomViewController: UIViewController {
     var room: Room?
     var userRecordID: CKRecordID?
     var roomDataLoader: RoomViewDataLoader?
+
     var viewPurpose: RoomViewPurpose?
     
     lazy var refreshControl: UIRefreshControl = {
@@ -27,6 +28,16 @@ class RoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupViewController()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        roomDataLoader?.loadUsers()
+    }
+    
+    func setupViewController() {
         participantsTableView.addSubview(self.refreshControl)
         refreshControl.beginRefreshing()
         
@@ -82,6 +93,9 @@ class RoomViewController: UIViewController {
             destination.room = room
             destination.userRecordID = userRecordID
         }
+        if let navigationCtrl = segue.destinationViewController as? UINavigationController, let destination = navigationCtrl.topViewController as? InvitationViewController {
+            destination.room = room
+        }
     }
     
     @IBAction func rightBarButtonPressed(sender: UIBarButtonItem) {
@@ -110,6 +124,19 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return nil
     }
+
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        let inviteButton = UIButton(frame: CGRect(x: view.frame.width - view.frame.height, y: 0, width: view.frame.height, height: view.frame.height))
+        inviteButton.setImage(UIImage(named: "AddUser.png"), forState: .Normal)
+        inviteButton.addTarget(self, action: #selector(inviteButtonTapped), forControlEvents: .TouchUpInside)
+        
+        view.addSubview(inviteButton)
+    }
+    
+    func inviteButtonTapped(sender: UIButton) {
+        performSegueWithIdentifier("ShowInvitationRoomController", sender: nil)
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
@@ -137,7 +164,7 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete, let roomRecordID = room?.recordID {
-                roomDataLoader?.deleteUser(indexPath.row, roomRecordID: roomRecordID)
+            roomDataLoader?.deleteUser(indexPath.row, roomRecordID: roomRecordID)
         }
     }
     

@@ -362,7 +362,7 @@ class CloudKitHelper {
                 if error == nil, let result = results {
                     let userInRoom = UserInRoom()
                     userInRoom.recordID = result[0].recordID
-                    self.deleteRecord(userInRoom, completionHandler: nil, errorHandler: nil)
+                    self.deleteRecord(userInRoom, completionHandler: completionHandler, errorHandler: nil)
                 }
                 else {
                     errorHandler?(error)
