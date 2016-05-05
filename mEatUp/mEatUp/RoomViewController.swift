@@ -11,16 +11,20 @@ import CloudKit
 
 class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
     var cloudKitHelper = CloudKitHelper()
     var room: Room?
     var userRecordID: CKRecordID?
-    
     var roomDataLoader: RoomViewDataLoader?
 
     var viewPurpose: RoomViewPurpose?
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleManualRefresh(_:)), forControlEvents: .ValueChanged)
+        return refreshControl
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +39,16 @@ class RoomViewController: UIViewController {
     }
     
     func setupViewController() {
+        participantsTableView.addSubview(self.refreshControl)
+        refreshControl.beginRefreshing()
+        
         if let userRecordID = userRecordID, room = room {
             roomDataLoader = RoomViewDataLoader(userRecordID: userRecordID, room: room)
         }
         
         roomDataLoader?.refreshHandler = {
             self.participantsTableView.reloadData()
-            self.loadingIndicator.stopAnimating()
+            self.refreshControl.endRefreshing()
         }
         
         roomDataLoader?.purposeHandler = {
@@ -104,18 +111,18 @@ class RoomViewController: UIViewController {
             roomDataLoader?.room?.eventOccured == true ? roomDataLoader?.endRoom(nil, errorHandler: nil) : roomDataLoader?.disbandRoom(nil, errorHandler: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
         case .Participant:
+            pullAndStartRefreshingTableView()
             roomDataLoader?.leaveRoom(nil)
         case .User:
+            pullAndStartRefreshingTableView()
             roomDataLoader?.joinRoom(nil)
         }
     }
+
 }
 
 extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Participants"
-        }
         return nil
     }
 
@@ -138,6 +145,7 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
             
         if let cell = cell as? RoomParticipantTableViewCell, let roomDataLoader = self.roomDataLoader {
             cell.configureWithRoom(roomDataLoader.users[indexPath.row])
+
             return cell
         }
         return cell
@@ -163,6 +171,16 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return viewPurpose == .Owner ? true : false
+    }
+    
+    func handleManualRefresh(refreshControl: UIRefreshControl) {
+        roomDataLoader?.loadUsers()
+    }
+    
+    func pullAndStartRefreshingTableView() {
+        let yOffset = participantsTableView.contentOffset.y - refreshControl.frame.size.height
+        participantsTableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: false)
+        refreshControl.beginRefreshing()
     }
     
 }
