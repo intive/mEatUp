@@ -18,7 +18,14 @@ class RoomListDataLoader {
     var invitedRooms: [Room] = []
     var publicRooms: [Room] = []
     
-    var currentRoomList: [Room] = []
+    var currentRoomList: [Room] {
+        get {
+            return loadCurrentRoomList(dataScope, filter: filter)
+        }
+    }
+    
+    var dataScope: RoomDataScopes = .Public
+    var filter: ((Room) -> Bool)? = nil
     
     var completionHandler: (() -> Void)?
         
@@ -26,6 +33,70 @@ class RoomListDataLoader {
 
     init() {
         cloudKitHelper = CloudKitHelper()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomAddedNotification), name: "roomAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomUpdatedNotification), name: "roomUpdated", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
+    }
+    
+    @objc func userInRoomAddedNotification(aNotification: NSNotification) {
+        if let userInRoomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper?.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
+                userInRoom in
+                if self.userRecordID == userInRoom.user?.recordID {
+                    //Alert for invite
+                }
+            }, errorHandler: nil)
+        }
+    }
+    
+    @objc func roomUpdatedNotification(aNotification: NSNotification) {
+        if let roomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper?.loadRoomRecord(roomRecordID, completionHandler: {
+                room in
+                    self.replaceRoomInArray(&self.publicRooms, room: room)
+                    self.replaceRoomInArray(&self.joinedRooms, room: room)
+                    self.replaceRoomInArray(&self.invitedRooms, room: room)
+                    self.completionHandler?()
+            }, errorHandler: nil)
+            
+            if let userRecordID = userRecordID {
+                cloudKitHelper?.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
+                    inRoom in
+                    if inRoom != nil {
+                        //Alert that room user was in was modified
+                    }
+                }, errorHandler: nil)
+            }
+        }
+    }
+    
+    func replaceRoomInArray(inout array: [Room], room: Room) {
+        if let index = array.findIndex(room) {
+            array.removeAtIndex(index)
+            array.append(room)
+        }
+    }
+    
+    @objc func roomAddedNotification(aNotification: NSNotification) {
+        if let roomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper?.loadRoomRecord(roomRecordID, completionHandler: {
+                room in
+                    self.publicRooms.append(room)
+                    self.completionHandler?()
+            }, errorHandler: nil)
+        }
+    }
+    
+    @objc func roomDeletedNotification(aNotification: NSNotification) {
+        if let roomRecordID = aNotification.object as? CKRecordID {
+            self.publicRooms = self.publicRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
+            self.joinedRooms = self.joinedRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
+            self.invitedRooms = self.invitedRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
+            
+            self.completionHandler?()
+        }
     }
     
     func loadUserRecordFromCloudKit() {
@@ -38,6 +109,13 @@ class RoomListDataLoader {
                 }
                 }, errorHandler: nil)
         }
+    }
+    
+    func filterRemovedRoom(room: Room, roomRecordID: CKRecordID) -> Bool {
+        if let recordID = room.recordID {
+            return !(recordID == roomRecordID)
+        }
+        return false
     }
     
     func loadRoomsForRoomList(userRecordID: CKRecordID) {
@@ -82,32 +160,31 @@ class RoomListDataLoader {
         }, errorHandler: nil)
     }
     
-    func loadCurrentRoomList(dataScope: RoomDataScopes, filter: ((Room) -> Bool)?) {
-        
+    func loadCurrentRoomList(dataScope: RoomDataScopes, filter: ((Room) -> Bool)?) -> [Room] {
         switch dataScope {
         case .Joined:
             if let filter = filter {
-                currentRoomList = joinedRooms.filter({filter($0)})
+                return joinedRooms.filter({filter($0)})
             } else {
-                currentRoomList = joinedRooms
+                return joinedRooms
             }
         case .Invited:
             if let filter = filter {
-                currentRoomList = invitedRooms.filter({filter($0)})
+                return invitedRooms.filter({filter($0)})
             } else {
-                currentRoomList = invitedRooms
+                return invitedRooms
             }
         case .MyRoom:
             if let filter = filter {
-                currentRoomList = myRoom.filter({filter($0)})
+                return myRoom.filter({filter($0)})
             } else {
-                currentRoomList = myRoom
+                return myRoom
             }
         case .Public:
             if let filter = filter {
-                currentRoomList = publicRooms.filter({filter($0)})
+                return publicRooms.filter({filter($0)})
             } else {
-                currentRoomList = publicRooms
+                return publicRooms
             }
         }
     }

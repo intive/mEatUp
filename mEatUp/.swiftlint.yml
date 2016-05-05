@@ -22,7 +22,7 @@ line_length:
   - 300
 type_body_length:
   - 300 # warning
-  - 400 # error
+  - 800 # error
 function_body_length:
   - 60
   - 120

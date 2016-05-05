@@ -45,6 +45,11 @@ class RoomViewController: UIViewController {
             self.setupViewForPurpose(purpose)
         }
         
+        roomDataLoader?.dismissHandler = {
+            //alert about room removal you are currently in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
         if let room = room {
             infoView.startWithRoom(room)
         }
@@ -103,9 +108,6 @@ class RoomViewController: UIViewController {
 
 extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            //return "Participants"
-        }
         return nil
     }
     
@@ -149,7 +151,7 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     
     func pullAndStartRefreshingTableView() {
         let yOffset = participantsTableView.contentOffset.y - refreshControl.frame.size.height
-        participantsTableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: true)
+        participantsTableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: false)
         refreshControl.beginRefreshing()
     }
     

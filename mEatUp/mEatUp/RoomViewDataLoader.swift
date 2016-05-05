@@ -11,8 +11,9 @@ import CloudKit
 
 class RoomViewDataLoader {
     var refreshHandler: (() -> Void)?
+    var dismissHandler: (() -> Void)?
     var purposeHandler: ((RoomViewPurpose) -> Void)?
-    var users = [User]()
+    var users = [UserWithStatus]()
     var room: Room?
     
     let cloudKitHelper = CloudKitHelper()
@@ -23,13 +24,85 @@ class RoomViewDataLoader {
     init(userRecordID: CKRecordID, room: Room) {
         self.userRecordID = userRecordID
         self.room = room
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomRemovedNotification), name: "userInRoomRemoved", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomUpdatedNotification), name: "userInRoomUpdated", object: nil)
+    }
+    
+    @objc func userInRoomUpdatedNotification(aNotification: NSNotification) {
+        if let userInRoomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
+                userInRoom in
+                if self.room == userInRoom.room, let user = userInRoom.user, let status = userInRoom.confirmationStatus {
+                    self.confirmUserInRoom(&self.users, userWithStatus: UserWithStatus(user: user, status: status))
+                    self.refreshHandler?()
+                }
+            }, errorHandler: nil)
+        }
+    }
+    
+    func confirmUserInRoom(inout array: [UserWithStatus], userWithStatus: UserWithStatus) {
+        if let index = array.findIndex(userWithStatus) {
+            array.removeAtIndex(index)
+            array.append(userWithStatus)
+        }
+    }
+    
+    @objc func roomDeletedNotification(aNotification: NSNotification) {
+        if let roomRecordID = aNotification.object as? CKRecordID {
+            if roomRecordID == room?.recordID {
+                dismissHandler?()
+            }
+        }
+    }
+    
+    @objc func userInRoomAddedNotification(aNotification: NSNotification) {
+        if let userInRoomRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
+                userInRoom in
+                    if self.room == userInRoom.room, let user = userInRoom.user, let status = userInRoom.confirmationStatus {
+                        self.users.append(UserWithStatus(user: user, status: status))
+                        self.refreshHandler?()
+                    }
+            }, errorHandler: nil)
+        }
+    }
+
+    @objc func userInRoomRemovedNotification(aNotification: NSNotification) {
+        if let queryNotification = aNotification.object as? CKQueryNotification {
+            if room?.recordID?.recordName == queryNotification.recordFields?["roomRecordID"] as? String {
+                if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
+                    if userRecordName == userRecordID?.recordName {
+                        //Alert - kicked from room
+                        dismissHandler?()
+                    } else {
+                        self.users = self.users.filter({
+                            guard let user = $0.user else {
+                                return true
+                            }
+                            return filterRemovedUser(user, userRecordName: userRecordName)
+                        })
+                        refreshHandler?()
+                    }
+                }
+            }
+        }
+    }
+    
+    func filterRemovedUser(user: User, userRecordName: String) -> Bool {
+        if let recordName = user.recordID?.recordName {
+            return !(recordName == userRecordName)
+        }
+        return false
     }
     
     func loadUsers() {
         self.users.removeAll()
         if let roomRecordID = room?.recordID {
-            cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] user in
-                self?.users.append(user)
+            cloudKitHelper.loadUsersInRoomRecordWithRoomId(roomRecordID, completionHandler: { [weak self] userWithStatus in
+                self?.users.append(userWithStatus)
                 self?.refreshHandler?()
             }, errorHandler: nil)
         }
@@ -81,7 +154,7 @@ class RoomViewDataLoader {
     }
     
     func deleteUser(userRow: Int, roomRecordID: CKRecordID) {
-        if let userRecordID = users[userRow].recordID {
+        if let userRecordID = users[userRow].user?.recordID {
             cloudKitHelper.deleteUserInRoomRecord(userRecordID, roomRecordID: roomRecordID, completionHandler: {
                 self.purposeHandler?(RoomViewPurpose.Owner)
                 self.loadUsers()

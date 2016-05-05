@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 class Restaurant: CloudKitObject {
-    static let entityName = "Restaurant"
+    static var entityName = "Restaurant"
     
     var name: String?
     var address: String?

@@ -12,7 +12,15 @@ class RoomParticipantTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     
-    func configureWithRoom(user: User) {
+    func configureWithRoom(userWithStatus: UserWithStatus) {
+        guard let user = userWithStatus.user, status = userWithStatus.status else {
+            return
+        }
+        
+        if status == .Invited {
+            self.backgroundColor = UIColor.darkGrayColor()
+        }
+        
         nameLabel.text = "\(user.name ?? "") \(user.surname ?? "")"
         if let URLasString = user.photo, let url = NSURL(string: URLasString) {
             imgView.setImageFromUrl(url)

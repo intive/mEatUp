@@ -10,14 +10,52 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 import FBSDKLoginKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let cloudKitHelper = CloudKitHelper()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+        
+        application.applicationIconBadgeNumber = 0
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        if let pushInfo = userInfo as? [String: NSObject] {
+            let queryNotification = CKQueryNotification(fromRemoteNotificationDictionary: pushInfo)
+            
+            switch queryNotification.queryNotificationReason {
+            case .RecordCreated:
+                if let _ = queryNotification.recordFields?["confirmationStatus"] {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "userInRoomAdded", object: queryNotification.recordID))
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomAdded", object: queryNotification.recordID))
+                }
+            case .RecordDeleted:
+                if let _ = queryNotification.recordFields?["confirmationStatus"] {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "userInRoomRemoved", object: queryNotification))
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomDeleted", object: queryNotification.recordID))
+                }
+            case .RecordUpdated:
+                if let _ = queryNotification.recordFields?["confirmationStatus"] {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "userInRoomUpdated", object: queryNotification))
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomUpdated", object: queryNotification.recordID))
+                }
+            }
+        }
+        return
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
