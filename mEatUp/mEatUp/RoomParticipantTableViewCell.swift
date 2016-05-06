@@ -17,9 +17,7 @@ class RoomParticipantTableViewCell: UITableViewCell {
             return
         }
         
-        if status == .Invited {
-            self.backgroundColor = UIColor.darkGrayColor()
-        }
+        self.backgroundColor = status == .Invited ? UIColor.darkGrayColor() : nil
         
         nameLabel.text = "\(user.name ?? "") \(user.surname ?? "")"
         if let URLasString = user.photo, let url = NSURL(string: URLasString) {

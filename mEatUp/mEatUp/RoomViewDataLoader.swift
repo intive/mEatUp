@@ -124,8 +124,6 @@ class RoomViewDataLoader {
                 } else {
                     self.purposeHandler?(RoomViewPurpose.User)
                 }
-
-                self.loadUsers()
             }, errorHandler: nil)
         }
     }
@@ -156,10 +154,15 @@ class RoomViewDataLoader {
     
     func deleteUser(userRow: Int, roomRecordID: CKRecordID) {
         if let userRecordID = users[userRow].user?.recordID {
-            cloudKitHelper.deleteUserInRoomRecord(userRecordID, roomRecordID: roomRecordID, completionHandler: {
-                self.purposeHandler?(RoomViewPurpose.Owner)
-                self.loadUsers()
-                } , errorHandler: nil)
+            let userWithStatus = users[userRow]
+            self.users.removeAtIndex(userRow)
+            self.refreshHandler?()
+            cloudKitHelper.deleteUserInRoomRecord(userRecordID, roomRecordID: roomRecordID, completionHandler: nil, errorHandler: {
+                error in
+                self.users.append(userWithStatus)
+                self.refreshHandler?()
+                //Alert - removal wasn't complete
+            })
         }
     }
     
