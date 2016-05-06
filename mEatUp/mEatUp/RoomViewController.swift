@@ -13,6 +13,11 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
+    @IBOutlet weak var chatTableView: UITableView!
+    
+    @IBOutlet weak var chatMessageTextField: UITextField!
+    var chat: ChatLoader?
+
     var cloudKitHelper = CloudKitHelper()
     var room: Room?
     var userRecordID: CKRecordID?
@@ -28,7 +33,6 @@ class RoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupViewController()
     }
     
@@ -66,6 +70,16 @@ class RoomViewController: UIViewController {
         }
         infoView.singleTapAction = { [unowned self] in
             self.performSegueWithIdentifier("showRoomDetailsSegue", sender: nil)
+        }
+        
+        if let roomRecordID = room?.recordID {
+            chat = ChatLoader(roomRecordID: roomRecordID)
+            chatTableView.delegate = chat
+            chatTableView.dataSource = chat
+            chat?.completionHandler = {
+                self.chatTableView.reloadData()
+            }
+            chat?.loadChatMessages()
         }
         
         roomDataLoader?.determineViewPurpose()
@@ -115,6 +129,19 @@ class RoomViewController: UIViewController {
         case .User:
             pullAndStartRefreshingTableView()
             roomDataLoader?.joinRoom(nil)
+        }
+    }
+    
+    @IBAction func sendChatButtonPushed(sender: UIButton) {
+        guard let roomRecordID = roomDataLoader?.room?.recordID, userRecordID = userRecordID else {
+            // Alert - cant send message
+            return
+        }
+        
+        if let message = chatMessageTextField.text {
+            let chatMessage = ChatMessage(roomRecordID: roomRecordID, userRecordID: userRecordID, message: message)
+            chat?.sendChatMessage(chatMessage)
+            chatMessageTextField.text = nil
         }
     }
 

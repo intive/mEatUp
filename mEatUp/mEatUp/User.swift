@@ -17,6 +17,15 @@ class User: CloudKitObject, Equatable {
     var surname: String?
     var photo: String?
     
+    var username: String {
+        get {
+            if let name = name, surname = surname {
+                return "\(name) \(surname)"
+            }
+            return "Unknown"
+        }
+    }
+    
     var recordID: CKRecordID?
     
     init(fbID: String, name: String, surname: String, photo: String) {
