@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3501DB221CDC9274004568A0 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */; };
 		3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */; };
 		3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2691CBFB55F0094394D /* FinishedRoom.swift */; };
 		3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */; };
@@ -24,6 +25,7 @@
 		354DB5141CB7EA8400B9194B /* mEatUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354DB5131CB7EA8400B9194B /* mEatUpTests.swift */; };
 		355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355301F91CBCF3E200F23373 /* RoomListViewController.swift */; };
 		355301FC1CBCF4CA00F23373 /* SettlementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */; };
+		3558E66E1CDB762700C2FD9D /* AlertCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3558E66D1CDB762700C2FD9D /* AlertCreator.swift */; };
 		356275CA1CBBAC1D009B8122 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */; };
 		356275CC1CBBB492009B8122 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */; };
 		356275CE1CBBB497009B8122 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */; };
@@ -82,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
 		3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishedRoom+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3508E2691CBFB55F0094394D /* FinishedRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoom.swift; sourceTree = "<group>"; };
 		3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 		354DB5151CB7EA8400B9194B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		355301F91CBCF3E200F23373 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettlementListViewController.swift; sourceTree = "<group>"; };
+		3558E66D1CDB762700C2FD9D /* AlertCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertCreator.swift; sourceTree = "<group>"; };
 		356275C91CBBAC1D009B8122 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		356275CB1CBBB492009B8122 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		356275CD1CBBB497009B8122 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -206,7 +210,7 @@
 				C7CD52C01CBE98C800A8CB8B /* MeatupTextField.swift */,
 				C74547091CBFB8900055E9A3 /* MeatupDatePicker.swift */,
 				E18D191B1CD9FCA400763DB0 /* UserWithStatus.swift */,
-
+				3558E66D1CDB762700C2FD9D /* AlertCreator.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -261,8 +265,8 @@
 		355301F81CBCF26400F23373 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
 				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
+				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
 				355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */,
 				C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */,
 				C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */,
@@ -300,6 +304,7 @@
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
 				E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */,
+				3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */,
+				3501DB221CDC9274004568A0 /* UIAlertController+Show.swift in Sources */,
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
 				E11E40481CD22BDD004137B1 /* Array+FindIndex.swift in Sources */,
@@ -524,6 +530,7 @@
 				3508E2711CBFB5BA0094394D /* CoreDataController.swift in Sources */,
 				C7175D7D1CD0B16A00F56934 /* UserTableViewCell.swift in Sources */,
 				3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */,
+				3558E66E1CDB762700C2FD9D /* AlertCreator.swift in Sources */,
 				E1FB87CB1CBCE96300273E4E /* CloudKitObject.swift in Sources */,
 				C7CD52BF1CBE771C00A8CB8B /* RoomDetailsViewController.swift in Sources */,
 				C7CD52C11CBE98C800A8CB8B /* MeatupTextField.swift in Sources */,
