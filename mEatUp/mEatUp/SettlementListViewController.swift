@@ -41,6 +41,11 @@ class SettlementListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
+            let message = "A serious application error occurred while mEatUp tried to read your 'settlements' data. Please contact support for help."
+            AlertCreator.singleActionAlert("Warning", message: message, actionTitle: "OK", actionHandler: nil)
+        }
         tableView.addSubview(self.refreshControl)
         fetch()
     }

@@ -46,8 +46,9 @@ class RoomViewController: UIViewController {
         }
         
         roomDataLoader?.dismissHandler = {
-            //alert about room removal you are currently in
             self.dismissViewControllerAnimated(true, completion: nil)
+            let message = "A room that you were in was removed"
+            AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
         }
         
         if let room = room {

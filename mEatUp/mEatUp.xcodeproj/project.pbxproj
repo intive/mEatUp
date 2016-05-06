@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3501DB221CDC9274004568A0 /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */; };
 		3508E26C1CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */; };
 		3508E26D1CBFB55F0094394D /* FinishedRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E2691CBFB55F0094394D /* FinishedRoom.swift */; };
 		3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
 		3508E2681CBFB55F0094394D /* FinishedRoom+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishedRoom+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3508E2691CBFB55F0094394D /* FinishedRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoom.swift; sourceTree = "<group>"; };
 		3508E26A1CBFB55F0094394D /* Participant+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Participant+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -258,8 +260,8 @@
 		355301F81CBCF26400F23373 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
 				354DB4FD1CB7EA8400B9194B /* LoginViewController.swift */,
+				355301F91CBCF3E200F23373 /* RoomListViewController.swift */,
 				355301FB1CBCF4CA00F23373 /* SettlementListViewController.swift */,
 				C7F6B7B41CBD19E600E12B16 /* RoomViewController.swift */,
 				C7CD52BE1CBE771C00A8CB8B /* RoomDetailsViewController.swift */,
@@ -296,6 +298,7 @@
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
 				E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */,
+				3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */,
+				3501DB221CDC9274004568A0 /* UIAlertController+Show.swift in Sources */,
 				3508E26E1CBFB55F0094394D /* Participant+CoreDataProperties.swift in Sources */,
 				E1FB87CE1CBCE97000273E4E /* AccessType.swift in Sources */,
 				E11E40481CD22BDD004137B1 /* Array+FindIndex.swift in Sources */,

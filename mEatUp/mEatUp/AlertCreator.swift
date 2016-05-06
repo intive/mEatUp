@@ -9,14 +9,15 @@
 import UIKit
 
 public class AlertCreator {
-    
-    static public func singleActionAlert(title: String, message: String, actionTitle: String, actionHandler: ((UIAlertController) -> Void)?) -> UIAlertController {
+   
+    static public func singleActionAlert(title: String, message: String, actionTitle: String, actionHandler: ((UIAlertController) -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: actionTitle, style: .Default, handler: { (_) -> Void in
             actionHandler?(alert)
+            print("OK")
         })
         alert.addAction(action)
-        
-        return alert
+        alert.show(true)
     }
+    
 }

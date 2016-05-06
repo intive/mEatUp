@@ -40,11 +40,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
-
-        if let didDetectIncompatibleStore = UserSettings().incompatibleStoreDetection where didDetectIncompatibleStore == true {
-            let message = "A serious application error occurred while mEatUp tried to read your data. Please contact support for help."
-            self.presentViewController( AlertCreator.singleActionAlert("Warning", message: message, actionTitle: "OK", actionHandler: nil), animated: true, completion: nil)
-        }
     }
 
     @IBAction func facebookLogout(sender: UIBarButtonItem) {

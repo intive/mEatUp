@@ -75,7 +75,8 @@ class RoomViewDataLoader {
             if room?.recordID?.recordName == queryNotification.recordFields?["roomRecordID"] as? String {
                 if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
                     if userRecordName == userRecordID?.recordName {
-                        //Alert - kicked from room
+                        let message = "You have been kicked out of a room"
+                        AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
                         dismissHandler?()
                     } else {
                         self.users = self.users.filter({
@@ -181,11 +182,13 @@ class RoomViewDataLoader {
                         })
                     }, errorHandler: nil)
                 } else {
-                    //ALERT! - Room is full
+                    let message = "This room is currently full. You can not join it."
+                    AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
                 }
             })
         } else {
-            //ALERT! - User already in room
+            let message = "You have already joined this room."
+            AlertCreator.singleActionAlert("Warning", message: message, actionTitle: "OK", actionHandler: nil)
         }
     }
     
