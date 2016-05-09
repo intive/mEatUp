@@ -45,7 +45,8 @@ class RoomListDataLoader {
             cloudKitHelper?.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
                 userInRoom in
                 if self.userRecordID == userInRoom.user?.recordID {
-                    //Alert for invite
+                    let message = "You have been invited to a room. Check the 'Invited' section."
+                    AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
                 }
             }, errorHandler: nil)
         }
@@ -65,7 +66,8 @@ class RoomListDataLoader {
                 cloudKitHelper?.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
                     inRoom in
                     if inRoom != nil {
-                        //Alert that room user was in was modified
+                        let message = "A room that you have joined has been modified."
+                        AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
                     }
                 }, errorHandler: nil)
             }

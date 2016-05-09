@@ -79,6 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
+        // Reset incompatible store status in UserSettings
+        UserSettings().incompatibleStoreDetection = false
     }
 
     func applicationWillTerminate(application: UIApplication) {
