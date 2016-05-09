@@ -14,8 +14,10 @@ class ParticipantDebtCell: UITableViewCell {
     @IBOutlet weak var balanceTextField: UITextField!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var balanceIndicatorButton: UIButton!
+    let balancePattern = "^[0-9]+\\.?[0-9]{0,2}$"
     var balanceIndicator: BalanceIndicator = .Neutral
     var participant: Participant?
+    var lastAcceptedBalance: String = "00.00"
     
     func configureWithParticipant(passedParticipant: Participant) {
         participant = passedParticipant
@@ -33,13 +35,19 @@ class ParticipantDebtCell: UITableViewCell {
     
     @IBAction func balanceChanged(sender: UITextField) {
         if let cellText = balanceTextField.text, let newBalance = Double(cellText), participant = participant {
-            if newBalance != participant.debt.doubleValue {
-                if balanceIndicator == .Negative {
-                    participant.debt = -newBalance
-                } else {
-                    participant.debt = newBalance
+            if cellText.rangeOfString(balancePattern, options: NSStringCompareOptions.RegularExpressionSearch) != nil {
+                if newBalance != participant.debt.doubleValue {
+                    lastAcceptedBalance = cellText
+                    if balanceIndicator == .Negative {
+                        participant.debt = -newBalance
+                    } else {
+                        participant.debt = newBalance
+                    }
+                    setCellSettingsWithBalance(participant.debt.doubleValue)
                 }
-                setCellSettingsWithBalance(participant.debt.doubleValue)
+            } else {
+                AlertCreator.singleActionAlert("Wrong Quote", message: "Settlement quote can not contain more than two decimal places. \nExample: 0.00", actionTitle: "OK", actionHandler: nil)
+                balanceTextField.text = lastAcceptedBalance
             }
         }
     }
@@ -77,5 +85,5 @@ class ParticipantDebtCell: UITableViewCell {
             balanceIndicator = .Neutral
         }
     }
-    
+
 }
