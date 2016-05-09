@@ -55,6 +55,7 @@ class Subscriptions {
         createCreateUserInRoomSubscription()
         createDeleteUserInRoomSubscription()
         createUpdateUserInRoomSubscription()
+        createCreateChatMessageSubscription()
     }
     
     func createUpdateRoomSubscription() {
@@ -92,5 +93,11 @@ class Subscriptions {
         let predicate = NSPredicate(format: "confirmationStatus == 2")
         
         createSubscription(predicate, recordType: UserInRoom.entityName, option: .FiresOnRecordUpdate, desiredKeys: ["userRecordID", "roomRecordID", "confirmationStatus"])
+    }
+    
+    func createCreateChatMessageSubscription() {
+        let predicate = NSPredicate(format: "TRUEPREDICATE")
+        
+        createSubscription(predicate, recordType: ChatMessage.entityName, option: .FiresOnRecordCreation, desiredKeys: ["message"])
     }
 }

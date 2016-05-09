@@ -36,7 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             switch queryNotification.queryNotificationReason {
             case .RecordCreated:
-                if let _ = queryNotification.recordFields?["confirmationStatus"] {
+                if let _ = queryNotification.recordFields?["message"] {
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "chatMessageAdded", object: queryNotification.recordID))
+                } else if let _ = queryNotification.recordFields?["confirmationStatus"] {
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "userInRoomAdded", object: queryNotification.recordID))
                 } else {
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "roomAdded", object: queryNotification.recordID))
