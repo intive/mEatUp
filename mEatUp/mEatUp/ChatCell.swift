@@ -18,8 +18,6 @@ class ChatCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     
     func setupCell(date: NSDate, username: String, message: String) {
-//        timeLabel.text = dateFormatter.stringFromDate(date, withFormat: "H:mm")
-//        dayLabel.text = dateFormatter.stringFromDate(date, withFormat: "dd.MM.yyyy")
         dateLabel.text = dateFormatter.stringFromDate(date, withFormat: "H:mm")
         messageLabel.text = message
         usernameLabel.text = username

@@ -14,13 +14,35 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var messages = [ChatMessage]()
     
-    let roomRecordID: CKRecordID
+    var roomRecordID: CKRecordID?
     let cloudKitHelper = CloudKitHelper()
     
     var completionHandler: (() -> Void)?
     
     init(roomRecordID: CKRecordID) {
+        super.init()
         self.roomRecordID = roomRecordID
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(chatMessageAddedNotification), name: "chatMessageAdded", object: nil)
+    }
+    
+    func chatMessageAddedNotification(aNotification: NSNotification) {
+        if let chatMessageRecordID = aNotification.object as? CKRecordID {
+            cloudKitHelper.loadChatMessagesRecord(chatMessageRecordID, completionHandler: {
+                chatMessage in
+                if chatMessage.roomRecordID == self.roomRecordID {
+                    guard let userRecordID = chatMessage.userRecordID else {
+                        return
+                    }
+                    
+                    self.cloudKitHelper.loadUserRecord(userRecordID, completionHandler: {
+                        user in
+                        chatMessage.user = user
+                        self.messages.insert(chatMessage, atIndex: 0)
+                        self.completionHandler?()
+                        }, errorHandler: nil)
+                }
+                }, errorHandler: nil)
+        }
     }
     
     func sendChatMessage(chatMessage: ChatMessage) {
@@ -32,15 +54,21 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
             self.cloudKitHelper.loadUserRecord(userRecordID, completionHandler: {
                 user in
                     chatMessage.user = user
-                    self.messages.append(chatMessage)
+                    self.messages.insert(chatMessage, atIndex: 0)
                     self.completionHandler?()
                 }, errorHandler: nil)
         }, errorHandler: nil)
     }
     
     func loadChatMessages() {
+        guard let roomRecordID = roomRecordID else {
+            //Alert - chat couldn't load
+            return
+        }
+        
         cloudKitHelper.loadChatMessagesRecordWithRoomId(roomRecordID, completionHandler: {
             messages in
+            self.messages = messages
             for message in messages {
                 guard let userRecordID = message.userRecordID else {
                     break
@@ -49,7 +77,6 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
                 self.cloudKitHelper.loadUserRecord(userRecordID, completionHandler: {
                     user in
                         message.user = user
-                        self.messages.append(message)
                         self.completionHandler?()
                 }, errorHandler: nil)
             }

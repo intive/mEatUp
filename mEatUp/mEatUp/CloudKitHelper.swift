@@ -337,6 +337,7 @@ class CloudKitHelper {
     func loadChatMessagesRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: ([ChatMessage]) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "roomRecordID == %@", CKReference(recordID: roomRecordID, action: .None))
         let query = CKQuery(recordType: ChatMessage.entityName, predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
             dispatch_async(dispatch_get_main_queue(), {
@@ -368,6 +369,35 @@ class CloudKitHelper {
                 }
             })
         }
+    }
+    
+    func loadChatMessagesRecord(chatMessageRecordID: CKRecordID, completionHandler: (ChatMessage) -> Void, errorHandler: ((NSError?) -> Void)?) {
+        self.publicDB.fetchRecordWithID(chatMessageRecordID, completionHandler: {
+            result,error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if error == nil {
+                    if let result = result {
+                        let newChatMessage = ChatMessage()
+                        
+                        if let userRecordID = result[ChatMessageProperties.userRecordID.rawValue] as? CKReference {
+                            newChatMessage.userRecordID = userRecordID.recordID
+                        }
+                        
+                        if let roomRecordID = result[ChatMessageProperties.roomRecordID.rawValue] as? CKReference {
+                            newChatMessage.roomRecordID = roomRecordID.recordID
+                        }
+                        
+                        newChatMessage.date = result[ChatMessageProperties.date.rawValue] as? NSDate
+                        
+                        newChatMessage.message = result[ChatMessageProperties.message.rawValue] as? String
+                        
+                        completionHandler(newChatMessage)
+                    }
+                } else {
+                    errorHandler?(error)
+                }
+            })
+        })
     }
     
     func loadUsersInRoomRecord(userInRoomRecordID: CKRecordID, completionHandler: (UserInRoom) -> Void, errorHandler: ((NSError?) -> Void)?) {
@@ -485,7 +515,7 @@ class CloudKitHelper {
                                     if room.didEnd == true {
                                         completionHandler(room)
                                     }
-                                }, errorHandler: nil)
+                                    }, errorHandler: nil)
                             }
                         }
                     } else {
