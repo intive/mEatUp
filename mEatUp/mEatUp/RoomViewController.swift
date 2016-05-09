@@ -18,12 +18,16 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var chatMessageTextField: UITextField!
     var chat: ChatLoader?
 
+    @IBOutlet var scrollView: UIScrollView!
+    
     var cloudKitHelper = CloudKitHelper()
     var room: Room?
     var userRecordID: CKRecordID?
     var roomDataLoader: RoomViewDataLoader?
 
     var viewPurpose: RoomViewPurpose?
+    
+    var activeField: UITextField?
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -84,6 +88,36 @@ class RoomViewController: UIViewController {
         }
         
         roomDataLoader?.determineViewPurpose()
+    }
+    
+    func registerForKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillBeHidden), name: UIKeyboardWillHideNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWasShown), name: UIKeyboardDidShowNotification, object: nil)
+    }
+    
+    func keyboardWasShown(aNotification: NSNotification) {
+        let info = aNotification.userInfo
+        
+        if let keyboardSize = (info?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
+            
+            var aRect = self.view.frame
+            aRect.size.height -= keyboardSize.height
+            if let activeFieldFrame = activeField?.frame {
+                if CGRectContainsPoint(aRect, activeFieldFrame.origin) {
+                    scrollView.scrollRectToVisible(activeFieldFrame, animated: true)
+                }
+            }
+        }
+    }
+    
+    func keyboardWillBeHidden(aNotification: NSNotification) {
+        let contentInsets = UIEdgeInsetsZero
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
     }
 
     func setupViewForPurpose(purpose: RoomViewPurpose) {
