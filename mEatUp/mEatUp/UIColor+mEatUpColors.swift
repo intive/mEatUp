@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     // czerwona pomarańcza
     class func darkPastelRedColor() -> UIColor { return UIColor(red:0.81, green:0.22, blue:0.13, alpha:1.00) }
-    class func redOrangeColor() -> UIColor { return UIColor(red:1.00, green:0.27, blue:0.17, alpha:1.00) }
+    class func redOrangeColor() -> UIColor { return UIColor(red:0.96, green:0.28, blue:0.16, alpha:1.00) }
     class func bittersweetColor() -> UIColor { return UIColor(red:0.97, green:0.46, blue:0.35, alpha:1.00) }
     class func monaLisaColor() -> UIColor { return UIColor(red:0.98, green:0.64, blue:0.56, alpha:1.00) }
     // szary
