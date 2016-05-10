@@ -24,8 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-        
         application.applicationIconBadgeNumber = 0
+        
+        // UINavigationBar appearance
+        UINavigationBar.appearance().alpha = 1
+        UINavigationBar.appearance().barTintColor = UIColor.redOrangeColor()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        // UISearchBar appearance
+        UISearchBar.appearance().tintColor = UIColor.redOrangeColor()
+        // UITabBar appearance
+        UITabBar.appearance().barTintColor = UIColor.redOrangeColor()
+        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 16)!], forState: UIControlState.Normal)
+        
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
