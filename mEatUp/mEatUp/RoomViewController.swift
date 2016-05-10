@@ -27,7 +27,7 @@ class RoomViewController: UIViewController {
 
     var viewPurpose: RoomViewPurpose?
     
-    var activeField: UITextField?
+    @IBOutlet var contentView: UIView!
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -42,6 +42,7 @@ class RoomViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        registerForKeyboardNotifications()
         roomDataLoader?.loadUsers()
     }
     
@@ -106,7 +107,7 @@ class RoomViewController: UIViewController {
             
             var aRect = self.view.frame
             aRect.size.height -= keyboardSize.height
-            if let activeFieldFrame = activeField?.frame {
+            if let activeFieldFrame = chatMessageTextField?.frame {
                 if CGRectContainsPoint(aRect, activeFieldFrame.origin) {
                     scrollView.scrollRectToVisible(activeFieldFrame, animated: true)
                 }
