@@ -25,6 +25,9 @@ class RoomViewController: UIViewController {
 
     var viewPurpose: RoomViewPurpose?
     
+    @IBOutlet weak var bottomButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomChatTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var chatMinHeight: NSLayoutConstraint!
     @IBOutlet weak var participantsMaxHeight: NSLayoutConstraint!
     @IBOutlet weak var participantsMinHeight: NSLayoutConstraint!
     lazy var refreshControl: UIRefreshControl = {
@@ -96,11 +99,17 @@ class RoomViewController: UIViewController {
     }
     
     func keyboardWasShown(aNotification: NSNotification) {
+        chatMinHeight.priority = 999
         participantsMaxHeight.priority = 250
         participantsMinHeight.priority = 999
+        bottomButtonConstraint.priority = 250
+        bottomChatTextConstraint.priority = 250
     }
     
     func keyboardWillBeHidden(aNotification: NSNotification) {
+        bottomButtonConstraint.priority = 999
+        bottomChatTextConstraint.priority = 999
+        chatMinHeight.priority = 250
         participantsMinHeight.priority = 250
         participantsMaxHeight.priority = 999
     }
