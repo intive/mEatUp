@@ -35,6 +35,7 @@
 		35CA40731CC7866200B117FB /* FinishedRoomListDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */; };
 		35DEEC9B1CE0BCF400C11BAF /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35DEEC9A1CE0BCF400C11BAF /* OpenSans-Semibold.ttf */; };
 		35DEEC9D1CE0BCFE00C11BAF /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35DEEC9C1CE0BCFE00C11BAF /* OpenSans-Light.ttf */; };
+		35DEEC9F1CE0D35300C11BAF /* UIColor+mEatUpColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DEEC9E1CE0D35300C11BAF /* UIColor+mEatUpColors.swift */; };
 		C7175D7B1CD0AC5700F56934 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */; };
 		C7175D7D1CD0B16A00F56934 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */; };
 		C7184B721CCA2B830074BA99 /* UISearchController+Meatup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */; };
@@ -122,6 +123,7 @@
 		35CA40721CC7866200B117FB /* FinishedRoomListDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedRoomListDataLoader.swift; sourceTree = "<group>"; };
 		35DEEC9A1CE0BCF400C11BAF /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		35DEEC9C1CE0BCFE00C11BAF /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		35DEEC9E1CE0D35300C11BAF /* UIColor+mEatUpColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+mEatUpColors.swift"; sourceTree = "<group>"; };
 		C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchController+Meatup.swift"; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */,
+				35DEEC9E1CE0D35300C11BAF /* UIColor+mEatUpColors.swift */,
 				357498CD1CC647710052C790 /* UIImageView+Meatup.swift */,
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
@@ -598,6 +601,7 @@
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
 				355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */,
 				357498CE1CC647710052C790 /* UIImageView+Meatup.swift in Sources */,
+				35DEEC9F1CE0D35300C11BAF /* UIColor+mEatUpColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
