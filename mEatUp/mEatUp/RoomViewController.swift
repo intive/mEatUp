@@ -108,7 +108,7 @@ class RoomViewController: UIViewController {
             var aRect = self.view.frame
             aRect.size.height -= keyboardSize.height
             if let activeFieldFrame = chatMessageTextField?.frame {
-                if CGRectContainsPoint(aRect, activeFieldFrame.origin) {
+                if !CGRectContainsPoint(aRect, activeFieldFrame.origin) {
                     scrollView.scrollRectToVisible(activeFieldFrame, animated: true)
                 }
             }
