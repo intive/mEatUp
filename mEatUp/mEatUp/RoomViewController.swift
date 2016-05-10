@@ -17,8 +17,6 @@ class RoomViewController: UIViewController {
     
     @IBOutlet weak var chatMessageTextField: UITextField!
     var chat: ChatLoader?
-
-    @IBOutlet var scrollView: UIScrollView!
     
     var cloudKitHelper = CloudKitHelper()
     var room: Room?
@@ -27,8 +25,8 @@ class RoomViewController: UIViewController {
 
     var viewPurpose: RoomViewPurpose?
     
-    @IBOutlet var contentView: UIView!
-    
+    @IBOutlet weak var participantsMaxHeight: NSLayoutConstraint!
+    @IBOutlet weak var participantsMinHeight: NSLayoutConstraint!
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleManualRefresh(_:)), forControlEvents: .ValueChanged)
@@ -98,27 +96,13 @@ class RoomViewController: UIViewController {
     }
     
     func keyboardWasShown(aNotification: NSNotification) {
-        let info = aNotification.userInfo
-        
-        if let keyboardSize = (info?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
-            scrollView.contentInset = contentInsets
-            scrollView.scrollIndicatorInsets = contentInsets
-            
-            var aRect = self.view.frame
-            aRect.size.height -= keyboardSize.height
-            if let activeFieldFrame = chatMessageTextField?.frame {
-                if !CGRectContainsPoint(aRect, activeFieldFrame.origin) {
-                    scrollView.scrollRectToVisible(activeFieldFrame, animated: true)
-                }
-            }
-        }
+        participantsMaxHeight.priority = 250
+        participantsMinHeight.priority = 999
     }
     
     func keyboardWillBeHidden(aNotification: NSNotification) {
-        let contentInsets = UIEdgeInsetsZero
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        participantsMinHeight.priority = 250
+        participantsMaxHeight.priority = 999
     }
 
     func setupViewForPurpose(purpose: RoomViewPurpose) {
