@@ -41,6 +41,12 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.refreshControl.endRefreshing()
         }
         
+        roomListLoader.errorHandler = {
+            self.roomTableView.reloadData()
+            self.showSearchBarScopes()
+            self.refreshControl.endRefreshing()
+        }
+        
         roomListLoader.loadUserRecordFromCloudKit()
         self.navigationController?.navigationBar.translucent = false
     }
