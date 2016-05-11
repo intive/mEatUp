@@ -19,12 +19,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         //configure loginButton appearance
         loginButton.layer.cornerRadius = 12
-        loginButton.backgroundColor = UIColor.whiteColor()
+        loginButton.backgroundColor = UIColor.loginButtonBackgroundColor()
         loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = UIColor.redOrangeColor().CGColor
-        loginButton.setTitleColor(UIColor.redOrangeColor(), forState: .Normal)
-        loginButton.setTitleColor(UIColor.aluminiumColor(), forState: .Highlighted)
-        print(loginButton.state)
+        loginButton.layer.borderColor = UIColor.loginButtonBorderColor().CGColor
+        loginButton.setTitleColor(UIColor.loginButtonTitleColorNormal(), forState: .Normal)
+        loginButton.setTitleColor(UIColor.loginButtonTitleColorHighlited(), forState: .Highlighted)
         
     }
     
@@ -39,7 +38,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonClicked(sender: UIButton) {
-        print(loginButton.state)
         FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self, handler: { (result: FBSDKLoginManagerLoginResult!, error: NSError!) -> Void in
             if (error == nil && result.grantedPermissions != nil){
                 if(result.grantedPermissions.contains("public_profile"))
