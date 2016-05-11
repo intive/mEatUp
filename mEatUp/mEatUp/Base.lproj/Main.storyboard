@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -374,6 +374,7 @@
                                     <constraint firstAttribute="height" constant="204" id="VRg-pU-Ymb"/>
                                     <constraint firstAttribute="height" constant="204" id="Vbm-1H-PSX"/>
                                     <constraint firstAttribute="height" constant="204" id="ZS2-QN-Jue"/>
+                                    <constraint firstAttribute="height" priority="250" constant="300" id="aI1-ru-xm2"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ChatCell" rowHeight="35" id="hlh-l3-kQq" customClass="ChatCell" customModule="mEatUp" customModuleProvider="target">
@@ -470,7 +471,6 @@
                             <constraint firstAttribute="trailing" secondItem="fMC-Z4-7YC" secondAttribute="trailing" id="PWf-og-i80"/>
                             <constraint firstItem="rVk-zm-N5G" firstAttribute="top" secondItem="Fga-Pe-pJI" secondAttribute="bottom" constant="8" id="TIO-sr-2OV"/>
                             <constraint firstItem="wGN-pw-S4H" firstAttribute="leading" secondItem="0y4-Aa-DPT" secondAttribute="leadingMargin" constant="-12" id="ULv-49-9D5"/>
-                            <constraint firstItem="0Qe-3r-rF5" firstAttribute="height" secondItem="0y4-Aa-DPT" secondAttribute="height" multiplier="0.5" priority="250" id="ZLC-aM-iQr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Fga-Pe-pJI" secondAttribute="trailing" constant="-3" id="aYw-qz-vMT"/>
                             <constraint firstItem="fMC-Z4-7YC" firstAttribute="trailing" secondItem="0Qe-3r-rF5" secondAttribute="trailing" id="mcA-G0-bd7"/>
                             <constraint firstItem="fMC-Z4-7YC" firstAttribute="height" secondItem="0y4-Aa-DPT" secondAttribute="height" multiplier="0.5" priority="750" id="thO-5y-vId"/>
@@ -509,7 +509,7 @@
                         <outlet property="bottomButtonConstraint" destination="CM0-0k-cN7" id="p1P-tg-9WJ"/>
                         <outlet property="bottomChatTextConstraint" destination="yPl-x9-DKS" id="wel-B0-Jan"/>
                         <outlet property="chatMessageTextField" destination="wGN-pw-S4H" id="p9M-dd-NwW"/>
-                        <outlet property="chatMinHeight" destination="ZLC-aM-iQr" id="jum-t5-kXB"/>
+                        <outlet property="chatMinHeight" destination="aI1-ru-xm2" id="mdT-Z8-ZUy"/>
                         <outlet property="chatTableView" destination="0Qe-3r-rF5" id="lnc-Xd-g9J"/>
                         <outlet property="infoView" destination="NAa-Hx-5fA" id="eKL-qR-Rks"/>
                         <outlet property="participantsMaxHeight" destination="thO-5y-vId" id="phu-hl-E7z"/>

@@ -37,7 +37,7 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
                     self.cloudKitHelper.loadUserRecord(userRecordID, completionHandler: {
                         user in
                         chatMessage.user = user
-                        self.messages.insert(chatMessage, atIndex: 0)
+                        self.messages.append(chatMessage)
                         self.completionHandler?()
                         }, errorHandler: nil)
                 }
@@ -54,7 +54,7 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
             self.cloudKitHelper.loadUserRecord(userRecordID, completionHandler: {
                 user in
                     chatMessage.user = user
-                    self.messages.insert(chatMessage, atIndex: 0)
+                    self.messages.append(chatMessage)
                     self.completionHandler?()
                 }, errorHandler: nil)
         }, errorHandler: nil)
@@ -82,7 +82,6 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
             }
         }, errorHandler: nil)
     }
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count

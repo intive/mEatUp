@@ -84,7 +84,13 @@ class RoomViewController: UIViewController {
             chatTableView.delegate = chat
             chatTableView.dataSource = chat
             chat?.completionHandler = {
+                guard let messagesCount = self.chat?.messages.count else {
+                    return
+                }
+                
+                let path = NSIndexPath(forRow: messagesCount - 1, inSection: 0)
                 self.chatTableView.reloadData()
+                self.chatTableView.scrollToRowAtIndexPath(path, atScrollPosition: .Bottom, animated: true)
             }
             chat?.loadChatMessages()
         }
@@ -99,11 +105,16 @@ class RoomViewController: UIViewController {
     }
     
     func keyboardWasShown(aNotification: NSNotification) {
-        chatMinHeight.priority = 999
-        participantsMaxHeight.priority = 250
-        participantsMinHeight.priority = 999
-        bottomButtonConstraint.priority = 250
-        bottomChatTextConstraint.priority = 250
+        let info = aNotification.userInfo
+        
+        if let keyboardSize = (info?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            chatMinHeight.constant = calculateChatHeight(keyboardSize.height)
+            chatMinHeight.priority = 999
+            participantsMaxHeight.priority = 250
+            participantsMinHeight.priority = 999
+            bottomButtonConstraint.priority = 250
+            bottomChatTextConstraint.priority = 250
+        }
     }
     
     func keyboardWillBeHidden(aNotification: NSNotification) {
@@ -112,6 +123,10 @@ class RoomViewController: UIViewController {
         chatMinHeight.priority = 250
         participantsMinHeight.priority = 250
         participantsMaxHeight.priority = 999
+    }
+    
+    func calculateChatHeight(keyboardHeight: CGFloat) -> CGFloat {
+        return view.frame.height - keyboardHeight - chatMessageTextField.frame.height - 15
     }
 
     func setupViewForPurpose(purpose: RoomViewPurpose) {
@@ -168,6 +183,10 @@ class RoomViewController: UIViewController {
         }
         
         if let message = chatMessageTextField.text {
+            if message.isEmpty {
+                return
+            }
+            
             let chatMessage = ChatMessage(roomRecordID: roomRecordID, userRecordID: userRecordID, message: message)
             chat?.sendChatMessage(chatMessage)
             chatMessageTextField.text = nil
