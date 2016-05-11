@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -11,6 +11,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
@@ -58,28 +59,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaj-l8-8DJ" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="0.0" y="20" width="600" height="30"/>
-                                <state key="normal" title="FacebookLoginButton"/>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="XTI-Fv-eSR">
-                                <rect key="frame" x="40" y="85" width="520" height="430"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people_eating" translatesAutoresizingMaskIntoConstraints="NO" id="Kas-XS-rMh">
+                                <rect key="frame" x="20" y="314" width="560" height="286"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Kas-XS-rMh" secondAttribute="height" multiplier="294:143" constant="-28" id="HaC-cw-Rcp"/>
+                                    <constraint firstAttribute="height" constant="286" id="h31-5S-aiX"/>
+                                </constraints>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="XTI-Fv-eSR">
+                                <rect key="frame" x="40" y="20" width="520" height="430"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XTI-Fv-eSR" secondAttribute="height" multiplier="52:43" id="YvQ-ih-2R8"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaj-l8-8DJ">
+                                <rect key="frame" x="168" y="465" width="265" height="22"/>
+                                <color key="backgroundColor" white="0.43113473360655735" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="qaj-l8-8DJ" secondAttribute="height" multiplier="5:1" constant="155" id="tc1-db-alj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
+                                <state key="normal" title="SIGN UP VIA FACEBOOK">
+                                    <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oXr-bs-7oN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="XTI-Fv-eSR" secondAttribute="trailing" constant="20" id="Q97-8Z-n3K"/>
-                            <constraint firstAttribute="trailing" secondItem="qaj-l8-8DJ" secondAttribute="trailing" id="Wod-Ci-I5w"/>
-                            <constraint firstItem="qaj-l8-8DJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Wtt-3a-pZj"/>
-                            <constraint firstItem="qaj-l8-8DJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kH4-6L-Sjp"/>
-                            <constraint firstItem="XTI-Fv-eSR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="nbu-bk-Nj9"/>
-                            <constraint firstItem="XTI-Fv-eSR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yy4-In-Gsd"/>
-                            <constraint firstItem="XTI-Fv-eSR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zHo-3X-mYZ"/>
+                            <constraint firstItem="qaj-l8-8DJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D2i-eK-4dl"/>
+                            <constraint firstItem="XTI-Fv-eSR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Mxx-nB-vHc"/>
+                            <constraint firstItem="qaj-l8-8DJ" firstAttribute="top" secondItem="XTI-Fv-eSR" secondAttribute="bottom" constant="14.5" id="OEv-4B-1FG" userLabel="Login Button.top = Logo.bottom + 25"/>
+                            <constraint firstItem="XTI-Fv-eSR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="Oei-Vc-sEw" userLabel="Logo.top = topMargin + 35"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Kas-XS-rMh" secondAttribute="bottom" id="hW6-Dw-FTc"/>
+                            <constraint firstItem="Kas-XS-rMh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j8e-Iq-XFI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XTI-Fv-eSR" secondAttribute="trailing" constant="20" id="vr7-sO-edv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ffu-UT-pqp"/>
                     <connections>
-                        <outlet property="loginButton" destination="qaj-l8-8DJ" id="Bi9-Ih-TRP"/>
+                        <outlet property="loginButton" destination="qaj-l8-8DJ" id="gA5-Lk-lEH"/>
                         <segue destination="3p5-4G-dVz" kind="show" identifier="ShowRoomListSegue" id="PTp-H0-WW3"/>
                     </connections>
                 </viewController>
@@ -1179,6 +1203,7 @@
     </scenes>
     <resources>
         <image name="Logo" width="600" height="430"/>
+        <image name="people_eating" width="626" height="626"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RmS-TD-TDb"/>
