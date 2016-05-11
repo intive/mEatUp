@@ -93,6 +93,11 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         roomDataLoader?.determineViewPurpose()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     func registerForKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillBeHidden), name: UIKeyboardWillHideNotification, object: nil)
         
@@ -142,8 +147,10 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let path = NSIndexPath(forRow: messagesCount - 1, inSection: 0)
-        self.chatTableView.scrollToRowAtIndexPath(path, atScrollPosition: .Bottom, animated: true)
+        if messagesCount > 0 {
+            let path = NSIndexPath(forRow: messagesCount - 1, inSection: 0)
+            self.chatTableView.scrollToRowAtIndexPath(path, atScrollPosition: .Bottom, animated: true)
+        }
     }
 
     func setupViewForPurpose(purpose: RoomViewPurpose) {
@@ -218,12 +225,13 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-        let inviteButton = UIButton(frame: CGRect(x: view.frame.width - view.frame.height, y: 0, width: view.frame.height, height: view.frame.height))
-        inviteButton.setImage(UIImage(named: "AddUser.png"), forState: .Normal)
-        inviteButton.addTarget(self, action: #selector(inviteButtonTapped), forControlEvents: .TouchUpInside)
-        
-        view.addSubview(inviteButton)
+        if viewPurpose == .Owner {
+            let inviteButton = UIButton(frame: CGRect(x: view.frame.width - view.frame.height, y: 0, width: view.frame.height, height: view.frame.height))
+            inviteButton.setImage(UIImage(named: "AddUser.png"), forState: .Normal)
+            inviteButton.addTarget(self, action: #selector(inviteButtonTapped), forControlEvents: .TouchUpInside)
+            
+            view.addSubview(inviteButton)
+        }
     }
     
     func inviteButtonTapped(sender: UIButton) {
@@ -261,7 +269,10 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return viewPurpose == .Owner ? true : false
+        guard let selectedUser = roomDataLoader?.users[indexPath.row].user else {
+            return false
+        }
+        return (viewPurpose == .Owner && selectedUser.recordID != userRecordID) ? true : false
     }
     
     func handleManualRefresh(refreshControl: UIRefreshControl) {
