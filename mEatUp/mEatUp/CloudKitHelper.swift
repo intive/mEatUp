@@ -337,7 +337,7 @@ class CloudKitHelper {
     func loadChatMessagesRecordWithRoomId(roomRecordID: CKRecordID, completionHandler: ([ChatMessage]) -> Void, errorHandler: ((NSError?) -> Void)?) {
         let predicate = NSPredicate(format: "roomRecordID == %@", CKReference(recordID: roomRecordID, action: .None))
         let query = CKQuery(recordType: ChatMessage.entityName, predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        query.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
             dispatch_async(dispatch_get_main_queue(), {
