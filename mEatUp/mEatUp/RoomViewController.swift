@@ -269,7 +269,10 @@ extension RoomViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return viewPurpose == .Owner ? true : false
+        guard let selectedUser = roomDataLoader?.users[indexPath.row].user else {
+            return false
+        }
+        return (viewPurpose == .Owner && selectedUser.recordID != userRecordID) ? true : false
     }
     
     func handleManualRefresh(refreshControl: UIRefreshControl) {
