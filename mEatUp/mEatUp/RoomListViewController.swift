@@ -23,9 +23,12 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         return refreshControl
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        setupView()
+    }
+    
+    func setupView() {
         hideSearchBarScopes()
         roomTableView.addSubview(self.refreshControl)
         refreshControl.beginRefreshing()
@@ -78,8 +81,10 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         self.roomListLoader.dataScope = scope
-        self.roomListLoader.filter = nil
-
+        if let text = searchBar.text {
+            setRoomFilter(text)
+        }
+        
         roomListLoader.completionHandler = {
             self.roomTableView.reloadData()
         }
@@ -93,9 +98,14 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         guard let scope = RoomDataScopes(rawValue: searchBar.selectedScopeButtonIndex) else {
             return
         }
-        
+        setRoomFilter(searchText)
         self.roomListLoader.dataScope = scope
 
+        
+        self.roomTableView.reloadData()
+    }
+    
+    func setRoomFilter(searchText: String) {
         if searchText.isEmpty {
             self.roomListLoader.filter = nil
         } else {
@@ -107,8 +117,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
-        
-        self.roomTableView.reloadData()
+
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {

@@ -18,6 +18,25 @@ class CloudKitHelper {
         publicDB = container.publicCloudDatabase
     }
     
+    func createDatabaseScheme() {
+        let user = User(fbID: "test", name: "test", surname: "test", photo: "test")
+        saveUserRecord(user, completionHandler: {
+            let restaurant = Restaurant(name: "test", address: "test")
+            self.saveRestaurantRecord(restaurant, completionHandler: {
+                let room = Room(title: "test", accessType: .Public, restaurant: restaurant, maxCount: 2, date: NSDate(), owner: user)
+                self.saveRoomRecord(room, completionHandler: {
+                    let userInRoom = UserInRoom(user: user, room: room, confirmationStatus: .Accepted)
+                    self.saveUserInRoomRecord(userInRoom, completionHandler: {
+                        if let roomRecordID = room.recordID, userRecordID = user.recordID {
+                            let chatMessage = ChatMessage(roomRecordID: roomRecordID, userRecordID: userRecordID, message: "test")
+                            self.saveChatRecord(chatMessage, completionHandler: nil, errorHandler: nil)
+                        }
+                        }, errorHandler: nil)
+                    }, errorHandler: nil)
+                }, errorHandler: nil)
+            }, errorHandler: nil)
+    }
+    
     func editRoomRecord(room: Room, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
         publicDB.fetchRecordWithID(room.recordID!, completionHandler: {
             record, error in
@@ -37,6 +56,28 @@ class CloudKitHelper {
                     dispatch_async(dispatch_get_main_queue(), {
                         if error == nil {
                             room.recordID = record?.recordID
+                            completionHandler?()
+                        } else {
+                            errorHandler?(error)
+                        }
+                    })
+                })
+            }
+        })
+    }
+    
+    func editUserInRoomRecord(userInRoom: UserInRoom, completionHandler: (() -> Void)?, errorHandler: ((NSError?) -> Void)?) {
+        publicDB.fetchRecordWithID(userInRoom.recordID!, completionHandler: {
+            record, error in
+            if let record = record {
+                guard let confirmationStatus = userInRoom.confirmationStatus else {
+                    return
+                }
+                record.setValue(confirmationStatus.rawValue, forKey: UserInRoomProperties.confirmationStatus.rawValue)
+                self.publicDB.saveRecord(record, completionHandler: { (record, error) in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if error == nil {
+                            userInRoom.recordID = record?.recordID
                             completionHandler?()
                         } else {
                             errorHandler?(error)
@@ -471,7 +512,7 @@ class CloudKitHelper {
     }
     
     func loadUsersInRoomRecordWithUserId(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "userRecordID == %@", CKReference(recordID: userRecordID, action: .None))
+        let predicate = NSPredicate(format: "userRecordID == %@ AND confirmationStatus = 2", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
@@ -617,7 +658,7 @@ class CloudKitHelper {
 
     
     func loadInvitedRoomRecords(userRecordID: CKRecordID, completionHandler: (Room?) -> Void, errorHandler: ((NSError?) -> Void)?) {
-        let predicate = NSPredicate(format: "userRecordID == %@ AND confirmationStatus == 1 AND didEnd == 0", CKReference(recordID: userRecordID, action: .None))
+        let predicate = NSPredicate(format: "userRecordID == %@ AND confirmationStatus == 1", CKReference(recordID: userRecordID, action: .None))
         let query = CKQuery(recordType: UserInRoom.entityName, predicate: predicate)
         
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
@@ -709,7 +750,9 @@ class CloudKitHelper {
                     if let results = results where results.count > 0 {
                         for userInRoom in results {
                             let newUserInRoom = UserInRoom()
-                            newUserInRoom.confirmationStatus = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? ConfirmationStatus
+                            if let confirmationValue = userInRoom[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                                newUserInRoom.confirmationStatus = ConfirmationStatus(rawValue: confirmationValue)
+                            }
                             newUserInRoom.recordID = userInRoom.recordID
                             completionHandler(newUserInRoom)
                         }

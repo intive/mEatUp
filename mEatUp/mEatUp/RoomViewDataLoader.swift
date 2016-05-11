@@ -115,7 +115,7 @@ class RoomViewDataLoader {
                 userInRoom in
                 self.userInRoom = userInRoom
                 
-                if userInRoom != nil {
+                if userInRoom != nil && userInRoom?.confirmationStatus == .Accepted {
                     if self.room?.owner?.recordID == userRecordID {
                         self.purposeHandler?(RoomViewPurpose.Owner)
                     } else {
@@ -167,23 +167,30 @@ class RoomViewDataLoader {
     }
     
     func joinRoom(completionBlock: (() -> Void)?) {
-        if let userRecordID = userRecordID, let roomRecordID = room?.recordID where userInRoom == nil  {
+        if let userRecordID = userRecordID, let roomRecordID = room?.recordID where (userInRoom == nil || userInRoom?.confirmationStatus == .Invited) {
             ableToJoin({
                 isAble in
                 if isAble {
-                    self.userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
-                    guard let userInRoom = self.userInRoom else {
-                        return
+                    if let userInRoom = self.userInRoom {
+                        userInRoom.confirmationStatus = .Accepted
+                        self.cloudKitHelper.editUserInRoomRecord(userInRoom, completionHandler: {
+                            self.loadUsers()
+                        }, errorHandler: nil)
+                    } else {
+                        self.userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
+                        guard let userInRoom = self.userInRoom else {
+                            return
+                        }
+                        
+                        self.cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
+                            self.purposeHandler?(RoomViewPurpose.Participant)
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))),
+                                dispatch_get_main_queue(), {
+                                    self.loadUsers()
+                                    completionBlock?()
+                            })
+                        }, errorHandler: nil)
                     }
-                    
-                    self.cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
-                        self.purposeHandler?(RoomViewPurpose.Participant)
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC))),
-                            dispatch_get_main_queue(), {
-                                self.loadUsers()
-                                completionBlock?()
-                        })
-                    }, errorHandler: nil)
                 } else {
                     let message = "This room is currently full. You can not join it."
                     AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
