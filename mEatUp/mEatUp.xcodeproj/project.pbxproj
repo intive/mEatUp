@@ -36,6 +36,7 @@
 		35DEEC9B1CE0BCF400C11BAF /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35DEEC9A1CE0BCF400C11BAF /* OpenSans-Semibold.ttf */; };
 		35DEEC9D1CE0BCFE00C11BAF /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35DEEC9C1CE0BCFE00C11BAF /* OpenSans-Light.ttf */; };
 		35DEEC9F1CE0D35300C11BAF /* UIColor+mEatUpColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DEEC9E1CE0D35300C11BAF /* UIColor+mEatUpColors.swift */; };
+		35F7B3611CE35E3B00E98DFD /* UIColor+whereToUseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F7B3601CE35E3B00E98DFD /* UIColor+whereToUseColor.swift */; };
 		C7175D7B1CD0AC5700F56934 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */; };
 		C7175D7D1CD0B16A00F56934 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */; };
 		C7184B721CCA2B830074BA99 /* UISearchController+Meatup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */; };
@@ -124,6 +125,7 @@
 		35DEEC9A1CE0BCF400C11BAF /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		35DEEC9C1CE0BCFE00C11BAF /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		35DEEC9E1CE0D35300C11BAF /* UIColor+mEatUpColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+mEatUpColors.swift"; sourceTree = "<group>"; };
+		35F7B3601CE35E3B00E98DFD /* UIColor+whereToUseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+whereToUseColor.swift"; sourceTree = "<group>"; };
 		C7175D7A1CD0AC5700F56934 /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		C7175D7C1CD0B16A00F56934 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchController+Meatup.swift"; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 			children = (
 				C7184B711CCA2B830074BA99 /* UISearchController+Meatup.swift */,
 				35DEEC9E1CE0D35300C11BAF /* UIColor+mEatUpColors.swift */,
+				35F7B3601CE35E3B00E98DFD /* UIColor+whereToUseColor.swift */,
 				357498CD1CC647710052C790 /* UIImageView+Meatup.swift */,
 				C7F88DB61CC53115007A6038 /* NSDateFormatter+Meatup.swift */,
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
@@ -591,6 +594,7 @@
 				E1FB87E11CBCE99B00273E4E /* UserProperties.swift in Sources */,
 				E1FB87CF1CBCE97000273E4E /* ConfirmationStatus.swift in Sources */,
 				E17687D01CC6410D00B5F115 /* RoomDetailsPurpose.swift in Sources */,
+				35F7B3611CE35E3B00E98DFD /* UIColor+whereToUseColor.swift in Sources */,
 				C7184B721CCA2B830074BA99 /* UISearchController+Meatup.swift in Sources */,
 				E163A9D11CDB841C004C0C8B /* ChatMessage.swift in Sources */,
 				C745470A1CBFB8900055E9A3 /* MeatupDatePicker.swift in Sources */,

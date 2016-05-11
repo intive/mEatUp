@@ -10,40 +10,43 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController {
     
-    @IBOutlet weak var loginButton: FBSDKLoginButton!
+    @IBOutlet weak var loginButton: UIButton!
     let userSettings = UserSettings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureFacebook()
+        //configure loginButton appearance
+        loginButton.layer.cornerRadius = 12
+        loginButton.backgroundColor = UIColor.loginButtonBackgroundColor()
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = UIColor.loginButtonBorderColor().CGColor
+        loginButton.setTitleColor(UIColor.loginButtonTitleColorNormal(), forState: .Normal)
+        loginButton.setTitleColor(UIColor.loginButtonTitleColorHighlited(), forState: .Highlighted)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         if FBSDKAccessToken.currentAccessToken() != nil
         {
-            loginButton.hidden = true
             createUser()
+            loginButton.hidden = true
             performSegueWithIdentifier("ShowRoomListSegue", sender: nil)
         }
     }
     
-    func configureFacebook() {
-        loginButton.delegate = self
-    }
-    
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if error != nil {
-        } else {
-            createUser()
-        }
-    }
-    
-    //function added only to conform FBSDKLoginButtonDelegate protocol
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    @IBAction func loginButtonClicked(sender: UIButton) {
+        FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self, handler: { (result: FBSDKLoginManagerLoginResult!, error: NSError!) -> Void in
+            if (error == nil && result.grantedPermissions != nil){
+                if(result.grantedPermissions.contains("public_profile"))
+                {
+                    self.createUser()
+                }
+            }
 
+        })
     }
     
     func createUser() {

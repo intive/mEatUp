@@ -28,14 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // UINavigationBar appearance
         UINavigationBar.appearance().alpha = 1
-        UINavigationBar.appearance().barTintColor = UIColor.redOrangeColor()
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        UINavigationBar.appearance().barTintColor = UIColor.navigationBarBarTintColor()
+        UINavigationBar.appearance().tintColor = UIColor.navigationBarTintColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.navigationBarTitleTextColor()]
         // UISearchBar appearance
-        UISearchBar.appearance().tintColor = UIColor.redOrangeColor()
+        UISearchBar.appearance().tintColor = UIColor.searchBarTintColor()
         // UITabBar appearance
-        UITabBar.appearance().barTintColor = UIColor.redOrangeColor()
-        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBar.appearance().barTintColor = UIColor.tabBarBarTintColor()
+        UITabBar.appearance().tintColor = UIColor.tabBarTintColor()
         UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 16)!], forState: UIControlState.Normal)
                 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
