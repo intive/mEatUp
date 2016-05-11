@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class RoomViewController: UIViewController {
+class RoomViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
     @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
@@ -84,13 +84,8 @@ class RoomViewController: UIViewController {
             chatTableView.delegate = chat
             chatTableView.dataSource = chat
             chat?.completionHandler = {
-                guard let messagesCount = self.chat?.messages.count else {
-                    return
-                }
-                
-                let path = NSIndexPath(forRow: messagesCount - 1, inSection: 0)
                 self.chatTableView.reloadData()
-                self.chatTableView.scrollToRowAtIndexPath(path, atScrollPosition: .Bottom, animated: true)
+                self.scrollChatTableViewToLatestMessage()
             }
             chat?.loadChatMessages()
         }
@@ -114,6 +109,9 @@ class RoomViewController: UIViewController {
             participantsMinHeight.priority = 999
             bottomButtonConstraint.priority = 250
             bottomChatTextConstraint.priority = 250
+            UIView.animateWithDuration(0.5, animations: {
+                self.view.layoutIfNeeded()
+            })
         }
     }
     
@@ -123,10 +121,29 @@ class RoomViewController: UIViewController {
         chatMinHeight.priority = 250
         participantsMinHeight.priority = 250
         participantsMaxHeight.priority = 999
+        UIView.animateWithDuration(0.5, animations: {
+            self.view.layoutIfNeeded()
+            } ,completion: { bool in
+                self.scrollChatTableViewToLatestMessage()
+        })
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     func calculateChatHeight(keyboardHeight: CGFloat) -> CGFloat {
         return view.frame.height - keyboardHeight - chatMessageTextField.frame.height - 15
+    }
+    
+    func scrollChatTableViewToLatestMessage() {
+        guard let messagesCount = self.chat?.messages.count else {
+            return
+        }
+        
+        let path = NSIndexPath(forRow: messagesCount - 1, inSection: 0)
+        self.chatTableView.scrollToRowAtIndexPath(path, atScrollPosition: .Bottom, animated: true)
     }
 
     func setupViewForPurpose(purpose: RoomViewPurpose) {
