@@ -28,6 +28,7 @@ class RoomListDataLoader {
     var filter: ((Room) -> Bool)? = nil
     
     var completionHandler: (() -> Void)?
+    var errorHandler: (() -> Void)?
         
     var userRecordID: CKRecordID?
 
@@ -109,7 +110,9 @@ class RoomListDataLoader {
                     self.userRecordID = userRecordID
                     self.loadRoomsForRoomList(userRecordID)
                 }
-                }, errorHandler: nil)
+                }, errorHandler: { error in
+                    self.loadUserRecordFromCloudKit()
+            })
         }
     }
     
@@ -132,7 +135,9 @@ class RoomListDataLoader {
                 self.publicRooms.append(room)
                 self.completionHandler?()
             }
-        }, errorHandler: nil)
+            }, errorHandler: {error in
+                self.errorHandler?()
+        })
         
         
         cloudKitHelper?.loadInvitedRoomRecords(userRecordID, completionHandler: {
@@ -141,8 +146,9 @@ class RoomListDataLoader {
                     self.invitedRooms.append(room)
                     self.completionHandler?()
                 }
-        }, errorHandler: nil)
-        
+            }, errorHandler: {error in
+                self.errorHandler?()
+        })
         
         cloudKitHelper?.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
             userRoom in
@@ -150,8 +156,9 @@ class RoomListDataLoader {
                     self.joinedRooms.append(userRoom)
                     self.completionHandler?()
                 }
-        }, errorHandler: nil)
-        
+            }, errorHandler: {error in
+                self.errorHandler?()
+        })
         
         cloudKitHelper?.loadUserRoomRecord(userRecordID, completionHandler: {
             room in
@@ -159,7 +166,9 @@ class RoomListDataLoader {
                     self.myRoom.append(room)
                     self.completionHandler?()
                 }
-        }, errorHandler: nil)
+            }, errorHandler: {error in
+                self.errorHandler?()
+        })
     }
     
     func loadCurrentRoomList(dataScope: RoomDataScopes, filter: ((Room) -> Bool)?) -> [Room] {

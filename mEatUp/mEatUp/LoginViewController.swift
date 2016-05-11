@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(true)
         if FBSDKAccessToken.currentAccessToken() != nil
         {
-            createUser()
+            requestFacebookUserData()
             loginButton.hidden = true
             performSegueWithIdentifier("ShowRoomListSegue", sender: nil)
         }
@@ -45,8 +45,26 @@ class LoginViewController: UIViewController {
                     self.createUser()
                 }
             }
-
         })
+    }
+    
+    func requestFacebookUserData() {
+        FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields":"id, first_name, last_name, picture.type(small)"]).startWithCompletionHandler { (connection, result, error) -> Void in
+            if error != nil {
+            } else {
+                self.saveUserDefaults(result)
+            }
+        }
+    }
+    
+    private func saveUserDefaults(fbRequestResult: AnyObject) {
+        if let fbID = (fbRequestResult.objectForKey("id") as? String) {
+            let firstName: String? = (fbRequestResult.objectForKey("first_name") as? String)
+            let lastName: String? = (fbRequestResult.objectForKey("last_name") as? String)
+            let pictureURL: String? = (fbRequestResult.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as? String)
+            
+            self.userSettings.saveUserDetails(fbID, firstName: firstName, lastName: lastName, pictureURL: pictureURL)
+        }
     }
     
     func createUser() {
