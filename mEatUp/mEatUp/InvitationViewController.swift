@@ -21,8 +21,9 @@ class InvitationViewController: UIViewController {
         }
     }
     
+    var completionHandler: ((User) -> Void)? = nil
     var filter: ((User) -> Bool)? = nil
-    var checked = [CKRecordID]()
+    var checked = [User]()
     var room: Room?
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -49,17 +50,16 @@ class InvitationViewController: UIViewController {
     }
     
     @IBAction func inviteButtonTapped(sender: UIBarButtonItem) {
-        //TUTAJ KRECIOLEK START
         sender.enabled = false
         guard let roomRecordID = room?.recordID else { return }
-        for userRecordID in checked {
+        for user in checked {
+            guard let userRecordID = user.recordID else {
+                return
+            }
+            completionHandler?(user)
             let userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: .Invited)
             cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
-                    dispatch_get_main_queue(), {
-                        //TUTAJ KRECIOLEK STOP
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                })
+                self.dismissViewControllerAnimated(true, completion: nil)
             }, errorHandler: nil)
         }
     }
@@ -83,8 +83,8 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath)
         if let cell = cell as? UserTableViewCell {
             
-            guard let userRecordID = currentUserList[indexPath.row].recordID else { return cell }
-            let accessoryType: UITableViewCellAccessoryType = checked.contains(userRecordID) ? .Checkmark : .None
+            let user = currentUserList[indexPath.row]
+            let accessoryType: UITableViewCellAccessoryType = checked.contains(user) ? .Checkmark : .None
             cell.configureWithUser(currentUserList[indexPath.row], accessoryType: accessoryType)
             
             return cell
@@ -98,15 +98,15 @@ extension InvitationViewController: UITableViewDataSource, UITableViewDelegate, 
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
 
-        guard let userRecordID = currentUserList[indexPath.row].recordID else { return }
+        let user = currentUserList[indexPath.row]
         
-        if checked.contains(userRecordID) {
-            if let index = checked.indexOf(userRecordID) {
+        if checked.contains(user) {
+            if let index = checked.indexOf(user) {
                 checked.removeAtIndex(index)
                 cell?.accessoryType = .None
             }
         } else {
-            checked.append(userRecordID)
+            checked.append(user)
             cell?.accessoryType = .Checkmark
         }
     }
