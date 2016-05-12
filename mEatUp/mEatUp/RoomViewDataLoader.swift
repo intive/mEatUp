@@ -53,6 +53,8 @@ class RoomViewDataLoader {
     @objc func roomDeletedNotification(aNotification: NSNotification) {
         if let roomRecordID = aNotification.object as? CKRecordID {
             if roomRecordID == room?.recordID {
+                let message = "A room that you were in was removed"
+                AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
                 dismissHandler?()
             }
         }

@@ -68,8 +68,6 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         
         roomDataLoader?.dismissHandler = {
             self.dismissViewControllerAnimated(true, completion: nil)
-            let message = "A room that you were in was removed"
-            AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
         }
         
         if let room = room {
