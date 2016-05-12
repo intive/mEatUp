@@ -11,7 +11,7 @@ import CloudKit
 
 class RoomViewDataLoader {
     var refreshHandler: (() -> Void)?
-    var dismissHandler: (() -> Void)?
+    var dismissHandler: ((String) -> Void)?
     var purposeHandler: ((RoomViewPurpose) -> Void)?
     var users = [UserWithStatus]()
     var room: Room?
@@ -25,10 +25,32 @@ class RoomViewDataLoader {
         self.userRecordID = userRecordID
         self.room = room
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomUpdatedNotification), name: "roomUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomRemovedNotification), name: "userInRoomRemoved", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomUpdatedNotification), name: "userInRoomUpdated", object: nil)
+    }
+    
+    func removeNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    @objc func roomUpdatedNotification(aNotification: NSNotification) {
+        if let roomRecordID = aNotification.object as? CKRecordID {
+            if roomRecordID == room?.recordID {
+                cloudKitHelper.loadRoomRecord(roomRecordID, completionHandler: {
+                    room in
+                    guard let didEnd = room.didEnd, title = room.title else {
+                        return
+                    }
+                    if didEnd {
+                        let message = "A room with name \(title) has ended. Please visit settlements tab to ender balance."
+                        self.dismissHandler?(message)
+                    }
+                }, errorHandler: nil)
+            }
+        }
     }
     
     @objc func userInRoomUpdatedNotification(aNotification: NSNotification) {
@@ -54,8 +76,8 @@ class RoomViewDataLoader {
         if let roomRecordID = aNotification.object as? CKRecordID {
             if roomRecordID == room?.recordID {
                 let message = "A room that you were in was removed"
+                dismissHandler?(message)
                 AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
-                dismissHandler?()
             }
         }
     }
@@ -78,8 +100,7 @@ class RoomViewDataLoader {
                 if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
                     if userRecordName == userRecordID?.recordName {
                         let message = "You have been kicked out of a room"
-                        AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
-                        dismissHandler?()
+                        dismissHandler?(message)
                     } else {
                         self.users = self.users.filter({
                             guard let user = $0.user else {
