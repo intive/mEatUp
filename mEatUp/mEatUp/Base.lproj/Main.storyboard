@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -306,15 +306,19 @@
                         <constraints>
                             <constraint firstItem="2Ln-FL-Yo2" firstAttribute="top" secondItem="Fc9-1m-3Tc" secondAttribute="bottom" id="8ID-Pi-l4V"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Fc9-1m-3Tc" secondAttribute="trailing" constant="-20" id="HTL-Cd-rW9"/>
-                            <constraint firstItem="jR3-Tb-bav" firstAttribute="leading" secondItem="FN1-Ot-SOc" secondAttribute="leadingMargin" constant="-20" id="deC-gF-7sr"/>
+                            <constraint firstItem="jR3-Tb-bav" firstAttribute="leading" secondItem="FN1-Ot-SOc" secondAttribute="leading" id="bI7-Ia-v4X"/>
+                            <constraint firstItem="jR3-Tb-bav" firstAttribute="leading" secondItem="FN1-Ot-SOc" secondAttribute="leadingMargin" id="deC-gF-7sr"/>
                             <constraint firstItem="Fc9-1m-3Tc" firstAttribute="top" secondItem="jR3-Tb-bav" secondAttribute="bottom" constant="8" id="dsr-m8-Oxp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jR3-Tb-bav" secondAttribute="trailing" constant="-20" id="jaP-ov-BdZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jR3-Tb-bav" secondAttribute="trailing" id="jaP-ov-BdZ"/>
+                            <constraint firstAttribute="trailing" secondItem="jR3-Tb-bav" secondAttribute="trailing" id="ji7-OP-rd7"/>
                             <constraint firstItem="Fc9-1m-3Tc" firstAttribute="top" secondItem="jR3-Tb-bav" secondAttribute="top" id="t1b-ki-i8S"/>
                             <constraint firstItem="Fc9-1m-3Tc" firstAttribute="leading" secondItem="FN1-Ot-SOc" secondAttribute="leadingMargin" constant="-20" id="uPL-GZ-kjE"/>
                             <constraint firstItem="jR3-Tb-bav" firstAttribute="top" secondItem="bzM-eD-ISw" secondAttribute="bottom" id="zOm-7p-MVq"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="deC-gF-7sr"/>
+                                <exclude reference="jaP-ov-BdZ"/>
                                 <exclude reference="t1b-ki-i8S"/>
                             </mask>
                         </variation>
