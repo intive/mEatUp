@@ -64,7 +64,6 @@ class Subscriptions {
         createSubscription(predicate, recordType: Room.entityName, option: .FiresOnRecordUpdate, desiredKeys: nil)
     }
     
-    
     func createDeleteRoomSubscription() {
         let predicate = NSPredicate(format: "TRUEPREDICATE")
         
