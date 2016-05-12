@@ -49,11 +49,17 @@ class InvitationViewController: UIViewController {
     }
     
     @IBAction func inviteButtonTapped(sender: UIBarButtonItem) {
+        //TUTAJ KRECIOLEK START
+        sender.enabled = false
         guard let roomRecordID = room?.recordID else { return }
         for userRecordID in checked {
             let userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: .Invited)
             cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
+                    dispatch_get_main_queue(), {
+                        //TUTAJ KRECIOLEK STOP
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                })
             }, errorHandler: nil)
         }
     }

@@ -41,8 +41,8 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         setupViewController()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         registerForKeyboardNotifications()
         roomDataLoader?.loadUsers()
     }
