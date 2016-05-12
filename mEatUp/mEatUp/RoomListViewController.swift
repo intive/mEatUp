@@ -28,6 +28,11 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         setupView()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        roomListLoader.removeNotifications()
+    }
+    
     func setupView() {
         hideSearchBarScopes()
         roomTableView.addSubview(self.refreshControl)
@@ -48,6 +53,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         roomListLoader.loadUserRecordFromCloudKit()
+        roomListLoader.addNotifications()
         self.navigationController?.navigationBar.translucent = false
     }
 

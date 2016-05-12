@@ -40,9 +40,9 @@ class InvitationViewController: UIViewController {
                         self.users.append(user)
                         self.tableView.reloadData()
                     }
-                    }, errorHandler: nil)
+                }, errorHandler: nil)
             }
-            }, errorHandler: nil)
+        }, errorHandler: nil)
     }
     
     @IBAction func cancelButtonTapped(sender: UIBarButtonItem) {

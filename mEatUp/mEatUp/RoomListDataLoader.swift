@@ -34,11 +34,29 @@ class RoomListDataLoader {
 
     init() {
         cloudKitHelper = CloudKitHelper()
-        
+    }
+    
+    func addNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomAddedNotification), name: "roomAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomDeletedNotification), name: "roomDeleted", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(roomUpdatedNotification), name: "roomUpdated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomAddedNotification), name: "userInRoomAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userInRoomRemovedNotification), name: "userInRoomRemoved", object: nil)
+    }
+    
+    func removeNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    @objc func userInRoomRemovedNotification(aNotification: NSNotification) {
+        if let queryNotification = aNotification.object as? CKQueryNotification {
+            if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
+                if userRecordName == userRecordID?.recordName {
+                    let message = "You have been kicked out of a room"
+                    AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
+                }
+            }
+        }
     }
     
     @objc func userInRoomAddedNotification(aNotification: NSNotification) {

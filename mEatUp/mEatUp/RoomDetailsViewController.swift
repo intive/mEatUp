@@ -236,10 +236,11 @@ class RoomDetailsViewController: UIViewController {
         
         cloudKitHelper.editRoomRecord(room, completionHandler: {
             self.dismissViewControllerAnimated(true, completion: nil)
-            }, errorHandler: nil)
+        }, errorHandler: nil)
     }
     
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
+        sender.enabled = false
         switch viewPurpose {
         case .Create:
             createRoom()

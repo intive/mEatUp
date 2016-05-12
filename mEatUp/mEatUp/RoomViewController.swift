@@ -67,7 +67,12 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         }
         
         roomDataLoader?.dismissHandler = {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            message in
+            self.dismissViewControllerAnimated(true, completion: {
+                if !message.isEmpty {
+                    AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
+                }
+            })
         }
         
         if let room = room {
@@ -94,6 +99,7 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        roomDataLoader?.removeNotifications()
     }
     
     func registerForKeyboardNotifications() {
