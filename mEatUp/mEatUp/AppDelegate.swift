@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // UITabBar appearance
         UITabBar.appearance().barTintColor = UIColor.tabBarBarTintColor()
         UITabBar.appearance().tintColor = UIColor.tabBarTintColor()
-        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 16)!], forState: UIControlState.Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "OpenSans-Semibold", size: 15)!], forState: UIControlState.Normal)
                 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
