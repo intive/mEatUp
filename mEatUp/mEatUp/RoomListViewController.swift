@@ -78,7 +78,9 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("ShowRoomViewController", sender: roomListLoader.currentRoomList[indexPath.row])
+        if refreshControl.refreshing == false {
+            performSegueWithIdentifier("ShowRoomViewController", sender: roomListLoader.currentRoomList[indexPath.row])
+        }
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
