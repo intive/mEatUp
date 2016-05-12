@@ -46,7 +46,12 @@ class RoomListDataLoader {
             cloudKitHelper?.loadUsersInRoomRecord(userInRoomRecordID, completionHandler: {
                 userInRoom in
                 if self.userRecordID == userInRoom.user?.recordID {
+                    guard let userRecordID = self.userRecordID else {
+                        return
+                    }
                     let message = "You have been invited to a room. Check the 'Invited' section."
+                    self.invitedRooms.removeAll()
+                    self.loadInvitedRoomRecords(userRecordID)
                     AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
                 }
             }, errorHandler: nil)
@@ -123,12 +128,23 @@ class RoomListDataLoader {
         return false
     }
     
-    func loadRoomsForRoomList(userRecordID: CKRecordID) {
+    func clearRooms() {
         myRoom.removeAll()
         joinedRooms.removeAll()
         invitedRooms.removeAll()
         publicRooms.removeAll()
+    }
+    
+    func loadRoomsForRoomList(userRecordID: CKRecordID) {
+        clearRooms()
         
+        loadPublicRoomRecords()
+        loadInvitedRoomRecords(userRecordID)
+        loadUsersInRoomRecordsWithUserId(userRecordID)
+        loadUserRoomRecord(userRecordID)
+    }
+    
+    func loadPublicRoomRecords() {
         cloudKitHelper?.loadPublicRoomRecords({
             room in
             if !room.eventOccured {
@@ -138,34 +154,39 @@ class RoomListDataLoader {
             }, errorHandler: {error in
                 self.errorHandler?()
         })
-        
-        
+    }
+    
+    func loadInvitedRoomRecords(userRecordID: CKRecordID) {
         cloudKitHelper?.loadInvitedRoomRecords(userRecordID, completionHandler: {
             room in
-                if let room = room where !room.eventOccured {
-                    self.invitedRooms.append(room)
-                    self.completionHandler?()
-                }
+            if let room = room where !room.eventOccured {
+                self.invitedRooms.append(room)
+                self.completionHandler?()
+            }
             }, errorHandler: {error in
                 self.errorHandler?()
         })
-        
+    }
+    
+    func loadUsersInRoomRecordsWithUserId(userRecordID: CKRecordID) {
         cloudKitHelper?.loadUsersInRoomRecordWithUserId(userRecordID, completionHandler: {
             userRoom in
-                if let userRoom = userRoom {
-                    self.joinedRooms.append(userRoom)
-                    self.completionHandler?()
-                }
+            if let userRoom = userRoom {
+                self.joinedRooms.append(userRoom)
+                self.completionHandler?()
+            }
             }, errorHandler: {error in
                 self.errorHandler?()
         })
-        
+    }
+    
+    func loadUserRoomRecord(userRecordID: CKRecordID) {
         cloudKitHelper?.loadUserRoomRecord(userRecordID, completionHandler: {
             room in
-                if let room = room {
-                    self.myRoom.append(room)
-                    self.completionHandler?()
-                }
+            if let room = room {
+                self.myRoom.append(room)
+                self.completionHandler?()
+            }
             }, errorHandler: {error in
                 self.errorHandler?()
         })
