@@ -109,8 +109,14 @@ class RoomListDataLoader {
     }
     
     @objc func roomDeletedNotification(aNotification: NSNotification) {
-        if let roomRecordID = aNotification.object as? CKRecordID {
+        if let roomRecordID = aNotification.object as? CKRecordID, userRecordID = userRecordID {
             removeRoomFromArrays(roomRecordID)
+            cloudKitHelper?.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
+                inRoom in
+                if inRoom != nil {
+                    AlertCreator.singleActionAlert("Info", message: "Room you were in has been deleted", actionTitle: "OK", actionHandler: nil)
+                }
+            }, errorHandler: nil)
             self.completionHandler?()
         }
     }
