@@ -72,8 +72,19 @@ class RoomListDataLoader {
                 cloudKitHelper?.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
                     inRoom in
                     if inRoom != nil {
-                        let message = "A room that you have joined has been modified."
-                        AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
+                        self.cloudKitHelper?.loadRoomRecord(roomRecordID, completionHandler: {
+                            room in
+                            guard let didEnd = room.didEnd else {
+                                return
+                            }
+                            
+                            if didEnd {
+                                self.removeRoomFromArrays(roomRecordID)
+                            }
+                            
+                            let message = (didEnd ? "A room that you have joined has ended. Please check settlements tab and enter balance." : "A room that you have joined has been modified.")
+                            AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
+                        }, errorHandler: nil)
                     }
                 }, errorHandler: nil)
             }
@@ -98,13 +109,22 @@ class RoomListDataLoader {
     }
     
     @objc func roomDeletedNotification(aNotification: NSNotification) {
-        if let roomRecordID = aNotification.object as? CKRecordID {
-            self.publicRooms = self.publicRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
-            self.joinedRooms = self.joinedRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
-            self.invitedRooms = self.invitedRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
-            
+        if let roomRecordID = aNotification.object as? CKRecordID, userRecordID = userRecordID {
+            removeRoomFromArrays(roomRecordID)
+            cloudKitHelper?.checkIfUserInRoom(roomRecordID, userRecordID: userRecordID, completionHandler: {
+                inRoom in
+                if inRoom != nil {
+                    AlertCreator.singleActionAlert("Info", message: "Room you were in has been deleted", actionTitle: "OK", actionHandler: nil)
+                }
+            }, errorHandler: nil)
             self.completionHandler?()
         }
+    }
+    
+    func removeRoomFromArrays(roomRecordID: CKRecordID) {
+        self.publicRooms = self.publicRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
+        self.joinedRooms = self.joinedRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
+        self.invitedRooms = self.invitedRooms.filter({return filterRemovedRoom($0, roomRecordID: roomRecordID)})
     }
     
     func loadUserRecordFromCloudKit() {

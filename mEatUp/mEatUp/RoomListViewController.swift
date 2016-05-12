@@ -123,7 +123,6 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
-
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {

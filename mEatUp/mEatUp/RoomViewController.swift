@@ -200,7 +200,7 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func sendChatButtonPushed(sender: UIButton) {
         guard let roomRecordID = roomDataLoader?.room?.recordID, userRecordID = userRecordID else {
-            // Alert - cant send message
+            AlertCreator.singleActionAlert("Error", message: "Could not send message.", actionTitle: "OK", actionHandler: nil)
             return
         }
         
