@@ -161,7 +161,7 @@ class RoomViewDataLoader {
                 error in
                 self.users.append(userWithStatus)
                 self.refreshHandler?()
-                //Alert - removal wasn't complete
+                AlertCreator.singleActionAlert("Error", message: "Could not remove user from room.", actionTitle: "OK", actionHandler: nil)
             })
         }
     }

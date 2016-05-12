@@ -62,7 +62,7 @@ class ChatLoader: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func loadChatMessages() {
         guard let roomRecordID = roomRecordID else {
-            //Alert - chat couldn't load
+            AlertCreator.singleActionAlert("Error", message: "Could not load chat.", actionTitle: "OK", actionHandler: nil)
             return
         }
         
