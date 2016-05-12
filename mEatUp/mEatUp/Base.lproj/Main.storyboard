@@ -115,7 +115,7 @@
         <scene sceneID="zPv-j3-pWR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DQA-3E-S9T" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settlement List" id="JER-tV-Gyf"/>
+                    <tabBarItem key="tabBarItem" title="Settlement List" image="wallet" id="JER-tV-Gyf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oFj-tC-gnU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1181,7 +1181,7 @@
         <scene sceneID="h1g-SF-4VN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="38r-QK-lKz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Room List" id="Yjb-Qt-hfZ"/>
+                    <tabBarItem key="tabBarItem" title="Room List" image="list" id="Yjb-Qt-hfZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Y0-hf-8UQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1235,7 +1235,9 @@
     </scenes>
     <resources>
         <image name="Logo" width="600" height="430"/>
+        <image name="list" width="30" height="30"/>
         <image name="people_eating" width="626" height="626"/>
+        <image name="wallet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RmS-TD-TDb"/>
