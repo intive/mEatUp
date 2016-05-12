@@ -39,12 +39,12 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
+        roomDataLoader?.loadUsers()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         registerForKeyboardNotifications()
-        roomDataLoader?.loadUsers()
     }
     
     func setupViewController() {
@@ -175,6 +175,12 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         }
         if let navigationCtrl = segue.destinationViewController as? UINavigationController, let destination = navigationCtrl.topViewController as? InvitationViewController {
             destination.room = room
+            destination.completionHandler = {
+                user in
+                let invitedUser = UserWithStatus(user: user, status: .Invited)
+                self.roomDataLoader?.users.append(invitedUser)
+                self.participantsTableView.reloadData()
+            }
         }
     }
     

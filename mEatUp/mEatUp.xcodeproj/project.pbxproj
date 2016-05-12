@@ -56,6 +56,7 @@
 		E11E40481CD22BDD004137B1 /* Array+FindIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */; };
 		E121F3631CCA374700860871 /* RoomViewDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E121F3621CCA374700860871 /* RoomViewDataLoader.swift */; };
 		E12352271CCF677C009F84F8 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12352261CCF677C009F84F8 /* Subscriptions.swift */; };
+		E12443741CE4AD1B00A78156 /* Array+ContainsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12443731CE4AD1B00A78156 /* Array+ContainsUser.swift */; };
 		E12D3A1F1CC8C0FF0072EC41 /* RoomViewPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */; };
 		E134A87D1CC8C96C0014F251 /* RoomViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134A87C1CC8C96C0014F251 /* RoomViewActions.swift */; };
 		E163A9D11CDB841C004C0C8B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E163A9D01CDB841C004C0C8B /* ChatMessage.swift */; };
@@ -145,6 +146,7 @@
 		E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+FindIndex.swift"; sourceTree = "<group>"; };
 		E121F3621CCA374700860871 /* RoomViewDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewDataLoader.swift; sourceTree = "<group>"; };
 		E12352261CCF677C009F84F8 /* Subscriptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
+		E12443731CE4AD1B00A78156 /* Array+ContainsUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+ContainsUser.swift"; sourceTree = "<group>"; };
 		E12D3A1E1CC8C0FF0072EC41 /* RoomViewPurpose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewPurpose.swift; sourceTree = "<group>"; };
 		E134A87C1CC8C96C0014F251 /* RoomViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewActions.swift; sourceTree = "<group>"; };
 		E163A9D01CDB841C004C0C8B /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				E1D4FE121CCE169400C88541 /* NSDate+CompareDates.swift */,
 				E11E40471CD22BDD004137B1 /* Array+FindIndex.swift */,
 				3501DB211CDC9274004568A0 /* UIAlertController+Show.swift */,
+				E12443731CE4AD1B00A78156 /* Array+ContainsUser.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				C7F6B7B51CBD19E600E12B16 /* RoomViewController.swift in Sources */,
 				354DB4FC1CB7EA8400B9194B /* AppDelegate.swift in Sources */,
 				355301FA1CBCF3E200F23373 /* RoomListViewController.swift in Sources */,
+				E12443741CE4AD1B00A78156 /* Array+ContainsUser.swift in Sources */,
 				357498CE1CC647710052C790 /* UIImageView+Meatup.swift in Sources */,
 				35DEEC9F1CE0D35300C11BAF /* UIColor+mEatUpColors.swift in Sources */,
 			);
