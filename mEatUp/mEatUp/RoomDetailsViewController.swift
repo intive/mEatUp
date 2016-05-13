@@ -215,7 +215,7 @@ class RoomDetailsViewController: UIViewController {
                 if let userRecordID = self.userRecordID, let roomRecordID = room.recordID {
                     let userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
                     self.cloudKitHelper.saveUserInRoomRecord(userInRoom, completionHandler: {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.navigationController?.popViewControllerAnimated(true)
                     }, errorHandler: nil)
                 }
             }, errorHandler: nil)
@@ -235,7 +235,7 @@ class RoomDetailsViewController: UIViewController {
         }
         
         cloudKitHelper.editRoomRecord(room, completionHandler: {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.popViewControllerAnimated(true)
         }, errorHandler: nil)
     }
     
