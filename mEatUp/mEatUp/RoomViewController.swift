@@ -11,7 +11,6 @@ import CloudKit
 
 class RoomViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
-    @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
     @IBOutlet weak var chatTableView: UITableView!
     
@@ -162,16 +161,23 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        var enabled = true
+        var title = ""
+        
         switch purpose {
         case .Owner:
-            rightBarButton.title = room.eventOccured == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
+            title = room.eventOccured == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
         case .Participant:
-            rightBarButton.title = RoomViewActions.Leave.rawValue
-            rightBarButton.enabled = !room.eventOccured
+            title = RoomViewActions.Leave.rawValue
+            enabled = !room.eventOccured
         case .User:
-            rightBarButton.title = RoomViewActions.Join.rawValue
-            rightBarButton.enabled = !room.eventOccured
+            title = RoomViewActions.Join.rawValue
+            enabled = !room.eventOccured
         }
+        
+        let rightBarButton = UIBarButtonItem(title: title, style: .Bordered, target: self, action: "rightBarButtonPressed:")
+        rightBarButton.enabled = enabled
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -190,23 +196,25 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func rightBarButtonPressed(sender: UIBarButtonItem) {
+    func rightBarButtonPressed(sender: UIBarButtonItem) {
         guard let purpose = viewPurpose else {
             return
         }
         
+        sender.enabled = false
+
         switch purpose {
         case .Owner:
             var message: String!
             var title: String!
             
             let yesActionHandler = {
-                self.rightBarButton.enabled = false
+                sender.enabled = false
                 self.roomDataLoader?.room?.eventOccured == true ? self.roomDataLoader?.endRoom(nil, errorHandler: nil) : self.roomDataLoader?.disbandRoom(nil, errorHandler: nil)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            if rightBarButton.title == RoomViewActions.End.rawValue {
+            if sender.title == RoomViewActions.End.rawValue {
                 message = "Do you really want to end this room?"
                 title = "End room"
             } else {
@@ -217,14 +225,14 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
             AlertCreator.confirmationAlert(title, message: message, yesActionHandler: yesActionHandler, noActionHandler: nil)
         case .Participant:
             let yesActionHandler = {
-                self.rightBarButton.enabled = false
+                sender.enabled = false
                 self.pullAndStartRefreshingTableView()
                 self.roomDataLoader?.leaveRoom(nil)
             }
             let message = "Do you really want to leave this room?"
             AlertCreator.confirmationAlert("Leave room", message: message, yesActionHandler: yesActionHandler, noActionHandler: nil)
         case .User:
-            rightBarButton.enabled = false
+            sender.enabled = false
             pullAndStartRefreshingTableView()
             roomDataLoader?.joinRoom(nil)
         }

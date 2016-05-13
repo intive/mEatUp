@@ -550,11 +550,6 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <gestureRecognizers/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" id="ZQW-yE-8Bg">
-                            <connections>
-                                <action selector="rightBarButtonPressed:" destination="lG1-sF-iMY" id="NLe-pu-dR4"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomButtonConstraint" destination="CM0-0k-cN7" id="p1P-tg-9WJ"/>
@@ -566,7 +561,6 @@
                         <outlet property="participantsMaxHeight" destination="thO-5y-vId" id="phu-hl-E7z"/>
                         <outlet property="participantsMinHeight" destination="0ZQ-tt-934" id="fVu-Hr-oVS"/>
                         <outlet property="participantsTableView" destination="fMC-Z4-7YC" id="pmZ-lq-KqZ"/>
-                        <outlet property="rightBarButton" destination="ZQW-yE-8Bg" id="qHr-yH-D55"/>
                         <segue destination="7Gv-nF-1j4" kind="show" identifier="showRoomDetailsSegue" id="RmG-Tc-ZsY"/>
                         <segue destination="0mh-yt-vKD" kind="presentation" identifier="ShowInvitationRoomController" id="bks-EI-mJj"/>
                     </connections>
