@@ -50,10 +50,18 @@ class RoomListDataLoader {
     
     @objc func userInRoomRemovedNotification(aNotification: NSNotification) {
         if let queryNotification = aNotification.object as? CKQueryNotification {
-            if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String {
+            if let userRecordName = queryNotification.recordFields?["userRecordID"] as? String, roomRecordName = queryNotification.recordFields?["roomRecordID"] as? String {
                 if userRecordName == userRecordID?.recordName {
-                    let message = "You have been kicked out of a room"
-                    AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
+                    cloudKitHelper?.loadRoomRecord(CKRecordID(recordName: roomRecordName), completionHandler: {
+                        room in
+                        guard let owner = room.owner?.recordID else {
+                            return
+                        }
+                        if owner != userRecordName {
+                            let message = "You have been kicked out of a room"
+                            AlertCreator.singleActionAlert("Info", message: message, actionTitle: "OK", actionHandler: nil)
+                        }
+                    }, errorHandler: nil)
                 }
             }
         }
