@@ -33,15 +33,7 @@ class RoomDetailsViewController: UIViewController {
     
     let cloudKitHelper = CloudKitHelper()
     
-    var viewPurpose: RoomDetailsPurpose {
-        if room == nil {
-            return RoomDetailsPurpose.Create
-        } else if room?.owner?.recordID == userRecordID && room?.didEnd == false {
-            return RoomDetailsPurpose.Edit
-        } else {
-            return RoomDetailsPurpose.View
-        }
-    }
+    var viewPurpose: RoomDetailsPurpose?
     var userRecordID: CKRecordID?
     
     @IBAction func sliderValueChanged(sender: UISlider) {
@@ -122,6 +114,11 @@ class RoomDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        determineViewPurpose()
+        
+        guard let viewPurpose = viewPurpose else {
+            return
+        }
         
         setupViewForPurpose(viewPurpose)
         
@@ -129,6 +126,16 @@ class RoomDetailsViewController: UIViewController {
         datePicker.locale = NSLocale(localeIdentifier: "PL")
         registerForKeyboardNotifications()
         self.navigationController?.navigationBar.translucent = false;
+    }
+    
+    func determineViewPurpose() {
+        if room == nil {
+            viewPurpose = RoomDetailsPurpose.Create
+        } else if room?.owner?.recordID == userRecordID && room?.didEnd == false {
+            viewPurpose = RoomDetailsPurpose.Edit
+        } else {
+            viewPurpose = RoomDetailsPurpose.View
+        }
     }
     
     deinit {
@@ -169,6 +176,10 @@ class RoomDetailsViewController: UIViewController {
     func configureWithRoom(room: Room) {
         title = "\(room.title ?? "Room")"
         
+        guard let viewPurpose = viewPurpose else {
+            return
+        }
+        
         if let name = room.owner?.name, let surname = room.owner?.surname, let date = room.date, let limit = room.maxCount, let access = room.accessType {
 
             switch viewPurpose {
@@ -196,6 +207,18 @@ class RoomDetailsViewController: UIViewController {
         }
     }
     
+    func textFieldsAreFilled() -> Bool {
+        guard let topText = topTextField.text, placeText = placeTextField.text, dateText = dateTextField.text, hourText = hourTextField.text else {
+            return false
+        }
+        
+        if !topText.isEmpty && !placeText.isEmpty && !dateText.isEmpty && !hourText.isEmpty {
+            return true
+        }
+        
+        return false
+    }
+    
     func createRoom() {
         rightBarButton.enabled = false
         room = Room()
@@ -210,7 +233,7 @@ class RoomDetailsViewController: UIViewController {
             room?.restaurant = restaurant
         }
         
-        if let room = room {
+        if let room = room where textFieldsAreFilled() {
             cloudKitHelper.saveRoomRecord(room, completionHandler: {
                 if let userRecordID = self.userRecordID, let roomRecordID = room.recordID {
                     let userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
@@ -219,6 +242,9 @@ class RoomDetailsViewController: UIViewController {
                     }, errorHandler: nil)
                 }
             }, errorHandler: nil)
+        } else {
+            rightBarButton.enabled = true
+            AlertCreator.singleActionAlert("Error", message: "Please fill all text fields.", actionTitle: "OK", actionHandler: nil)
         }
     }
     
@@ -241,6 +267,10 @@ class RoomDetailsViewController: UIViewController {
     
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
         sender.enabled = false
+        guard let viewPurpose = viewPurpose else {
+            return
+        }
+        
         switch viewPurpose {
         case .Create:
             createRoom()
