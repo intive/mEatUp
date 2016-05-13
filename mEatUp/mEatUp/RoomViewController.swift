@@ -35,9 +35,9 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         refreshControl.addTarget(self, action: #selector(handleManualRefresh(_:)), forControlEvents: .ValueChanged)
         return refreshControl
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         setupViewController()
         roomDataLoader?.loadUsers()
     }
