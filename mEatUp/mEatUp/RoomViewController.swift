@@ -209,12 +209,12 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
             var title: String!
             
             let yesActionHandler = {
-                self.rightBarButton.enabled = false
+                sender.enabled = false
                 self.roomDataLoader?.room?.eventOccured == true ? self.roomDataLoader?.endRoom(nil, errorHandler: nil) : self.roomDataLoader?.disbandRoom(nil, errorHandler: nil)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            if rightBarButton.title == RoomViewActions.End.rawValue {
+            if sender.title == RoomViewActions.End.rawValue {
                 message = "Do you really want to end this room?"
                 title = "End room"
             } else {
@@ -225,14 +225,14 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
             AlertCreator.confirmationAlert(title, message: message, yesActionHandler: yesActionHandler, noActionHandler: nil)
         case .Participant:
             let yesActionHandler = {
-                self.rightBarButton.enabled = false
+                sender.enabled = false
                 self.pullAndStartRefreshingTableView()
                 self.roomDataLoader?.leaveRoom(nil)
             }
             let message = "Do you really want to leave this room?"
             AlertCreator.confirmationAlert("Leave room", message: message, yesActionHandler: yesActionHandler, noActionHandler: nil)
         case .User:
-            rightBarButton.enabled = false
+            sender.enabled = false
             pullAndStartRefreshingTableView()
             roomDataLoader?.joinRoom(nil)
         }
