@@ -16,6 +16,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     var roomListLoader = RoomListDataLoader()
     let finishedRoomListLoader = FinishedRoomListDataLoader()
+    var downloading: Bool = false
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -25,7 +26,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if refreshControl.refreshing == false {
+        if downloading == false {
             setupView()
         }
     }
@@ -39,6 +40,7 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
         hideSearchBarScopes()
         roomTableView.addSubview(self.refreshControl)
         refreshControl.beginRefreshing()
+        downloading = true
         
         finishedRoomListLoader.loadUserRecordFromCloudKit()
         
@@ -46,12 +48,14 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.roomTableView.reloadData()
             self.showSearchBarScopes()
             self.refreshControl.endRefreshing()
+            self.downloading = false
         }
         
         roomListLoader.errorHandler = {
             self.roomTableView.reloadData()
             self.showSearchBarScopes()
             self.refreshControl.endRefreshing()
+            self.downloading = false
         }
         
         roomListLoader.loadUserRecordFromCloudKit()
@@ -171,12 +175,15 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func handleManualRefresh(refreshControl: UIRefreshControl) {
         roomListLoader.completionHandler = {
+            self.downloading = false
             self.roomTableView.reloadData()
             self.refreshControl.endRefreshing()
         }
         
-        if refreshControl.refreshing == false {
+        if downloading == false {
+            downloading = true
             roomListLoader.loadUserRecordFromCloudKit()
         }
     }
+    
 }
