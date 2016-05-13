@@ -11,7 +11,6 @@ import CloudKit
 
 class RoomViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var infoView: OscillatingRoomInfoView!
-    @IBOutlet weak var rightBarButton: UIBarButtonItem!
     @IBOutlet weak var participantsTableView: UITableView!
     @IBOutlet weak var chatTableView: UITableView!
     
@@ -162,16 +161,23 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        var enabled = true
+        var title = ""
+        
         switch purpose {
         case .Owner:
-            rightBarButton.title = room.eventOccured == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
+            title = room.eventOccured == true ? RoomViewActions.End.rawValue : RoomViewActions.Disband.rawValue
         case .Participant:
-            rightBarButton.title = RoomViewActions.Leave.rawValue
-            rightBarButton.enabled = !room.eventOccured
+            title = RoomViewActions.Leave.rawValue
+            enabled = !room.eventOccured
         case .User:
-            rightBarButton.title = RoomViewActions.Join.rawValue
-            rightBarButton.enabled = !room.eventOccured
+            title = RoomViewActions.Join.rawValue
+            enabled = !room.eventOccured
         }
+        
+        let rightBarButton = UIBarButtonItem(title: title, style: .Bordered, target: self, action: "rightBarButtonPressed:")
+        rightBarButton.enabled = enabled
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -190,12 +196,12 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func rightBarButtonPressed(sender: UIBarButtonItem) {
+    func rightBarButtonPressed(sender: UIBarButtonItem) {
         guard let purpose = viewPurpose else {
             return
         }
         
-        rightBarButton.enabled = false
+        sender.enabled = false
         
         switch purpose {
         case .Owner:
