@@ -260,9 +260,14 @@ class RoomDetailsViewController: UIViewController {
             room.restaurant = restaurant
         }
         
-        cloudKitHelper.editRoomRecord(room, completionHandler: {
-            self.navigationController?.popViewControllerAnimated(true)
-        }, errorHandler: nil)
+        if textFieldsAreFilled() {
+            cloudKitHelper.editRoomRecord(room, completionHandler: {
+                self.navigationController?.popViewControllerAnimated(true)
+            }, errorHandler: nil)
+        } else {
+            rightBarButton.enabled = true
+            AlertCreator.singleActionAlert("Error", message: "Please fill all text fields.", actionTitle: "OK", actionHandler: nil)
+        }
     }
     
     @IBAction func barButtonPressed(sender: UIBarButtonItem) {
