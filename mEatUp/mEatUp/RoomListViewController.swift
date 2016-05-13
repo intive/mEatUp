@@ -25,7 +25,9 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        setupView()
+        if refreshControl.refreshing == false {
+            setupView()
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -173,6 +175,8 @@ class RoomListViewController: UIViewController, UITableViewDelegate, UITableView
             self.refreshControl.endRefreshing()
         }
         
-        roomListLoader.loadUserRecordFromCloudKit()
+        if refreshControl.refreshing == false {
+            roomListLoader.loadUserRecordFromCloudKit()
+        }
     }
 }
