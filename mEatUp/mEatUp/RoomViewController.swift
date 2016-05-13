@@ -200,8 +200,6 @@ class RoomViewController: UIViewController, UITextFieldDelegate {
         guard let purpose = viewPurpose else {
             return
         }
-        
-        sender.enabled = false
 
         switch purpose {
         case .Owner:
