@@ -22,6 +22,7 @@ extension UIColor {
     class func darkGrayCustomColor() -> UIColor { return UIColor(red:0.33, green:0.33, blue:0.33, alpha:1.00) }
     class func darkerGrayCustomColor() -> UIColor { return UIColor(red:0.65, green:0.65, blue:0.65, alpha:1.00) }
     class func gainsboroColor() -> UIColor { return UIColor(red:0.87, green:0.87, blue:0.87, alpha:1.00) }
+    class func lavenderGrey() -> UIColor { return UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.00) }
     // piaskowy
     class func tussockColor() -> UIColor { return UIColor(red:0.80, green:0.62, blue:0.28, alpha:1.00) }
     class func saffronMangoColor() -> UIColor { return UIColor(red:1.00, green:0.77, blue:0.36, alpha:1.00) }

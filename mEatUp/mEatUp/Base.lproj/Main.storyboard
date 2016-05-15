@@ -245,7 +245,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mES-pv-M1r">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mES-pv-M1r">
                                                     <rect key="frame" x="10" y="0.0" width="180" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="180" id="38d-jC-V2z"/>
@@ -259,15 +259,18 @@
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Restaurant" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4P-Cj-M6o">
-                                                    <rect key="frame" x="200" y="0.0" width="290" height="40"/>
-                                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l80-uB-ypz">
                                                     <rect key="frame" x="500" y="19" width="90" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="kNP-pm-d1c"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Restaurant" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4P-Cj-M6o">
+                                                    <rect key="frame" x="202" y="0.0" width="290" height="40"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -276,10 +279,10 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="XiX-mk-pTn" secondAttribute="trailing" constant="2" id="CLO-vx-VYh"/>
                                                 <constraint firstItem="XiX-mk-pTn" firstAttribute="trailing" secondItem="l80-uB-ypz" secondAttribute="trailing" id="Qks-wN-N8g"/>
                                                 <constraint firstItem="mES-pv-M1r" firstAttribute="centerY" secondItem="vie-1u-3lY" secondAttribute="centerY" id="Qw6-Ca-JJq"/>
-                                                <constraint firstItem="XiX-mk-pTn" firstAttribute="leading" secondItem="B4P-Cj-M6o" secondAttribute="trailing" constant="10" id="XSH-nC-WTa"/>
+                                                <constraint firstItem="XiX-mk-pTn" firstAttribute="leading" secondItem="B4P-Cj-M6o" secondAttribute="trailing" constant="8" id="XSH-nC-WTa"/>
                                                 <constraint firstItem="l80-uB-ypz" firstAttribute="top" secondItem="vie-1u-3lY" secondAttribute="topMargin" constant="11" id="Ygs-vO-PJh"/>
                                                 <constraint firstItem="B4P-Cj-M6o" firstAttribute="baseline" secondItem="l80-uB-ypz" secondAttribute="baseline" id="Zil-7H-sV5"/>
-                                                <constraint firstItem="B4P-Cj-M6o" firstAttribute="leading" secondItem="mES-pv-M1r" secondAttribute="trailing" constant="10" id="kRa-aj-gol"/>
+                                                <constraint firstItem="B4P-Cj-M6o" firstAttribute="leading" secondItem="mES-pv-M1r" secondAttribute="trailing" constant="12" id="kRa-aj-gol"/>
                                                 <constraint firstItem="mES-pv-M1r" firstAttribute="top" secondItem="vie-1u-3lY" secondAttribute="top" id="kdM-md-Syp"/>
                                                 <constraint firstItem="B4P-Cj-M6o" firstAttribute="firstBaseline" secondItem="XiX-mk-pTn" secondAttribute="firstBaseline" id="ojA-dd-108"/>
                                                 <constraint firstItem="mES-pv-M1r" firstAttribute="firstBaseline" secondItem="B4P-Cj-M6o" secondAttribute="firstBaseline" id="oxc-0e-lpn"/>
@@ -441,7 +444,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bV-qd-FVm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bV-qd-FVm">
                                                     <rect key="frame" x="124" y="7" width="432" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1234,6 +1237,6 @@
         <image name="wallet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RmG-Tc-ZsY"/>
+        <segue reference="RmS-TD-TDb"/>
     </inferredMetricsTieBreakers>
 </document>
