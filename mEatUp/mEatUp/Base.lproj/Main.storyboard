@@ -1141,11 +1141,6 @@
                             <rect key="frame" x="275" y="5.5" width="50" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="LZ2-u5-vKa">
-                            <connections>
-                                <action selector="saveButtonTapped:" destination="z5e-aI-Fu0" id="CK1-B9-IQU"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="infoView" destination="agK-jq-Sk2" id="axv-cv-BMv"/>
@@ -1237,6 +1232,6 @@
         <image name="wallet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RmS-TD-TDb"/>
+        <segue reference="aGV-Mz-HDX"/>
     </inferredMetricsTieBreakers>
 </document>
