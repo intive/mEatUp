@@ -1055,7 +1055,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tM0-aO-OR2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tM0-aO-OR2">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1079,18 +1079,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u69-Cg-XnQ">
-                                                    <rect key="frame" x="520" y="10" width="60" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="KvU-a1-u0s"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="e5k-Wo-qNW" userLabel="width = 80"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
-                                                    <connections>
-                                                        <action selector="balanceChanged:" destination="vb7-is-srj" eventType="editingChanged" id="fgC-9H-OJl"/>
-                                                    </connections>
-                                                </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHZ-Ja-jDP">
                                                     <rect key="frame" x="490" y="4" width="30" height="42"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="25"/>
@@ -1101,6 +1089,19 @@
                                                         <action selector="balanceIndicatorChanged:" destination="vb7-is-srj" eventType="touchUpInside" id="nIb-fD-Bxe"/>
                                                     </connections>
                                                 </button>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u69-Cg-XnQ">
+                                                    <rect key="frame" x="520" y="10" width="60" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="KvU-a1-u0s"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="e5k-Wo-qNW" userLabel="width = 80"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <action selector="balanceChanged:" destination="vb7-is-srj" eventType="editingChanged" id="fgC-9H-OJl"/>
+                                                        <outlet property="delegate" destination="z5e-aI-Fu0" id="BUT-lP-J1A"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="D66-bF-lGg" firstAttribute="centerY" secondItem="rRP-Xk-ldE" secondAttribute="centerY" id="4kc-UN-L7u"/>
@@ -1234,6 +1235,6 @@
         <image name="wallet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-       <segue reference="aGV-Mz-HDX"/>
+        <segue reference="aGV-Mz-HDX"/>
     </inferredMetricsTieBreakers>
 </document>
