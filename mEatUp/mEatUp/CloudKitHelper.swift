@@ -483,7 +483,15 @@ class CloudKitHelper {
         self.publicDB.performQuery(query, inZoneWithID: nil) { results, error in
             dispatch_async(dispatch_get_main_queue(), {
                 if error == nil, let results = results {
-                    completionHandler(results.count)
+                    var count = 0
+                    for result in results {
+                        if let confirmationValue = result[UserInRoomProperties.confirmationStatus.rawValue] as? Int {
+                            if confirmationValue == 2 {
+                                count += 1
+                            }
+                        }
+                    }
+                    completionHandler(count)
                 }
                 else {
                     errorHandler?(error)

@@ -472,6 +472,11 @@
                                                 <constraint firstItem="oEx-cz-EKh" firstAttribute="leading" secondItem="EGM-uQ-dt3" secondAttribute="leading" constant="8" id="u1k-bZ-8k8"/>
                                                 <constraint firstItem="oEx-cz-EKh" firstAttribute="top" secondItem="EGM-uQ-dt3" secondAttribute="top" id="ua1-BT-aXg"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Ini-b2-cYs"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="biV-39-SsG" id="J3a-Ri-VCV"/>
