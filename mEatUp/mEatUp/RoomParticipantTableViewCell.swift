@@ -18,7 +18,7 @@ class RoomParticipantTableViewCell: UITableViewCell {
             return
         }
         
-        self.backgroundColor = status == .Invited ? UIColor.silverSandColor() : nil
+        self.backgroundColor = status == .Invited ? UIColor.lavenderGrey() : nil
         invitedImageView.image = status == .Invited ? UIImage(named: "Invited") : nil
         
         nameLabel.text = "\(user.name ?? "") \(user.surname ?? "")"
