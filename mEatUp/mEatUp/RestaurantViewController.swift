@@ -17,12 +17,16 @@ class RestaurantViewController: UIViewController {
     
     @IBAction func saveButtonTapped(sender: UIBarButtonItem) {
         if let name = nameTextField.text, let address = addressTextField.text {
-            let restaurant = Restaurant(name: name, address: address)
-            cloudKitHelper.saveRestaurantRecord(restaurant, completionHandler: {
-                self.dismissViewControllerAnimated(true) { [unowned self] in
-                     self.saveRestaurant?(restaurant)
-                }
-                }, errorHandler: nil)
+            if !name.isEmpty && !address.isEmpty {
+                let restaurant = Restaurant(name: name, address: address)
+                cloudKitHelper.saveRestaurantRecord(restaurant, completionHandler: {
+                    self.dismissViewControllerAnimated(true) { [unowned self] in
+                         self.saveRestaurant?(restaurant)
+                    }
+                    }, errorHandler: nil)
+            } else {
+                AlertCreator.singleActionAlert("Error", message: "Please fill all text fields.", actionTitle: "OK", actionHandler: nil)
+            }
         }
     }
 }

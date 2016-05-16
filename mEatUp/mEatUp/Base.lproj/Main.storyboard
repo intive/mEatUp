@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -435,10 +434,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="34.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biV-39-SsG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biV-39-SsG">
                                                     <rect key="frame" x="29" y="13" width="60" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="2X0-nw-gBZ"/>
+                                                        <constraint firstAttribute="width" constant="60" id="P4k-4R-Ahl"/>
+                                                        <constraint firstAttribute="height" constant="21" id="PNe-Av-mPQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -452,23 +452,25 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEx-cz-EKh">
                                                     <rect key="frame" x="8" y="0.0" width="103" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="103" id="48T-uC-9Ym"/>
+                                                        <constraint firstAttribute="height" constant="21" id="lpc-rF-Tdp"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0bV-qd-FVm" firstAttribute="leading" secondItem="oEx-cz-EKh" secondAttribute="trailing" constant="13" id="5Fi-VE-QSn"/>
+                                                <constraint firstAttribute="bottom" secondItem="0bV-qd-FVm" secondAttribute="bottom" constant="6.5" id="2Us-0R-aov"/>
+                                                <constraint firstItem="biV-39-SsG" firstAttribute="top" secondItem="EGM-uQ-dt3" secondAttribute="top" constant="13" id="6MG-uu-b6t"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0bV-qd-FVm" secondAttribute="trailing" constant="36" id="87F-Yv-oCT"/>
-                                                <constraint firstItem="oEx-cz-EKh" firstAttribute="centerX" secondItem="biV-39-SsG" secondAttribute="centerX" id="98s-hd-hb8"/>
-                                                <constraint firstItem="oEx-cz-EKh" firstAttribute="leading" secondItem="EGM-uQ-dt3" secondAttribute="leadingMargin" id="GiP-y1-0Ht"/>
                                                 <constraint firstItem="0bV-qd-FVm" firstAttribute="centerY" secondItem="EGM-uQ-dt3" secondAttribute="centerY" id="Ini-b2-cYs"/>
-                                                <constraint firstItem="oEx-cz-EKh" firstAttribute="top" secondItem="EGM-uQ-dt3" secondAttribute="top" id="SdN-ME-7Fa"/>
+                                                <constraint firstItem="0bV-qd-FVm" firstAttribute="leading" secondItem="oEx-cz-EKh" secondAttribute="trailing" constant="13" id="QLa-BL-gCH"/>
                                                 <constraint firstItem="0bV-qd-FVm" firstAttribute="top" secondItem="EGM-uQ-dt3" secondAttribute="topMargin" constant="-1" id="aIP-H1-ULp"/>
-                                                <constraint firstItem="0bV-qd-FVm" firstAttribute="leading" secondItem="biV-39-SsG" secondAttribute="trailing" constant="35" id="bdg-AX-hth"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="biV-39-SsG" secondAttribute="bottom" constant="-7.5" id="g8c-hq-WTZ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="oEx-cz-EKh" secondAttribute="bottom" constant="5.5" id="jxY-9l-YPl"/>
-                                                <constraint firstItem="0bV-qd-FVm" firstAttribute="baseline" secondItem="biV-39-SsG" secondAttribute="firstBaseline" id="mZk-ZC-C5r"/>
+                                                <constraint firstItem="biV-39-SsG" firstAttribute="centerX" secondItem="oEx-cz-EKh" secondAttribute="centerX" id="k2o-2V-2Wo"/>
+                                                <constraint firstItem="oEx-cz-EKh" firstAttribute="leading" secondItem="EGM-uQ-dt3" secondAttribute="leading" constant="8" id="u1k-bZ-8k8"/>
+                                                <constraint firstItem="oEx-cz-EKh" firstAttribute="top" secondItem="EGM-uQ-dt3" secondAttribute="top" id="ua1-BT-aXg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1232,6 +1234,6 @@
         <image name="wallet" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aGV-Mz-HDX"/>
+       <segue reference="aGV-Mz-HDX"/>
     </inferredMetricsTieBreakers>
 </document>

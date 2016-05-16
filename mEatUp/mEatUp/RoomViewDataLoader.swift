@@ -198,6 +198,7 @@ class RoomViewDataLoader {
                         userInRoom.confirmationStatus = .Accepted
                         self.cloudKitHelper.editUserInRoomRecord(userInRoom, completionHandler: {
                             self.loadUsers()
+                            self.purposeHandler?(RoomViewPurpose.Participant)
                         }, errorHandler: nil)
                     } else {
                         self.userInRoom = UserInRoom(userRecordID: userRecordID, roomRecordID: roomRecordID, confirmationStatus: ConfirmationStatus.Accepted)
